@@ -6,7 +6,7 @@
   <div class="container mx-auto flex justify-between items-center">
     <a href="#" class="text-2xl font-extrabold text-indigo-600 tracking-tight hover:text-indigo-700 transition-colors">Inkspire</a>
     
-    <button class="sm:hidden focus:outline-none" on:click={() => menuOpen = !menuOpen}>
+    <button class="sm:hidden focus:outline-none" onclick={() => menuOpen = !menuOpen}>
       <svg class="w-6 h-6 transition-transform duration-300 {menuOpen ? 'rotate-180' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{menuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}" />
       </svg>
