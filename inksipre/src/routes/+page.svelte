@@ -2,33 +2,49 @@
   let menuOpen = false;
 </script>
 
-<!-- Navbar -->
-<nav class="bg-white/70 backdrop-blur-md shadow-md text-gray-800 p-4 fixed w-full z-50">
+<nav class="bg-white/80 backdrop-blur-lg shadow-lg text-gray-900 p-4 fixed w-full z-50 transition-all duration-300 ease-in-out">
   <div class="container mx-auto flex justify-between items-center">
-    <a href="#" class="text-2xl font-bold text-indigo-600">Inkspire</a>
-    <button class="sm:hidden" onclick={() => menuOpen = !menuOpen}>
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="{menuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}" />
+    <a href="#" class="text-2xl font-extrabold text-indigo-600 tracking-tight hover:text-indigo-700 transition-colors">Inkspire</a>
+    
+    <button class="sm:hidden focus:outline-none" on:click={() => menuOpen = !menuOpen}>
+      <svg class="w-6 h-6 transition-transform duration-300 {menuOpen ? 'rotate-180' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{menuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}" />
       </svg>
     </button>
-    <ul class="hidden sm:flex space-x-6 font-medium">
-      <li><a href="#" class="hover:text-indigo-500 transition">Home</a></li>
-      <li><a href="#" class="hover:text-indigo-500 transition">Shop</a></li>
-      <li><a href="#" class="hover:text-indigo-500 transition">About</a></li>
-      <li><a href="#" class="hover:text-indigo-500 transition">Contact</a></li>
+    
+    <ul class="hidden sm:flex space-x-8 font-semibold">
+      <li><a href="#" class="relative hover:text-indigo-600 transition-colors after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-indigo-600 after:transition-all hover:after:w-full">Home</a></li>
+      <li><a href="#" class="relative hover:text-indigo-600 transition-colors after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-indigo-600 after:transition-all hover:after:w-full">Shop</a></li>
+      <li><a href="#" class="relative hover:text-indigo-600 transition-colors after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-indigo-600 after:transition-all hover:after:w-full">About</a></li>
+      <li><a href="#" class="relative hover:text-indigo-600 transition-colors after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-indigo-600 after:transition-all hover:after:w-full">Contact</a></li>
     </ul>
   </div>
-  <!-- Mobile Menu -->
+  
   {#if menuOpen}
-    <ul class="sm:hidden bg-white/90 backdrop-blur-md text-gray-800 flex flex-col p-4 space-y-2 shadow-lg rounded-b-lg mt-2">
-      <li><a href="#" class="hover:text-indigo-500 transition">Home</a></li>
-      <li><a href="#" class="hover:text-indigo-500 transition">Shop</a></li>
-      <li><a href="#" class="hover:text-indigo-500 transition">About</a></li>
-      <li><a href="#" class="hover:text-indigo-500 transition">Contact</a></li>
+    <ul class="sm:hidden bg-white/95 backdrop-blur-lg text-gray-900 flex flex-col p-6 space-y-4 shadow-2xl rounded-b-2xl mt-2 animate-slide-down">
+      <li><a href="#" class="hover:text-indigo-600 transition-colors py-2 border-b border-gray-200 last:border-b-0">Home</a></li>
+      <li><a href="#" class="hover:text-indigo-600 transition-colors py-2 border-b border-gray-200 last:border-b-0">Shop</a></li>
+      <li><a href="#" class="hover:text-indigo-600 transition-colors py-2 border-b border-gray-200 last:border-b-0">About</a></li>
+      <li><a href="#" class="hover:text-indigo-600 transition-colors py-2 border-b border-gray-200 last:border-b-0">Contact</a></li>
     </ul>
   {/if}
 </nav>
+
+<style>
+  @keyframes slide-down {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-slide-down {
+    animation: slide-down 0.3s ease-out;
+  }
+</style>
 
 <!-- Hero Section -->
 <section class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 py-32 text-center text-white relative overflow-hidden">
