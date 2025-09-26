@@ -33,6 +33,7 @@
 		"vite": "^7.0.4"
 	},
 	"dependencies": {
+		"bcrypt": "^6.0.0",
 		"mysql2": "^3.15.1"
 	}
 }
