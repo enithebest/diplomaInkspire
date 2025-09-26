@@ -12,21 +12,34 @@
 	>
 		<h1 class="text-2xl font-bold text-center mb-4">Login</h1>
 
-		<label class="block mb-1 font-medium" for="email">E-Mail</label>
-		<input class="w-full p-2 border rounded mb-3" type="email" name="email" id="email" required />
+		<label for="email" class="block font-medium mb-1">E-Mail</label>
+		<input
+			type="email"
+			name="email"
+			id="email"
+			required
+			class="w-full p-2 border rounded mb-3"
+			value={form?.values?.email}  
+		/>
 
-		<label class="block mb-1 font-medium" for="password">Passwort</label>
-		<input class="w-full p-2 border rounded mb-4" type="password" name="password" id="password" required />
+		<label for="password" class="block font-medium mb-1">Passwort</label>
+		<input
+			type="password"
+			name="password"
+			id="password"
+			required
+			class="w-full p-2 border rounded mb-4"
+		/>
 
 		<button
 			type="submit"
-			class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition"
+			class="w-full bg-black text-white p-2 rounded hover:bg-gray-800 transition"
 		>
-			Login
+			Einloggen
 		</button>
 
 		{#if form?.message}
-			<p class="mt-4 text-red-600 text-center">{form.message}</p>
+			<p class="mt-4 text-center text-red-600">{form.message}</p>
 		{/if}
 	</form>
 </div>
