@@ -1,5 +1,6 @@
 import { login } from '$lib/db/auth';
 import { redirect } from '@sveltejs/kit';
+import { validateEmail, validatePassword } from '$lib/utils/authUtils';
 
 export const actions = {
   login: async ({ request, cookies }) => {
@@ -24,7 +25,7 @@ export const actions = {
       });
 
       // Redirect to dashboard
-      throw redirect(302, '/propertySystem');
+      throw redirect(302, 'admin/propertySystem');
     }
 
     // Return any login error (email not found or wrong password)
