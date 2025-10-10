@@ -1,83 +1,47 @@
-import { createConnection } from '$lib/db/mysql';
+import { createConnection } from './mysql';
 import bcrypt from 'bcrypt';
 
-export let login = async (email, password) => {
-    let connection = await createConnection();    
+export async function login(email, password) {
+  const db = await createConnection();
+  const [users] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+  if (users.length === 0) {
+    db.release();
+    return { token: null, message: 'Email not found' };
+  }
 
-    // Find user with email    
-    let [users] = await connection.query('SELECT * FROM users WHERE email = ?', [email]);  
+  const valid = await bcrypt.compare(password, users[0].password_hash);
+  if (!valid) {
+    db.release();
+    return { token: null, message: 'Incorrect password' };
+  }
 
-    if (users.length === 0) {        
-        return null;    
-    }
+  await db.execute('UPDATE users SET session_token = NULL, session_expiration = NULL WHERE id = ?', [users[0].id]);
 
-    // Check password    
-    if (!await bcrypt.compare(password, users[0].password_hash)) {        
-        return null;   
-    }
-
-    // Create token     
-    const token = crypto.randomUUID();    
-    
-    // Create expiration date (1 week)    
-    let expires = new Date();    
-    expires.setDate(expires.getDate() + 7);    
-    
-    // Save token   
-    let [result] = await connection.execute('UPDATE users SET session_token = ?, session_expiration = ? WHERE id = ?', [token, expires, users[0].id]);    
-    
-    if (result.affectedRows === 0) {        
-        return null;    
-    }    
-    
-    // Return token    
-    return token;
+  const token = await createSessionToken(users[0].id);
+  db.release();
+  return { token, message: 'Login successful' };
 }
 
-export let register = async (email, username, password) => {
-    let connection = await createConnection();
-    let hashedPassword = await hashPassword(password);
-    
-    // Check if email is already in use  
-    let [users] = await connection.query('SELECT * FROM users WHERE email = ?', [email]);  
-    if (users.length > 0) {
-        return { token: null, message: 'Email already in use' };
-    }
+export async function register(email, username, password) {
+  const db = await createConnection();
+  const hashed = await bcrypt.hash(password, 12);
 
-    // Check if username is already in use  
-    [users] = await connection.query('SELECT * FROM users WHERE username = ?', [username]);  
-    if (users.length > 0) {
-        return { token: null, message: 'Username already in use' };
-    }
+  const [emailTaken] = await db.query('SELECT 1 FROM users WHERE email = ?', [email]);
+  const [usernameTaken] = await db.query('SELECT 1 FROM users WHERE username = ?', [username]);
 
-    // Create user  
-    let [result] = await connection.execute('INSERT INTO users (email, username, password_hash, role) VALUES (?, ?, ?, ?)', [
-        email,
-        username,
-        hashedPassword,
-        "user"
-    ]);
+  if (emailTaken.length) return { success: false, message: 'Email already in use' };
+  if (usernameTaken.length) return { success: false, message: 'Username already in use' };
 
-    // Create token  
-    const token = crypto.randomUUID();
+  await db.execute('INSERT INTO users (email, username, password_hash) VALUES (?, ?, ?)', [email, username, hashed]);
+  db.release();
+  return { success: true, message: 'User registered successfully' };
+}
 
-    // Create expiration date (1 week)  
-    let expires = new Date();
-    expires.setDate(expires.getDate() + 7);
-    
-    // Save token  
-    await connection.query(
-        'UPDATE users SET session_token = ?, session_expiration = ? WHERE id = ?',
-        [token, expires, result.insertId]
-        );
-        
-        // Return token  
-        return {
-            token: token,
-            message: 'User created'
-        };
-    };
-    
-    let hashPassword = async (password) => {
-        return await bcrypt.hash(password, 12);
-    };
+export async function createSessionToken(userId) {
+  const db = await createConnection();
+  const token = uuidv4();
+  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+  await db.execute('UPDATE users SET session_token = ?, session_expiration = ? WHERE id = ?', [token, expires, userId]);
+  db.release();
+  return token;
+}
