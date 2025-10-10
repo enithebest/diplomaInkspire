@@ -6,6 +6,12 @@
           <span class="sr-only">Your Company</span>
          <h1 class="text-white text-2xl font-bold">Inkspire</h1>
         </a>
+        <a
+  href="/customisation/1"
+  class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+>
+  Go to Customisation (test)
+</a>
       </div>
       <div class="flex lg:hidden">
         <button type="button" command="show-modal" commandfor="mobile-menu" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-200">
