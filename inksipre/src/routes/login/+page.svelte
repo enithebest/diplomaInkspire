@@ -10,7 +10,7 @@
     <!-- Header -->
     <div class="text-center mb-8">
       <i class="fas fa-user-cog text-4xl text-blue-500 mb-2 inline-block"></i>
-      <h1 class="text-2xl font-semibold text-white">Admin Login</h1>
+      <h1 class="text-2xl font-semibold text-white">Login</h1>
       <p class="text-gray-400 text-sm">Secure access to your account</p>
     </div>
 

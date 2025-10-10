@@ -16,7 +16,7 @@
         </button>
       </div>
       <div class="hidden lg:flex lg:gap-x-12">
-        <a href="/" class="text-sm/6 font-semibold text-white">Product</a>
+        <a href="/categories" class="text-sm/6 font-semibold text-white">Categories</a>
         <a href="/" class="text-sm/6 font-semibold text-white">Features</a>
         <a href="/" class="text-sm/6 font-semibold text-white">Marketplace</a>
         <a href="/" class="text-sm/6 font-semibold text-white">Company</a>
