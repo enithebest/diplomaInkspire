@@ -34,8 +34,8 @@
 	},
 	"dependencies": {
 		"@lucide/svelte": "^0.544.0",
-		"lucide-svelte": "^0.544.0",
 		"bcrypt": "^6.0.0",
+		"lucide-svelte": "^0.544.0",
 		"mysql2": "^3.15.1"
 	}
 }

@@ -1,5 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { getConnection } from '$lib/server/mysql.js';
+import { getConnection } from '$lib/db/mysql.js';
 import bcrypt from 'bcrypt';
 
 export const actions = {

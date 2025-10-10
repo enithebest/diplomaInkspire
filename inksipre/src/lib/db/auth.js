@@ -1,8 +1,8 @@
 import { createConnection } from '$lib/db/mysql';
 import bcrypt from 'bcrypt';
 
-export let login = async (email, password) => { 
-     let connection = await createConnection();    
+export let login = async (email, password) => {
+    let connection = await createConnection();    
 
     // Find user with email    
     let [users] = await connection.query('SELECT * FROM users WHERE email = ?', [email]);  
@@ -51,7 +51,7 @@ export let register = async (email, username, password) => {
     }
 
     // Create user  
-    let [result] = await connection.execute('INSERT INTO users (email, username, password_hash, role) VALUES (?, ?, ?, ?)', [    
+    let [result] = await connection.execute('INSERT INTO users (email, username, password_hash, role) VALUES (?, ?, ?, ?)', [
         email,
         username,
         hashedPassword,
@@ -67,7 +67,7 @@ export let register = async (email, username, password) => {
     
     // Save token  
     await connection.query(
-        'UPDATE users SET session_token = ?, session_expiration = ? WHERE id = ?',    
+        'UPDATE users SET session_token = ?, session_expiration = ? WHERE id = ?',
         [token, expires, result.insertId]
         );
         
