@@ -24,7 +24,7 @@ export const actions = {
         maxAge: 60 * 60 * 24 * 7
       });
 
-      throw redirect(302, 'admin'); 
+      throw redirect(302, '/admin'); 
     }
 
     return { message };

@@ -25,7 +25,7 @@ export const actions = {
       });
 
       // Redirect to dashboard
-      throw redirect(302, 'admin');
+      throw redirect(302, '/admin');
     }
 
     // Return any login error (email not found or wrong password)
