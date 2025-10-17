@@ -11,3 +11,22 @@ export const load = async () => {
 
   return { hoodies, tshirts, sweatshirts, mugs };
 };
+
+export const actions = {
+  search: async ({ request }) => {
+    const formData = await request.formData();
+    const name = formData.get('name')?.trim();
+
+    if (!name) {
+      return { message: 'Bitte gib einen Produktnamen ein.', products: [] };
+    }
+
+    const products = await query('SELECT * FROM products WHERE name LIKE ?', [`%${name}%`]);
+
+    if (products.length === 0) {
+      return { message: `Kein Produkt mit dem Namen "${name}" gefunden.`, products: [] };
+    }
+
+    return { products, message: '' };
+  }
+};
