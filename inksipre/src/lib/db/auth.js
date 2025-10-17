@@ -1,17 +1,20 @@
-import { createConnection } from './mysql.js';
+import { query, createConnection } from './mysql.js';
 import bcrypt from 'bcrypt';
-import { v4 as uuidv4 } from 'uuid'; 
+import { v4 as uuidv4 } from 'uuid';
 
 export async function login(email, password) {
   const db = await createConnection();
 
-  const [users] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
-  if (users.length === 0) {
+  // Get rows directly from the pool query helper
+  const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+  if (rows.length === 0) {
     db.release();
     return { token: null, message: 'Email not found' };
   }
 
-  const user = users[0];
+  const user = rows[0];
+
+  // ✅ extra safety: trim email & lowercase
   const valid = await bcrypt.compare(password, user.password_hash);
 
   if (!valid) {
@@ -19,12 +22,20 @@ export async function login(email, password) {
     return { token: null, message: 'Incorrect password' };
   }
 
+  // ✅ clear previous session
   await db.execute(
     'UPDATE users SET session_token = NULL, session_expiration = NULL WHERE id = ?',
     [user.id]
   );
 
-  const token = await createSessionToken(user.id);
+  const token = uuidv4();
+  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+
+  await db.execute(
+    'UPDATE users SET session_token = ?, session_expiration = ? WHERE id = ?',
+    [token, expires, user.id]
+  );
+
   db.release();
 
   return { token, message: 'Login successful' };
@@ -48,16 +59,8 @@ export async function register(email, full_name, password) {
   const [rows] = await db.query('SELECT id FROM users WHERE email = ?', [email]);
   const userId = rows[0].id;
 
-  const token = await createSessionToken(userId);
-
-  db.release();
-  return { token, message: 'User registered successfully' };
-}
-
-export async function createSessionToken(userId) {
-  const db = await createConnection();
   const token = uuidv4();
-  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); 
+  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
   await db.execute(
     'UPDATE users SET session_token = ?, session_expiration = ? WHERE id = ?',
@@ -65,5 +68,5 @@ export async function createSessionToken(userId) {
   );
 
   db.release();
-  return token;
+  return { token, message: 'User registered successfully' };
 }
