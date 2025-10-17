@@ -43,7 +43,7 @@
 				<ul class="list-disc list-inside mb-3">
 					{#each product.variants as v}
 						<li>
-							<code>{JSON.stringify(v.option_values)}</code> – {v.price} €
+							<code>{JSON.stringify(v.option_values)}</code>  {v.price} €
 							<form method="POST" action="?/deleteVariant" use:enhance class="inline">
 								<input type="hidden" name="id" value={v.id} />
 								<button class="text-red-600 ml-2 hover:underline">✕</button>
@@ -52,7 +52,7 @@
 					{/each}
 				</ul>
 			{:else}
-				<p class="text-gray-500 mb-3">Keine Varianten vorhanden.</p>
+				<p class="text-gray-500 mb-3">Keine Varianten vorhanden.</p>	
 			{/if}
 
 			<form method="POST" action="?/addVariant" use:enhance class="flex flex-wrap gap-2">
