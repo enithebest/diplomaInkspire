@@ -1,4 +1,3 @@
-// +page.server.js
 import { register } from '$lib/db/auth';
 import { redirect } from '@sveltejs/kit';
 import { validateEmail, validatePassword } from '$lib/utils/authUtils';
@@ -25,7 +24,7 @@ export const actions = {
         maxAge: 60 * 60 * 24 * 7
       });
 
-      throw redirect(302, 'admin/propertySystem'); 
+      throw redirect(302, 'admin'); 
     }
 
     return { message };

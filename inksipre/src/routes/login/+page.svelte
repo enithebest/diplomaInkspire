@@ -1,7 +1,7 @@
 <script>
   import { enhance } from '$app/forms';
   import Warning from '$lib/components/Warning.svelte';
-  export let form;
+  let form;
 </script>
 
 <div class="flex items-center justify-center min-h-screen bg-gray-900 p-4">
