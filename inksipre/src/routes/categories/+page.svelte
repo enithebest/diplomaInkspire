@@ -2,14 +2,14 @@
   import { enhance } from '$app/forms';
   export let data;
   export let form;
-
+ import Nav from '$lib/components/nav/nav.svelte';
   const { hoodies, tshirts, sweatshirts, mugs } = data;
 
   function editProduct(id) {
     window.location.href = `/customisation/${id}`;
   }
 </script>
-
+<Nav />
 <h1 class="text-3xl font-bold mb-6 text-center">Our Categories</h1>
 
 <!-- 🔍 Suchfeld oben -->
