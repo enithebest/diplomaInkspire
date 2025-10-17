@@ -15,7 +15,7 @@
     </div>
 
     <!-- Login Form -->
-    <form method="POST" action="?/login" use:enhance class="space-y-6">
+    <form method="POST" action="?/login" class="space-y-6">
       
       <!-- Email -->
       <div>

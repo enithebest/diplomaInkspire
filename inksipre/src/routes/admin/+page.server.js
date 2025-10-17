@@ -1,27 +1,30 @@
 import { redirect, fail } from '@sveltejs/kit';
-import { getConnection } from '$lib/db/mysql.js';
+import { createConnection } from '$lib/db/mysql.js';  // ✅ fixed
 
 export async function load({ locals }) {
-	if (!locals.user || locals.user.role !== 'admin') {
-		throw redirect(302, '/');
-	}
+  if (!locals.user || locals.user.role !== 'admin') {
+    throw redirect(302, '/');
+  }
 
-	const db = await getConnection();
-	const [products] = await db.execute('SELECT * FROM products ORDER BY created_at DESC');
+  const db = await createConnection();  // ✅ fixed
+  const [products] = await db.execute('SELECT * FROM products ORDER BY created_at DESC');
 
-	for (const product of products) {
-		const [variants] = await db.execute(
-			'SELECT id, option_values, price FROM product_variants WHERE product_id = ?',
-			[product.id]
-		);
-		product.variants = variants.map((v) => ({
-			...v,
-			option_values: JSON.parse(v.option_values)
-		}));
-	}
+  for (const product of products) {
+    const [variants] = await db.execute(
+      'SELECT id, option_values, price FROM product_variants WHERE product_id = ?',
+      [product.id]
+    );
+    product.variants = variants.map((v) => ({
+      ...v,
+      option_values: JSON.parse(v.option_values)
+    }));
+  }
 
-	return { products };
+  db.release();
+
+  return { products };
 }
+
 
 export const actions = {
 	create: async ({ request, locals }) => {
