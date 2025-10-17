@@ -1,8 +1,7 @@
 import { createConnection } from './mysql.js';
 import bcrypt from 'bcrypt';
-import { v4 as uuidv4 } from 'uuid'; // ✅ Import UUID generator
+import { v4 as uuidv4 } from 'uuid'; 
 
-// LOGIN FUNCTION
 export async function login(email, password) {
   const db = await createConnection();
 
@@ -20,20 +19,17 @@ export async function login(email, password) {
     return { token: null, message: 'Incorrect password' };
   }
 
-  // Clear any previous session
   await db.execute(
     'UPDATE users SET session_token = NULL, session_expiration = NULL WHERE id = ?',
     [user.id]
   );
 
-  // Create a new session
   const token = await createSessionToken(user.id);
   db.release();
 
   return { token, message: 'Login successful' };
 }
 
-// REGISTER FUNCTION
 export async function register(email, full_name, password) {
   const db = await createConnection();
   const hashed = await bcrypt.hash(password, 12);
@@ -44,28 +40,24 @@ export async function register(email, full_name, password) {
     return { token: null, message: 'Email already in use' };
   }
 
-  // Insert user
   await db.execute(
     'INSERT INTO users (email, password_hash, full_name) VALUES (?, ?, ?)',
     [email, hashed, full_name]
   );
 
-  // Fetch new user ID
   const [rows] = await db.query('SELECT id FROM users WHERE email = ?', [email]);
   const userId = rows[0].id;
 
-  // Create session token immediately
   const token = await createSessionToken(userId);
 
   db.release();
   return { token, message: 'User registered successfully' };
 }
 
-// SESSION TOKEN CREATION
 export async function createSessionToken(userId) {
   const db = await createConnection();
   const token = uuidv4();
-  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
+  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); 
 
   await db.execute(
     'UPDATE users SET session_token = ?, session_expiration = ? WHERE id = ?',
