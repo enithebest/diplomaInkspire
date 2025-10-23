@@ -51,7 +51,7 @@
         class="w-full flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-lg transition"
       >
         <i class="fas fa-sign-in-alt"></i>
-        Login in
+        Log in
       </button>
 
       <!-- Server Error -->
