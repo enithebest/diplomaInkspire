@@ -10,6 +10,8 @@
   }
 </script>
 <Nav />
+
+
 <h1 class="text-3xl font-bold mb-6 text-center">Our Categories</h1>
 
 <!-- 🔍 Suchfeld oben -->
