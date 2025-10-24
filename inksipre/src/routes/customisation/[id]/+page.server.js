@@ -1,58 +1,51 @@
+// src/routes/customisation/[id]/+page.server.js
 import { query } from '$lib/db/mysql.js';
-import { fail } from '@sveltejs/kit';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import { fail, redirect } from '@sveltejs/kit';
+import { put } from '@vercel/blob';
+import { BLOB_READ_WRITE_TOKEN } from '$env/static/private';
 
-// --- make sure /static/uploads exists ---
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const uploadDir = join(__dirname, '../../../../static/uploads');
-if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
-
-// --- PAGE LOAD: get product data (optional) ---
 export const load = async ({ params }) => {
   const { id } = params;
-  const products = await query('SELECT * FROM products WHERE id = ?', [id]);
-  return { product: products[0] ?? null };
+  const [product] = await query('SELECT * FROM products WHERE id = ?', [id]);
+  return { product: product?.[0] ?? null };
 };
 
-// --- ACTION: handle file upload ---
 export const actions = {
-  upload: async ({ request, cookies, params }) => {
-    console.log('🧠 Upload action triggered!');
-    const formData = await request.formData();
-    const file = formData.get('design');
+  upload: async ({ request, locals, params }) => {
+    const user = locals?.user;
+    if (!user) throw redirect(302, '/login');
 
-    if (!file || file.size === 0) {
-      console.log('❌ No file received');
-      return fail(400, { message: 'No file uploaded' });
+    const form = await request.formData();
+    const file = form.get('file');
+
+    if (!file || typeof file === 'string') {
+      return fail(400, { error: 'No file provided' });
     }
 
-    const sessionToken = cookies.get('session');
-    const [user] = await query('SELECT id FROM users WHERE session_token = ?', [sessionToken]);
-
-    if (!user) {
-      console.log('❌ No user found for this session');
-      return fail(401, { message: 'User not logged in' });
+    // Optional: validate type & size
+    const allowed = ['image/png', 'image/jpeg', 'image/webp'];
+    if (!allowed.includes(file.type)) {
+      return fail(400, { error: 'Invalid file type' });
+    }
+    if (file.size > 5_000_000) { // 5MB
+      return fail(400, { error: 'File too large (max 5MB)' });
     }
 
-    // Save file
-    const buffer = Buffer.from(await file.arrayBuffer());
-    const filename = `${Date.now()}-${file.name}`;
-    const filepath = join(uploadDir, filename);
-    fs.writeFileSync(filepath, buffer);
-    console.log(`✅ File saved at: ${filepath}`);
+    // Unique filename (tie to user & product/customisation)
+    const filename = `${user.id}-${params.id}-${Date.now()}-${file.name}`;
 
-    // Save to database
-    const imageUrl = `/uploads/${filename}`;
+    // Upload to Vercel Blob
+    const blob = await put(filename, file, {
+      access: 'public',
+      token: BLOB_READ_WRITE_TOKEN
+    });
+
+    // Store URL in DB (customisation_id NULL for now; link later if needed)
     await query(
       'INSERT INTO uploads (user_id, customisation_id, image_url) VALUES (?, NULL, ?)',
-      [user.id, imageUrl]
+      [user.id, blob.url]
     );
-    console.log('✅ DB record inserted for upload:', imageUrl);
 
-    return { success: true, imageUrl };
+    return { success: true, imageUrl: blob.url };
   }
 };
