@@ -20,7 +20,6 @@ export const actions = {
     if (!name) {
       return { message: 'Bitte gib einen Produktnamen ein.', products: [] };
     }
-
     const products = await query('SELECT * FROM products WHERE name LIKE ?', [`%${name}%`]);
 
     if (products.length === 0) {

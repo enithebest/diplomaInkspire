@@ -90,7 +90,7 @@
 							<code>{JSON.stringify(v.option_values)}</code> – {v.price} €
 							<form method="POST" action="?/deleteVariant" use:enhance class="inline">
 								<input type="hidden" name="id" value={v.id} />
-								<button class="text-red-600 ml-2 hover:underline">✕</button>
+								<button class="text-green-600 ml-2 hover:underline">✕</button>
 							</form>
 						</li>
 					{/each}
