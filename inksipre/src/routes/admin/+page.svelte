@@ -110,7 +110,7 @@
 					placeholder="Preis (€)"
 					class="border p-1 rounded w-28"
 				/>
-				<button class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800">
+				<button class="bg-gray-800 text-white px-3 py-1 rounded hover:bg-gray-800">
 					Variante hinzufügen
 				</button>
 			</form>
