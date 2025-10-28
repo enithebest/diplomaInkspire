@@ -1,25 +1,11 @@
 <script>
-  import { page } from '$app/stores';
-  export let user = null;
-
-  // Main links for all visitors
-  const links = [
-    { name: 'Home', href: '/' },
-    { name: 'Shop', href: '/categories' },
-    { name: 'Contact', href: '/contact' }
-  ];
-
-  // Only visible for admins
-  const adminLinks = [
-    { name: 'Admin', href: '/admin' },
-    { name: 'Orders', href: '/orders' }
-  ];
-
-  const isActive = (path) => $page.url.pathname === path;
+  // Receive the user prop from +layout.svelte
+  export let user;
 </script>
 
 <nav class="w-full bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
   <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-3">
+    
     <!-- Logo -->
     <a href="/" class="text-2xl font-bold tracking-tight text-gray-800 hover:text-blue-600">
       Inkspire
@@ -27,35 +13,23 @@
 
     <!-- Main Links -->
     <div class="hidden md:flex gap-6">
-      {#each links as link}
-        <a
-          href={link.href}
-          class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
-          class:is-active={isActive(link.href)}
-        >
-          {link.name}
-        </a>
-      {/each}
+      <a href="/" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
+      <a href="/categories" class="text-gray-700 hover:text-blue-600 font-medium">Shop</a>
+      <a href="/contact" class="text-gray-700 hover:text-blue-600 font-medium">Contact</a>
 
+      <!-- Admin links -->
       {#if user?.role === 'admin'}
-        {#each adminLinks as link}
-          <a
-            href={link.href}
-            class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
-            class:is-active={isActive(link.href)}
-          >
-            {link.name}
-          </a>
-        {/each}
+        <a href="/admin" class="text-gray-700 hover:text-blue-600 font-medium">Admin</a>
+        <a href="/orders" class="text-gray-700 hover:text-blue-600 font-medium">Orders</a>
       {/if}
     </div>
 
     <!-- Right-side buttons -->
     <div class="flex items-center gap-4">
       {#if user}
-        <a href="/profile" class="text-gray-700 hover:text-blue-600 font-medium">
-          Profile
-        </a>
+        <!-- Logged in -->
+        <span class="text-gray-700">Hi, {user.full_name || user.email}!</span>
+        <a href="/profile" class="text-gray-700 hover:text-blue-600 font-medium">Profile</a>
         <form method="POST" action="/logout">
           <button
             type="submit"
@@ -65,6 +39,7 @@
           </button>
         </form>
       {:else}
+        <!-- Not logged in -->
         <a href="/login" class="text-gray-700 hover:text-blue-600 font-medium">Login</a>
         <a
           href="/register"
@@ -75,10 +50,8 @@
       {/if}
     </div>
   </div>
+
+  <!-- Optional debug: remove in production -->
+
 </nav>
 
-<style>
-  a.is-active {
-    border-bottom: 2px solid #2563eb; /* highlight active page */
-  }
-</style>

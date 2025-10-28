@@ -10,6 +10,8 @@
 </svelte:head>
 
 <!-- Navigation bar visible on every page -->
+
+
 <Nav user={data.user} />
 
 <!-- Page content -->

@@ -2,7 +2,7 @@
   import { enhance } from '$app/forms';
   export let data;
   export let form;
-  import Nav from '$lib/components/nav/nav.svelte';
+
   const { hoodies, tshirts, sweatshirts, mugs } = data;
 
   function editProduct(id) {
@@ -10,7 +10,6 @@
   }
 </script>
 
-<Nav />
 
 <!-- 🌌 Background Section -->
 <div class="relative isolate overflow-hidden bg-gray-900 text-gray-200 min-h-screen px-6 py-16 sm:py-24 lg:px-12">
