@@ -1,2 +1,9 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> jM Gni dhe jam pak karto read the documentation</p>
+<script>
+  import Content from '$lib/components/content/content.svelte';
+  import Hero from '$lib/components/herosection/hero.svelte';
+  import Product from '$lib/components/products/product.svelte';
+</script>
+
+<Hero />
+<Product />
+<Content />

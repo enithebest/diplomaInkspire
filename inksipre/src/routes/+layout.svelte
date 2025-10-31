@@ -1,12 +1,20 @@
 <script>
-	import '../app.css';
-	import favicon from '$lib/assets/favicon.svg';
-
-	let { children } = $props();
+  import '../app.css';
+  import favicon from '$lib/assets/favicon.svg';
+  import Nav from '$lib/components/Nav.svelte';
+  export let data;
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+  <link rel="icon" href={favicon} />
 </svelte:head>
 
-{@render children?.()}
+<!-- Navigation bar visible on every page -->
+
+
+<Nav user={data.user} />
+
+<!-- Page content -->
+<main class="min-h-screen bg-white text-gray-900">
+  <slot />
+</main>
