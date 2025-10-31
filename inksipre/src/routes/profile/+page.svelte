@@ -12,11 +12,7 @@
     <input type="email" name="email" value={data.user.email} readonly class="input input-bordered w-full" />
   </div>
 
-  <div>
-    <!-- svelte-ignore a11y_label_has_associated_control -->
-    <label>Username</label>
-    <input type="text" value={data.user.username} readonly class="input input-bordered w-full" />
-  </div>
+  
 
   <div>
     <!-- svelte-ignore a11y_label_has_associated_control -->

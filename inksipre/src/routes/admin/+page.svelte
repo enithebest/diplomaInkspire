@@ -35,10 +35,10 @@
 		<!-- Kategorie -->
 		<select name="category" class="border p-2 rounded col-span-2" required>
 			<option value="">-- Kategorie wählen --</option>
-			<option value="Hoodie">Hoodie</option>
-			<option value="T-Shirt">T-Shirt</option>
-			<option value="Sweatshirt">Sweatshirt</option>
-			<option value="Mug">Mug</option>
+			<option value="hoodies">Hoodies</option>
+			<option value="tshirts">T-Shirts</option>
+			<option value="sweatshirts">Sweatshirts</option>
+			<option value="mugs">Mugs</option>
 		</select>
 
 		<!-- Bild -->

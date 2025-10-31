@@ -7,7 +7,7 @@ export const load = async ({ cookies }) => {
   if (!token) throw redirect(302, '/login');
 
   const db = await createConnection();
-  const [rows] = await db.query('SELECT id, email, username, full_name, created_at FROM users WHERE session_token = ?', [token]);
+  const [rows] = await db.query('SELECT id, email, full_name, created_at FROM users WHERE session_token = ?', [token]);
   db.release();
 
   if (rows.length === 0) throw redirect(302, '/login');
