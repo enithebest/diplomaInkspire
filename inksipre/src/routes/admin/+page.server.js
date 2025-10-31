@@ -10,6 +10,16 @@ export async function load({ locals }) {
 
 	const db = await createConnection();
 	const [products] = await db.execute('SELECT * FROM products ORDER BY created_at DESC');
+
+	// Attach variants for each product so the UI reflects real data
+	for (const p of products) {
+		const [variants] = await db.execute(
+			'SELECT id, option_values, price FROM product_variants WHERE product_id = ? ORDER BY id DESC',
+			[p.id]
+		);
+		p.variants = variants;
+	}
+
 	db.release();
 
 	return { products };

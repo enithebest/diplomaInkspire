@@ -1,5 +1,7 @@
 <script>
+  import { enhance } from '$app/forms';
   export let data;
+  export let form;
   let file;
   let previewUrl = '';
   let message = '';
@@ -21,6 +23,7 @@
   method="POST"
   enctype="multipart/form-data"
   action="?/upload"
+  use:enhance
   class="max-w-lg mx-auto space-y-6"
 >
   <div>
@@ -58,8 +61,8 @@
   </button>
 </form>
 
-{#if message}
-  <p class="mt-4 text-center text-green-600">{message}</p>
+{#if form?.success}
+  <p class="mt-4 text-center text-green-600">Uploaded successfully!</p>
 {/if}
 
 {#if uploadedUrl}
@@ -67,6 +70,17 @@
     <p class="text-gray-700">Uploaded successfully!</p>
     <img
       src={uploadedUrl}
+      alt="Uploaded design"
+      class="max-h-64 mx-auto rounded-lg mt-4 shadow"
+    />
+  </div>
+{/if}
+
+{#if form?.imageUrl}
+  <div class="mt-6 text-center">
+    <p class="text-gray-700">Uploaded successfully!</p>
+    <img
+      src={form.imageUrl}
       alt="Uploaded design"
       class="max-h-64 mx-auto rounded-lg mt-4 shadow"
     />

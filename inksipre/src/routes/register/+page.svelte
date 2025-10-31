@@ -32,9 +32,9 @@
         </div>
       </div>
 
-      <!-- Username -->
+      <!-- Full Name -->
       <div>
-        <label for="username" class="block text-gray-400 font-medium mb-1">Username</label>
+        <label for="username" class="block text-gray-400 font-medium mb-1">Full name</label>
         <div class="relative">
           <i class="fas fa-user absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
           <input
@@ -42,7 +42,7 @@
             name="username"
             id="username"
             required
-            placeholder="Choose a username"
+            placeholder="Enter your full name"
             class="w-full pl-10 pr-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
