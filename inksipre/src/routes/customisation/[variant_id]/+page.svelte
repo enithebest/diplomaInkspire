@@ -1,8 +1,9 @@
 <script>
   export let data;
   let file;
-  let previewUrl;
+  let previewUrl = '';
   let message = '';
+  let uploadedUrl = '';
 
   function handleFileChange(e) {
     file = e.target.files[0];
@@ -12,11 +13,20 @@
   }
 </script>
 
-<h1 class="text-3xl font-bold mb-6 text-center">Customize {data?.product?.name ?? 'Product'}</h1>
+<h1 class="text-3xl font-bold mb-6 text-center">
+  Customize {data?.product?.name ?? 'Product'}
+</h1>
 
-<form method="POST" enctype="multipart/form-data" action="?/upload" class="max-w-lg mx-auto space-y-6">
+<form
+  method="POST"
+  enctype="multipart/form-data"
+  action="?/upload"
+  class="max-w-lg mx-auto space-y-6"
+>
   <div>
-    <label for="design" class="block mb-2 text-lg font-medium">Upload your design</label>
+    <label for="design" class="block mb-2 text-lg font-medium"
+      >Upload your design</label
+    >
     <input
       id="design"
       type="file"
@@ -31,7 +41,11 @@
   {#if previewUrl}
     <div class="mt-4">
       <p class="text-gray-600 mb-2">Preview:</p>
-      <img src={previewUrl} alt="Preview" class="max-h-64 rounded-lg shadow mx-auto" />
+      <img
+        src={previewUrl}
+        alt="Preview"
+        class="max-h-64 rounded-lg shadow mx-auto"
+      />
     </div>
   {/if}
 
@@ -46,4 +60,15 @@
 
 {#if message}
   <p class="mt-4 text-center text-green-600">{message}</p>
+{/if}
+
+{#if uploadedUrl}
+  <div class="mt-6 text-center">
+    <p class="text-gray-700">Uploaded successfully!</p>
+    <img
+      src={uploadedUrl}
+      alt="Uploaded design"
+      class="max-h-64 mx-auto rounded-lg mt-4 shadow"
+    />
+  </div>
 {/if}

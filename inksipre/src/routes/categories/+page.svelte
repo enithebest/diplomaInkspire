@@ -5,11 +5,11 @@
 
   const { hoodies, tshirts, sweatshirts, mugs } = data;
 
-  function editProduct(id) {
-    window.location.href = `/customisation/${id}`;
+  // Redirect to product detail page instead of customisation
+  function viewProduct(id) {
+    window.location.href = `/product/${id}`;
   }
 </script>
-
 
 <!-- 🌌 Background Section -->
 <div class="relative isolate overflow-hidden bg-gray-900 text-gray-200 min-h-screen px-6 py-16 sm:py-24 lg:px-12">
@@ -55,15 +55,21 @@
       <h2 class="text-2xl font-semibold mb-6 text-center text-indigo-400">Search Results</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {#each form.products as product}
-          <div class="bg-gray-800/60 backdrop-blur-sm border border-gray-700 shadow-lg rounded-2xl p-4 flex flex-col items-center transition hover:-translate-y-1 hover:shadow-indigo-500/30 duration-300">
-            <img src={product.image_url ?? '/placeholder.png'} alt={product.name} class="w-full h-48 object-cover rounded-lg" />
+          <div
+            class="bg-gray-800/60 backdrop-blur-sm border border-gray-700 shadow-lg rounded-2xl p-4 flex flex-col items-center transition hover:-translate-y-1 hover:shadow-indigo-500/30 duration-300"
+          >
+            <img
+              src={product.image_url ?? '/placeholder.png'}
+              alt={product.name}
+              class="w-full h-48 object-cover rounded-lg"
+            />
             <h3 class="mt-3 text-lg font-semibold text-white">{product.name}</h3>
             <p class="text-gray-400">${product.base_price}</p>
             <button
-              on:click={() => editProduct(product.id)}
+              on:click={() => viewProduct(product.id)}
               class="mt-3 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg transition"
             >
-              Edit
+              View Product
             </button>
           </div>
         {/each}
@@ -73,20 +79,31 @@
 
   <!-- 🏷️ Product Categories -->
   <div class="space-y-20">
-    {#each [{ title: 'Hoodies', items: hoodies }, { title: 'T-Shirts', items: tshirts }, { title: 'Sweatshirts', items: sweatshirts }, { title: 'Mugs', items: mugs }] as category}
+    {#each [
+      { title: 'Hoodies', items: hoodies },
+      { title: 'T-Shirts', items: tshirts },
+      { title: 'Sweatshirts', items: sweatshirts },
+      { title: 'Mugs', items: mugs }
+    ] as category}
       <section>
         <h2 class="text-2xl font-semibold mb-6 text-indigo-400">{category.title}</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {#each category.items as product}
-            <div class="bg-gray-800/60 backdrop-blur-sm border border-gray-700 shadow-lg rounded-2xl p-4 flex flex-col items-center transition hover:-translate-y-1 hover:shadow-indigo-500/30 duration-300">
-              <img src={product.image_url ?? '/placeholder.png'} alt={product.name} class="w-full h-48 object-cover rounded-lg" />
+            <div
+              class="bg-gray-800/60 backdrop-blur-sm border border-gray-700 shadow-lg rounded-2xl p-4 flex flex-col items-center transition hover:-translate-y-1 hover:shadow-indigo-500/30 duration-300"
+            >
+              <img
+                src={product.image_url ?? '/placeholder.png'}
+                alt={product.name}
+                class="w-full h-48 object-cover rounded-lg"
+              />
               <h3 class="mt-3 text-lg font-semibold text-white">{product.name}</h3>
               <p class="text-gray-400">${product.base_price}</p>
               <button
-                on:click={() => editProduct(product.id)}
+                on:click={() => viewProduct(product.id)}
                 class="mt-3 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg transition"
               >
-                Edit
+                View Product
               </button>
             </div>
           {/each}
