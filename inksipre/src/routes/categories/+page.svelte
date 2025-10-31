@@ -1,4 +1,4 @@
-<script>
+﻿<script>
   import { enhance } from '$app/forms';
   export let data;
   export let form;
@@ -11,7 +11,7 @@
   }
 </script>
 
-<!-- 🌌 Background Section -->
+<!-- ðŸŒŒ Background Section -->
 <div class="relative isolate overflow-hidden bg-gray-900 text-gray-200 min-h-screen px-6 py-16 sm:py-24 lg:px-12">
   <!-- Decorative SVG grid pattern -->
   <div class="absolute inset-0 -z-10 opacity-20">
@@ -28,7 +28,7 @@
   <!-- Page Header -->
   <h1 class="text-4xl font-semibold text-center text-white mb-10">Our Categories</h1>
 
-  <!-- 🔍 Search Bar -->
+  <!-- ðŸ” Search Bar -->
   <form method="POST" action="?/search" use:enhance class="flex flex-col sm:flex-row gap-3 justify-center mb-12">
     <input
       type="text"
@@ -49,7 +49,7 @@
     <p class="text-center text-red-500 mb-4">{form.message}</p>
   {/if}
 
-  <!-- 🧾 Search Results -->
+  <!-- ðŸ§¾ Search Results -->
   {#if form?.products?.length > 0}
     <section class="mb-16">
       <h2 class="text-2xl font-semibold mb-6 text-center text-indigo-400">Search Results</h2>
@@ -77,7 +77,7 @@
     </section>
   {/if}
 
-  <!-- 🏷️ Product Categories -->
+  <!-- ðŸ·ï¸ Product Categories -->
   <div class="space-y-20">
     {#each [
       { title: 'Hoodies', items: hoodies },
@@ -112,3 +112,5 @@
     {/each}
   </div>
 </div>
+
+

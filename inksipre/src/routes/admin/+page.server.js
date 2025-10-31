@@ -1,4 +1,4 @@
-import { redirect, fail } from '@sveltejs/kit';
+﻿import { redirect, fail } from '@sveltejs/kit';
 import { createConnection } from '$lib/db/mysql.js';
 import fs from 'fs';
 import path from 'path';
@@ -37,25 +37,34 @@ export const actions = {
 		const image = formData.get('image');
 
 		if (!name || !category || !image) {
-			return fail(400, { message: 'Bitte alle Pflichtfelder ausfüllen.' });
+			return fail(400, { message: 'Bitte alle Pflichtfelder ausfÃ¼llen.' });
 		}
 
-		// 📁 Speicherort für Bilder
+		// ðŸ“ Speicherort fÃ¼r Bilder
 		const uploadDir = 'static/uploads';
 		if (!fs.existsSync(uploadDir)) {
 			fs.mkdirSync(uploadDir, { recursive: true });
+
+		// Validate image type and size
+		const allowed = ['image/png', 'image/jpeg', 'image/webp'];
+		if (typeof image === 'string' || !allowed.includes(image.type)) {
+			return fail(400, { message: 'Ungültiger Bildtyp. Erlaubt: PNG, JPG, WEBP.' });
+		}
+		if (image.size > 5000000) {
+			return fail(400, { message: 'Datei zu groß (max. 5MB).' });
+		}
 		}
 
 		const fileName = `${Date.now()}-${image.name}`;
 		const filePath = path.join(uploadDir, fileName);
 
-		// 🔽 Datei speichern
+		// ðŸ”½ Datei speichern
 		const arrayBuffer = await image.arrayBuffer();
 		fs.writeFileSync(filePath, Buffer.from(arrayBuffer));
 
 		const imageUrl = `/uploads/${fileName}`;
 
-		// 🗄️ In Datenbank einfügen
+		// ðŸ—„ï¸ In Datenbank einfÃ¼gen
 		const db = await createConnection();
 		await db.execute(
 			'INSERT INTO products (name, description, base_price, category, image_url) VALUES (?, ?, ?, ?, ?)',
@@ -106,3 +115,5 @@ export const actions = {
 		return { success: true };
 	}
 };
+
+
