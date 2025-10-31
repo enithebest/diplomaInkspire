@@ -6,7 +6,7 @@ export const actions = {
   register: async ({ request, cookies }) => {
     const formData = await request.formData();
     const email = formData.get('email');
-    const username = formData.get('username');
+    const full_name = formData.get('full_name');
     const password = formData.get('password');
     const confirmPassword = formData.get('confirmPassword');
 
@@ -14,7 +14,7 @@ export const actions = {
     if (!validatePassword(password)) return { message: 'Password must be at least 8 characters' };
     if (password !== confirmPassword) return { message: 'Passwords do not match' };
 
-    const { token, message } = await register(email, username, password);
+    const { token, message } = await register(email, full_name, password);
 
     if (token) {
       cookies.set('session', token, {

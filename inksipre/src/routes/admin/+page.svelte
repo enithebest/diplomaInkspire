@@ -1,10 +1,18 @@
-<script>
+﻿<script>
 	import { enhance } from '$app/forms';
 	export let data;
 	export let form;
+
+	const toOv = (ov) => {
+		try {
+			return typeof ov === 'string' ? JSON.parse(ov) : ov;
+		} catch (e) {
+			return {};
+		}
+	};
 </script>
 
-<h1 class="text-3xl font-bold mb-6 text-center">🛠️ Adminbereich – Produktverwaltung</h1>
+<h1 class="text-3xl font-bold mb-6 text-center">Adminbereich – Produktverwaltung</h1>
 
 <!-- Neues Produkt -->
 <form
@@ -86,13 +94,16 @@
 			{#if product.variants?.length > 0}
 				<ul class="list-disc list-inside mb-3">
 					{#each product.variants as v}
-						<li>
-							<code>{JSON.stringify(v.option_values)}</code> – {v.price} €
-							<form method="POST" action="?/deleteVariant" use:enhance class="inline">
-								<input type="hidden" name="id" value={v.id} />
-								<button class="text-green-600 ml-2 hover:underline">✕</button>
-							</form>
-						</li>
+						{#key v.id}
+							<li>
+								{#let ov = toOv(v.option_values)}
+								<span class="font-mono">{ov?.size || '–'} / {ov?.color || '–'}</span> – {v.price} €
+								<form method="POST" action="?/deleteVariant" use:enhance class="inline">
+									<input type="hidden" name="id" value={v.id} />
+									<button class="text-red-600 ml-2 hover:underline">Löschen</button>
+								</form>
+							</li>
+						{/key}
 					{/each}
 				</ul>
 			{:else}
@@ -110,9 +121,7 @@
 					placeholder="Preis (€)"
 					class="border p-1 rounded w-28"
 				/>
-				<button class="bg-gray-800 text-white px-3 py-1 rounded hover:bg-gray-800">
-					Variante hinzufügen
-				</button>
+				<button class="bg-gray-800 text-white px-3 py-1 rounded hover:bg-gray-800">Variante hinzufügen</button>
 			</form>
 		</div>
 	</div>
