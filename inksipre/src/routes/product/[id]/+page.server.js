@@ -12,20 +12,19 @@ export const load = async ({ params }) => {
   }
 
   // Get all variants linked to this product
-  // Select option_values as fallback source for color/size when columns are null
   const variantRows = await query(
-    'SELECT id, price, color, size, option_values FROM product_variants WHERE product_id = ?',
+    'SELECT id, price, option_values FROM product_variants WHERE product_id = ?',
     [id]
   );
 
   const variants = (variantRows || []).map((v) => {
-    let color = v.color ?? null;
-    let size = v.size ?? null;
-    if ((!color || !size) && v.option_values) {
+    let color = null;
+    let size = null;
+    if (v.option_values) {
       try {
         const opts = typeof v.option_values === 'string' ? JSON.parse(v.option_values) : v.option_values;
-        color = color ?? opts?.color ?? null;
-        size = size ?? opts?.size ?? null;
+        color = opts?.color ?? null;
+        size = opts?.size ?? null;
       } catch {
         // ignore JSON parse errors and keep nulls
       }
