@@ -42,8 +42,15 @@ export const actions = {
       return fail(400, { error: 'File too large (max 5MB).' });
     }
 
-    // Create a unique name for the blob using the variant id
-    const filename = `${user.id}-${variant_id}-${Date.now()}-${file.name}`;
+    // Create a unique, sanitized name for the blob using the variant id
+    const originalName = String(file.name || 'upload');
+    const safeName = originalName
+      .toLowerCase()
+      .replace(/[^a-z0-9._-]+/g, '-')
+      .replace(/-{2,}/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .slice(0, 80);
+    const filename = `${user.id}-${variant_id}-${Date.now()}-${safeName || 'image'}`;
 
     // Upload to Vercel Blob Storage
     const blob = await put(filename, file, {

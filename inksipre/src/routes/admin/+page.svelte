@@ -58,6 +58,7 @@
 			class="border p-2 rounded col-span-2"
 			required
 		/>
+		<p class="col-span-2 text-sm text-gray-600">Erlaubte Formate: PNG, JPG, WEBP. Maximale Größe: 5MB.</p>
 	</div>
 
 	<button

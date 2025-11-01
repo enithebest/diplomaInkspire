@@ -39,6 +39,7 @@
       on:change={handleFileChange}
       class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
     />
+    <p class="mt-2 text-sm text-gray-600">Allowed: PNG, JPG, WEBP. Max size: 5MB.</p>
   </div>
 
   {#if previewUrl}
@@ -63,6 +64,10 @@
 
 {#if form?.success}
   <p class="mt-4 text-center text-green-600">Uploaded successfully!</p>
+{/if}
+
+{#if form?.error}
+  <p class="mt-4 text-center text-red-600">{form.error}</p>
 {/if}
 
 {#if uploadedUrl}

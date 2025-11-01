@@ -15,7 +15,8 @@ export const load = async () => {
 export const actions = {
   search: async ({ request }) => {
     const formData = await request.formData();
-    const name = formData.get('name')?.trim();
+    const raw = formData.get('name');
+    const name = raw ? String(raw).trim().slice(0, 50).replace(/[\%_]/g, '') : '';
 
     if (!name) {
       return { message: 'Bitte gib einen Produktnamen ein.', products: [] };
