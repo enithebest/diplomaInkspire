@@ -3,6 +3,7 @@
 	export let data;
 	export let form;
 
+	// helper to parse option_values (size/color JSON)
 	const toOv = (ov) => {
 		try {
 			return typeof ov === 'string' ? JSON.parse(ov) : ov;
@@ -12,7 +13,9 @@
 	};
 </script>
 
-<h1 class="text-3xl font-bold mb-6 text-center">Adminbereich – Produktverwaltung</h1>
+<h1 class="text-3xl font-bold mb-6 text-center">
+	Adminbereich – Produktverwaltung
+</h1>
 
 <!-- Neues Produkt -->
 <form
@@ -40,7 +43,6 @@
 			class="border p-2 rounded col-span-2"
 		></textarea>
 
-		<!-- Kategorie -->
 		<select name="category" class="border p-2 rounded col-span-2" required>
 			<option value="">-- Kategorie wählen --</option>
 			<option value="hoodies">Hoodies</option>
@@ -49,7 +51,6 @@
 			<option value="mugs">Mugs</option>
 		</select>
 
-		<!-- Bild -->
 		<input
 			name="image"
 			type="file"
@@ -59,7 +60,10 @@
 		/>
 	</div>
 
-	<button type="submit" class="mt-3 bg-black text-white px-4 py-2 rounded hover:bg-gray-800">
+	<button
+		type="submit"
+		class="mt-3 bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
+	>
 		Erstellen
 	</button>
 </form>
@@ -84,33 +88,54 @@
 
 			<form method="POST" action="?/delete" use:enhance>
 				<input type="hidden" name="id" value={product.id} />
-				<button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">Löschen</button>
+				<button
+					class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+				>
+					Löschen
+				</button>
 			</form>
 		</div>
 
 		<!-- Varianten -->
 		<div class="mt-4">
 			<h4 class="font-semibold mb-2">Varianten</h4>
+
 			{#if product.variants?.length > 0}
 				<ul class="list-disc list-inside mb-3">
-					{#each product.variants as v}
-						{#key v.id}
-							<li>
-								{#let ov = toOv(v.option_values)}
-								<span class="font-mono">{ov?.size || '–'} / {ov?.color || '–'}</span> – {v.price} €
-								<form method="POST" action="?/deleteVariant" use:enhance class="inline">
-									<input type="hidden" name="id" value={v.id} />
-									<button class="text-red-600 ml-2 hover:underline">Löschen</button>
-								</form>
-							</li>
-						{/key}
+					{#each product.variants as v (v.id)}
+						{@const ov = toOv(v.option_values)}
+						<li>
+							<span class="font-mono">
+								{ov?.size || '–'} / {ov?.color || '–'}
+							</span>
+							– {v.price} €
+
+							<form
+								method="POST"
+								action="?/deleteVariant"
+								use:enhance
+								class="inline"
+							>
+								<input type="hidden" name="id" value={v.id} />
+								<button class="text-red-600 ml-2 hover:underline">
+									Löschen
+								</button>
+							</form>
+						</li>
 					{/each}
 				</ul>
 			{:else}
-				<p class="text-gray-500 mb-3">Keine Varianten vorhanden.</p>
+				<p class="text-gray-500 mb-3">
+					Keine Varianten vorhanden.
+				</p>
 			{/if}
 
-			<form method="POST" action="?/addVariant" use:enhance class="flex flex-wrap gap-2">
+			<form
+				method="POST"
+				action="?/addVariant"
+				use:enhance
+				class="flex flex-wrap gap-2"
+			>
 				<input type="hidden" name="product_id" value={product.id} />
 				<input name="size" placeholder="Größe (z. B. M)" class="border p-1 rounded" />
 				<input name="color" placeholder="Farbe (z. B. Schwarz)" class="border p-1 rounded" />
@@ -121,7 +146,11 @@
 					placeholder="Preis (€)"
 					class="border p-1 rounded w-28"
 				/>
-				<button class="bg-gray-800 text-white px-3 py-1 rounded hover:bg-gray-800">Variante hinzufügen</button>
+				<button
+					class="bg-gray-800 text-white px-3 py-1 rounded hover:bg-gray-700"
+				>
+					Variante hinzufügen
+				</button>
 			</form>
 		</div>
 	</div>
