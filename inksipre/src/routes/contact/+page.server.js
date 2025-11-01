@@ -1,5 +1,13 @@
+// src/routes/contact/+page.server.js
 import { fail } from '@sveltejs/kit';
 import nodemailer from 'nodemailer';
+import {
+	SMTP_HOST,
+	SMTP_PORT,
+	SMTP_USER,
+	SMTP_PASS,
+	CONTACT_RECEIVER
+} from '$env/static/private';
 
 export const actions = {
 	send: async ({ request }) => {
@@ -9,30 +17,39 @@ export const actions = {
 		const message = formData.get('message');
 
 		if (!name || !email || !message) {
-			return fail(400, { error: 'Please fill out all fields.' });
+			return fail(400, { error: 'Bitte alle Felder ausfüllen.' });
 		}
 
-		// Example: using Gmail (you can change this to your SMTP server)
+		// ✅ Transporter – direkter SMTP-Zugang (wie 3.11.1 im Skript)
 		const transporter = nodemailer.createTransport({
-			service: 'gmail',
+			host: SMTP_HOST,
+			port: Number(SMTP_PORT),
+			secure: true, // Port 465 = SSL
 			auth: {
-				user: 'your_email@gmail.com',
-				pass: 'your_app_password' // use App Password, not your normal password
+				user: SMTP_USER,
+				pass: SMTP_PASS
 			}
 		});
 
 		try {
 			await transporter.sendMail({
-				from: email,
-				to: 'ajssii.sala@gmail.com',
-				subject: `New contact form message from ${name}`,
-				text: message
+				from: `"Inkspire Kontakt" <${SMTP_USER}>`,
+				to: CONTACT_RECEIVER,
+				subject: `Neue Nachricht von ${name}`,
+				text: `Von: ${name} <${email}>\n\n${message}`,
+				html: `
+					<h2>Neue Nachricht von Inkspire</h2>
+					<p><b>Name:</b> ${name}</p>
+					<p><b>Email:</b> ${email}</p>
+					<p><b>Nachricht:</b></p>
+					<p>${message}</p>
+				`
 			});
 
-			return { success: 'Message sent successfully!' };
+			return { success: '✅ Ihre Nachricht wurde erfolgreich gesendet.' };
 		} catch (error) {
-			console.error(error);
-			return fail(500, { error: 'Failed to send message. Please try again later.' });
+			console.error('E-Mail-Versand fehlgeschlagen:', error);
+			return fail(500, { error: 'E-Mail-Versand fehlgeschlagen. Bitte später erneut versuchen.' });
 		}
 	}
 };

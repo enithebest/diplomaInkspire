@@ -5,9 +5,9 @@
 
 <div class="min-h-screen flex flex-col items-center justify-center bg-gray-50 py-12 px-4">
 	<div class="max-w-2xl w-full bg-white p-8 rounded-2xl shadow-md">
-		<h1 class="text-3xl font-bold mb-6 text-center text-gray-800"> Contact Us</h1>
+		<h1 class="text-3xl font-bold mb-6 text-center text-gray-800"> Kontaktformular</h1>
 		<p class="text-gray-600 mb-6 text-center">
-			Have questions, suggestions, or need help? Fill out the form below and we'll get back to you soon.
+			Für Fragen oder Anregungen – einfach das Formular ausfüllen.
 		</p>
 
 		<form method="POST" action="?/send" use:enhance class="space-y-4">
@@ -22,7 +22,7 @@
 			</div>
 
 			<div>
-				<label class="block text-sm font-medium text-gray-700">Email</label>
+				<label class="block text-sm font-medium text-gray-700">E-Mail</label>
 				<input
 					type="email"
 					name="email"
@@ -32,7 +32,7 @@
 			</div>
 
 			<div>
-				<label class="block text-sm font-medium text-gray-700">Message</label>
+				<label class="block text-sm font-medium text-gray-700">Nachricht</label>
 				<textarea
 					name="message"
 					rows="5"
@@ -45,7 +45,7 @@
 				type="submit"
 				class="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 transition-colors"
 			>
-				Send Message
+				Nachricht senden
 			</button>
 
 			{#if form?.success}
