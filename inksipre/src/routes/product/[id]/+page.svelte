@@ -79,12 +79,18 @@
         <div class="flex gap-3 mt-4 flex-wrap justify-center">
           {#each variants as variant}
             {#if variant.image_url}
-              <img
-                src={variant.image_url}
-                alt="Variant"
-                class="w-20 h-20 object-cover rounded-md border border-gray-700 cursor-pointer hover:ring-2 hover:ring-indigo-500 transition"
+              <button
+                type="button"
+                class="rounded-md border border-gray-700 hover:ring-2 hover:ring-indigo-500 transition p-0"
                 on:click={() => (selectedVariant = variant)}
-              />
+                aria-label="Choose variant image"
+              >
+                <img
+                  src={variant.image_url}
+                  alt="Variant thumbnail"
+                  class="w-20 h-20 object-cover rounded-md"
+                />
+              </button>
             {/if}
           {/each}
         </div>
