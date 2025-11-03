@@ -44,13 +44,11 @@ export const actions = {
       return fail(400, { message: 'Bitte alle Pflichtfelder ausfüllen.' });
     }
 
-    // Upload directory
     const uploadDir = 'static/uploads';
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
 
-    // Validate image type and size
     const allowed = ['image/png', 'image/jpeg', 'image/webp'];
     if (typeof image === 'string' || !allowed.includes(image.type)) {
       return fail(400, { message: 'Ungültiger Bildtyp. Erlaubt: PNG, JPG, WEBP.' });
@@ -59,7 +57,6 @@ export const actions = {
       return fail(400, { message: 'Datei zu groß (max. 5MB).' });
     }
 
-    // Sanitize filename
     const originalName = String(image.name || 'upload');
     const safeName = originalName
       .toLowerCase()
@@ -70,12 +67,10 @@ export const actions = {
     const fileName = `${Date.now()}-${safeName || 'image'}`;
     const filePath = path.join(uploadDir, fileName);
 
-    // Save file
     const arrayBuffer = await image.arrayBuffer();
     fs.writeFileSync(filePath, Buffer.from(arrayBuffer));
     const imageUrl = `/uploads/${fileName}`;
 
-    // Insert to DB
     const db = await createConnection();
     await db.execute(
       'INSERT INTO products (name, description, base_price, category, image_url) VALUES (?, ?, ?, ?, ?)',

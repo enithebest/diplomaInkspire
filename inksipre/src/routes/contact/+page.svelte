@@ -6,12 +6,10 @@
 <section
 	class="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#0b0b20] via-[#111132] to-[#0b0b20] text-white px-6 py-16 overflow-hidden"
 >
-	<!-- glowing background -->
 	<div
 		class="absolute -top-32 left-1/2 w-[900px] h-[900px] rounded-full bg-gradient-to-r from-indigo-500/20 to-purple-600/20 blur-3xl -translate-x-1/2"
 	></div>
 
-	<!-- card container -->
 	<div
 		class="relative z-10 w-full max-w-2xl bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl p-10"
 	>
@@ -26,7 +24,6 @@
 		</p>
 
 		<form method="POST" action="?/send" use:enhance class="space-y-6">
-			<!-- Name -->
 			<div>
 				<label class="block text-sm font-medium text-gray-300 mb-1">Your Name</label>
 				<input
@@ -38,7 +35,6 @@
 				/>
 			</div>
 
-			<!-- Email -->
 			<div>
 				<label class="block text-sm font-medium text-gray-300 mb-1">Email Address</label>
 				<input
@@ -50,7 +46,6 @@
 				/>
 			</div>
 
-			<!-- Message -->
 			<div>
 				<label class="block text-sm font-medium text-gray-300 mb-1">Message</label>
 				<textarea
@@ -62,7 +57,6 @@
 				></textarea>
 			</div>
 
-			<!-- Button -->
 			<button
 				type="submit"
 				class="w-full py-3 rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white font-semibold text-lg shadow-lg shadow-indigo-500/20 transition-all duration-200"
@@ -70,7 +64,6 @@
 				Send Message
 			</button>
 
-			<!-- Feedback messages -->
 			{#if form?.success}
 				<p class="text-green-400 text-center mt-4 animate-fade-in">{form.success}</p>
 			{:else if form?.error}

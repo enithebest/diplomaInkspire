@@ -1,4 +1,3 @@
-// src/routes/contact/+page.server.js
 import { fail } from '@sveltejs/kit';
 import nodemailer from 'nodemailer';
 import {
@@ -20,11 +19,10 @@ export const actions = {
 			return fail(400, { error: 'Bitte alle Felder ausfüllen.' });
 		}
 
-		// ✅ Transporter – direkter SMTP-Zugang (wie 3.11.1 im Skript)
 		const transporter = nodemailer.createTransport({
 			host: SMTP_HOST,
 			port: Number(SMTP_PORT),
-			secure: true, // Port 465 = SSL
+			secure: true, 
 			auth: {
 				user: SMTP_USER,
 				pass: SMTP_PASS
