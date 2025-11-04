@@ -3,7 +3,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import { put } from '@vercel/blob';
 import { BLOB_READ_WRITE_TOKEN } from '$env/static/private';
 
-export const load = async ({ params }) => {
+export const load = async ({ params, locals }) => {
   const { variant_id } = params;
 
   // Load the selected variant and its parent product
@@ -16,7 +16,16 @@ export const load = async ({ params }) => {
   const productRows = await query('SELECT * FROM products WHERE id = ?', [variant.product_id]);
   const product = productRows?.[0] || null;
 
-  return { product, variant };
+  // If user is logged in, load their previous uploads (most recent first)
+  let uploads = [];
+  if (locals?.user?.id) {
+    uploads = await query(
+      'SELECT id, image_url FROM uploads WHERE user_id = ? ORDER BY id DESC LIMIT 100',
+      [locals.user.id]
+    );
+  }
+
+  return { product, variant, uploads };
 };
 
 export const actions = {

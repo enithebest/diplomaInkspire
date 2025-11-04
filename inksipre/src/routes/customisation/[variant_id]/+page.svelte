@@ -4,12 +4,35 @@
   export let form;
   let file;
   let previewUrl = '';
+  let showLibrary = false;
+  let search = '';
 
   function handleFileChange(e) {
     file = e.target.files[0];
     if (file) {
       previewUrl = URL.createObjectURL(file);
     }
+  }
+
+  const libraryItems = (data?.uploads ?? []).map((u) => ({
+    id: u.id,
+    url: u.image_url,
+    created_at: u.created_at
+  }));
+
+  function displayName(url) {
+    try {
+      const path = new URL(url).pathname;
+      const last = path.split('/').pop() || '';
+      return decodeURIComponent(last);
+    } catch (e) {
+      return url;
+    }
+  }
+
+  function useFromLibrary(url) {
+    previewUrl = url;
+    showLibrary = false;
   }
 </script>
 
@@ -19,7 +42,16 @@
   <!-- Sidebar: Upload form -->
   <aside class="md:col-span-4">
     <div class="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-5 md:sticky md:top-6">
-      <h2 class="text-lg font-semibold mb-4">Upload Design</h2>
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-semibold">Upload Design</h2>
+        <button
+          type="button"
+          class="text-sm text-indigo-300 hover:text-white underline"
+          on:click={() => (showLibrary = true)}
+        >
+          My library
+        </button>
+      </div>
       <form method="POST" enctype="multipart/form-data" action="?/upload" use:enhance class="space-y-5">
         <div>
           <label for="design" class="block mb-2 text-sm font-medium">Choose image</label>
@@ -76,3 +108,41 @@
     {/if}
   </main>
 </div>
+
+{#if showLibrary}
+  <div class="fixed inset-0 z-50">
+    <div class="absolute inset-0 bg-black/60" on:click={() => (showLibrary = false)}></div>
+    <aside class="absolute right-0 top-0 h-full w-full sm:w-[28rem] bg-gray-900 border-l border-white/10 p-4 overflow-y-auto">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-lg font-semibold">My library</h2>
+        <button class="text-sm text-gray-300 hover:text-white" on:click={() => (showLibrary = false)}>Close</button>
+      </div>
+
+      <input
+        type="text"
+        placeholder="Search library"
+        bind:value={search}
+        class="w-full mb-4 px-3 py-2 rounded-md bg-white/5 border border-white/10 focus:outline-none"
+      />
+
+      {#if libraryItems.length === 0}
+        <p class="text-gray-400">No uploads yet.</p>
+      {:else}
+        <div class="grid grid-cols-2 gap-3">
+          {#each libraryItems.filter((i) => displayName(i.url).toLowerCase().includes(search.toLowerCase())) as item}
+            <div class="bg-white/5 border border-white/10 rounded-md overflow-hidden group">
+              <img src={item.url} alt={displayName(item.url)} class="w-full h-28 object-cover" />
+              <div class="p-2 flex items-center justify-between">
+                <span class="text-xs truncate max-w-[70%]" title={displayName(item.url)}>{displayName(item.url)}</span>
+                <button
+                  class="text-xs px-2 py-1 rounded bg-indigo-600 text-white hover:bg-indigo-500"
+                  on:click={() => useFromLibrary(item.url)}
+                >Use</button>
+              </div>
+            </div>
+          {/each}
+        </div>
+      {/if}
+    </aside>
+  </div>
+{/if}
