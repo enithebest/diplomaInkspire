@@ -46,19 +46,26 @@
           Upload & Save
         </button>
       </form>
+
+      {#if previewUrl || form?.imageUrl}
+        <div class="mt-4">
+          <h3 class="text-sm font-medium mb-2">Preview</h3>
+          <img
+            src={previewUrl || form?.imageUrl}
+            alt="Uploaded design preview"
+            class="max-h-48 w-auto rounded-md shadow border border-white/10"
+          />
+        </div>
+      {/if}
     </div>
   </aside>
 
-  <!-- Main: Customisation canvas / preview -->
+  <!-- Main: Info / instructions (no centered image preview) -->
   <main class="md:col-span-8">
-    <div class="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-5 min-h-[360px] flex items-center justify-center">
-      {#if previewUrl}
-        <img src={previewUrl} alt="Preview" class="max-h-[520px] w-auto rounded-lg shadow" />
-      {:else if form?.imageUrl}
-        <img src={form.imageUrl} alt="Uploaded design" class="max-h-[520px] w-auto rounded-lg shadow" />
-      {:else}
-        <p class="text-gray-400">Upload an image on the left to start customising.</p>
-      {/if}
+    <div class="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-5 min-h-[240px]">
+      <p class="text-gray-300">
+        Upload an image using the form on the left. Your uploaded image will appear directly below the form.
+      </p>
     </div>
 
     {#if data?.product?.description}
@@ -69,4 +76,3 @@
     {/if}
   </main>
 </div>
-
