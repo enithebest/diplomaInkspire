@@ -85,13 +85,16 @@
       { title: 'Sweatshirts', items: sweatshirts },
       { title: 'Mugs', items: mugs }
     ] as category}
-      <section>
-        <h2 class="text-2xl font-semibold mb-6 text-indigo-400">{category.title}</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {#each category.items as product}
-            <div
-              class="bg-gray-800/60 backdrop-blur-sm border border-gray-700 shadow-lg rounded-2xl p-4 flex flex-col items-center transition hover:-translate-y-1 hover:shadow-indigo-500/30 duration-300"
-            >
+    <section class="text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-2 text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-sky-400 to-purple-400">
+        {category.title}
+      </h2>
+      <div class="h-0.5 w-24 mx-auto bg-white/10 rounded mb-8"></div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {#each category.items as product}
+          <div
+            class="bg-gray-800/60 backdrop-blur-sm border border-gray-700 shadow-lg rounded-2xl p-4 flex flex-col items-center transition hover:-translate-y-1 hover:shadow-indigo-500/30 duration-300"
+          >
               <img
                 src={product.image_url ?? '/placeholder.png'}
                 alt={product.name}

@@ -12,13 +12,13 @@
         Customize quality apparel and merch with fast turnaround and premium prints.
       </p>
       <div class="flex gap-3 mt-5">
-        <a href="#" aria-label="Inkspire on Twitter" class="rounded-full p-2 bg-white/5 hover:bg-white/10 transition">
+        <a href="https://twitter.com/" rel="noopener noreferrer" target="_blank" aria-label="Inkspire on Twitter" class="rounded-full p-2 bg-white/5 hover:bg-white/10 transition">
           <Twitter size="18" />
         </a>
-        <a href="#" aria-label="Inkspire on Facebook" class="rounded-full p-2 bg-white/5 hover:bg-white/10 transition">
+        <a href="https://facebook.com/" rel="noopener noreferrer" target="_blank" aria-label="Inkspire on Facebook" class="rounded-full p-2 bg-white/5 hover:bg-white/10 transition">
           <Facebook size="18" />
         </a>
-        <a href="#" aria-label="Inkspire on Instagram" class="rounded-full p-2 bg-white/5 hover:bg-white/10 transition">
+        <a href="https://instagram.com/" rel="noopener noreferrer" target="_blank" aria-label="Inkspire on Instagram" class="rounded-full p-2 bg-white/5 hover:bg-white/10 transition">
           <Instagram size="18" />
         </a>
       </div>
@@ -40,9 +40,9 @@
       <h3 class="text-white font-semibold">Company</h3>
       <ul class="mt-4 space-y-2 text-sm">
         <li><a class="hover:text-white" href="/contact">Contact</a></li>
-        <li><a class="hover:text-white" href="#">About</a></li>
-        <li><a class="hover:text-white" href="#">Careers</a></li>
-        <li><a class="hover:text-white" href="#">Press</a></li>
+        <li><a class="hover:text-white" href="/about">About</a></li>
+        <li><a class="hover:text-white" href="/careers">Careers</a></li>
+        <li><a class="hover:text-white" href="/press">Press</a></li>
       </ul>
     </div>
 
@@ -66,7 +66,7 @@
       </form>
 
       <ul class="mt-6 space-y-2 text-sm">
-        <li class="flex items-center gap-2"><Phone size="16" /> <a href="tel:+10000000000" class="hover:text-white">+1 (000) 000‑0000</a></li>
+        <li class="flex items-center gap-2"><Phone size="16" /> <a href="tel:+10000000000" class="hover:text-white">+1 (000) 000-0000</a></li>
         <li class="flex items-center gap-2"><Mail size="16" /> <a href="mailto:support@inkspire.example" class="hover:text-white">support@inkspire.example</a></li>
         <li class="flex items-center gap-2"><MapPin size="16" /> <span>Vienna, AT</span></li>
       </ul>
@@ -78,9 +78,9 @@
     <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm">
       <p class="text-gray-400">© {new Date().getFullYear()} Inkspire. All rights reserved.</p>
       <div class="flex gap-4">
-        <a href="#" class="hover:text-white">Privacy</a>
-        <a href="#" class="hover:text-white">Terms</a>
-        <a href="#" class="hover:text-white">Cookies</a>
+        <a href="/privacy" class="hover:text-white">Privacy</a>
+        <a href="/terms" class="hover:text-white">Terms</a>
+        <a href="/cookies" class="hover:text-white">Cookies</a>
       </div>
     </div>
   </div>
