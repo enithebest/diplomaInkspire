@@ -2,6 +2,7 @@
   export let user;
 
   import { onMount } from 'svelte';
+  import { m } from '$lib/paraglide/messages';
   let cartCount = 0;
 
   // Funktion: Warenkorb aus localStorage lesen
@@ -34,13 +35,13 @@
 
     <!-- Main Links -->
     <div class="hidden md:flex gap-6">
-      <a href="/" class="text-gray-300 hover:text-white font-medium">Home</a>
-      <a href="/categories" class="text-gray-300 hover:text-white font-medium">Shop</a>
-      <a href="/contact" class="text-gray-300 hover:text-white font-medium">Contact</a>
+      <a href="/" class="text-gray-300 hover:text-white font-medium">{m.nav_home()}</a>
+      <a href="/categories" class="text-gray-300 hover:text-white font-medium">{m.nav_shop()}</a>
+      <a href="/contact" class="text-gray-300 hover:text-white font-medium">{m.nav_contact()}</a>
 
       {#if user?.role === 'admin'}
-        <a href="/admin" class="text-gray-300 hover:text-white font-medium">Admin</a>
-        <a href="/orders" class="text-gray-300 hover:text-white font-medium">Orders</a>
+        <a href="/admin" class="text-gray-300 hover:text-white font-medium">{m.nav_admin()}</a>
+        <a href="/orders" class="text-gray-300 hover:text-white font-medium">{m.nav_orders()}</a>
       {/if}
     </div>
 
@@ -48,7 +49,7 @@
     <div class="flex items-center gap-5">
       <!-- Warenkorb -->
       <a href="/cart" class="relative inline-block text-gray-300 hover:text-white font-medium">
-        Cart
+        {m.nav_cart()}
         {#if cartCount > 0}
           <span
             class="absolute -top-2 -right-3 bg-indigo-500 text-white text-xs font-semibold rounded-full px-1.5"
@@ -59,23 +60,23 @@
       </a>
 
       {#if user}
-        <span class="text-gray-300 text-sm">Hi, {user.full_name || user.email}!</span>
-        <a href="/profile" class="text-gray-300 hover:text-white font-medium">Profile</a>
+        <span class="text-gray-300 text-sm">{m.nav_greeting({ name: user.full_name || user.email })}</span>
+        <a href="/profile" class="text-gray-300 hover:text-white font-medium">{m.nav_profile()}</a>
         <form method="POST" action="/logout">
           <button
             type="submit"
             class="bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600 text-sm"
           >
-            Logout
+            {m.nav_logout()}
           </button>
         </form>
       {:else}
-        <a href="/login" class="text-gray-300 hover:text-white font-medium">Login</a>
+        <a href="/login" class="text-gray-300 hover:text-white font-medium">{m.nav_login()}</a>
         <a
           href="/register"
           class="bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-400 transition text-sm"
         >
-          Register
+          {m.nav_register()}
         </a>
       {/if}
     </div>
