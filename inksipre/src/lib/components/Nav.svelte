@@ -2,7 +2,7 @@
   export let user;
 
   import { onMount } from 'svelte';
-  import { m } from '$lib/paraglide/messages';
+  import * as m from '$lib/paraglide/messages/_index.js';
   let cartCount = 0;
 
   // Funktion: Warenkorb aus localStorage lesen
