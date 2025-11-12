@@ -58,11 +58,7 @@
           <div
             class="bg-gray-800/60 backdrop-blur-sm border border-gray-700 shadow-lg rounded-2xl p-4 flex flex-col items-center transition hover:-translate-y-1 hover:shadow-indigo-500/30 duration-300"
           >
-            <img
-              src={product.image_url ?? '/placeholder.png'}
-              alt={product.name}
-              class="w-full h-48 object-cover rounded-lg"
-            />
+            <div class="w-full h-48 rounded-lg bg-gray-800 border border-gray-700"></div>
             <h3 class="mt-3 text-lg font-semibold text-white">{product.name}</h3>
             <p class="text-gray-400">${product.base_price}</p>
             <button
@@ -95,11 +91,7 @@
           <div
             class="bg-gray-800/60 backdrop-blur-sm border border-gray-700 shadow-lg rounded-2xl p-4 flex flex-col items-center transition hover:-translate-y-1 hover:shadow-indigo-500/30 duration-300"
           >
-              <img
-                src={product.image_url ?? '/placeholder.png'}
-                alt={product.name}
-                class="w-full h-48 object-cover rounded-lg"
-              />
+              <div class="w-full h-48 rounded-lg bg-gray-800 border border-gray-700"></div>
               <h3 class="mt-3 text-lg font-semibold text-white">{product.name}</h3>
               <p class="text-gray-400">${product.base_price}</p>
               <button

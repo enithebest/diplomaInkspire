@@ -70,9 +70,10 @@
 </script>
 
 {#if !product}
-  <p class="text-center mt-20 text-gray-500 text-lg">Product not found.</p>
+  <p class="text-center mt-20 text-gray-400 text-lg">Product not found.</p>
 {:else}
-  <section class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-10">
+  <div class="relative isolate overflow-hidden bg-gray-900 text-gray-200 min-h-screen px-6 py-12 lg:px-12">
+  <section class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
     <div>
       <img
         src={selectedVariant?.image_url ?? product.image_url}
@@ -164,7 +165,7 @@
 
       <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
         <button
-          class="bg-green-600 hover:bg-green-500 text-white py-3 rounded-lg font-semibold disabled:opacity-50"
+          class="bg-indigo-600 hover:bg-indigo-500 text-white py-3 rounded-lg font-semibold disabled:opacity-50"
           disabled={!selectedVariant}
           on:click={addToCart}
         >
@@ -200,14 +201,10 @@
       </div>
     </div>
   </section>
+  </div>
 {/if}
 
 <style>
-  :global(body) {
-    background-color: #0f172a;
-    color: #f8fafc;
-  }
-
   .toast-enter {
     opacity: 0;
     transform: translate(-50%, -20px) scale(0.95);
