@@ -1,6 +1,6 @@
 import { query } from '$lib/db/mysql.js';
 
-export const load = async ({ params }) => {
+export const load = async ({ params, locals }) => {
   const { id } = params;
 
   // Get the base product
@@ -32,5 +32,5 @@ export const load = async ({ params }) => {
     return { id: v.id, price: v.price, color, size };
   });
 
-  return { product, variants };
+  return { product, variants, isAuthenticated: Boolean(locals?.user) };
 };

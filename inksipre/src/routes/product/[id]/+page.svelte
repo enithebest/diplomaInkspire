@@ -3,6 +3,7 @@
 
   const product = data.product;
   const variants = data.variants || [];
+  const isAuthenticated = data.isAuthenticated ?? false;
 
   let selectedVariant = null;
   let selectedColor = '';
@@ -34,6 +35,10 @@
   }
 
   function addToCart() {
+    if (!isAuthenticated) {
+      window.location.href = '/login';
+      return;
+    }
     if (!selectedVariant) return;
     try {
       const item = {
