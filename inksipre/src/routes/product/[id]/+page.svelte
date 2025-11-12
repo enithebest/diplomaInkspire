@@ -36,7 +36,9 @@
 
   function addToCart() {
     if (!isAuthenticated) {
-      window.location.href = '/login';
+      const next = typeof location !== 'undefined' ? location.pathname : '/';
+      const url = `/login?reason=order_required&next=${encodeURIComponent(next)}`;
+      window.location.href = url;
       return;
     }
     if (!selectedVariant) return;

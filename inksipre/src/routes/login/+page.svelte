@@ -1,7 +1,11 @@
 <script>
   import { enhance } from '$app/forms';
+  import { page } from '$app/stores';
   import Warning from '$lib/components/Warning.svelte';
   let form;
+  let showOrderNotice = false;
+  $: showOrderNotice = $page.url.searchParams.get('reason') === 'order_required';
+  function closeNotice() { showOrderNotice = false; }
 </script>
 
 <div class="flex items-center justify-center min-h-screen bg-gray-900 p-4">
@@ -67,3 +71,16 @@
     </form>
   </div>
 </div>
+
+{#if showOrderNotice}
+  <div class="fixed inset-0 z-50">
+    <div class="absolute inset-0 bg-black/60" on:click={closeNotice}></div>
+    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-900 border border-white/10 rounded-xl p-6 w-[90%] max-w-md">
+      <h2 class="text-white text-lg font-semibold mb-2">Login required</h2>
+      <p class="text-gray-300 mb-4">Please log in to place an order.</p>
+      <div class="flex justify-end gap-2">
+        <button type="button" class="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-500" on:click={closeNotice}>OK</button>
+      </div>
+    </div>
+  </div>
+{/if}
