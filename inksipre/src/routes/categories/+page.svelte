@@ -1,5 +1,6 @@
 ﻿<script>
   import { enhance } from '$app/forms';
+  import { onMount } from 'svelte';
   export let data;
   export let form;
 
@@ -9,10 +10,23 @@
   function viewProduct(id) {
     window.location.href = `/product/${id}`;
   }
+  let showDesignToast = false;
+  onMount(() => {
+    try {
+      const url = typeof localStorage !== 'undefined' ? localStorage.getItem('selectedDesignUrl') : null;
+      if (url) {
+        showDesignToast = true;
+        setTimeout(() => (showDesignToast = false), 2500);
+      }
+    } catch (e) {}
+  });
 </script>
 
 <!-- ðŸŒŒ Background Section -->
 <div class="relative isolate overflow-hidden bg-gray-900 text-gray-200 min-h-screen px-6 py-16 sm:py-24 lg:px-12">
+  {#if showDesignToast}
+    <div role="status" aria-live="polite" class="fixed top-20 left-1/2 -translate-x-1/2 z-[9999] bg-indigo-600 text-white pointer-events-none px-4 py-2 rounded-lg shadow-lg">Design selected - pick a product</div>
+  {/if}
   <!-- Decorative SVG grid pattern -->
   <div class="absolute inset-0 -z-10 opacity-20">
     <svg aria-hidden="true" class="absolute top-0 left-1/2 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-800">
@@ -58,11 +72,7 @@
           <div
             class="bg-gray-800/60 backdrop-blur-sm border border-gray-700 shadow-lg rounded-2xl p-4 flex flex-col items-center transition hover:-translate-y-1 hover:shadow-indigo-500/30 duration-300"
           >
-            <img
-              src={product.image_url ?? '/placeholder.png'}
-              alt={product.name}
-              class="w-full h-48 object-cover rounded-lg"
-            />
+            <div class="w-full h-48 rounded-lg bg-gray-800 border border-gray-700"></div>
             <h3 class="mt-3 text-lg font-semibold text-white">{product.name}</h3>
             <p class="text-gray-400">${product.base_price}</p>
             <button
@@ -95,11 +105,7 @@
           <div
             class="bg-gray-800/60 backdrop-blur-sm border border-gray-700 shadow-lg rounded-2xl p-4 flex flex-col items-center transition hover:-translate-y-1 hover:shadow-indigo-500/30 duration-300"
           >
-              <img
-                src={product.image_url ?? '/placeholder.png'}
-                alt={product.name}
-                class="w-full h-48 object-cover rounded-lg"
-              />
+              <div class="w-full h-48 rounded-lg bg-gray-800 border border-gray-700"></div>
               <h3 class="mt-3 text-lg font-semibold text-white">{product.name}</h3>
               <p class="text-gray-400">${product.base_price}</p>
               <button

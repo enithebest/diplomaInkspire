@@ -3,7 +3,7 @@ import { redirect } from '@sveltejs/kit';
 import { validateEmail, validatePassword } from '$lib/utils/authUtils';
 
 export const actions = {
-  login: async ({ request, cookies }) => {
+  login: async ({ request, cookies, url }) => {
     const data = await request.formData();
     const email = data.get('email');
     const password = data.get('password');
@@ -24,8 +24,16 @@ export const actions = {
         maxAge: 60 * 60 * 24 * 7 // 1 week
       });
 
-      // Redirect to dashboard
-      throw redirect(302, '/admin');
+      // Determine safe redirect target
+      const next = url.searchParams.get('next');
+      let to = '/profile';
+      if (next && typeof next === 'string') {
+        // allow only same-site relative paths
+        if (next.startsWith('/') && !next.startsWith('//')) {
+          to = next === '/login' ? '/profile' : next;
+        }
+      }
+      throw redirect(302, to);
     }
 
     // Return any login error (email not found or wrong password)

@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { page } from '$app/stores';
   let cart = [];
   let showRemoveToast = false;
 
@@ -29,55 +30,56 @@
   $: total = cart.reduce((sum, item) => sum + Number(item.price) * item.qty, 0).toFixed(2);
 
   onMount(loadCart);
+
+  function goToCheckout() {
+    const isAuthenticated = Boolean($page.data?.user);
+    if (!isAuthenticated) {
+      const url = `/login?reason=order_required&next=${encodeURIComponent('/cart')}`;
+      window.location.href = url;
+      return;
+    }
+    // If/when a checkout route exists, navigate there
+    window.location.href = '/checkout';
+  }
 </script>
 
 {#if showRemoveToast}
   <div
-    class="fixed top-6 left-1/2 -translate-x-1/2 bg-gradient-to-r from-rose-600 to-pink-500 text-white px-6 py-3 rounded-xl shadow-lg z-50 animate-fade-in"
+    class="fixed top-4 left-1/2 -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in"
   >
-   Item removed
+    Item removed from cart
   </div>
 {/if}
 
-<section class="max-w-6xl mx-auto px-6 py-16">
-  <h1 class="text-4xl font-extrabold text-center text-gray-900 mb-12 tracking-tight">
-    Your Cart
-  </h1>
+<section class="max-w-6xl mx-auto px-6 py-12">
+  <h1 class="text-3xl font-bold text-center text-gray-800 mb-10">Your Cart</h1>
 
   {#if cart.length === 0}
-    <div class="text-center py-20">
-      <p class="text-gray-500 text-lg mb-6">Your cart is currently empty.</p>
-      <a
-        href="/categories"
-        class="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-500 text-white font-semibold rounded-lg shadow-md hover:shadow-lg hover:opacity-90 transition"
-      >
-        Browse Products
-      </a>
-    </div>
+    <p class="text-center text-gray-500 text-lg mt-10">Your cart is empty.</p>
   {:else}
-    <div class="space-y-5">
+    <div class="space-y-6">
       {#each cart as item, i}
         <div
-          class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/70 backdrop-blur-md border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 p-5"
+          class="flex items-center justify-between bg-white border border-gray-200 rounded-lg shadow-sm p-4"
         >
-          <div class="flex items-center gap-5 w-full sm:w-auto">
+          <div class="flex items-center gap-4">
             <img
               src={item.image_url}
               alt={item.name}
-              class="w-24 h-24 object-cover rounded-xl border border-gray-200 shadow-sm"
+              class="w-20 h-20 object-cover rounded-lg border border-gray-300"
             />
             <div>
-              <h2 class="font-semibold text-lg text-gray-900">{item.name}</h2>
-              <p class="text-gray-600 text-sm mt-1">
-                <span class="capitalize">{item.color}</span> • Size {item.size}
+              <h2 class="font-semibold text-lg text-gray-800">{item.name}</h2>
+              <p class="text-gray-600 text-sm">
+                Color: <span class="capitalize">{item.color}</span> • Size: {item.size}
               </p>
-              <p class="text-blue-600 font-medium mt-1">{item.price} €</p>
+              <p class="text-gray-500 text-sm">{item.price} €</p>
             </div>
           </div>
 
           <button
             on:click={() => removeItem(i)}
-            class="text-rose-600 hover:text-rose-700 text-sm font-medium transition"
+            class="text-red-500 hover:text-red-600 font-medium text-sm transition"
           >
             Remove
           </button>
@@ -85,26 +87,27 @@
       {/each}
 
       <div
-        class="flex flex-col sm:flex-row justify-between items-center mt-12 border-t border-gray-200 pt-8 gap-6"
+        class="flex flex-col sm:flex-row justify-between items-center mt-10 border-t border-gray-200 pt-6 gap-4"
       >
-        <p class="text-2xl font-semibold text-gray-900">
-          Total: <span class="text-blue-700">{total} €</span>
+        <p class="text-xl font-semibold text-gray-800">
+          Total: <span class="text-blue-600">{total} €</span>
         </p>
 
-        <div class="flex gap-4">
+        <div class="flex gap-3">
           <button
             on:click={clearCart}
-            class="px-5 py-2.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium transition"
+            class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm"
           >
             Clear Cart
           </button>
 
-          <a
-            href="/checkout"
-            class="px-6 py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-md hover:shadow-lg transition"
+          <button
+            type="button"
+            on:click={goToCheckout}
+            class="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm"
           >
-            Proceed to Checkout
-          </a>
+            Checkout
+          </button>
         </div>
       </div>
     </div>
@@ -113,7 +116,7 @@
 
 <style>
   :global(body) {
-    background: linear-gradient(to bottom right, #f8fafc, #eef2ff);
+    background-color: #f9fafb;
   }
 
   @keyframes fadeInOut {

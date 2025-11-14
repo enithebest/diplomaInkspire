@@ -3,7 +3,7 @@ import { redirect } from '@sveltejs/kit';
 import { validateEmail, validatePassword } from '$lib/utils/authUtils';
 
 export const actions = {
-  register: async ({ request, cookies }) => {
+  register: async ({ request, cookies, url }) => {
     const formData = await request.formData();
     const email = formData.get('email');
     const full_name = formData.get('full_name');
@@ -24,7 +24,15 @@ export const actions = {
         maxAge: 60 * 60 * 24 * 7
       });
 
-      throw redirect(302, '/admin'); 
+      // After successful registration, redirect to a safe `next` path if provided
+      const next = url.searchParams.get('next');
+      let to = '/profile';
+      if (next && typeof next === 'string') {
+        if (next.startsWith('/') && !next.startsWith('//')) {
+          to = next === '/login' || next === '/register' ? '/profile' : next;
+        }
+      }
+      throw redirect(302, to);
     }
 
     return { message };
