@@ -13,7 +13,7 @@
 <!-- Navigation bar visible on every page -->
 
 
-<Nav user={data.user} />
+<Nav user={data.user} locale={data.locale} locales={data.locales} />
 
 <!-- Page content -->
 <main class="min-h-screen bg-white text-gray-900">

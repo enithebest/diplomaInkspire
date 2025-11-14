@@ -1,11 +1,15 @@
 <script>
   export let user;
+  export let locale = 'en';
+  export let locales = ['en'];
 
   import { onMount } from 'svelte';
+  import { page } from '$app/stores';
+  import { localizeHref } from '$lib/paraglide/runtime';
   import * as m from '$lib/paraglide/messages/_index.js';
   let cartCount = 0;
 
-  // Funktion: Warenkorb aus localStorage lesen
+  // Read cart from localStorage
   function updateCartCount() {
     try {
       const raw = localStorage.getItem('cart');
@@ -16,14 +20,17 @@
     }
   }
 
-  // Beim Laden einmal abrufen + auf Änderungen reagieren
+  // Run once on mount and when localStorage changes
   onMount(() => {
     updateCartCount();
 
-    // Wenn an anderer Stelle localStorage geändert wird
+    // Listen for changes triggered in other tabs
     window.addEventListener('storage', updateCartCount);
     return () => window.removeEventListener('storage', updateCartCount);
   });
+
+  $: availableLocales = locales?.length ? locales : ['en'];
+  $: currentHref = `${$page.url.pathname}${$page.url.search}${$page.url.hash}`;
 </script>
 
 <nav class="w-full sticky top-0 z-50 bg-gray-900/90 backdrop-blur border-b border-white/10 shadow-sm">
@@ -79,6 +86,21 @@
           {m.nav_register()}
         </a>
       {/if}
+
+      <!-- Language selector -->
+      <div class="flex items-center gap-1 rounded-full border border-white/20 px-2 py-1 text-xs md:text-sm">
+        {#each availableLocales as code}
+          <a
+            href={localizeHref(currentHref, { locale: code })}
+            aria-current={locale === code ? 'true' : 'false'}
+            class={`px-2 py-1 rounded-full transition ${
+              locale === code ? 'bg-white text-gray-900 font-semibold' : 'text-gray-300 hover:text-white'
+            }`}
+          >
+            {code.toUpperCase()}
+          </a>
+        {/each}
+      </div>
     </div>
   </div>
 </nav>
