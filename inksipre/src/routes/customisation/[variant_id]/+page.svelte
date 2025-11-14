@@ -1,5 +1,6 @@
 <script>
   import { enhance } from '$app/forms';
+  import { onMount } from 'svelte';
   export let data;
   export let form;
   let file;
@@ -34,6 +35,18 @@
     previewUrl = url;
     showLibrary = false;
   }
+
+  onMount(() => {
+    try {
+      const url = typeof localStorage !== 'undefined' ? localStorage.getItem('selectedDesignUrl') : null;
+      if (url) {
+        previewUrl = url;
+        localStorage.removeItem('selectedDesignUrl');
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  });
 </script>
 
 <div class="relative isolate overflow-hidden bg-gray-900 text-gray-200 min-h-screen px-6 py-10 lg:px-12">

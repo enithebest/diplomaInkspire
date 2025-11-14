@@ -1,5 +1,6 @@
 <script>
   import { enhance } from '$app/forms';
+  import { page } from '$app/stores';
   export let form;
 </script>
 
@@ -101,8 +102,12 @@
 
       <!-- Footer -->
       <p class="text-gray-400 text-sm text-center mt-4">
-        Already have an account? 
-        <a href="/login" class="text-blue-500 font-medium hover:text-blue-400">Login here</a>
+        Already have an account?
+        {#if $page.url.searchParams.get('next')}
+          <a href={`/login?next=${encodeURIComponent($page.url.searchParams.get('next'))}`} class="text-blue-500 font-medium hover:text-blue-400">Login here</a>
+        {:else}
+          <a href="/login" class="text-blue-500 font-medium hover:text-blue-400">Login here</a>
+        {/if}
       </p>
     </form>
   </div>

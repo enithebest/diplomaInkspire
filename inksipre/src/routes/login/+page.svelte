@@ -65,8 +65,12 @@
 
       <!-- Footer -->
       <p class="text-gray-400 text-sm text-center">
-        Don't have an account? 
-        <a href="/register" class="text-blue-500 font-medium hover:text-blue-400">Register here</a>
+        Don't have an account?
+        {#if $page.url.searchParams.get('next')}
+          <a href={`/register?next=${encodeURIComponent($page.url.searchParams.get('next'))}`} class="text-blue-500 font-medium hover:text-blue-400">Register here</a>
+        {:else}
+          <a href="/register" class="text-blue-500 font-medium hover:text-blue-400">Register here</a>
+        {/if}
       </p>
     </form>
   </div>

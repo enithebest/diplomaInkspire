@@ -1,5 +1,6 @@
 ﻿<script>
   import { enhance } from '$app/forms';
+  import { onMount } from 'svelte';
   export let data;
   export let form;
 
@@ -9,10 +10,23 @@
   function viewProduct(id) {
     window.location.href = `/product/${id}`;
   }
+  let showDesignToast = false;
+  onMount(() => {
+    try {
+      const url = typeof localStorage !== 'undefined' ? localStorage.getItem('selectedDesignUrl') : null;
+      if (url) {
+        showDesignToast = true;
+        setTimeout(() => (showDesignToast = false), 2500);
+      }
+    } catch (e) {}
+  });
 </script>
 
 <!-- ðŸŒŒ Background Section -->
 <div class="relative isolate overflow-hidden bg-gray-900 text-gray-200 min-h-screen px-6 py-16 sm:py-24 lg:px-12">
+  {#if showDesignToast}
+    <div role="status" aria-live="polite" class="fixed top-20 left-1/2 -translate-x-1/2 z-[9999] bg-indigo-600 text-white pointer-events-none px-4 py-2 rounded-lg shadow-lg">Design selected - pick a product</div>
+  {/if}
   <!-- Decorative SVG grid pattern -->
   <div class="absolute inset-0 -z-10 opacity-20">
     <svg aria-hidden="true" class="absolute top-0 left-1/2 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-800">
