@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { page } from '$app/stores';
   let cart = [];
   let showRemoveToast = false;
 
@@ -29,6 +30,17 @@
   $: total = cart.reduce((sum, item) => sum + Number(item.price) * item.qty, 0).toFixed(2);
 
   onMount(loadCart);
+
+  function goToCheckout() {
+    const isAuthenticated = Boolean($page.data?.user);
+    if (!isAuthenticated) {
+      const url = `/login?reason=order_required&next=${encodeURIComponent('/cart')}`;
+      window.location.href = url;
+      return;
+    }
+    // If/when a checkout route exists, navigate there
+    window.location.href = '/checkout';
+  }
 </script>
 
 {#if showRemoveToast}
@@ -89,12 +101,13 @@
             Clear Cart
           </button>
 
-          <a
-            href="/checkout"
+          <button
+            type="button"
+            on:click={goToCheckout}
             class="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm"
           >
             Checkout
-          </a>
+          </button>
         </div>
       </div>
     </div>

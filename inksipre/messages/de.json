@@ -1,4 +1,15 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"hello_world": "Hello, {name} from de!"
+	"hello_world": "Hallo, {name} aus de!",
+	"nav_home": "Startseite",
+	"nav_shop": "Shop",
+	"nav_contact": "Kontakt",
+	"nav_admin": "Admin",
+	"nav_orders": "Bestellungen",
+	"nav_cart": "Warenkorb",
+	"nav_greeting": "Willkommen, {name}",
+	"nav_profile": "Profil",
+	"nav_logout": "Abmelden",
+	"nav_login": "Anmelden",
+	"nav_register": "Registrieren"
 }

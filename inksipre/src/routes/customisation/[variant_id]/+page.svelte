@@ -1,5 +1,6 @@
 <script>
   import { enhance } from '$app/forms';
+  import { onMount } from 'svelte';
   export let data;
   export let form;
   let file;
@@ -34,11 +35,24 @@
     previewUrl = url;
     showLibrary = false;
   }
+
+  onMount(() => {
+    try {
+      const url = typeof localStorage !== 'undefined' ? localStorage.getItem('selectedDesignUrl') : null;
+      if (url) {
+        previewUrl = url;
+        localStorage.removeItem('selectedDesignUrl');
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  });
 </script>
 
-<h1 class="text-3xl font-bold mb-6 text-center">Customize {data?.product?.name ?? 'Product'}</h1>
+<div class="relative isolate overflow-hidden bg-gray-900 text-gray-200 min-h-screen px-6 py-10 lg:px-12">
+<h1 class="text-3xl font-bold mb-6 text-center text-white">Customize {data?.product?.name ?? 'Product'}</h1>
 
-<div class="max-w-7xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-12 gap-8">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
   <!-- Sidebar: Upload form -->
   <aside class="md:col-span-4">
     <div class="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-5 md:sticky md:top-6">
@@ -54,7 +68,7 @@
       </div>
       <form method="POST" enctype="multipart/form-data" action="?/upload" use:enhance class="space-y-5">
         <div>
-          <label for="design" class="block mb-2 text-sm font-medium">Choose image</label>
+          <label for="design" class="block mb-2 text-sm font-medium text-gray-200">Choose image</label>
           <input
             id="design"
             type="file"
@@ -62,9 +76,9 @@
             accept="image/*"
             required
             on:change={handleFileChange}
-            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+            class="block w-full text-sm text-gray-200 border border-white/10 rounded-lg cursor-pointer bg-white/5 focus:outline-none"
           />
-          <p class="mt-2 text-xs text-gray-500">Allowed: PNG, JPG, WEBP. Max size: 5MB.</p>
+          <p class="mt-2 text-xs text-gray-400">Allowed: PNG, JPG, WEBP. Max size: 5MB.</p>
         </div>
 
         {#if form?.error}
@@ -74,7 +88,7 @@
           <p class="text-sm text-green-600" role="status">Uploaded successfully!</p>
         {/if}
 
-        <button type="submit" formaction="?/upload" class="w-full bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+        <button type="submit" formaction="?/upload" class="w-full bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-500 transition">
           Upload & Save
         </button>
       </form>
@@ -146,3 +160,4 @@
     </aside>
   </div>
 {/if}
+</div>
