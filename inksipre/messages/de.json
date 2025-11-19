@@ -12,4 +12,31 @@
 	"nav_logout": "Abmelden",
 	"nav_login": "Anmelden",
 	"nav_register": "Registrieren"
+	,
+	"register_header": "Registrierung",
+	"register_subtitle": "Erstellen Sie ein neues Konto",
+	"email_label": "E-Mail-Adresse",
+	"email_placeholder": "Geben Sie Ihre E-Mail ein",
+	"full_name_label": "Vollständiger Name",
+	"full_name_placeholder": "Geben Sie Ihren vollständigen Namen ein",
+	"password_label": "Passwort",
+	"password_placeholder": "Erstellen Sie ein Passwort",
+	"confirm_password_label": "Passwort bestätigen",
+	"confirm_password_placeholder": "Bestätigen Sie Ihr Passwort",
+	"create_account": "Konto erstellen",
+	"already_have_account": "Haben Sie bereits ein Konto?",
+	"login_here": "Hier anmelden",
+
+	"login_header": "Anmeldung",
+	"login_subtitle": "Sicherer Zugriff auf Ihr Konto",
+	"email_label_short": "E-Mail-Adresse",
+	"email_placeholder_login": "sie@beispiel.de",
+	"password_placeholder_login": "••••••••",
+	"login_button": "Anmelden",
+	"dont_have_account": "Haben Sie kein Konto?",
+	"register_here": "Hier registrieren",
+
+	"login_required": "Anmeldung erforderlich",
+	"please_login": "Bitte melden Sie sich an, um eine Bestellung aufzugeben.",
+	"ok_button": "OK"
 }

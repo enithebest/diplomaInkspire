@@ -48,3 +48,195 @@ export const nav_login = /** @type {(inputs: {}) => string} */ () => {
 export const nav_register = /** @type {(inputs: {}) => string} */ () => {
 	return `Registrieren`
 };
+
+export const register_header = /** @type {(inputs: {}) => string} */ () => {
+	return `Registrierung`
+};
+
+export const register_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Erstellen Sie ein neues Konto`
+};
+
+export const email_label = /** @type {(inputs: {}) => string} */ () => {
+	return `E-Mail-Adresse`
+};
+
+export const email_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Geben Sie Ihre E-Mail ein`
+};
+
+export const full_name_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Vollständiger Name`
+};
+
+export const full_name_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Geben Sie Ihren vollständigen Namen ein`
+};
+
+export const password_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Passwort`
+};
+
+export const password_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Erstellen Sie ein Passwort`
+};
+
+export const confirm_password_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Passwort bestätigen`
+};
+
+export const confirm_password_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Bestätigen Sie Ihr Passwort`
+};
+
+export const create_account = /** @type {(inputs: {}) => string} */ () => {
+	return `Konto erstellen`
+};
+
+export const already_have_account = /** @type {(inputs: {}) => string} */ () => {
+	return `Haben Sie bereits ein Konto?`
+};
+
+export const login_here = /** @type {(inputs: {}) => string} */ () => {
+	return `Hier anmelden`
+};
+
+export const login_header = /** @type {(inputs: {}) => string} */ () => {
+	return `Anmeldung`
+};
+
+export const login_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Sicherer Zugriff auf Ihr Konto`
+};
+
+export const email_label_short = /** @type {(inputs: {}) => string} */ () => {
+	return `E-Mail-Adresse`
+};
+
+export const email_placeholder_login = /** @type {(inputs: {}) => string} */ () => {
+	return `sie@beispiel.de`
+};
+
+export const password_placeholder_login = /** @type {(inputs: {}) => string} */ () => {
+	return `••••••••`
+};
+
+export const login_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Anmelden`
+};
+
+export const dont_have_account = /** @type {(inputs: {}) => string} */ () => {
+	return `Haben Sie kein Konto?`
+};
+
+export const register_here = /** @type {(inputs: {}) => string} */ () => {
+	return `Hier registrieren`
+};
+
+export const login_required = /** @type {(inputs: {}) => string} */ () => {
+	return `Anmeldung erforderlich`
+};
+
+export const please_login = /** @type {(inputs: {}) => string} */ () => {
+	return `Bitte melden Sie sich an, um eine Bestellung aufzugeben.`
+};
+
+export const ok_button = /** @type {(inputs: {}) => string} */ () => {
+	return `OK`
+};
+
+export const register_header = /** @type {(inputs: {}) => string} */ () => {
+	return `Registrierung`
+};
+
+export const register_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Erstellen Sie ein neues Konto`
+};
+
+export const email_label = /** @type {(inputs: {}) => string} */ () => {
+	return `E-Mail-Adresse`
+};
+
+export const email_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Geben Sie Ihre E-Mail ein`
+};
+
+export const full_name_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Vollständiger Name`
+};
+
+export const full_name_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Geben Sie Ihren vollständigen Namen ein`
+};
+
+export const password_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Passwort`
+};
+
+export const password_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Erstellen Sie ein Passwort`
+};
+
+export const confirm_password_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Passwort bestätigen`
+};
+
+export const confirm_password_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Bestätigen Sie Ihr Passwort`
+};
+
+export const create_account = /** @type {(inputs: {}) => string} */ () => {
+	return `Konto erstellen`
+};
+
+export const already_have_account = /** @type {(inputs: {}) => string} */ () => {
+	return `Haben Sie bereits ein Konto?`
+};
+
+export const login_here = /** @type {(inputs: {}) => string} */ () => {
+	return `Hier anmelden`
+};
+
+export const login_header = /** @type {(inputs: {}) => string} */ () => {
+	return `Anmeldung`
+};
+
+export const login_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Sicherer Zugriff auf Ihr Konto`
+};
+
+export const email_label_short = /** @type {(inputs: {}) => string} */ () => {
+	return `E-Mail-Adresse`
+};
+
+export const email_placeholder_login = /** @type {(inputs: {}) => string} */ () => {
+	return `sie@beispiel.de`
+};
+
+export const password_placeholder_login = /** @type {(inputs: {}) => string} */ () => {
+	return `••••••••`
+};
+
+export const login_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Anmelden`
+};
+
+export const dont_have_account = /** @type {(inputs: {}) => string} */ () => {
+	return `Haben Sie kein Konto?`
+};
+
+export const register_here = /** @type {(inputs: {}) => string} */ () => {
+	return `Hier registrieren`
+};
+
+export const login_required = /** @type {(inputs: {}) => string} */ () => {
+	return `Anmeldung erforderlich`
+};
+
+export const please_login = /** @type {(inputs: {}) => string} */ () => {
+	return `Bitte melden Sie sich an, um eine Bestellung aufzugeben.`
+};
+
+export const ok_button = /** @type {(inputs: {}) => string} */ () => {
+	return `OK`
+};

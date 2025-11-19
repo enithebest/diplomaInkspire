@@ -78,12 +78,14 @@
 
 {#if showOrderNotice}
   <div class="fixed inset-0 z-50">
-    <div class="absolute inset-0 bg-black/60" on:click={closeNotice}></div>
+    <!-- svelte-ignore a11y_click_events_have_key_events -->
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
+    <div class="absolute inset-0 bg-black/60" onclick={closeNotice}></div>
     <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-900 border border-white/10 rounded-xl p-6 w-[90%] max-w-md">
       <h2 class="text-white text-lg font-semibold mb-2">Login required</h2>
       <p class="text-gray-300 mb-4">Please log in to place an order.</p>
       <div class="flex justify-end gap-2">
-        <button type="button" class="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-500" on:click={closeNotice}>OK</button>
+        <button type="button" class="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-500" onclick={closeNotice}>OK</button>
       </div>
     </div>
   </div>

@@ -11,5 +11,31 @@
 	"nav_profile": "Profile",
 	"nav_logout": "Log out",
 	"nav_login": "Log in",
-	"nav_register": "Register"
+	"nav_register": "Register",
+	"register_header": "Registration",
+	"register_subtitle": "Create a new account",
+	"email_label": "Email Address",
+	"email_placeholder": "Enter your email",
+	"full_name_label": "Full name",
+	"full_name_placeholder": "Enter your full name",
+	"password_label": "Password",
+	"password_placeholder": "Create a password",
+	"confirm_password_label": "Confirm Password",
+	"confirm_password_placeholder": "Confirm your password",
+	"create_account": "Create Account",
+	"already_have_account": "Already have an account?",
+	"login_here": "Login here",
+
+	"login_header": "Login",
+	"login_subtitle": "Secure access to your account",
+	"email_label_short": "Email address",
+	"email_placeholder_login": "you@example.com",
+	"password_placeholder_login": "••••••••",
+	"login_button": "Log in",
+	"dont_have_account": "Don't have an account?",
+	"register_here": "Register here",
+
+	"login_required": "Login required",
+	"please_login": "Please log in to place an order.",
+	"ok_button": "OK"
 }
