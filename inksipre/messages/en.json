@@ -38,4 +38,11 @@
 	"login_required": "Login required",
 	"please_login": "Please log in to place an order.",
 	"ok_button": "OK"
+	,
+	"hero_banner_text": "New customizer! Our 3D designer is live",
+	"hero_banner_cta": "Try It",
+	"hero_title": "Customize your own product",
+	"hero_subtitle": "Comes to you faster than you can think",
+	"hero_cta_primary": "Get started",
+	"hero_cta_secondary": "Learn more"
 }

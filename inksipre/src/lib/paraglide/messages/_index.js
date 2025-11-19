@@ -831,3 +831,141 @@ export const ok_button = (inputs = {}, options = {}) => {
 	if (locale === "de") return de.ok_button(inputs)
 	return it.ok_button(inputs)
 };
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const hero_banner_text = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.hero_banner_text(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("hero_banner_text", locale)
+	if (locale === "en") return en.hero_banner_text(inputs)
+	if (locale === "de") return de.hero_banner_text(inputs)
+	return it.hero_banner_text(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const hero_banner_cta = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.hero_banner_cta(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("hero_banner_cta", locale)
+	if (locale === "en") return en.hero_banner_cta(inputs)
+	if (locale === "de") return de.hero_banner_cta(inputs)
+	return it.hero_banner_cta(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const hero_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.hero_title(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("hero_title", locale)
+	if (locale === "en") return en.hero_title(inputs)
+	if (locale === "de") return de.hero_title(inputs)
+	return it.hero_title(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const hero_subtitle = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.hero_subtitle(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("hero_subtitle", locale)
+	if (locale === "en") return en.hero_subtitle(inputs)
+	if (locale === "de") return de.hero_subtitle(inputs)
+	return it.hero_subtitle(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const hero_cta_primary = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.hero_cta_primary(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("hero_cta_primary", locale)
+	if (locale === "en") return en.hero_cta_primary(inputs)
+	if (locale === "de") return de.hero_cta_primary(inputs)
+	return it.hero_cta_primary(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const hero_cta_secondary = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.hero_cta_secondary(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("hero_cta_secondary", locale)
+	if (locale === "en") return en.hero_cta_secondary(inputs)
+	if (locale === "de") return de.hero_cta_secondary(inputs)
+	return it.hero_cta_secondary(inputs)
+};

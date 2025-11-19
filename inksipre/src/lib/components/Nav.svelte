@@ -5,7 +5,7 @@
 
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
-  import { localizeHref } from '$lib/paraglide/runtime';
+  import { localizeHref, setLocale } from '$lib/paraglide/runtime';
   import * as m from '$lib/paraglide/messages/_index.js';
   let cartCount = 0;
 
@@ -31,6 +31,23 @@
 
   $: availableLocales = locales?.length ? locales : ['en'];
   $: currentHref = `${$page.url.pathname}${$page.url.search}${$page.url.hash}`;
+
+  function handleLocaleClick(e, code) {
+    // allow modified clicks (open in new tab / window) and non-left clicks
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) {
+      return;
+    }
+    e.preventDefault();
+    // setLocale will navigate when the URL strategy is enabled
+    try {
+      const res = setLocale(code);
+      // handle async setLocale (custom strategies) without awaiting here
+      if (res instanceof Promise) res.catch(() => {});
+    } catch (err) {
+      // fallback: navigate to localized href
+      window.location.href = localizeHref(currentHref, { locale: code });
+    }
+  }
 </script>
 
 <nav class="w-full sticky top-0 z-50 bg-gray-900/90 backdrop-blur border-b border-white/10 shadow-sm">
@@ -96,6 +113,7 @@
             class={`px-2 py-1 rounded-full transition ${
               locale === code ? 'bg-white text-gray-900 font-semibold' : 'text-gray-300 hover:text-white'
             }`}
+            on:click={(e) => handleLocaleClick(e, code)}
           >
             {code.toUpperCase()}
           </a>

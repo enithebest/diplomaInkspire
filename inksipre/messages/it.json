@@ -39,4 +39,11 @@
 	"login_required": "Accesso richiesto",
 	"please_login": "Effettua l'accesso per effettuare un ordine.",
 	"ok_button": "OK"
+	,
+	"hero_banner_text": "Nuovo personalizzatore! Il nostro designer 3D è attivo",
+	"hero_banner_cta": "Provalo",
+	"hero_title": "Personalizza il tuo prodotto",
+	"hero_subtitle": "Arriva da te più velocemente di quanto pensi",
+	"hero_cta_primary": "Inizia",
+	"hero_cta_secondary": "Scopri di più"
 }

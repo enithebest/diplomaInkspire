@@ -144,3 +144,27 @@ export const please_login = /** @type {(inputs: {}) => string} */ () => {
 export const ok_button = /** @type {(inputs: {}) => string} */ () => {
 	return `OK`
 };
+
+export const hero_banner_text = /** @type {(inputs: {}) => string} */ () => {
+	return `Nuovo personalizzatore! Il nostro designer 3D è attivo`
+};
+
+export const hero_banner_cta = /** @type {(inputs: {}) => string} */ () => {
+	return `Provalo`
+};
+
+export const hero_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Personalizza il tuo prodotto`
+};
+
+export const hero_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Arriva da te più velocemente di quanto pensi`
+};
+
+export const hero_cta_primary = /** @type {(inputs: {}) => string} */ () => {
+	return `Inizia`
+};
+
+export const hero_cta_secondary = /** @type {(inputs: {}) => string} */ () => {
+	return `Scopri di più`
+};

@@ -39,4 +39,11 @@
 	"login_required": "Anmeldung erforderlich",
 	"please_login": "Bitte melden Sie sich an, um eine Bestellung aufzugeben.",
 	"ok_button": "OK"
+	,
+	"hero_banner_text": "Neuer Customizer! Unser 3D-Designer ist live",
+	"hero_banner_cta": "Probier's aus",
+	"hero_title": "Gestalte dein eigenes Produkt",
+	"hero_subtitle": "Kommt schneller zu dir, als du denkst",
+	"hero_cta_primary": "Loslegen",
+	"hero_cta_secondary": "Mehr erfahren"
 }
