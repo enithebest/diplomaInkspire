@@ -1,9 +1,12 @@
 <script>
   export let data;
+  export let form = {};
 
   const product = data.product;
   const variants = data.variants || [];
   const isAuthenticated = data.isAuthenticated ?? false;
+  let comments = data.comments || [];
+  $: comments = data.comments || [];
 
   let selectedVariant = null;
   let selectedColor = '';
@@ -39,6 +42,12 @@
     selectedSize = s;
     selectedVariant =
       variants.find((v) => v.color === selectedColor && v.size === s) || null;
+  }
+
+  function formatDate(value) {
+    if (!value) return '';
+    const date = new Date(value);
+    return new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' }).format(date);
   }
 
   function addToCart() {
@@ -207,6 +216,84 @@
           <li>Weight: Mid-weight</li>
         </ul>
       </div>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto mt-16 space-y-6">
+    <div class="bg-gray-800/60 rounded-2xl border border-white/5 p-6">
+      <div class="flex flex-col gap-2 mb-6">
+        <h2 class="text-2xl font-semibold text-white">Community thoughts</h2>
+        <p class="text-gray-400">
+          Share what you like (or would improve) about this product so others can decide faster.
+        </p>
+      </div>
+
+      <form method="POST" action="?/comment" class="space-y-4" aria-label="Leave a comment">
+        {#if !isAuthenticated}
+          <div>
+            <label class="block text-sm text-gray-300 mb-1" for="author_name">Name</label>
+            <input
+              id="author_name"
+              name="author_name"
+              type="text"
+              placeholder="Jane Doe"
+              required
+              class="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-white placeholder:text-gray-500 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400/40"
+            />
+          </div>
+        {:else}
+          <p class="text-sm text-gray-400">Commenting as <span class="text-white font-medium">{data?.user?.full_name ?? 'Inkspire user'}</span></p>
+        {/if}
+
+        <div>
+          <label class="block text-sm text-gray-300 mb-1" for="comment">Your comment</label>
+          <textarea
+            id="comment"
+            name="comment"
+            rows="4"
+            minlength="5"
+            placeholder="Tell everyone what stood out to you..."
+            required
+            class="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-gray-500 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400/40"
+          ></textarea>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <button
+            type="submit"
+            class="self-start rounded-lg bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-600/30 transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-300"
+          >
+            Post comment
+          </button>
+
+          {#if form?.success}
+            <p class="text-sm text-emerald-300">{form.success}</p>
+          {:else if form?.error}
+            <p class="text-sm text-rose-300">{form.error}</p>
+          {/if}
+        </div>
+      </form>
+    </div>
+
+    <div class="space-y-4">
+      <h3 class="text-xl font-semibold text-white">What people already said</h3>
+      {#if comments.length === 0}
+        <p class="text-gray-400 text-sm">No comments yet. Be the first to leave your impressions.</p>
+      {:else}
+        <ul class="space-y-4">
+          {#each comments as comment}
+            <li class="rounded-2xl border border-white/5 bg-gray-800/60 p-4">
+              <div class="flex items-center justify-between text-sm text-gray-400 mb-2">
+                <span class="font-medium text-white">
+                  {comment.registered_name || comment.author_name}
+                </span>
+                <span>{formatDate(comment.created_at)}</span>
+              </div>
+              <p class="text-gray-200 leading-relaxed">{comment.comment}</p>
+            </li>
+          {/each}
+        </ul>
+      {/if}
     </div>
   </section>
   </div>
