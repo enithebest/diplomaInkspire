@@ -1,9 +1,9 @@
 <script>
   import { enhance } from '$app/forms';
   import { page } from '$app/stores';
-  import { Warning}  from '$lib/components/Warning.svelte';
-    import { message } from '$lib/paraglide/messages/_index.js';
-  let form;
+  import Warning from '$lib/components/Warning.svelte';
+  import * as m from '$lib/paraglide/messages/_index.js';
+  export let form;
   let showOrderNotice = false;
   $: showOrderNotice = $page.url.searchParams.get('reason') === 'order_required';
   function closeNotice() { showOrderNotice = false; }

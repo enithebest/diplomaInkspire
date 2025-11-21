@@ -1,7 +1,7 @@
 <script>
   import { enhance } from '$app/forms';
   import { page } from '$app/stores';
-  import { message } from '$lib/paraglide/messages/_index.js';
+  import * as m from '$lib/paraglide/messages/_index.js';
   export let form;
 </script>
 

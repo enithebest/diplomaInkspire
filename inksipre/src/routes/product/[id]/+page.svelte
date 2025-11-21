@@ -26,6 +26,13 @@
     selectedColor = c;
     selectedSize = '';
     selectedVariant = null;
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('selectedBaseColor', c);
+      }
+    } catch (err) {
+      console.warn('Unable to persist base color', err);
+    }
   }
 
   function chooseSize(s) {
