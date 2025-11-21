@@ -113,7 +113,7 @@
             class={`px-2 py-1 rounded-full transition ${
               locale === code ? 'bg-white text-gray-900 font-semibold' : 'text-gray-300 hover:text-white'
             }`}
-            on:click={(e) => handleLocaleClick(e, code)}
+            onclick={(e) => handleLocaleClick(e, code)}
           >
             {code.toUpperCase()}
           </a>

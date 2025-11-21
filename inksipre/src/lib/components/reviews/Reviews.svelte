@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import * as m from '$lib/paraglide/messages/_index.js'
 
   // 10 static client reviews
   const reviews = [
@@ -42,14 +43,14 @@
   <div class="max-w-6xl mx-auto px-6">
     <div class="flex items-end justify-between mb-6">
       <div>
-        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-900">What our customers say</h2>
-        <p class="text-gray-500 mt-1">Real words from happy creators</p>
+        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-900">{m.reviews_title()}</h2>
+        <p class="text-gray-500 mt-1">{m.reviews_subtitle()}</p>
       </div>
       <div class="hidden sm:flex gap-2">
-        <button class="h-10 w-10 rounded-full border border-gray-200 hover:bg-gray-50" on:click={() => scrollByCards(-1)} aria-label="Previous reviews">
+        <button class="h-10 w-10 rounded-full border border-gray-200 hover:bg-gray-50" on:click={() => scrollByCards(-1)} aria-label={m.reviews_prev()}>
           ‹
         </button>
-        <button class="h-10 w-10 rounded-full border border-gray-200 hover:bg-gray-50" on:click={() => scrollByCards(1)} aria-label="Next reviews">
+        <button class="h-10 w-10 rounded-full border border-gray-200 hover:bg-gray-50" on:click={() => scrollByCards(1)} aria-label={m.reviews_next()}>
           ›
         </button>
       </div>
@@ -60,7 +61,7 @@
         bind:this={scroller}
         class="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2"
         style="scrollbar-width: thin;"
-        aria-label="Customer reviews carousel"
+        aria-label={m.reviews_carousel_aria()}
       >
         {#each reviews as r}
           <div
@@ -74,7 +75,7 @@
                 <p class="text-gray-500 text-sm">{r.role}</p>
               </div>
             </div>
-            <div class="mt-3 text-yellow-500" aria-label={`${r.rating} out of 5 stars`}>
+            <div class="mt-3 text-yellow-500" aria-label={m.reviews_rating_out_of({ rating: r.rating })}>
               {'★★★★★'.slice(0, r.rating)}<span class="text-gray-300">{'★★★★★'.slice(r.rating)}</span>
             </div>
             <p class="mt-3 text-gray-700 text-sm leading-relaxed">{r.comment}</p>

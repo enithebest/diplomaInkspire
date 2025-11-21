@@ -3,9 +3,14 @@
   import { page } from '$app/stores';
   import Warning from '$lib/components/Warning.svelte';
   import * as m from '$lib/paraglide/messages/_index.js';
-  export let form;
-  let showOrderNotice = false;
-  $: showOrderNotice = $page.url.searchParams.get('reason') === 'order_required';
+  import { onMount } from 'svelte';
+  let form;
+  let showOrderNotice = $state(false);
+
+  onMount(() => {
+    showOrderNotice = $page.url.searchParams.get('reason') === 'order_required';
+  });
+
   function closeNotice() { showOrderNotice = false; }
 </script>
 

@@ -1,5 +1,6 @@
 <script>
   export let products = [];
+  import * as m from '$lib/paraglide/messages/_index.js';
 
   const fallbackImg = (id) =>
     `https://picsum.photos/seed/inkspire-${id}/600/400`;
@@ -9,10 +10,10 @@
   <div class="max-w-6xl mx-auto px-6">
     <div class="flex items-end justify-between mb-8">
       <div>
-        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-900">Bestsellers</h2>
-        <p class="text-gray-500 mt-1">Our most-loved products right now</p>
+        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-900">{m.bestsellers_title()}</h2>
+        <p class="text-gray-500 mt-1">{m.bestsellers_subtitle()}</p>
       </div>
-      <a href="/categories" class="text-sm font-medium text-blue-600 hover:text-blue-700">Shop all</a>
+      <a href="/categories" class="text-sm font-medium text-blue-600 hover:text-blue-700">{m.bestsellers_shop_all()}</a>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -34,7 +35,7 @@
             <div class="flex items-center justify-between mt-3">
               <span class="text-gray-900 font-semibold">€{Number(p.base_price).toFixed(2)}</span>
               {#if p.total_sold != null}
-                <span class="text-xs text-gray-500">{p.total_sold} sold</span>
+                <span class="text-xs text-gray-500">{m.bestsellers_sold({ count: p.total_sold })}</span>
               {/if}
             </div>
           </div>

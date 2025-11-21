@@ -168,3 +168,203 @@ export const hero_cta_primary = /** @type {(inputs: {}) => string} */ () => {
 export const hero_cta_secondary = /** @type {(inputs: {}) => string} */ () => {
 	return `Learn more`
 };
+
+export const bestsellers_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Bestsellers`
+};
+
+export const bestsellers_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Our most-loved products right now`
+};
+
+export const bestsellers_shop_all = /** @type {(inputs: {}) => string} */ () => {
+	return `Shop all`
+};
+
+export const bestsellers_sold = /** @type {(inputs: { count: NonNullable<unknown> }) => string} */ (i) => {
+	return `${i.count} sold`
+};
+
+export const content_banner_small = /** @type {(inputs: {}) => string} */ () => {
+	return `Bring Your Designs to Life`
+};
+
+export const content_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Realistic 3D Mockups in Minutes`
+};
+
+export const content_intro = /** @type {(inputs: {}) => string} */ () => {
+	return `Showcase your products, apps, or packaging with high-quality 3D visuals that impress clients and boost conversions — all from your browser.`
+};
+
+export const content_feature_instant_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Instant Previews.`
+};
+
+export const content_feature_instant_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Upload your design and see it applied instantly on realistic 3D surfaces — no rendering delays.`
+};
+
+export const content_feature_cloud_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Cloud Rendering.`
+};
+
+export const content_feature_cloud_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `All mockups are rendered in the cloud — freeing your computer and saving time.`
+};
+
+export const content_feature_lighting_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Customizable Lighting.`
+};
+
+export const content_feature_lighting_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Adjust light, shadows, and reflections with a simple slider to match your brand mood.`
+};
+
+export const content_paragraph2 = /** @type {(inputs: {}) => string} */ () => {
+	return `From startup branding kits to full product campaigns, our 3D mockup platform makes visualization intuitive and fast — no modeling experience required.`
+};
+
+export const content_web_tools_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Web-Based 3D Tools`
+};
+
+export const content_web_tools_paragraph = /** @type {(inputs: {}) => string} */ () => {
+	return `Design, preview, and export your mockups directly from your browser. Collaborate in real time, share links, or download high-res renders instantly. Simplify your creative workflow today.`
+};
+
+export const footer_tagline = /** @type {(inputs: {}) => string} */ () => {
+	return `Customize quality apparel and merch with fast turnaround and premium prints.`
+};
+
+export const footer_shop_header = /** @type {(inputs: {}) => string} */ () => {
+	return `Shop`
+};
+
+export const footer_shop_all_categories = /** @type {(inputs: {}) => string} */ () => {
+	return `All Categories`
+};
+
+export const footer_shop_cart = /** @type {(inputs: {}) => string} */ () => {
+	return `Cart`
+};
+
+export const footer_shop_orders = /** @type {(inputs: {}) => string} */ () => {
+	return `Orders`
+};
+
+export const footer_shop_profile = /** @type {(inputs: {}) => string} */ () => {
+	return `Profile`
+};
+
+export const footer_company_header = /** @type {(inputs: {}) => string} */ () => {
+	return `Company`
+};
+
+export const footer_company_contact = /** @type {(inputs: {}) => string} */ () => {
+	return `Contact`
+};
+
+export const footer_company_about = /** @type {(inputs: {}) => string} */ () => {
+	return `About`
+};
+
+export const footer_company_careers = /** @type {(inputs: {}) => string} */ () => {
+	return `Careers`
+};
+
+export const footer_company_press = /** @type {(inputs: {}) => string} */ () => {
+	return `Press`
+};
+
+export const footer_newsletter_header = /** @type {(inputs: {}) => string} */ () => {
+	return `Stay in the loop`
+};
+
+export const footer_newsletter_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Get product updates and special offers.`
+};
+
+export const footer_newsletter_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `you@example.com`
+};
+
+export const footer_newsletter_subscribe = /** @type {(inputs: {}) => string} */ () => {
+	return `Subscribe`
+};
+
+export const footer_contact_phone = /** @type {(inputs: {}) => string} */ () => {
+	return `+1 (000) 000-0000`
+};
+
+export const footer_contact_email = /** @type {(inputs: {}) => string} */ () => {
+	return `support@inkspire.example`
+};
+
+export const footer_contact_location = /** @type {(inputs: {}) => string} */ () => {
+	return `Vienna, AT`
+};
+
+export const footer_copyright = /** @type {(inputs: { year: NonNullable<unknown> }) => string} */ (i) => {
+	return `© ${i.year} Inkspire. All rights reserved.`
+};
+
+export const footer_privacy = /** @type {(inputs: {}) => string} */ () => {
+	return `Privacy`
+};
+
+export const footer_terms = /** @type {(inputs: {}) => string} */ () => {
+	return `Terms`
+};
+
+export const footer_cookies = /** @type {(inputs: {}) => string} */ () => {
+	return `Cookies`
+};
+
+export const reviews_title = /** @type {(inputs: {}) => string} */ () => {
+	return `What our customers say`
+};
+
+export const reviews_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Real words from happy creators`
+};
+
+export const reviews_prev = /** @type {(inputs: {}) => string} */ () => {
+	return `Previous reviews`
+};
+
+export const reviews_next = /** @type {(inputs: {}) => string} */ () => {
+	return `Next reviews`
+};
+
+export const reviews_carousel_aria = /** @type {(inputs: {}) => string} */ () => {
+	return `Customer reviews carousel`
+};
+
+export const reviews_rating_out_of = /** @type {(inputs: { rating: NonNullable<unknown> }) => string} */ (i) => {
+	return `${i.rating} out of 5 stars`
+};
+
+export const product_hoodie_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Hoodie`
+};
+
+export const product_hoodie_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Comfortable cotton hoodie with premium print.`
+};
+
+export const product_mugs_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Mugs`
+};
+
+export const product_mugs_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Durable ceramic mugs with vibrant prints.`
+};
+
+export const product_tshirt_title = /** @type {(inputs: {}) => string} */ () => {
+	return `T-shirt`
+};
+
+export const product_tshirt_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Soft, breathable T-shirt made from organic cotton.`
+};

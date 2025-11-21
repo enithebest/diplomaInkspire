@@ -168,3 +168,203 @@ export const hero_cta_primary = /** @type {(inputs: {}) => string} */ () => {
 export const hero_cta_secondary = /** @type {(inputs: {}) => string} */ () => {
 	return `Scopri di più`
 };
+
+export const bestsellers_title = /** @type {(inputs: {}) => string} */ () => {
+	return `I più venduti`
+};
+
+export const bestsellers_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `I nostri prodotti più amati in questo momento`
+};
+
+export const bestsellers_shop_all = /** @type {(inputs: {}) => string} */ () => {
+	return `Vedi tutto`
+};
+
+export const bestsellers_sold = /** @type {(inputs: { count: NonNullable<unknown> }) => string} */ (i) => {
+	return `${i.count} venduti`
+};
+
+export const content_banner_small = /** @type {(inputs: {}) => string} */ () => {
+	return `Dai vita ai tuoi progetti`
+};
+
+export const content_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Mockup 3D realistici in pochi minuti`
+};
+
+export const content_intro = /** @type {(inputs: {}) => string} */ () => {
+	return `Mostra i tuoi prodotti, app o packaging con visual 3D di alta qualità che impressionano i clienti e aumentano le conversioni — tutto dal tuo browser.`
+};
+
+export const content_feature_instant_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Anteprime istantanee.`
+};
+
+export const content_feature_instant_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Carica il tuo design e vedi l'applicazione istantanea su superfici 3D realistiche — senza ritardi di rendering.`
+};
+
+export const content_feature_cloud_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Rendering in cloud.`
+};
+
+export const content_feature_cloud_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Tutti i mockup vengono renderizzati nel cloud — libera il tuo computer e risparmia tempo.`
+};
+
+export const content_feature_lighting_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Illuminazione personalizzabile.`
+};
+
+export const content_feature_lighting_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Regola luci, ombre e riflessi con un semplice cursore per adattare l'atmosfera al tuo brand.`
+};
+
+export const content_paragraph2 = /** @type {(inputs: {}) => string} */ () => {
+	return `Dai kit di branding per startup alle campagne prodotto complete, la nostra piattaforma di mockup 3D rende la visualizzazione intuitiva e veloce — nessuna esperienza di modellazione richiesta.`
+};
+
+export const content_web_tools_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Strumenti 3D basati sul web`
+};
+
+export const content_web_tools_paragraph = /** @type {(inputs: {}) => string} */ () => {
+	return `Progetta, visualizza ed esporta i tuoi mockup direttamente dal browser. Collabora in tempo reale, condividi link o scarica render ad alta risoluzione istantaneamente. Semplifica oggi il tuo flusso creativo.`
+};
+
+export const footer_tagline = /** @type {(inputs: {}) => string} */ () => {
+	return `Customize quality apparel and merch with fast turnaround and premium prints.`
+};
+
+export const footer_shop_header = /** @type {(inputs: {}) => string} */ () => {
+	return `Shop`
+};
+
+export const footer_shop_all_categories = /** @type {(inputs: {}) => string} */ () => {
+	return `Vedi tutto`
+};
+
+export const footer_shop_cart = /** @type {(inputs: {}) => string} */ () => {
+	return `Carrello`
+};
+
+export const footer_shop_orders = /** @type {(inputs: {}) => string} */ () => {
+	return `Ordini`
+};
+
+export const footer_shop_profile = /** @type {(inputs: {}) => string} */ () => {
+	return `Profilo`
+};
+
+export const footer_company_header = /** @type {(inputs: {}) => string} */ () => {
+	return `Azienda`
+};
+
+export const footer_company_contact = /** @type {(inputs: {}) => string} */ () => {
+	return `Contatti`
+};
+
+export const footer_company_about = /** @type {(inputs: {}) => string} */ () => {
+	return `Chi siamo`
+};
+
+export const footer_company_careers = /** @type {(inputs: {}) => string} */ () => {
+	return `Lavora con noi`
+};
+
+export const footer_company_press = /** @type {(inputs: {}) => string} */ () => {
+	return `Stampa`
+};
+
+export const footer_newsletter_header = /** @type {(inputs: {}) => string} */ () => {
+	return `Rimani aggiornato`
+};
+
+export const footer_newsletter_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Ricevi aggiornamenti sui prodotti e offerte speciali.`
+};
+
+export const footer_newsletter_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `tuo@esempio.com`
+};
+
+export const footer_newsletter_subscribe = /** @type {(inputs: {}) => string} */ () => {
+	return `Iscriviti`
+};
+
+export const footer_contact_phone = /** @type {(inputs: {}) => string} */ () => {
+	return `+1 (000) 000-0000`
+};
+
+export const footer_contact_email = /** @type {(inputs: {}) => string} */ () => {
+	return `support@inkspire.example`
+};
+
+export const footer_contact_location = /** @type {(inputs: {}) => string} */ () => {
+	return `Vienna, AT`
+};
+
+export const footer_copyright = /** @type {(inputs: { year: NonNullable<unknown> }) => string} */ (i) => {
+	return `© ${i.year} Inkspire. Tutti i diritti riservati.`
+};
+
+export const footer_privacy = /** @type {(inputs: {}) => string} */ () => {
+	return `Privacy`
+};
+
+export const footer_terms = /** @type {(inputs: {}) => string} */ () => {
+	return `Termini`
+};
+
+export const footer_cookies = /** @type {(inputs: {}) => string} */ () => {
+	return `Cookie`
+};
+
+export const reviews_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Cosa dicono i nostri clienti`
+};
+
+export const reviews_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Parole vere da creativi soddisfatti`
+};
+
+export const reviews_prev = /** @type {(inputs: {}) => string} */ () => {
+	return `Recensioni precedenti`
+};
+
+export const reviews_next = /** @type {(inputs: {}) => string} */ () => {
+	return `Recensioni successive`
+};
+
+export const reviews_carousel_aria = /** @type {(inputs: {}) => string} */ () => {
+	return `Carosello recensioni clienti`
+};
+
+export const reviews_rating_out_of = /** @type {(inputs: { rating: NonNullable<unknown> }) => string} */ (i) => {
+	return `${i.rating} su 5 stelle`
+};
+
+export const product_hoodie_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Felpa con cappuccio`
+};
+
+export const product_hoodie_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Felpa comoda in cotone con stampa di alta qualità.`
+};
+
+export const product_mugs_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Tazze`
+};
+
+export const product_mugs_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Tazze in ceramica resistenti con stampe vivaci.`
+};
+
+export const product_tshirt_title = /** @type {(inputs: {}) => string} */ () => {
+	return `T-shirt`
+};
+
+export const product_tshirt_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `T-shirt morbida e traspirante in cotone biologico.`
+};
