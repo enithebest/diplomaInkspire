@@ -368,3 +368,79 @@ export const product_tshirt_title = /** @type {(inputs: {}) => string} */ () => 
 export const product_tshirt_desc = /** @type {(inputs: {}) => string} */ () => {
 	return `T-shirt morbida e traspirante in cotone biologico.`
 };
+
+export const admin_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Admin — Gestione prodotti`
+};
+
+export const admin_create_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Crea nuovo prodotto`
+};
+
+export const admin_name_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Nome prodotto`
+};
+
+export const admin_base_price_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Prezzo base (€)`
+};
+
+export const admin_description_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Descrizione`
+};
+
+export const admin_category_select_default = /** @type {(inputs: {}) => string} */ () => {
+	return `-- Seleziona categoria --`
+};
+
+export const admin_category_hoodies = /** @type {(inputs: {}) => string} */ () => {
+	return `Felpe`
+};
+
+export const admin_category_tshirts = /** @type {(inputs: {}) => string} */ () => {
+	return `T-shirt`
+};
+
+export const admin_category_sweatshirts = /** @type {(inputs: {}) => string} */ () => {
+	return `Felpe sportive`
+};
+
+export const admin_category_mugs = /** @type {(inputs: {}) => string} */ () => {
+	return `Tazze`
+};
+
+export const admin_allowed_formats = /** @type {(inputs: {}) => string} */ () => {
+	return `Formati consentiti: PNG, JPG, WEBP. Max. 5MB.`
+};
+
+export const admin_create_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Crea`
+};
+
+export const admin_delete_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Elimina`
+};
+
+export const admin_variants_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Varianti`
+};
+
+export const admin_no_variants = /** @type {(inputs: {}) => string} */ () => {
+	return `Nessuna variante disponibile.`
+};
+
+export const admin_variant_size_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Taglia (es. M)`
+};
+
+export const admin_variant_color_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Colore (es. Nero)`
+};
+
+export const admin_variant_price_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Prezzo (€)`
+};
+
+export const admin_add_variant_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Aggiungi variante`
+};
