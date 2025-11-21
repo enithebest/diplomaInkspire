@@ -46,4 +46,9 @@
 	"hero_subtitle": "Kommt schneller zu dir, als du denkst",
 	"hero_cta_primary": "Loslegen",
 	"hero_cta_secondary": "Mehr erfahren"
+	,
+	"bestsellers_title": "Bestseller",
+	"bestsellers_subtitle": "Unsere beliebtesten Produkte gerade jetzt",
+	"bestsellers_shop_all": "Alle anzeigen",
+	"bestsellers_sold": "{count} verkauft"
 }

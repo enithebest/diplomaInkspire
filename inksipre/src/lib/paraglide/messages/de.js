@@ -168,3 +168,35 @@ export const hero_cta_primary = /** @type {(inputs: {}) => string} */ () => {
 export const hero_cta_secondary = /** @type {(inputs: {}) => string} */ () => {
 	return `Mehr erfahren`
 };
+
+export const bestsellers_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Bestseller`
+};
+
+export const bestsellers_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Unsere beliebtesten Produkte gerade jetzt`
+};
+
+export const bestsellers_shop_all = /** @type {(inputs: {}) => string} */ () => {
+	return `Alle anzeigen`
+};
+
+export const bestsellers_sold = /** @type {(inputs: { count: NonNullable<unknown> }) => string} */ (i) => {
+	return `${i.count} verkauft`
+};
+
+export const bestsellers_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Bestseller`
+};
+
+export const bestsellers_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Unsere beliebtesten Produkte gerade jetzt`
+};
+
+export const bestsellers_shop_all = /** @type {(inputs: {}) => string} */ () => {
+	return `Alle anzeigen`
+};
+
+export const bestsellers_sold = /** @type {(inputs: { count: NonNullable<unknown> }) => string} */ (i) => {
+	return `${i.count} verkauft`
+};

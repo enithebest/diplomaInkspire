@@ -969,3 +969,95 @@ export const hero_cta_secondary = (inputs = {}, options = {}) => {
 	if (locale === "de") return de.hero_cta_secondary(inputs)
 	return it.hero_cta_secondary(inputs)
 };
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const bestsellers_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.bestsellers_title(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("bestsellers_title", locale)
+	if (locale === "en") return en.bestsellers_title(inputs)
+	if (locale === "de") return de.bestsellers_title(inputs)
+	return it.bestsellers_title(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const bestsellers_subtitle = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.bestsellers_subtitle(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("bestsellers_subtitle", locale)
+	if (locale === "en") return en.bestsellers_subtitle(inputs)
+	if (locale === "de") return de.bestsellers_subtitle(inputs)
+	return it.bestsellers_subtitle(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const bestsellers_shop_all = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.bestsellers_shop_all(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("bestsellers_shop_all", locale)
+	if (locale === "en") return en.bestsellers_shop_all(inputs)
+	if (locale === "de") return de.bestsellers_shop_all(inputs)
+	return it.bestsellers_shop_all(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{ count: NonNullable<unknown> }} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const bestsellers_sold = (inputs, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.bestsellers_sold(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("bestsellers_sold", locale)
+	if (locale === "en") return en.bestsellers_sold(inputs)
+	if (locale === "de") return de.bestsellers_sold(inputs)
+	return it.bestsellers_sold(inputs)
+};

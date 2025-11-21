@@ -168,3 +168,35 @@ export const hero_cta_primary = /** @type {(inputs: {}) => string} */ () => {
 export const hero_cta_secondary = /** @type {(inputs: {}) => string} */ () => {
 	return `Learn more`
 };
+
+export const bestsellers_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Bestsellers`
+};
+
+export const bestsellers_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Our most-loved products right now`
+};
+
+export const bestsellers_shop_all = /** @type {(inputs: {}) => string} */ () => {
+	return `Shop all`
+};
+
+export const bestsellers_sold = /** @type {(inputs: { count: NonNullable<unknown> }) => string} */ (i) => {
+	return `${i.count} sold`
+};
+
+export const bestsellers_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Bestsellers`
+};
+
+export const bestsellers_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Our most-loved products right now`
+};
+
+export const bestsellers_shop_all = /** @type {(inputs: {}) => string} */ () => {
+	return `Shop all`
+};
+
+export const bestsellers_sold = /** @type {(inputs: { count: NonNullable<unknown> }) => string} */ (i) => {
+	return `${i.count} sold`
+};
