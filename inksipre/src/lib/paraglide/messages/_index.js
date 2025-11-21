@@ -1843,3 +1843,69 @@ export const footer_cookies = (inputs = {}, options = {}) => {
 	if (locale === "de") return de.footer_cookies(inputs)
 	return it.footer_cookies(inputs)
 };
+
+export const product_hoodie_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.product_hoodie_title(inputs)
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("product_hoodie_title", locale)
+	if (locale === "en") return en.product_hoodie_title(inputs)
+	if (locale === "de") return de.product_hoodie_title(inputs)
+	return it.product_hoodie_title(inputs)
+};
+
+export const product_hoodie_desc = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.product_hoodie_desc(inputs)
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("product_hoodie_desc", locale)
+	if (locale === "en") return en.product_hoodie_desc(inputs)
+	if (locale === "de") return de.product_hoodie_desc(inputs)
+	return it.product_hoodie_desc(inputs)
+};
+
+export const product_mugs_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.product_mugs_title(inputs)
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("product_mugs_title", locale)
+	if (locale === "en") return en.product_mugs_title(inputs)
+	if (locale === "de") return de.product_mugs_title(inputs)
+	return it.product_mugs_title(inputs)
+};
+
+export const product_mugs_desc = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.product_mugs_desc(inputs)
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("product_mugs_desc", locale)
+	if (locale === "en") return en.product_mugs_desc(inputs)
+	if (locale === "de") return de.product_mugs_desc(inputs)
+	return it.product_mugs_desc(inputs)
+};
+
+export const product_tshirt_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.product_tshirt_title(inputs)
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("product_tshirt_title", locale)
+	if (locale === "en") return en.product_tshirt_title(inputs)
+	if (locale === "de") return de.product_tshirt_title(inputs)
+	return it.product_tshirt_title(inputs)
+};
+
+export const product_tshirt_desc = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.product_tshirt_desc(inputs)
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("product_tshirt_desc", locale)
+	if (locale === "en") return en.product_tshirt_desc(inputs)
+	if (locale === "de") return de.product_tshirt_desc(inputs)
+	return it.product_tshirt_desc(inputs)
+};

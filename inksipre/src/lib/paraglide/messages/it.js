@@ -320,3 +320,27 @@ export const footer_terms = /** @type {(inputs: {}) => string} */ () => {
 export const footer_cookies = /** @type {(inputs: {}) => string} */ () => {
 	return `Cookie`
 };
+
+export const product_hoodie_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Felpa con cappuccio`
+};
+
+export const product_hoodie_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Felpa comoda in cotone con stampa di alta qualità.`
+};
+
+export const product_mugs_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Tazze`
+};
+
+export const product_mugs_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Tazze in ceramica resistenti con stampe vivaci.`
+};
+
+export const product_tshirt_title = /** @type {(inputs: {}) => string} */ () => {
+	return `T-shirt`
+};
+
+export const product_tshirt_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `T-shirt morbida e traspirante in cotone biologico.`
+};

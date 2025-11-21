@@ -320,3 +320,27 @@ export const footer_terms = /** @type {(inputs: {}) => string} */ () => {
 export const footer_cookies = /** @type {(inputs: {}) => string} */ () => {
 	return `Cookies`
 };
+
+export const product_hoodie_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Hoodie`
+};
+
+export const product_hoodie_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Comfortable cotton hoodie with premium print.`
+};
+
+export const product_mugs_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Mugs`
+};
+
+export const product_mugs_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Durable ceramic mugs with vibrant prints.`
+};
+
+export const product_tshirt_title = /** @type {(inputs: {}) => string} */ () => {
+	return `T-shirt`
+};
+
+export const product_tshirt_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Soft, breathable T-shirt made from organic cotton.`
+};

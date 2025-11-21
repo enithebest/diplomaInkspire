@@ -320,3 +320,27 @@ export const footer_terms = /** @type {(inputs: {}) => string} */ () => {
 export const footer_cookies = /** @type {(inputs: {}) => string} */ () => {
 	return `Cookies`
 };
+
+export const product_hoodie_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Hoodie`
+};
+
+export const product_hoodie_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Bequemer Baumwoll-Hoodie mit hochwertigem Druck.`
+};
+
+export const product_mugs_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Tassen`
+};
+
+export const product_mugs_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Robuste Keramiktassen mit lebendigen Drucken.`
+};
+
+export const product_tshirt_title = /** @type {(inputs: {}) => string} */ () => {
+	return `T-Shirt`
+};
+
+export const product_tshirt_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Weiches, atmungsaktives T-Shirt aus Bio-Baumwolle.`
+};
