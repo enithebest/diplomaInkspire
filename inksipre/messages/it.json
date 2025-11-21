@@ -93,6 +93,13 @@
 	"footer_terms": "Termini",
 	"footer_cookies": "Cookie"
 	,
+	"reviews_title": "Cosa dicono i nostri clienti",
+	"reviews_subtitle": "Parole vere da creativi soddisfatti",
+	"reviews_prev": "Recensioni precedenti",
+	"reviews_next": "Recensioni successive",
+	"reviews_carousel_aria": "Carosello recensioni clienti",
+	"reviews_rating_out_of": "{rating} su 5 stelle"
+	,
 	"product_hoodie_title": "Felpa con cappuccio",
 	"product_hoodie_desc": "Felpa comoda in cotone con stampa di alta qualità.",
 	"product_mugs_title": "Tazze",

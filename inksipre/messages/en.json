@@ -92,6 +92,13 @@
 	"footer_terms": "Terms",
 	"footer_cookies": "Cookies"
 	,
+	"reviews_title": "What our customers say",
+	"reviews_subtitle": "Real words from happy creators",
+	"reviews_prev": "Previous reviews",
+	"reviews_next": "Next reviews",
+	"reviews_carousel_aria": "Customer reviews carousel",
+	"reviews_rating_out_of": "{rating} out of 5 stars"
+	,
 	"product_hoodie_title": "Hoodie",
 	"product_hoodie_desc": "Comfortable cotton hoodie with premium print.",
 	"product_mugs_title": "Mugs",

@@ -321,6 +321,30 @@ export const footer_cookies = /** @type {(inputs: {}) => string} */ () => {
 	return `Cookie`
 };
 
+export const reviews_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Cosa dicono i nostri clienti`
+};
+
+export const reviews_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Parole vere da creativi soddisfatti`
+};
+
+export const reviews_prev = /** @type {(inputs: {}) => string} */ () => {
+	return `Recensioni precedenti`
+};
+
+export const reviews_next = /** @type {(inputs: {}) => string} */ () => {
+	return `Recensioni successive`
+};
+
+export const reviews_carousel_aria = /** @type {(inputs: {}) => string} */ () => {
+	return `Carosello recensioni clienti`
+};
+
+export const reviews_rating_out_of = /** @type {(inputs: { rating: NonNullable<unknown> }) => string} */ (i) => {
+	return `${i.rating} su 5 stelle`
+};
+
 export const product_hoodie_title = /** @type {(inputs: {}) => string} */ () => {
 	return `Felpa con cappuccio`
 };

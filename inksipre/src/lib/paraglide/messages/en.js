@@ -321,6 +321,30 @@ export const footer_cookies = /** @type {(inputs: {}) => string} */ () => {
 	return `Cookies`
 };
 
+export const reviews_title = /** @type {(inputs: {}) => string} */ () => {
+	return `What our customers say`
+};
+
+export const reviews_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Real words from happy creators`
+};
+
+export const reviews_prev = /** @type {(inputs: {}) => string} */ () => {
+	return `Previous reviews`
+};
+
+export const reviews_next = /** @type {(inputs: {}) => string} */ () => {
+	return `Next reviews`
+};
+
+export const reviews_carousel_aria = /** @type {(inputs: {}) => string} */ () => {
+	return `Customer reviews carousel`
+};
+
+export const reviews_rating_out_of = /** @type {(inputs: { rating: NonNullable<unknown> }) => string} */ (i) => {
+	return `${i.rating} out of 5 stars`
+};
+
 export const product_hoodie_title = /** @type {(inputs: {}) => string} */ () => {
 	return `Hoodie`
 };

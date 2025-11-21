@@ -93,6 +93,13 @@
 	"footer_terms": "Nutzungsbedingungen",
 	"footer_cookies": "Cookies"
 	,
+	"reviews_title": "Was unsere Kunden sagen",
+	"reviews_subtitle": "Echte Worte von zufriedenen Kreativen",
+	"reviews_prev": "Vorherige Bewertungen",
+	"reviews_next": "Nächste Bewertungen",
+	"reviews_carousel_aria": "Kundenbewertungen Karussell",
+	"reviews_rating_out_of": "{rating} von 5 Sternen"
+	,
 	"product_hoodie_title": "Hoodie",
 	"product_hoodie_desc": "Bequemer Baumwoll-Hoodie mit hochwertigem Druck.",
 	"product_mugs_title": "Tassen",

@@ -321,6 +321,30 @@ export const footer_cookies = /** @type {(inputs: {}) => string} */ () => {
 	return `Cookies`
 };
 
+export const reviews_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Was unsere Kunden sagen`
+};
+
+export const reviews_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Echte Worte von zufriedenen Kreativen`
+};
+
+export const reviews_prev = /** @type {(inputs: {}) => string} */ () => {
+	return `Vorherige Bewertungen`
+};
+
+export const reviews_next = /** @type {(inputs: {}) => string} */ () => {
+	return `Nächste Bewertungen`
+};
+
+export const reviews_carousel_aria = /** @type {(inputs: {}) => string} */ () => {
+	return `Kundenbewertungen Karussell`
+};
+
+export const reviews_rating_out_of = /** @type {(inputs: { rating: NonNullable<unknown> }) => string} */ (i) => {
+	return `${i.rating} von 5 Sternen`
+};
+
 export const product_hoodie_title = /** @type {(inputs: {}) => string} */ () => {
 	return `Hoodie`
 };
