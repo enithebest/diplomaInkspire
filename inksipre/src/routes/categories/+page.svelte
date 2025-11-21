@@ -5,6 +5,7 @@
   export let form;
 
   const { hoodies, tshirts, sweatshirts, mugs } = data;
+  const short = (text, len = 90) => (text ? `${text.slice(0, len)}${text.length > len ? '…' : ''}` : '');
 
   // Redirect to product detail page instead of customisation
   function viewProduct(id) {
@@ -70,11 +71,28 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {#each form.products as product}
           <div
-            class="bg-gray-800/60 backdrop-blur-sm border border-gray-700 shadow-lg rounded-2xl p-4 flex flex-col items-center transition hover:-translate-y-1 hover:shadow-indigo-500/30 duration-300"
+            class="bg-gray-800/60 backdrop-blur-sm border border-gray-700 shadow-lg rounded-2xl p-4 flex flex-col transition hover:-translate-y-1 hover:shadow-indigo-500/30 duration-300"
           >
-            <div class="w-full h-48 rounded-lg bg-gray-800 border border-gray-700"></div>
-            <h3 class="mt-3 text-lg font-semibold text-white">{product.name}</h3>
-            <p class="text-gray-400">${product.base_price}</p>
+            <div class="w-full h-48 rounded-xl bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 border border-gray-700 overflow-hidden flex items-center justify-center">
+              {#if product.image_url}
+                <img src={product.image_url} alt={product.name} class="w-full h-full object-cover" />
+              {:else}
+                <span class="text-gray-400 text-sm">Image coming soon</span>
+              {/if}
+            </div>
+            <div class="mt-3 flex-1 flex flex-col gap-2">
+              <div class="flex items-center justify-between gap-2">
+                <h3 class="text-lg font-semibold text-white line-clamp-1">{product.name}</h3>
+                <span class="text-sm text-indigo-300 font-medium">${product.base_price}</span>
+              </div>
+              {#if product.description}
+                <p class="text-gray-400 text-sm line-clamp-2">{short(product.description, 110)}</p>
+              {/if}
+              <div class="flex flex-wrap gap-2 text-xs text-gray-300">
+                <span class="px-2 py-1 rounded-full bg-white/5 border border-white/10">Customisable</span>
+                <span class="px-2 py-1 rounded-full bg-white/5 border border-white/10">Fast setup</span>
+              </div>
+            </div>
             <button
               on:click={() => viewProduct(product.id)}
               class="mt-3 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg transition"
@@ -96,28 +114,45 @@
       { title: 'Mugs', items: mugs }
     ] as category}
     <section class="text-center">
-      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-2 text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-sky-400 to-purple-400">
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-2 text-white drop-shadow-[0_5px_18px_rgba(79,70,229,0.25)]">
         {category.title}
       </h2>
-      <div class="h-0.5 w-24 mx-auto bg-white/10 rounded mb-8"></div>
+      <div class="h-0.5 w-24 mx-auto bg-indigo-400/50 rounded mb-8"></div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {#each category.items as product}
           <div
-            class="bg-gray-800/60 backdrop-blur-sm border border-gray-700 shadow-lg rounded-2xl p-4 flex flex-col items-center transition hover:-translate-y-1 hover:shadow-indigo-500/30 duration-300"
+            class="bg-gray-800/60 backdrop-blur-sm border border-gray-700 shadow-lg rounded-2xl p-4 flex flex-col transition hover:-translate-y-1 hover:shadow-indigo-500/30 duration-300"
           >
-              <div class="w-full h-48 rounded-lg bg-gray-800 border border-gray-700"></div>
-              <h3 class="mt-3 text-lg font-semibold text-white">{product.name}</h3>
-              <p class="text-gray-400">${product.base_price}</p>
-              <button
-                on:click={() => viewProduct(product.id)}
-                class="mt-3 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg transition"
-              >
-                View Product
-              </button>
+            <div class="w-full h-48 rounded-xl bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 border border-gray-700 overflow-hidden flex items-center justify-center">
+              {#if product.image_url}
+                <img src={product.image_url} alt={product.name} class="w-full h-full object-cover" />
+              {:else}
+                <span class="text-gray-400 text-sm">Image coming soon</span>
+              {/if}
             </div>
-          {/each}
-        </div>
-      </section>
+            <div class="mt-3 flex-1 flex flex-col gap-2">
+              <div class="flex items-center justify-between gap-2">
+                <h3 class="text-lg font-semibold text-white line-clamp-1">{product.name}</h3>
+                <span class="text-sm text-indigo-300 font-medium">${product.base_price}</span>
+              </div>
+              {#if product.description}
+                <p class="text-gray-400 text-sm line-clamp-2">{short(product.description, 110)}</p>
+              {/if}
+              <div class="flex flex-wrap gap-2 text-xs text-gray-300">
+                <span class="px-2 py-1 rounded-full bg-white/5 border border-white/10">Customisable</span>
+                <span class="px-2 py-1 rounded-full bg-white/5 border border-white/10">Fast setup</span>
+              </div>
+            </div>
+            <button
+              on:click={() => viewProduct(product.id)}
+              class="mt-3 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg transition"
+            >
+              View Product
+            </button>
+          </div>
+        {/each}
+      </div>
+    </section>
     {/each}
   </div>
 </div>
