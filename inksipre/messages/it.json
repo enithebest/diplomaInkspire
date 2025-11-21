@@ -50,5 +50,23 @@
 	"bestsellers_title": "I più venduti",
 	"bestsellers_subtitle": "I nostri prodotti più amati in questo momento",
 	"bestsellers_shop_all": "Vedi tutto",
+	"bestsellers_sold": "{count} venduti",
+
+	"content_banner_small": "Dai vita ai tuoi progetti",
+	"content_title": "Mockup 3D realistici in pochi minuti",
+	"content_intro": "Mostra i tuoi prodotti, app o packaging con visual 3D di alta qualità che impressionano i clienti e aumentano le conversioni — tutto dal tuo browser.",
+	"content_feature_instant_title": "Anteprime istantanee.",
+	"content_feature_instant_desc": "Carica il tuo design e vedi l'applicazione istantanea su superfici 3D realistiche — senza ritardi di rendering.",
+	"content_feature_cloud_title": "Rendering in cloud.",
+	"content_feature_cloud_desc": "Tutti i mockup vengono renderizzati nel cloud — libera il tuo computer e risparmia tempo.",
+	"content_feature_lighting_title": "Illuminazione personalizzabile.",
+	"content_feature_lighting_desc": "Regola luci, ombre e riflessi con un semplice cursore per adattare l'atmosfera al tuo brand.",
+	"content_paragraph2": "Dai kit di branding per startup alle campagne prodotto complete, la nostra piattaforma di mockup 3D rende la visualizzazione intuitiva e veloce — nessuna esperienza di modellazione richiesta.",
+	"content_web_tools_title": "Strumenti 3D basati sul web",
+	"content_web_tools_paragraph": "Progetta, visualizza ed esporta i tuoi mockup direttamente dal browser. Collabora in tempo reale, condividi link o scarica render ad alta risoluzione istantaneamente. Semplifica oggi il tuo flusso creativo."
+	,
+	"bestsellers_title": "I più venduti",
+	"bestsellers_subtitle": "I nostri prodotti più amati in questo momento",
+	"bestsellers_shop_all": "Vedi tutto",
 	"bestsellers_sold": "{count} venduti"
 }

@@ -185,18 +185,50 @@ export const bestsellers_sold = /** @type {(inputs: { count: NonNullable<unknown
 	return `${i.count} verkauft`
 };
 
-export const bestsellers_title = /** @type {(inputs: {}) => string} */ () => {
-	return `Bestseller`
+export const content_banner_small = /** @type {(inputs: {}) => string} */ () => {
+	return `Bringen Sie Ihre Designs zum Leben`
 };
 
-export const bestsellers_subtitle = /** @type {(inputs: {}) => string} */ () => {
-	return `Unsere beliebtesten Produkte gerade jetzt`
+export const content_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Realistische 3D-Mockups in Minuten`
 };
 
-export const bestsellers_shop_all = /** @type {(inputs: {}) => string} */ () => {
-	return `Alle anzeigen`
+export const content_intro = /** @type {(inputs: {}) => string} */ () => {
+	return `Präsentieren Sie Ihre Produkte, Apps oder Verpackungen mit hochwertigen 3D-Visuals, die Kunden beeindrucken und die Conversion-Rate steigern – alles direkt im Browser.`
 };
 
-export const bestsellers_sold = /** @type {(inputs: { count: NonNullable<unknown> }) => string} */ (i) => {
-	return `${i.count} verkauft`
+export const content_feature_instant_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Sofortige Vorschauen.`
+};
+
+export const content_feature_instant_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Laden Sie Ihr Design hoch und sehen Sie es sofort auf realistischen 3D-Oberflächen angewendet – keine Render-Verzögerungen.`
+};
+
+export const content_feature_cloud_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Cloud-Rendering.`
+};
+
+export const content_feature_cloud_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Alle Mockups werden in der Cloud gerendert — so bleibt Ihr Computer frei und Sie sparen Zeit.`
+};
+
+export const content_feature_lighting_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Anpassbare Beleuchtung.`
+};
+
+export const content_feature_lighting_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Passen Sie Licht, Schatten und Reflexionen mit einem einfachen Schieberegler an, um die Stimmung Ihrer Marke zu treffen.`
+};
+
+export const content_paragraph2 = /** @type {(inputs: {}) => string} */ () => {
+	return `Von Startup-Branding-Kits bis hin zu kompletten Produktkampagnen macht unsere 3D-Mockup-Plattform die Visualisierung intuitiv und schnell — keine Modelliererfahrung erforderlich.`
+};
+
+export const content_web_tools_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Webbasierte 3D-Tools`
+};
+
+export const content_web_tools_paragraph = /** @type {(inputs: {}) => string} */ () => {
+	return `Entwerfen, Vorschauen und exportieren Sie Ihre Mockups direkt aus dem Browser. In Echtzeit zusammenarbeiten, Links teilen oder hochauflösende Renderings sofort herunterladen. Vereinfachen Sie noch heute Ihren kreativen Workflow.`
 };

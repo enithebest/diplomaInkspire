@@ -49,5 +49,23 @@
 	"bestsellers_title": "Bestsellers",
 	"bestsellers_subtitle": "Our most-loved products right now",
 	"bestsellers_shop_all": "Shop all",
+	"bestsellers_sold": "{count} sold",
+
+	"content_banner_small": "Bring Your Designs to Life",
+	"content_title": "Realistic 3D Mockups in Minutes",
+	"content_intro": "Showcase your products, apps, or packaging with high-quality 3D visuals that impress clients and boost conversions — all from your browser.",
+	"content_feature_instant_title": "Instant Previews.",
+	"content_feature_instant_desc": "Upload your design and see it applied instantly on realistic 3D surfaces — no rendering delays.",
+	"content_feature_cloud_title": "Cloud Rendering.",
+	"content_feature_cloud_desc": "All mockups are rendered in the cloud — freeing your computer and saving time.",
+	"content_feature_lighting_title": "Customizable Lighting.",
+	"content_feature_lighting_desc": "Adjust light, shadows, and reflections with a simple slider to match your brand mood.",
+	"content_paragraph2": "From startup branding kits to full product campaigns, our 3D mockup platform makes visualization intuitive and fast — no modeling experience required.",
+	"content_web_tools_title": "Web-Based 3D Tools",
+	"content_web_tools_paragraph": "Design, preview, and export your mockups directly from your browser. Collaborate in real time, share links, or download high-res renders instantly. Simplify your creative workflow today."
+	,
+	"bestsellers_title": "Bestsellers",
+	"bestsellers_subtitle": "Our most-loved products right now",
+	"bestsellers_shop_all": "Shop all",
 	"bestsellers_sold": "{count} sold"
 }

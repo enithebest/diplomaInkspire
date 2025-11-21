@@ -185,18 +185,50 @@ export const bestsellers_sold = /** @type {(inputs: { count: NonNullable<unknown
 	return `${i.count} sold`
 };
 
-export const bestsellers_title = /** @type {(inputs: {}) => string} */ () => {
-	return `Bestsellers`
+export const content_banner_small = /** @type {(inputs: {}) => string} */ () => {
+	return `Bring Your Designs to Life`
 };
 
-export const bestsellers_subtitle = /** @type {(inputs: {}) => string} */ () => {
-	return `Our most-loved products right now`
+export const content_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Realistic 3D Mockups in Minutes`
 };
 
-export const bestsellers_shop_all = /** @type {(inputs: {}) => string} */ () => {
-	return `Shop all`
+export const content_intro = /** @type {(inputs: {}) => string} */ () => {
+	return `Showcase your products, apps, or packaging with high-quality 3D visuals that impress clients and boost conversions — all from your browser.`
 };
 
-export const bestsellers_sold = /** @type {(inputs: { count: NonNullable<unknown> }) => string} */ (i) => {
-	return `${i.count} sold`
+export const content_feature_instant_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Instant Previews.`
+};
+
+export const content_feature_instant_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Upload your design and see it applied instantly on realistic 3D surfaces — no rendering delays.`
+};
+
+export const content_feature_cloud_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Cloud Rendering.`
+};
+
+export const content_feature_cloud_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `All mockups are rendered in the cloud — freeing your computer and saving time.`
+};
+
+export const content_feature_lighting_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Customizable Lighting.`
+};
+
+export const content_feature_lighting_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Adjust light, shadows, and reflections with a simple slider to match your brand mood.`
+};
+
+export const content_paragraph2 = /** @type {(inputs: {}) => string} */ () => {
+	return `From startup branding kits to full product campaigns, our 3D mockup platform makes visualization intuitive and fast — no modeling experience required.`
+};
+
+export const content_web_tools_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Web-Based 3D Tools`
+};
+
+export const content_web_tools_paragraph = /** @type {(inputs: {}) => string} */ () => {
+	return `Design, preview, and export your mockups directly from your browser. Collaborate in real time, share links, or download high-res renders instantly. Simplify your creative workflow today.`
 };

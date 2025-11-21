@@ -1061,3 +1061,136 @@ export const bestsellers_sold = (inputs, options = {}) => {
 	if (locale === "de") return de.bestsellers_sold(inputs)
 	return it.bestsellers_sold(inputs)
 };
+
+/* Content component translations */
+export const content_banner_small = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_banner_small(inputs)
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("content_banner_small", locale)
+	if (locale === "en") return en.content_banner_small(inputs)
+	if (locale === "de") return de.content_banner_small(inputs)
+	return it.content_banner_small(inputs)
+};
+
+export const content_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_title(inputs)
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("content_title", locale)
+	if (locale === "en") return en.content_title(inputs)
+	if (locale === "de") return de.content_title(inputs)
+	return it.content_title(inputs)
+};
+
+export const content_intro = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_intro(inputs)
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("content_intro", locale)
+	if (locale === "en") return en.content_intro(inputs)
+	if (locale === "de") return de.content_intro(inputs)
+	return it.content_intro(inputs)
+};
+
+export const content_feature_instant_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_feature_instant_title(inputs)
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("content_feature_instant_title", locale)
+	if (locale === "en") return en.content_feature_instant_title(inputs)
+	if (locale === "de") return de.content_feature_instant_title(inputs)
+	return it.content_feature_instant_title(inputs)
+};
+
+export const content_feature_instant_desc = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_feature_instant_desc(inputs)
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("content_feature_instant_desc", locale)
+	if (locale === "en") return en.content_feature_instant_desc(inputs)
+	if (locale === "de") return de.content_feature_instant_desc(inputs)
+	return it.content_feature_instant_desc(inputs)
+};
+
+export const content_feature_cloud_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_feature_cloud_title(inputs)
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("content_feature_cloud_title", locale)
+	if (locale === "en") return en.content_feature_cloud_title(inputs)
+	if (locale === "de") return de.content_feature_cloud_title(inputs)
+	return it.content_feature_cloud_title(inputs)
+};
+
+export const content_feature_cloud_desc = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_feature_cloud_desc(inputs)
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("content_feature_cloud_desc", locale)
+	if (locale === "en") return en.content_feature_cloud_desc(inputs)
+	if (locale === "de") return de.content_feature_cloud_desc(inputs)
+	return it.content_feature_cloud_desc(inputs)
+};
+
+export const content_feature_lighting_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_feature_lighting_title(inputs)
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("content_feature_lighting_title", locale)
+	if (locale === "en") return en.content_feature_lighting_title(inputs)
+	if (locale === "de") return de.content_feature_lighting_title(inputs)
+	return it.content_feature_lighting_title(inputs)
+};
+
+export const content_feature_lighting_desc = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_feature_lighting_desc(inputs)
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("content_feature_lighting_desc", locale)
+	if (locale === "en") return en.content_feature_lighting_desc(inputs)
+	if (locale === "de") return de.content_feature_lighting_desc(inputs)
+	return it.content_feature_lighting_desc(inputs)
+};
+
+export const content_paragraph2 = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_paragraph2(inputs)
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("content_paragraph2", locale)
+	if (locale === "en") return en.content_paragraph2(inputs)
+	if (locale === "de") return de.content_paragraph2(inputs)
+	return it.content_paragraph2(inputs)
+};
+
+export const content_web_tools_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_web_tools_title(inputs)
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("content_web_tools_title", locale)
+	if (locale === "en") return en.content_web_tools_title(inputs)
+	if (locale === "de") return de.content_web_tools_title(inputs)
+	return it.content_web_tools_title(inputs)
+};
+
+export const content_web_tools_paragraph = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_web_tools_paragraph(inputs)
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("content_web_tools_paragraph", locale)
+	if (locale === "en") return en.content_web_tools_paragraph(inputs)
+	if (locale === "de") return de.content_web_tools_paragraph(inputs)
+	return it.content_web_tools_paragraph(inputs)
+};
