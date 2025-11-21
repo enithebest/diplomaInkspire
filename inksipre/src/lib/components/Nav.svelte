@@ -51,14 +51,14 @@
 </script>
 
 <nav class="w-full sticky top-0 z-50 bg-gray-900/90 backdrop-blur border-b border-white/10 shadow-sm">
-  <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-3 text-white">
+  <div class="max-w-7xl mx-auto flex items-center justify-between gap-6 px-6 py-2 text-white">
     <!-- Logo -->
-    <a href="/" class="text-2xl font-bold tracking-tight text-white hover:text-indigo-400">
+    <a href="/" class="text-2xl font-bold tracking-tight text-white hover:text-indigo-400 flex-shrink-0">
       Inkspire
     </a>
 
     <!-- Main Links -->
-    <div class="hidden md:flex gap-6">
+    <div class="hidden md:flex gap-6 mx-auto">
       <a href="/" class="text-gray-300 hover:text-white font-medium">{m.nav_home()}</a>
       <a href="/categories" class="text-gray-300 hover:text-white font-medium">{m.nav_shop()}</a>
       <a href="/contact" class="text-gray-300 hover:text-white font-medium">{m.nav_contact()}</a>
@@ -70,7 +70,7 @@
     </div>
 
     <!-- Right side -->
-    <div class="flex items-center gap-5">
+    <div class="flex items-center gap-5 flex-shrink-0 justify-end">
       <!-- Warenkorb -->
       <a href="/cart" class="relative inline-block text-gray-300 hover:text-white font-medium">
         {m.nav_cart()}
