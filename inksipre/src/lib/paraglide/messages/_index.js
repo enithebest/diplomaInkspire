@@ -1061,11 +1061,22 @@ export const bestsellers_sold = (inputs, options = {}) => {
 	if (locale === "de") return de.bestsellers_sold(inputs)
 	return it.bestsellers_sold(inputs)
 };
-
-/* Content component translations */
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 export const content_banner_small = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
-		return /** @type {any} */ (globalThis).__paraglide_ssr.content_banner_small(inputs)
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_banner_small(inputs) 
 	}
 	const locale = options.locale ?? getLocale()
 	trackMessageCall("content_banner_small", locale)
@@ -1073,10 +1084,22 @@ export const content_banner_small = (inputs = {}, options = {}) => {
 	if (locale === "de") return de.content_banner_small(inputs)
 	return it.content_banner_small(inputs)
 };
-
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 export const content_title = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
-		return /** @type {any} */ (globalThis).__paraglide_ssr.content_title(inputs)
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_title(inputs) 
 	}
 	const locale = options.locale ?? getLocale()
 	trackMessageCall("content_title", locale)
@@ -1084,10 +1107,22 @@ export const content_title = (inputs = {}, options = {}) => {
 	if (locale === "de") return de.content_title(inputs)
 	return it.content_title(inputs)
 };
-
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 export const content_intro = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
-		return /** @type {any} */ (globalThis).__paraglide_ssr.content_intro(inputs)
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_intro(inputs) 
 	}
 	const locale = options.locale ?? getLocale()
 	trackMessageCall("content_intro", locale)
@@ -1095,10 +1130,22 @@ export const content_intro = (inputs = {}, options = {}) => {
 	if (locale === "de") return de.content_intro(inputs)
 	return it.content_intro(inputs)
 };
-
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 export const content_feature_instant_title = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
-		return /** @type {any} */ (globalThis).__paraglide_ssr.content_feature_instant_title(inputs)
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_feature_instant_title(inputs) 
 	}
 	const locale = options.locale ?? getLocale()
 	trackMessageCall("content_feature_instant_title", locale)
@@ -1106,10 +1153,22 @@ export const content_feature_instant_title = (inputs = {}, options = {}) => {
 	if (locale === "de") return de.content_feature_instant_title(inputs)
 	return it.content_feature_instant_title(inputs)
 };
-
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 export const content_feature_instant_desc = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
-		return /** @type {any} */ (globalThis).__paraglide_ssr.content_feature_instant_desc(inputs)
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_feature_instant_desc(inputs) 
 	}
 	const locale = options.locale ?? getLocale()
 	trackMessageCall("content_feature_instant_desc", locale)
@@ -1117,10 +1176,22 @@ export const content_feature_instant_desc = (inputs = {}, options = {}) => {
 	if (locale === "de") return de.content_feature_instant_desc(inputs)
 	return it.content_feature_instant_desc(inputs)
 };
-
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 export const content_feature_cloud_title = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
-		return /** @type {any} */ (globalThis).__paraglide_ssr.content_feature_cloud_title(inputs)
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_feature_cloud_title(inputs) 
 	}
 	const locale = options.locale ?? getLocale()
 	trackMessageCall("content_feature_cloud_title", locale)
@@ -1128,10 +1199,22 @@ export const content_feature_cloud_title = (inputs = {}, options = {}) => {
 	if (locale === "de") return de.content_feature_cloud_title(inputs)
 	return it.content_feature_cloud_title(inputs)
 };
-
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 export const content_feature_cloud_desc = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
-		return /** @type {any} */ (globalThis).__paraglide_ssr.content_feature_cloud_desc(inputs)
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_feature_cloud_desc(inputs) 
 	}
 	const locale = options.locale ?? getLocale()
 	trackMessageCall("content_feature_cloud_desc", locale)
@@ -1139,10 +1222,22 @@ export const content_feature_cloud_desc = (inputs = {}, options = {}) => {
 	if (locale === "de") return de.content_feature_cloud_desc(inputs)
 	return it.content_feature_cloud_desc(inputs)
 };
-
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 export const content_feature_lighting_title = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
-		return /** @type {any} */ (globalThis).__paraglide_ssr.content_feature_lighting_title(inputs)
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_feature_lighting_title(inputs) 
 	}
 	const locale = options.locale ?? getLocale()
 	trackMessageCall("content_feature_lighting_title", locale)
@@ -1150,10 +1245,22 @@ export const content_feature_lighting_title = (inputs = {}, options = {}) => {
 	if (locale === "de") return de.content_feature_lighting_title(inputs)
 	return it.content_feature_lighting_title(inputs)
 };
-
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 export const content_feature_lighting_desc = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
-		return /** @type {any} */ (globalThis).__paraglide_ssr.content_feature_lighting_desc(inputs)
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_feature_lighting_desc(inputs) 
 	}
 	const locale = options.locale ?? getLocale()
 	trackMessageCall("content_feature_lighting_desc", locale)
@@ -1161,10 +1268,22 @@ export const content_feature_lighting_desc = (inputs = {}, options = {}) => {
 	if (locale === "de") return de.content_feature_lighting_desc(inputs)
 	return it.content_feature_lighting_desc(inputs)
 };
-
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 export const content_paragraph2 = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
-		return /** @type {any} */ (globalThis).__paraglide_ssr.content_paragraph2(inputs)
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_paragraph2(inputs) 
 	}
 	const locale = options.locale ?? getLocale()
 	trackMessageCall("content_paragraph2", locale)
@@ -1172,10 +1291,22 @@ export const content_paragraph2 = (inputs = {}, options = {}) => {
 	if (locale === "de") return de.content_paragraph2(inputs)
 	return it.content_paragraph2(inputs)
 };
-
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 export const content_web_tools_title = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
-		return /** @type {any} */ (globalThis).__paraglide_ssr.content_web_tools_title(inputs)
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_web_tools_title(inputs) 
 	}
 	const locale = options.locale ?? getLocale()
 	trackMessageCall("content_web_tools_title", locale)
@@ -1183,14 +1314,532 @@ export const content_web_tools_title = (inputs = {}, options = {}) => {
 	if (locale === "de") return de.content_web_tools_title(inputs)
 	return it.content_web_tools_title(inputs)
 };
-
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 export const content_web_tools_paragraph = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
-		return /** @type {any} */ (globalThis).__paraglide_ssr.content_web_tools_paragraph(inputs)
+		return /** @type {any} */ (globalThis).__paraglide_ssr.content_web_tools_paragraph(inputs) 
 	}
 	const locale = options.locale ?? getLocale()
 	trackMessageCall("content_web_tools_paragraph", locale)
 	if (locale === "en") return en.content_web_tools_paragraph(inputs)
 	if (locale === "de") return de.content_web_tools_paragraph(inputs)
 	return it.content_web_tools_paragraph(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_tagline = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_tagline(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_tagline", locale)
+	if (locale === "en") return en.footer_tagline(inputs)
+	if (locale === "de") return de.footer_tagline(inputs)
+	return it.footer_tagline(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_shop_header = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_shop_header(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_shop_header", locale)
+	if (locale === "en") return en.footer_shop_header(inputs)
+	if (locale === "de") return de.footer_shop_header(inputs)
+	return it.footer_shop_header(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_shop_all_categories = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_shop_all_categories(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_shop_all_categories", locale)
+	if (locale === "en") return en.footer_shop_all_categories(inputs)
+	if (locale === "de") return de.footer_shop_all_categories(inputs)
+	return it.footer_shop_all_categories(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_shop_cart = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_shop_cart(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_shop_cart", locale)
+	if (locale === "en") return en.footer_shop_cart(inputs)
+	if (locale === "de") return de.footer_shop_cart(inputs)
+	return it.footer_shop_cart(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_shop_orders = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_shop_orders(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_shop_orders", locale)
+	if (locale === "en") return en.footer_shop_orders(inputs)
+	if (locale === "de") return de.footer_shop_orders(inputs)
+	return it.footer_shop_orders(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_shop_profile = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_shop_profile(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_shop_profile", locale)
+	if (locale === "en") return en.footer_shop_profile(inputs)
+	if (locale === "de") return de.footer_shop_profile(inputs)
+	return it.footer_shop_profile(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_company_header = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_company_header(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_company_header", locale)
+	if (locale === "en") return en.footer_company_header(inputs)
+	if (locale === "de") return de.footer_company_header(inputs)
+	return it.footer_company_header(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_company_contact = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_company_contact(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_company_contact", locale)
+	if (locale === "en") return en.footer_company_contact(inputs)
+	if (locale === "de") return de.footer_company_contact(inputs)
+	return it.footer_company_contact(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_company_about = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_company_about(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_company_about", locale)
+	if (locale === "en") return en.footer_company_about(inputs)
+	if (locale === "de") return de.footer_company_about(inputs)
+	return it.footer_company_about(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_company_careers = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_company_careers(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_company_careers", locale)
+	if (locale === "en") return en.footer_company_careers(inputs)
+	if (locale === "de") return de.footer_company_careers(inputs)
+	return it.footer_company_careers(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_company_press = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_company_press(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_company_press", locale)
+	if (locale === "en") return en.footer_company_press(inputs)
+	if (locale === "de") return de.footer_company_press(inputs)
+	return it.footer_company_press(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_newsletter_header = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_newsletter_header(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_newsletter_header", locale)
+	if (locale === "en") return en.footer_newsletter_header(inputs)
+	if (locale === "de") return de.footer_newsletter_header(inputs)
+	return it.footer_newsletter_header(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_newsletter_subtitle = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_newsletter_subtitle(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_newsletter_subtitle", locale)
+	if (locale === "en") return en.footer_newsletter_subtitle(inputs)
+	if (locale === "de") return de.footer_newsletter_subtitle(inputs)
+	return it.footer_newsletter_subtitle(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_newsletter_placeholder = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_newsletter_placeholder(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_newsletter_placeholder", locale)
+	if (locale === "en") return en.footer_newsletter_placeholder(inputs)
+	if (locale === "de") return de.footer_newsletter_placeholder(inputs)
+	return it.footer_newsletter_placeholder(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_newsletter_subscribe = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_newsletter_subscribe(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_newsletter_subscribe", locale)
+	if (locale === "en") return en.footer_newsletter_subscribe(inputs)
+	if (locale === "de") return de.footer_newsletter_subscribe(inputs)
+	return it.footer_newsletter_subscribe(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_contact_phone = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_contact_phone(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_contact_phone", locale)
+	if (locale === "en") return en.footer_contact_phone(inputs)
+	if (locale === "de") return de.footer_contact_phone(inputs)
+	return it.footer_contact_phone(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_contact_email = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_contact_email(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_contact_email", locale)
+	if (locale === "en") return en.footer_contact_email(inputs)
+	if (locale === "de") return de.footer_contact_email(inputs)
+	return it.footer_contact_email(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_contact_location = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_contact_location(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_contact_location", locale)
+	if (locale === "en") return en.footer_contact_location(inputs)
+	if (locale === "de") return de.footer_contact_location(inputs)
+	return it.footer_contact_location(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{ year: NonNullable<unknown> }} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_copyright = (inputs, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_copyright(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_copyright", locale)
+	if (locale === "en") return en.footer_copyright(inputs)
+	if (locale === "de") return de.footer_copyright(inputs)
+	return it.footer_copyright(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_privacy = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_privacy(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_privacy", locale)
+	if (locale === "en") return en.footer_privacy(inputs)
+	if (locale === "de") return de.footer_privacy(inputs)
+	return it.footer_privacy(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_terms = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_terms(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_terms", locale)
+	if (locale === "en") return en.footer_terms(inputs)
+	if (locale === "de") return de.footer_terms(inputs)
+	return it.footer_terms(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const footer_cookies = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.footer_cookies(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("footer_cookies", locale)
+	if (locale === "en") return en.footer_cookies(inputs)
+	if (locale === "de") return de.footer_cookies(inputs)
+	return it.footer_cookies(inputs)
 };

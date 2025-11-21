@@ -1,3 +1,7 @@
+<script>
+  import * as m from '$lib/paraglide/messages/_index.js';
+</script>
+
 <div id="mockups" class="relative isolate overflow-hidden bg-gray-900 px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
   <div class="absolute inset-0 -z-10 overflow-hidden">
     <svg aria-hidden="true" class="absolute top-0 left-[max(50%,25rem)] h-256 w-512 -translate-x-1/2 mask-[radial-gradient(64rem_64rem_at_top,white,transparent)] stroke-gray-800">
@@ -12,10 +16,6 @@
       <rect width="100%" height="100%" fill="url(#mockup-pattern)" stroke-width="0" />
     </svg>
   </div>
-
-  <script>
-    import * as m from '$lib/paraglide/messages/_index.js';
-  </script>
 
   <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-y-10">
     <!-- Hero Text -->

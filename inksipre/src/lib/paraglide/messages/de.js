@@ -232,3 +232,91 @@ export const content_web_tools_title = /** @type {(inputs: {}) => string} */ () 
 export const content_web_tools_paragraph = /** @type {(inputs: {}) => string} */ () => {
 	return `Entwerfen, Vorschauen und exportieren Sie Ihre Mockups direkt aus dem Browser. In Echtzeit zusammenarbeiten, Links teilen oder hochauflösende Renderings sofort herunterladen. Vereinfachen Sie noch heute Ihren kreativen Workflow.`
 };
+
+export const footer_tagline = /** @type {(inputs: {}) => string} */ () => {
+	return `Customize quality apparel and merch with fast turnaround and premium prints.`
+};
+
+export const footer_shop_header = /** @type {(inputs: {}) => string} */ () => {
+	return `Shop`
+};
+
+export const footer_shop_all_categories = /** @type {(inputs: {}) => string} */ () => {
+	return `Alle Kategorien`
+};
+
+export const footer_shop_cart = /** @type {(inputs: {}) => string} */ () => {
+	return `Warenkorb`
+};
+
+export const footer_shop_orders = /** @type {(inputs: {}) => string} */ () => {
+	return `Bestellungen`
+};
+
+export const footer_shop_profile = /** @type {(inputs: {}) => string} */ () => {
+	return `Profil`
+};
+
+export const footer_company_header = /** @type {(inputs: {}) => string} */ () => {
+	return `Unternehmen`
+};
+
+export const footer_company_contact = /** @type {(inputs: {}) => string} */ () => {
+	return `Kontakt`
+};
+
+export const footer_company_about = /** @type {(inputs: {}) => string} */ () => {
+	return `Über uns`
+};
+
+export const footer_company_careers = /** @type {(inputs: {}) => string} */ () => {
+	return `Karriere`
+};
+
+export const footer_company_press = /** @type {(inputs: {}) => string} */ () => {
+	return `Presse`
+};
+
+export const footer_newsletter_header = /** @type {(inputs: {}) => string} */ () => {
+	return `Bleiben Sie informiert`
+};
+
+export const footer_newsletter_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Erhalten Sie Produktupdates und spezielle Angebote.`
+};
+
+export const footer_newsletter_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `sie@beispiel.de`
+};
+
+export const footer_newsletter_subscribe = /** @type {(inputs: {}) => string} */ () => {
+	return `Abonnieren`
+};
+
+export const footer_contact_phone = /** @type {(inputs: {}) => string} */ () => {
+	return `+1 (000) 000-0000`
+};
+
+export const footer_contact_email = /** @type {(inputs: {}) => string} */ () => {
+	return `support@inkspire.example`
+};
+
+export const footer_contact_location = /** @type {(inputs: {}) => string} */ () => {
+	return `Wien, AT`
+};
+
+export const footer_copyright = /** @type {(inputs: { year: NonNullable<unknown> }) => string} */ (i) => {
+	return `© ${i.year} Inkspire. Alle Rechte vorbehalten.`
+};
+
+export const footer_privacy = /** @type {(inputs: {}) => string} */ () => {
+	return `Datenschutz`
+};
+
+export const footer_terms = /** @type {(inputs: {}) => string} */ () => {
+	return `Nutzungsbedingungen`
+};
+
+export const footer_cookies = /** @type {(inputs: {}) => string} */ () => {
+	return `Cookies`
+};
