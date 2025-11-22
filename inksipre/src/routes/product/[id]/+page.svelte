@@ -141,13 +141,14 @@
             <div class="flex items-center gap-3 flex-wrap">
               {#each colors as c}
                 <button
+                  type="button"
                   class={`w-9 h-9 rounded-full border-2 ${
                     selectedColor === c ? 'border-indigo-500' : 'border-gray-600'
                   } flex items-center justify-center`}
                   style={`background-color: ${c?.toLowerCase?.() || 'transparent'}`}
                   title={c}
                   on:click={() => chooseColor(c)}
-                />
+                ></button>
               {/each}
             </div>
           {/if}

@@ -1,4 +1,4 @@
-<script>
+﻿<script>
   import { browser } from '$app/environment';
   import { enhance } from '$app/forms';
   import { onDestroy, onMount } from 'svelte';
@@ -47,6 +47,8 @@
   let Konva;
   let konvaReady = false;
   let pendingEditorInit = false;
+  let orderDesignData = '';
+  let orderDesignUrl = '';
 
   let libraryItems = [];
   let jacketColor = (data?.variant?.color ?? '').toString().trim();
@@ -206,6 +208,38 @@
     setTextureOnModel(texture);
 
     showEditor = false;
+  };
+
+  const prepareOrderSubmission = (event) => {
+    orderDesignUrl = previewUrl || form?.imageUrl || uploadedImages[0] || '';
+    if (!stage) {
+      orderDesignData = '';
+      if (event?.target) {
+        const designUrlField = event.target.querySelector('input[name="design_url"]');
+        const designDataField = event.target.querySelector('input[name="design_data"]');
+        if (designUrlField) designUrlField.value = orderDesignUrl;
+        if (designDataField) designDataField.value = orderDesignData;
+      }
+      return;
+    }
+
+    try {
+      stage.find('Transformer').forEach((tr) => tr.hide());
+      stage.draw();
+      orderDesignData = stage.toDataURL({ pixelRatio: 2 });
+      stage.find('Transformer').forEach((tr) => tr.show());
+      stage.draw();
+    } catch (err) {
+      console.error('Unable to export design for order', err);
+      orderDesignData = '';
+    }
+
+    if (event?.target) {
+      const designUrlField = event.target.querySelector('input[name="design_url"]');
+      const designDataField = event.target.querySelector('input[name="design_data"]');
+      if (designUrlField) designUrlField.value = orderDesignUrl;
+      if (designDataField) designDataField.value = orderDesignData;
+    }
   };
 
   const initScene = () => {
@@ -426,9 +460,9 @@
     Customize {data?.product?.name ?? 'Product'}
   </h1>
 
-  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-start md:items-stretch">
-    <aside class="md:col-span-4 flex flex-col gap-6 h-full">
-      <div class="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-5">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    <aside class="lg:col-span-3 space-y-6">
+      <div class="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-5 shadow-lg">
         <div class="flex items-center justify-between mb-4">
           <h2 class="text-lg font-semibold">Upload design</h2>
           <button
@@ -483,7 +517,7 @@
         {/if}
       </div>
 
-      <div class="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700">
+      <div class="bg-gray-800/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-700 shadow-lg">
         <p class="text-lg font-medium mb-3">Edit your artwork</p>
         <button
           class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-3 rounded-xl transition transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-indigo-400"
@@ -512,14 +546,12 @@
 
     </aside>
 
-    <main class="md:col-span-8 flex flex-col h-full space-y-6">
+    <main class="lg:col-span-6 flex flex-col h-full space-y-6">
       <div class="flex-1 relative">
         <div class="bg-gray-900/80 backdrop-blur-md rounded-3xl overflow-hidden shadow-2xl border border-gray-700 h-[60vh] max-h-[650px] min-h-[360px] relative">
           <div bind:this={containerRef} class="w-full h-full flex items-center justify-center cursor-grab"></div>
           {#if modelPath}
-            <div class="pointer-events-none absolute inset-0 flex items-end justify-center pb-4">
-              <span class="bg-black/40 px-2 py-1 rounded-full border border-white/10 text-[11px] text-gray-300/60">Drag to rotate</span>
-            </div>
+            <div class="pointer-events-none absolute inset-0 flex items-end justify-center pb-4">            </div>
           {:else}
             <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
               <div class="bg-black/50 text-white px-4 py-2 rounded-lg border border-white/10 text-sm">3D preview coming soon</div>
@@ -534,20 +566,63 @@
           Download render
         </button>
       </div>
-      <p class="text-center text-sm text-gray-400">Drag to rotate • Scroll to zoom</p>
-
-      {#if data?.product?.description}
-        <div class="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-5">
-          <h3 class="text-lg font-semibold mb-1 text-indigo-400">Description</h3>
-          <p class="text-gray-300 leading-relaxed">{data.product.description}</p>
-        </div>
-      {/if}
+      <p class="text-center text-sm text-gray-400">Drag to rotate / Scroll to zoom</p>
     </main>
+
+    <aside class="lg:col-span-3 space-y-4">
+      <div class="sticky top-4 space-y-4">
+        {#if data?.product?.description}
+          <div class="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-5 max-h-[55vh] overflow-y-auto shadow-lg">
+            <h3 class="text-lg font-semibold mb-2 text-indigo-300">Product details</h3>
+            <p class="text-gray-200 leading-relaxed whitespace-pre-line">{data.product.description}</p>
+          </div>
+        {/if}
+
+        <div class="bg-white/5 backdrop-blur border border-blue-900/40 rounded-xl p-5 shadow-lg">
+          <div class="flex flex-col gap-1 mb-3">
+            <h3 class="text-lg font-semibold text-white">Ready to order?</h3>
+            <p class="text-sm text-gray-300">We attach your current edit to a new order.</p>
+            <p class="text-xs text-gray-400">Variant: {data?.variant?.sku || data?.variant?.id || 'Selected'}</p>
+          </div>
+          <form
+            method="POST"
+            action="?/order"
+            class="space-y-3"
+            on:submit={prepareOrderSubmission}
+          >
+            <input type="hidden" name="design_data" value={orderDesignData} />
+            <input type="hidden" name="design_url" value={orderDesignUrl} />
+
+            <button
+              type="submit"
+              class="w-full bg-green-600 hover:bg-green-500 text-white font-semibold px-6 py-3 rounded-xl transition transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-green-400 disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              Order this custom piece
+            </button>
+            {#if form?.orderSuccess}
+              <p class="text-sm text-green-400" role="status">
+                Order saved! {form.orderId ? `ID #${form.orderId}` : ''} — we’ll get it ready.
+              </p>
+            {/if}
+            {#if form?.orderError}
+              <p class="text-sm text-red-400" role="alert">{form.orderError}</p>
+            {/if}
+          </form>
+        </div>
+      </div>
+    </aside>
   </div>
 
   {#if showLibrary}
     <div class="fixed inset-0 z-50">
-      <div class="absolute inset-0 bg-black/60" on:click={() => (showLibrary = false)}></div>
+      <div
+        class="absolute inset-0 bg-black/60"
+        role="button"
+        tabindex="0"
+        on:click={() => (showLibrary = false)}
+        on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && (showLibrary = false)}
+        aria-label="Close library"
+      ></div>
       <aside class="absolute right-0 top-0 h-full w-full sm:w-[28rem] bg-gray-900 border-l border-white/10 p-4 overflow-y-auto">
         <div class="flex items-center justify-between mb-3">
           <h2 class="text-lg font-semibold">My library</h2>
