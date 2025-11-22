@@ -167,6 +167,7 @@ export const hero_cta_primary = /** @type {(inputs: {}) => string} */ () => {
 
 export const hero_cta_secondary = /** @type {(inputs: {}) => string} */ () => {
 	return `Learn more`
+
 };
 
 export const bestsellers_title = /** @type {(inputs: {}) => string} */ () => {

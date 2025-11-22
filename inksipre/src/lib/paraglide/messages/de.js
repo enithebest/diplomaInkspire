@@ -143,6 +143,7 @@ export const please_login = /** @type {(inputs: {}) => string} */ () => {
 
 export const ok_button = /** @type {(inputs: {}) => string} */ () => {
 	return `OK`
+
 };
 
 export const hero_banner_text = /** @type {(inputs: {}) => string} */ () => {
@@ -167,6 +168,7 @@ export const hero_cta_primary = /** @type {(inputs: {}) => string} */ () => {
 
 export const hero_cta_secondary = /** @type {(inputs: {}) => string} */ () => {
 	return `Mehr erfahren`
+
 };
 
 export const bestsellers_title = /** @type {(inputs: {}) => string} */ () => {
