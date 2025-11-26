@@ -1,5 +1,5 @@
 <script>
-  export let user;
+  export let user = null;
   export let locale = 'en';
   export let locales = ['en'];
 
@@ -51,6 +51,7 @@
 </script>
 
 <nav class="w-full sticky top-0 z-50 bg-gray-900/90 backdrop-blur border-b border-white/10 shadow-sm">
+  <div class="max-w-7xl mx-auto flex justify-between"></div>  
   <div class="max-w-7xl mx-auto flex items-center justify-between gap-6 px-6 py-2 text-white">
     <!-- Logo -->
     <a href="/" class="text-2xl font-bold tracking-tight text-white hover:text-indigo-400 flex-shrink-0">
@@ -71,8 +72,7 @@
 
     <!-- Right side -->
     <div class="flex items-center gap-5 flex-shrink-0 justify-end">
-      <!-- Warenkorb -->
-      <a href="/cart" class="relative inline-block text-gray-300 hover:text-white font-medium">
+      <a href="/cart" class="relative text-gray-300 hover:text-white font-medium">
         {m.nav_cart()}
         {#if cartCount > 0}
           <span
