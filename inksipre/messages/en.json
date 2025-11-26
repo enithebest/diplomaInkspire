@@ -1,4 +1,4 @@
-{
+﻿{
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"hello_world": "Hello, {name} from en!",
 	"nav_home": "Home",
@@ -30,7 +30,7 @@
 	"login_subtitle": "Secure access to your account",
 	"email_label_short": "Email address",
 	"email_placeholder_login": "you@example.com",
-	"password_placeholder_login": "••••••••",
+	"password_placeholder_login": "â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢",
 	"login_button": "Log in",
 	"dont_have_account": "Don't have an account?",
 	"register_here": "Register here",
@@ -53,14 +53,14 @@
 
 	"content_banner_small": "Bring Your Designs to Life",
 	"content_title": "Realistic 3D Mockups in Minutes",
-	"content_intro": "Showcase your products, apps, or packaging with high-quality 3D visuals that impress clients and boost conversions — all from your browser.",
+	"content_intro": "Showcase your products, apps, or packaging with high-quality 3D visuals that impress clients and boost conversions â€” all from your browser.",
 	"content_feature_instant_title": "Instant Previews.",
-	"content_feature_instant_desc": "Upload your design and see it applied instantly on realistic 3D surfaces — no rendering delays.",
+	"content_feature_instant_desc": "Upload your design and see it applied instantly on realistic 3D surfaces â€” no rendering delays.",
 	"content_feature_cloud_title": "Cloud Rendering.",
-	"content_feature_cloud_desc": "All mockups are rendered in the cloud — freeing your computer and saving time.",
+	"content_feature_cloud_desc": "All mockups are rendered in the cloud â€” freeing your computer and saving time.",
 	"content_feature_lighting_title": "Customizable Lighting.",
 	"content_feature_lighting_desc": "Adjust light, shadows, and reflections with a simple slider to match your brand mood.",
-	"content_paragraph2": "From startup branding kits to full product campaigns, our 3D mockup platform makes visualization intuitive and fast — no modeling experience required.",
+	"content_paragraph2": "From startup branding kits to full product campaigns, our 3D mockup platform makes visualization intuitive and fast â€” no modeling experience required.",
 	"content_web_tools_title": "Web-Based 3D Tools",
 	"content_web_tools_paragraph": "Design, preview, and export your mockups directly from your browser. Collaborate in real time, share links, or download high-res renders instantly. Simplify your creative workflow today."
 	,
@@ -82,7 +82,7 @@
 	"footer_contact_phone": "+1 (000) 000-0000",
 	"footer_contact_email": "support@inkspire.example",
 	"footer_contact_location": "Vienna, AT",
-	"footer_copyright": "© {year} Inkspire. All rights reserved.",
+	"footer_copyright": "Â© {year} Inkspire. All rights reserved.",
 	"footer_privacy": "Privacy",
 	"footer_terms": "Terms",
 	"footer_cookies": "Cookies"
@@ -101,10 +101,10 @@
 	"product_tshirt_title": "T-shirt",
 	"product_tshirt_desc": "Soft, breathable T-shirt made from organic cotton."
 	,
-	"admin_title": "Admin — Product Management",
+	"admin_title": "Admin â€” Product Management",
 	"admin_create_heading": "Create new product",
 	"admin_name_placeholder": "Product name",
-	"admin_base_price_placeholder": "Base price (€)",
+	"admin_base_price_placeholder": "Base price (â‚¬)",
 	"admin_description_placeholder": "Description",
 	"admin_category_select_default": "-- Select category --",
 	"admin_category_hoodies": "Hoodies",
@@ -118,7 +118,7 @@
 	"admin_no_variants": "No variants available.",
 	"admin_variant_size_placeholder": "Size (e.g. M)",
 	"admin_variant_color_placeholder": "Color (e.g. Black)",
-	"admin_variant_price_placeholder": "Price (€)",
+	"admin_variant_price_placeholder": "Price (â‚¬)",
 	"admin_add_variant_button": "Add variant",
 
 	"cart_toast_removed": "Item removed from cart",
@@ -129,6 +129,15 @@
 	"cart_total_label": "Total:",
 	"cart_clear_button": "Clear Cart",
 	"cart_checkout_button": "Checkout",
-	"cart_remove_button": "Remove"
+	"cart_remove_button": "Remove",
+	"categories_title": "Our Categories",
+	"categories_search_placeholder": "Search for a product...",
+	"categories_search_button": "Search",
+	"categories_toast_design_selected": "Design selected - pick a product",
+	"categories_results_title": "Search Results",
+	"categories_view_product": "View Product",
+	"categories_section_hoodies": "Hoodies",
+	"categories_section_tshirts": "T-Shirts",
+	"categories_section_sweatshirts": "Sweatshirts",
+	"categories_section_mugs": "Mugs"
 }
-

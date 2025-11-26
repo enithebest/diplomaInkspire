@@ -1,6 +1,7 @@
 ﻿<script>
   import { enhance } from '$app/forms';
   import { onMount } from 'svelte';
+  import * as m from '$lib/paraglide/messages/_index.js';
   export let data;
   export let form;
 
@@ -12,6 +13,12 @@
     window.location.href = `/product/${id}`;
   }
   let showDesignToast = false;
+  const categorySections = [
+    { title: m.categories_section_hoodies(), items: hoodies },
+    { title: m.categories_section_tshirts(), items: tshirts },
+    { title: m.categories_section_sweatshirts(), items: sweatshirts },
+    { title: m.categories_section_mugs(), items: mugs }
+  ];
   onMount(() => {
     try {
       const url = typeof localStorage !== 'undefined' ? localStorage.getItem('selectedDesignUrl') : null;
@@ -23,10 +30,9 @@
   });
 </script>
 
-<!-- ðŸŒŒ Background Section -->
 <div class="relative isolate overflow-hidden bg-gray-900 text-gray-200 min-h-screen px-6 py-16 sm:py-24 lg:px-12">
   {#if showDesignToast}
-    <div role="status" aria-live="polite" class="fixed top-20 left-1/2 -translate-x-1/2 z-[9999] bg-indigo-600 text-white pointer-events-none px-4 py-2 rounded-lg shadow-lg">Design selected - pick a product</div>
+    <div role="status" aria-live="polite" class="fixed top-20 left-1/2 -translate-x-1/2 z-[9999] bg-indigo-600 text-white pointer-events-none px-4 py-2 rounded-lg shadow-lg">{m.categories_toast_design_selected()}</div>
   {/if}
   <!-- Decorative SVG grid pattern -->
   <div class="absolute inset-0 -z-10 opacity-20">
@@ -41,14 +47,14 @@
   </div>
 
   <!-- Page Header -->
-  <h1 class="text-4xl font-semibold text-center text-white mb-10">Our Categories</h1>
+  <h1 class="text-4xl font-semibold text-center text-white mb-10">{m.categories_title()}</h1>
 
-  <!-- ðŸ” Search Bar -->
+  <!-- Search Bar -->
   <form method="POST" action="?/search" use:enhance class="flex flex-col sm:flex-row gap-3 justify-center mb-12">
     <input
       type="text"
       name="name"
-      placeholder="Search for a product..."
+      placeholder={m.categories_search_placeholder()}
       class="border border-gray-700 bg-gray-800 text-gray-200 placeholder-gray-400 rounded-lg px-4 py-2 w-full sm:w-1/2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
       required
     />
@@ -56,7 +62,7 @@
       type="submit"
       class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2 rounded-lg font-medium transition"
     >
-      Search
+      {m.categories_search_button()}
     </button>
   </form>
 
@@ -64,10 +70,10 @@
     <p class="text-center text-red-500 mb-4">{form.message}</p>
   {/if}
 
-  <!-- ðŸ§¾ Search Results -->
+  <!--Search Results -->
   {#if form?.products?.length > 0}
     <section class="mb-16">
-      <h2 class="text-2xl font-semibold mb-6 text-center text-indigo-400">Search Results</h2>
+      <h2 class="text-2xl font-semibold mb-6 text-center text-indigo-400">{m.categories_results_title()}</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {#each form.products as product}
           <div
@@ -94,10 +100,10 @@
               </div>
             </div>
             <button
-              on:click={() => viewProduct(product.id)}
+              onclick={() => viewProduct(product.id)}
               class="mt-3 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg transition"
             >
-              View Product
+              {m.categories_view_product()}
             </button>
           </div>
         {/each}
@@ -105,7 +111,7 @@
     </section>
   {/if}
 
-  <!-- ðŸ·ï¸ Product Categories -->
+  <!-- Product Categories -->
   <div class="space-y-20">
     {#each [
       { title: 'Hoodies', items: hoodies },
@@ -144,7 +150,7 @@
               </div>
             </div>
             <button
-              on:click={() => viewProduct(product.id)}
+              onclick={() => viewProduct(product.id)}
               class="mt-3 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg transition"
             >
               View Product
