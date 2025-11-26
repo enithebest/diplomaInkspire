@@ -2556,3 +2556,210 @@ export const admin_add_variant_button = (inputs = {}, options = {}) => {
 	if (locale === "de") return de.admin_add_variant_button(inputs)
 	return it.admin_add_variant_button(inputs)
 };
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const cart_toast_removed = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.cart_toast_removed(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("cart_toast_removed", locale)
+	if (locale === "en") return en.cart_toast_removed(inputs)
+	if (locale === "de") return de.cart_toast_removed(inputs)
+	return it.cart_toast_removed(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const cart_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.cart_title(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("cart_title", locale)
+	if (locale === "en") return en.cart_title(inputs)
+	if (locale === "de") return de.cart_title(inputs)
+	return it.cart_title(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const cart_empty = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.cart_empty(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("cart_empty", locale)
+	if (locale === "en") return en.cart_empty(inputs)
+	if (locale === "de") return de.cart_empty(inputs)
+	return it.cart_empty(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const cart_color_label = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.cart_color_label(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("cart_color_label", locale)
+	if (locale === "en") return en.cart_color_label(inputs)
+	if (locale === "de") return de.cart_color_label(inputs)
+	return it.cart_color_label(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const cart_size_label = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.cart_size_label(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("cart_size_label", locale)
+	if (locale === "en") return en.cart_size_label(inputs)
+	if (locale === "de") return de.cart_size_label(inputs)
+	return it.cart_size_label(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const cart_total_label = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.cart_total_label(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("cart_total_label", locale)
+	if (locale === "en") return en.cart_total_label(inputs)
+	if (locale === "de") return de.cart_total_label(inputs)
+	return it.cart_total_label(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const cart_clear_button = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.cart_clear_button(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("cart_clear_button", locale)
+	if (locale === "en") return en.cart_clear_button(inputs)
+	if (locale === "de") return de.cart_clear_button(inputs)
+	return it.cart_clear_button(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const cart_checkout_button = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.cart_checkout_button(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("cart_checkout_button", locale)
+	if (locale === "en") return en.cart_checkout_button(inputs)
+	if (locale === "de") return de.cart_checkout_button(inputs)
+	return it.cart_checkout_button(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const cart_remove_button = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.cart_remove_button(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("cart_remove_button", locale)
+	if (locale === "en") return en.cart_remove_button(inputs)
+	if (locale === "de") return de.cart_remove_button(inputs)
+	return it.cart_remove_button(inputs)
+};

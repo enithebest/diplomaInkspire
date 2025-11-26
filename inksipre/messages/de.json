@@ -47,11 +47,6 @@
 	"hero_cta_primary": "Loslegen",
 	"hero_cta_secondary": "Mehr erfahren"
 	,
-	"bestsellers_title": "Bestseller",
-	"bestsellers_subtitle": "Unsere beliebtesten Produkte gerade jetzt",
-	"bestsellers_shop_all": "Alle anzeigen",
-	"bestsellers_sold": "{count} verkauft",
-
 	"content_banner_small": "Bringen Sie Ihre Designs zum Leben",
 	"content_title": "Realistische 3D-Mockups in Minuten",
 	"content_intro": "Präsentieren Sie Ihre Produkte, Apps oder Verpackungen mit hochwertigen 3D-Visuals, die Kunden beeindrucken und die Conversion-Rate steigern – alles direkt im Browser.",
@@ -125,5 +120,17 @@
 	"admin_variant_size_placeholder": "Größe (z. B. M)",
 	"admin_variant_color_placeholder": "Farbe (z. B. Schwarz)",
 	"admin_variant_price_placeholder": "Preis (€)",
-	"admin_add_variant_button": "Variante hinzufügen"
+	"admin_add_variant_button": "Variante hinzuf?gen",
+
+	"cart_toast_removed": "Artikel aus dem Warenkorb entfernt.",
+	"cart_title": "Dein Warenkorb",
+	"cart_empty": "Dein Warenkorb ist leer.",
+	"cart_color_label": "Farbe:",
+	"cart_size_label": "Gr��e:",
+	"cart_total_label": "Gesamt:",
+	"cart_clear_button": "Warenkorb leeren",
+	"cart_checkout_button": "Zur Kasse",
+	"cart_remove_button": "Entfernen"
 }
+
+

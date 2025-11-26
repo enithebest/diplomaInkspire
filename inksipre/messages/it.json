@@ -47,11 +47,6 @@
 	"hero_cta_primary": "Inizia",
 	"hero_cta_secondary": "Scopri di più"
 	,
-	"bestsellers_title": "I più venduti",
-	"bestsellers_subtitle": "I nostri prodotti più amati in questo momento",
-	"bestsellers_shop_all": "Vedi tutto",
-	"bestsellers_sold": "{count} venduti",
-
 	"content_banner_small": "Dai vita ai tuoi progetti",
 	"content_title": "Mockup 3D realistici in pochi minuti",
 	"content_intro": "Mostra i tuoi prodotti, app o packaging con visual 3D di alta qualità che impressionano i clienti e aumentano le conversioni — tutto dal tuo browser.",
@@ -125,5 +120,16 @@
 	"admin_variant_size_placeholder": "Taglia (es. M)",
 	"admin_variant_color_placeholder": "Colore (es. Nero)",
 	"admin_variant_price_placeholder": "Prezzo (€)",
-	"admin_add_variant_button": "Aggiungi variante"
+	"admin_add_variant_button": "Aggiungi variante",
+
+	"cart_toast_removed": "Articolo rimosso dal carrello.",
+	"cart_title": "Il tuo carrello",
+	"cart_empty": "Il tuo carrello � vuoto.",
+	"cart_color_label": "Colore:",
+	"cart_size_label": "Taglia:",
+	"cart_total_label": "Totale:",
+	"cart_clear_button": "Svuota carrello",
+	"cart_checkout_button": "Procedi al checkout",
+	"cart_remove_button": "Rimuovi"
 }
+

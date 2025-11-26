@@ -143,7 +143,6 @@ export const please_login = /** @type {(inputs: {}) => string} */ () => {
 
 export const ok_button = /** @type {(inputs: {}) => string} */ () => {
 	return `OK`
-
 };
 
 export const hero_banner_text = /** @type {(inputs: {}) => string} */ () => {
@@ -168,7 +167,6 @@ export const hero_cta_primary = /** @type {(inputs: {}) => string} */ () => {
 
 export const hero_cta_secondary = /** @type {(inputs: {}) => string} */ () => {
 	return `Mehr erfahren`
-
 };
 
 export const bestsellers_title = /** @type {(inputs: {}) => string} */ () => {
@@ -370,7 +368,6 @@ export const product_tshirt_title = /** @type {(inputs: {}) => string} */ () => 
 export const product_tshirt_desc = /** @type {(inputs: {}) => string} */ () => {
 	return `Weiches, atmungsaktives T-Shirt aus Bio-Baumwolle.`
 };
-<<<<<<< HEAD
 
 export const admin_title = /** @type {(inputs: {}) => string} */ () => {
 	return `Adminbereich – Produktverwaltung`
@@ -445,5 +442,41 @@ export const admin_variant_price_placeholder = /** @type {(inputs: {}) => string
 };
 
 export const admin_add_variant_button = /** @type {(inputs: {}) => string} */ () => {
-	return `Variante hinzufügen`
+	return `Variante hinzuf?gen`
+};
+
+export const cart_toast_removed = /** @type {(inputs: {}) => string} */ () => {
+	return `Artikel aus dem Warenkorb entfernt.`
+};
+
+export const cart_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Dein Warenkorb`
+};
+
+export const cart_empty = /** @type {(inputs: {}) => string} */ () => {
+	return `Dein Warenkorb ist leer.`
+};
+
+export const cart_color_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Farbe:`
+};
+
+export const cart_size_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Gr��e:`
+};
+
+export const cart_total_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Gesamt:`
+};
+
+export const cart_clear_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Warenkorb leeren`
+};
+
+export const cart_checkout_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Zur Kasse`
+};
+
+export const cart_remove_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Entfernen`
 };

@@ -1,12 +1,14 @@
-<script>
-  import { onMount } from 'svelte';
-  import { page } from '$app/stores';
+﻿<script>
+  import { onMount } from "svelte";
+  import { page } from "$app/stores";
+  import * as m from "$lib/paraglide/messages/_index.js";
+
   let cart = [];
   let showRemoveToast = false;
 
   function loadCart() {
     try {
-      const raw = localStorage.getItem('cart');
+      const raw = localStorage.getItem("cart");
       cart = raw ? JSON.parse(raw) : [];
     } catch {
       cart = [];
@@ -15,16 +17,16 @@
 
   function removeItem(index) {
     cart = cart.filter((_, i) => i !== index);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    window.dispatchEvent(new Event('storage'));
+    localStorage.setItem("cart", JSON.stringify(cart));
+    window.dispatchEvent(new Event("storage"));
     showRemoveToast = true;
     setTimeout(() => (showRemoveToast = false), 2000);
   }
 
   function clearCart() {
-    localStorage.removeItem('cart');
+    localStorage.removeItem("cart");
     cart = [];
-    window.dispatchEvent(new Event('storage'));
+    window.dispatchEvent(new Event("storage"));
   }
 
   $: total = cart.reduce((sum, item) => sum + Number(item.price) * item.qty, 0).toFixed(2);
@@ -34,12 +36,11 @@
   function goToCheckout() {
     const isAuthenticated = Boolean($page.data?.user);
     if (!isAuthenticated) {
-      const url = `/login?reason=order_required&next=${encodeURIComponent('/cart')}`;
+      const url = `/login?reason=order_required&next=${encodeURIComponent("/cart")}`;
       window.location.href = url;
       return;
     }
-    // If/when a checkout route exists, navigate there
-    window.location.href = '/checkout';
+    window.location.href = "/checkout";
   }
 </script>
 
@@ -47,15 +48,15 @@
   <div
     class="fixed top-4 left-1/2 -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in"
   >
-    Item removed from cart
+    {m.cart_toast_removed()}
   </div>
 {/if}
 
 <section class="max-w-6xl mx-auto px-6 py-12">
-  <h1 class="text-3xl font-bold text-center text-gray-800 mb-10">Your Cart</h1>
+  <h1 class="text-3xl font-bold text-center text-gray-800 mb-10">{m.cart_title()}</h1>
 
   {#if cart.length === 0}
-    <p class="text-center text-gray-500 text-lg mt-10">Your cart is empty.</p>
+    <p class="text-center text-gray-500 text-lg mt-10">{m.cart_empty()}</p>
   {:else}
     <div class="space-y-6">
       {#each cart as item, i}
@@ -71,7 +72,7 @@
             <div>
               <h2 class="font-semibold text-lg text-gray-800">{item.name}</h2>
               <p class="text-gray-600 text-sm">
-                Color: <span class="capitalize">{item.color}</span> • Size: {item.size}
+                {m.cart_color_label()} <span class="capitalize">{item.color}</span> • {m.cart_size_label()} {item.size}
               </p>
               <p class="text-gray-500 text-sm">{item.price} €</p>
             </div>
@@ -81,7 +82,7 @@
             on:click={() => removeItem(i)}
             class="text-red-500 hover:text-red-600 font-medium text-sm transition"
           >
-            Remove
+            {m.cart_remove_button()}
           </button>
         </div>
       {/each}
@@ -90,7 +91,7 @@
         class="flex flex-col sm:flex-row justify-between items-center mt-10 border-t border-gray-200 pt-6 gap-4"
       >
         <p class="text-xl font-semibold text-gray-800">
-          Total: <span class="text-blue-600">{total} €</span>
+          {m.cart_total_label()} <span class="text-blue-600">{total} €</span>
         </p>
 
         <div class="flex gap-3">
@@ -98,7 +99,7 @@
             on:click={clearCart}
             class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm"
           >
-            Clear Cart
+            {m.cart_clear_button()}
           </button>
 
           <button
@@ -106,7 +107,7 @@
             on:click={goToCheckout}
             class="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm"
           >
-            Checkout
+            {m.cart_checkout_button()}
           </button>
         </div>
       </div>

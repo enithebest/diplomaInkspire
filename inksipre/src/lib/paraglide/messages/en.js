@@ -167,7 +167,6 @@ export const hero_cta_primary = /** @type {(inputs: {}) => string} */ () => {
 
 export const hero_cta_secondary = /** @type {(inputs: {}) => string} */ () => {
 	return `Learn more`
-
 };
 
 export const bestsellers_title = /** @type {(inputs: {}) => string} */ () => {
@@ -369,7 +368,6 @@ export const product_tshirt_title = /** @type {(inputs: {}) => string} */ () => 
 export const product_tshirt_desc = /** @type {(inputs: {}) => string} */ () => {
 	return `Soft, breathable T-shirt made from organic cotton.`
 };
-<<<<<<< HEAD
 
 export const admin_title = /** @type {(inputs: {}) => string} */ () => {
 	return `Admin — Product Management`
@@ -445,4 +443,40 @@ export const admin_variant_price_placeholder = /** @type {(inputs: {}) => string
 
 export const admin_add_variant_button = /** @type {(inputs: {}) => string} */ () => {
 	return `Add variant`
+};
+
+export const cart_toast_removed = /** @type {(inputs: {}) => string} */ () => {
+	return `Item removed from cart`
+};
+
+export const cart_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Your Cart`
+};
+
+export const cart_empty = /** @type {(inputs: {}) => string} */ () => {
+	return `Your cart is empty.`
+};
+
+export const cart_color_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Color:`
+};
+
+export const cart_size_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Size:`
+};
+
+export const cart_total_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Total:`
+};
+
+export const cart_clear_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Clear Cart`
+};
+
+export const cart_checkout_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Checkout`
+};
+
+export const cart_remove_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Remove`
 };

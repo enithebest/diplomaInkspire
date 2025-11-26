@@ -444,3 +444,39 @@ export const admin_variant_price_placeholder = /** @type {(inputs: {}) => string
 export const admin_add_variant_button = /** @type {(inputs: {}) => string} */ () => {
 	return `Aggiungi variante`
 };
+
+export const cart_toast_removed = /** @type {(inputs: {}) => string} */ () => {
+	return `Articolo rimosso dal carrello.`
+};
+
+export const cart_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Il tuo carrello`
+};
+
+export const cart_empty = /** @type {(inputs: {}) => string} */ () => {
+	return `Il tuo carrello � vuoto.`
+};
+
+export const cart_color_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Colore:`
+};
+
+export const cart_size_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Taglia:`
+};
+
+export const cart_total_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Totale:`
+};
+
+export const cart_clear_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Svuota carrello`
+};
+
+export const cart_checkout_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Procedi al checkout`
+};
+
+export const cart_remove_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Rimuovi`
+};
