@@ -41,39 +41,6 @@
       variants.find((v) => v.color === selectedColor && v.size === s) || null;
   }
 
-  function addToCart() {
-    if (!selectedVariant) return;
-    try {
-      const item = {
-        product_id: product.id,
-        variant_id: selectedVariant.id,
-        name: product.name,
-        color: selectedVariant.color,
-        size: selectedVariant.size,
-        price: selectedVariant.price ?? product.base_price,
-        qty: 1,
-        image_url: selectedVariant.image_url ?? product.image_url
-      };
-      const raw = typeof localStorage !== 'undefined' ? localStorage.getItem('cart') : null;
-      const cart = raw ? JSON.parse(raw) : [];
-      cart.push(item);
-      if (typeof localStorage !== 'undefined') localStorage.setItem('cart', JSON.stringify(cart));
-
-      const toast = document.createElement('div');
-      toast.textContent = 'Product added to cart successfully';
-      toast.className =
-        'fixed top-6 left-1/2 -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 toast-enter';
-      document.body.appendChild(toast);
-
-      setTimeout(() => {
-        toast.classList.add('toast-leave');
-      }, 1600);
-      setTimeout(() => toast.remove(), 2200);
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
   const shortDesc = (product?.description || '').slice(0, 160);
 </script>
 
@@ -172,11 +139,12 @@
         </div>
       {/if}
 
-      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <form method="POST" action="?/order" class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <input type="hidden" name="variant_id" value={selectedVariant?.id} />
         <button
+          type="submit"
           class="bg-indigo-600 hover:bg-indigo-500 text-white py-3 rounded-lg font-semibold disabled:opacity-50"
           disabled={!selectedVariant}
-          on:click={addToCart}
         >
           Add to cart
         </button>
@@ -191,7 +159,7 @@
         >
           Start Designing
         </a>
-      </div>
+      </form>
 
       {#if showMore && product.description}
         <div class="mt-6">
