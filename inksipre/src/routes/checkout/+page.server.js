@@ -2,8 +2,6 @@ import Stripe from 'stripe';
 import { STRIPE_SECRET_KEY, STRIPE_PUBLIC_KEY } from '$env/static/private';
 import { fail, redirect } from '@sveltejs/kit';
 
-const stripe = new Stripe(STRIPE_SECRET_KEY);
-
 export const load = ({ locals, url }) => {
 	if (!locals.user) {
 		throw redirect(
@@ -14,7 +12,8 @@ export const load = ({ locals, url }) => {
 
 	return {
 		user: locals.user,
-		publishableKey: STRIPE_PUBLIC_KEY
+		publishableKey: STRIPE_PUBLIC_KEY || null,
+		stripeReady: Boolean(STRIPE_SECRET_KEY)
 	};
 };
 
@@ -38,6 +37,10 @@ export const actions = {
 
 		if (!rawCart) {
 			return fail(400, { message: 'Missing cart data' });
+		}
+
+		if (!STRIPE_SECRET_KEY) {
+			return fail(500, { message: 'Payment is not configured. Please contact support.' });
 		}
 
 		let cart;
@@ -84,6 +87,7 @@ export const actions = {
 		}
 
 		try {
+			const stripe = new Stripe(STRIPE_SECRET_KEY);
 			const session = await stripe.checkout.sessions.create({
 				mode: 'payment',
 				line_items,

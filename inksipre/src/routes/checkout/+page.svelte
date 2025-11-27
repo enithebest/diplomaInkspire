@@ -2,15 +2,18 @@
   import { enhance } from '$app/forms';
   import { onMount } from 'svelte';
 
-  export let data;
+  const { data } = $props();
 
   let cart = $state([]);
   let message = $state('');
   let loading = $state(false);
+  let total = $state(0);
+  let totalFormatted = $state('0.00');
 
   onMount(() => {
     const raw = localStorage.getItem('cart');
     cart = raw ? JSON.parse(raw) : [];
+    updateTotals();
 
     if (!cart.length) {
       window.location.href = '/cart';
@@ -45,7 +48,16 @@
     }
   );
 
-  $: total = cart.reduce((sum, item) => sum + Number(item.price) * (Number(item.qty) || 1), 0);
+  function updateTotals() {
+    total = cart.reduce(
+      (sum, item) => sum + (Number(item.price) || 0) * (Number(item.qty) || 1),
+      0
+    );
+    totalFormatted = total.toFixed(2);
+  }
+
+  const lineTotal = (item) =>
+    ((Number(item.price) || 0) * (Number(item.qty) || 1)).toFixed(2);
 </script>
 
 <section class="max-w-6xl mx-auto px-6 py-12">
@@ -53,37 +65,70 @@
 
   <div class="grid lg:grid-cols-3 gap-8">
     <div class="lg:col-span-2 space-y-6">
-      <form method="POST" action="?/intent" use:enhanceSubmit class="space-y-4 bg-white shadow-sm border border-gray-200 rounded-lg p-6">
+      <form
+        method="POST"
+        action="?/intent"
+        use:enhanceSubmit
+        class="space-y-4 bg-white shadow-sm border border-gray-200 rounded-lg p-6"
+      >
         <h2 class="text-xl font-semibold text-gray-800 mb-2">Shipping details</h2>
 
         <div class="grid md:grid-cols-2 gap-4">
           <label class="block text-sm font-medium text-gray-700">
             Full name
-            <input name="full_name" required value={data.user?.full_name} class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <input
+              name="full_name"
+              required
+              value={data.user?.full_name}
+              class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
           </label>
           <label class="block text-sm font-medium text-gray-700">
             Email
-            <input name="email" type="email" disabled value={data.user?.email} class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 bg-gray-100 text-gray-600" />
+            <input
+              name="email"
+              type="email"
+              disabled
+              value={data.user?.email}
+              class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 bg-gray-100 text-gray-600"
+            />
           </label>
         </div>
 
         <label class="block text-sm font-medium text-gray-700">
           Address line
-          <input name="line1" required class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <input
+            name="line1"
+            required
+            class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
         </label>
 
         <div class="grid md:grid-cols-3 gap-4">
           <label class="block text-sm font-medium text-gray-700">
             City
-            <input name="city" required class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <input
+              name="city"
+              required
+              class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
           </label>
           <label class="block text-sm font-medium text-gray-700">
             Postal code
-            <input name="postal_code" required class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <input
+              name="postal_code"
+              required
+              class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
           </label>
           <label class="block text-sm font-medium text-gray-700">
             Country (2-letter)
-            <input name="country" maxlength="2" required class="mt-1 w-full uppercase rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <input
+              name="country"
+              maxlength="2"
+              required
+              class="mt-1 w-full uppercase rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
           </label>
         </div>
 
@@ -99,7 +144,7 @@
           disabled={loading || !cart.length}
         >
           {#if loading}
-            <span class="animate-pulse">Processing…</span>
+            <span class="animate-pulse">Processing...</span>
           {:else}
             Continue to payment
           {/if}
@@ -118,16 +163,16 @@
             <div class="flex justify-between text-sm text-gray-700">
               <div>
                 <p class="font-medium">{item.name}</p>
-                <p class="text-gray-500">Qty: {item.qty} — {item.color} {item.size}</p>
+                <p class="text-gray-500">Qty: {item.qty} - {item.color} {item.size}</p>
               </div>
-              <p class="font-semibold">{(Number(item.price) * (Number(item.qty) || 1)).toFixed(2)} $</p>
+              <p class="font-semibold">{lineTotal(item)} $</p>
             </div>
           {/each}
         </div>
 
         <div class="border-t border-gray-200 mt-4 pt-4 flex justify-between text-gray-900 font-semibold">
           <span>Total</span>
-          <span>{total.toFixed(2)} $</span>
+          <span>{totalFormatted} $</span>
         </div>
       {/if}
     </aside>

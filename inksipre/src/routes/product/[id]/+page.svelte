@@ -156,7 +156,7 @@
                   style={`background-color: ${c?.toLowerCase?.() || 'transparent'}`}
                   title={c}
                   on:click={() => chooseColor(c)}
-                />
+                ></button>
               {/each}
             </div>
           {/if}
