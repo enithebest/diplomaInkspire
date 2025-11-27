@@ -1,4 +1,4 @@
-﻿<script>
+<script>
   import { onMount } from "svelte";
   import { page } from "$app/stores";
   import * as m from "$lib/paraglide/messages/_index.js";
@@ -6,7 +6,7 @@
   let cart = [];
   let showRemoveToast = false;
   let total = 0;
-  let totalFormatted = '0.00';
+  let totalFormatted = "0.00";
 
   function loadCart() {
     try {
@@ -85,12 +85,12 @@
               <p class="text-gray-600 text-sm">
                 {m.cart_color_label()} <span class="capitalize">{item.color}</span> • {m.cart_size_label()} {item.size}
               </p>
-              <p class="text-gray-500 text-sm">{item.price} €</p>
+              <p class="text-gray-500 text-sm">{item.price} ?</p>
             </div>
           </div>
 
           <button
-            onclick={() => removeItem(i)}
+            on:click={() => removeItem(i)}
             class="text-red-500 hover:text-red-600 font-medium text-sm transition"
           >
             {m.cart_remove_button()}
@@ -102,12 +102,12 @@
         class="flex flex-col sm:flex-row justify-between items-center mt-10 border-t border-gray-200 pt-6 gap-4"
       >
         <p class="text-xl font-semibold text-gray-800">
-          {m.cart_total_label()} <span class="text-blue-600">{total} €</span>
+          {m.cart_total_label()} <span class="text-blue-600">{totalFormatted} ?</span>
         </p>
 
         <div class="flex gap-3">
           <button
-            onclick={clearCart}
+            on:click={clearCart}
             class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm"
           >
             {m.cart_clear_button()}
@@ -115,7 +115,7 @@
 
           <button
             type="button"
-            onclick={goToCheckout}
+            on:click={goToCheckout}
             class="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm"
           >
             {m.cart_checkout_button()}
