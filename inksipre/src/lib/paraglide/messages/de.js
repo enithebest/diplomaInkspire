@@ -66,11 +66,11 @@ export const email_placeholder = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const full_name_label = /** @type {(inputs: {}) => string} */ () => {
-	return `VollstÃ¤ndiger Name`
+	return `Vollständiger Name`
 };
 
 export const full_name_placeholder = /** @type {(inputs: {}) => string} */ () => {
-	return `Geben Sie Ihren vollstÃ¤ndigen Namen ein`
+	return `Geben Sie Ihren vollständigen Namen ein`
 };
 
 export const password_label = /** @type {(inputs: {}) => string} */ () => {
@@ -82,11 +82,11 @@ export const password_placeholder = /** @type {(inputs: {}) => string} */ () => 
 };
 
 export const confirm_password_label = /** @type {(inputs: {}) => string} */ () => {
-	return `Passwort bestÃ¤tigen`
+	return `Passwort bestätigen`
 };
 
 export const confirm_password_placeholder = /** @type {(inputs: {}) => string} */ () => {
-	return `BestÃ¤tigen Sie Ihr Passwort`
+	return `Bestätigen Sie Ihr Passwort`
 };
 
 export const create_account = /** @type {(inputs: {}) => string} */ () => {
@@ -118,7 +118,7 @@ export const email_placeholder_login = /** @type {(inputs: {}) => string} */ () 
 };
 
 export const password_placeholder_login = /** @type {(inputs: {}) => string} */ () => {
-	return `â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢`
+	return `••••••••`
 };
 
 export const login_button = /** @type {(inputs: {}) => string} */ () => {
@@ -194,7 +194,7 @@ export const content_title = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const content_intro = /** @type {(inputs: {}) => string} */ () => {
-	return `PrÃ¤sentieren Sie Ihre Produkte, Apps oder Verpackungen mit hochwertigen 3D-Visuals, die Kunden beeindrucken und die Conversion-Rate steigern â€“ alles direkt im Browser.`
+	return `Präsentieren Sie Ihre Produkte, Apps oder Verpackungen mit hochwertigen 3D-Visuals, die Kunden beeindrucken und die Conversion-Rate steigern – alles direkt im Browser.`
 };
 
 export const content_feature_instant_title = /** @type {(inputs: {}) => string} */ () => {
@@ -202,7 +202,7 @@ export const content_feature_instant_title = /** @type {(inputs: {}) => string} 
 };
 
 export const content_feature_instant_desc = /** @type {(inputs: {}) => string} */ () => {
-	return `Laden Sie Ihr Design hoch und sehen Sie es sofort auf realistischen 3D-OberflÃ¤chen angewendet â€“ keine Render-VerzÃ¶gerungen.`
+	return `Laden Sie Ihr Design hoch und sehen Sie es sofort auf realistischen 3D-Oberflächen angewendet – keine Render-Verzögerungen.`
 };
 
 export const content_feature_cloud_title = /** @type {(inputs: {}) => string} */ () => {
@@ -210,7 +210,7 @@ export const content_feature_cloud_title = /** @type {(inputs: {}) => string} */
 };
 
 export const content_feature_cloud_desc = /** @type {(inputs: {}) => string} */ () => {
-	return `Alle Mockups werden in der Cloud gerendert â€” so bleibt Ihr Computer frei und Sie sparen Zeit.`
+	return `Alle Mockups werden in der Cloud gerendert — so bleibt Ihr Computer frei und Sie sparen Zeit.`
 };
 
 export const content_feature_lighting_title = /** @type {(inputs: {}) => string} */ () => {
@@ -222,7 +222,7 @@ export const content_feature_lighting_desc = /** @type {(inputs: {}) => string} 
 };
 
 export const content_paragraph2 = /** @type {(inputs: {}) => string} */ () => {
-	return `Von Startup-Branding-Kits bis hin zu kompletten Produktkampagnen macht unsere 3D-Mockup-Plattform die Visualisierung intuitiv und schnell â€” keine Modelliererfahrung erforderlich.`
+	return `Von Startup-Branding-Kits bis hin zu kompletten Produktkampagnen macht unsere 3D-Mockup-Plattform die Visualisierung intuitiv und schnell — keine Modelliererfahrung erforderlich.`
 };
 
 export const content_web_tools_title = /** @type {(inputs: {}) => string} */ () => {
@@ -230,7 +230,7 @@ export const content_web_tools_title = /** @type {(inputs: {}) => string} */ () 
 };
 
 export const content_web_tools_paragraph = /** @type {(inputs: {}) => string} */ () => {
-	return `Entwerfen, Vorschauen und exportieren Sie Ihre Mockups direkt aus dem Browser. In Echtzeit zusammenarbeiten, Links teilen oder hochauflÃ¶sende Renderings sofort herunterladen. Vereinfachen Sie noch heute Ihren kreativen Workflow.`
+	return `Entwerfen, Vorschauen und exportieren Sie Ihre Mockups direkt aus dem Browser. In Echtzeit zusammenarbeiten, Links teilen oder hochauflösende Renderings sofort herunterladen. Vereinfachen Sie noch heute Ihren kreativen Workflow.`
 };
 
 export const footer_tagline = /** @type {(inputs: {}) => string} */ () => {
@@ -266,7 +266,7 @@ export const footer_company_contact = /** @type {(inputs: {}) => string} */ () =
 };
 
 export const footer_company_about = /** @type {(inputs: {}) => string} */ () => {
-	return `Ãœber uns`
+	return `Über uns`
 };
 
 export const footer_company_careers = /** @type {(inputs: {}) => string} */ () => {
@@ -306,7 +306,7 @@ export const footer_contact_location = /** @type {(inputs: {}) => string} */ () 
 };
 
 export const footer_copyright = /** @type {(inputs: { year: NonNullable<unknown> }) => string} */ (i) => {
-	return `Â© ${i.year} Inkspire. Alle Rechte vorbehalten.`
+	return `© ${i.year} Inkspire. Alle Rechte vorbehalten.`
 };
 
 export const footer_privacy = /** @type {(inputs: {}) => string} */ () => {
@@ -334,7 +334,7 @@ export const reviews_prev = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const reviews_next = /** @type {(inputs: {}) => string} */ () => {
-	return `NÃ¤chste Bewertungen`
+	return `Nächste Bewertungen`
 };
 
 export const reviews_carousel_aria = /** @type {(inputs: {}) => string} */ () => {
@@ -370,7 +370,7 @@ export const product_tshirt_desc = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const admin_title = /** @type {(inputs: {}) => string} */ () => {
-	return `Adminbereich â€“ Produktverwaltung`
+	return `Adminbereich – Produktverwaltung`
 };
 
 export const admin_create_heading = /** @type {(inputs: {}) => string} */ () => {
@@ -382,7 +382,7 @@ export const admin_name_placeholder = /** @type {(inputs: {}) => string} */ () =
 };
 
 export const admin_base_price_placeholder = /** @type {(inputs: {}) => string} */ () => {
-	return `Basispreis (â‚¬)`
+	return `Basispreis (€)`
 };
 
 export const admin_description_placeholder = /** @type {(inputs: {}) => string} */ () => {
@@ -390,7 +390,7 @@ export const admin_description_placeholder = /** @type {(inputs: {}) => string} 
 };
 
 export const admin_category_select_default = /** @type {(inputs: {}) => string} */ () => {
-	return `-- Kategorie wÃ¤hlen --`
+	return `-- Kategorie wählen --`
 };
 
 export const admin_category_hoodies = /** @type {(inputs: {}) => string} */ () => {
@@ -418,7 +418,7 @@ export const admin_create_button = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const admin_delete_button = /** @type {(inputs: {}) => string} */ () => {
-	return `LÃ¶schen`
+	return `Löschen`
 };
 
 export const admin_variants_heading = /** @type {(inputs: {}) => string} */ () => {
@@ -430,7 +430,7 @@ export const admin_no_variants = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const admin_variant_size_placeholder = /** @type {(inputs: {}) => string} */ () => {
-	return `GrÃ¶ÃŸe (z. B. M)`
+	return `Größe (z. B. M)`
 };
 
 export const admin_variant_color_placeholder = /** @type {(inputs: {}) => string} */ () => {
@@ -438,11 +438,11 @@ export const admin_variant_color_placeholder = /** @type {(inputs: {}) => string
 };
 
 export const admin_variant_price_placeholder = /** @type {(inputs: {}) => string} */ () => {
-	return `Preis (â‚¬)`
+	return `Preis (€)`
 };
 
 export const admin_add_variant_button = /** @type {(inputs: {}) => string} */ () => {
-	return `Variante hinzuf?gen`
+	return `Variante hinzufügen`
 };
 
 export const cart_toast_removed = /** @type {(inputs: {}) => string} */ () => {
@@ -519,4 +519,93 @@ export const categories_section_sweatshirts = /** @type {(inputs: {}) => string}
 
 export const categories_section_mugs = /** @type {(inputs: {}) => string} */ () => {
 	return `Tassen`
+};
+
+// Kontakt Seite
+export const contact_badge = /** @type {(inputs: {}) => string} */ () => {
+	return `Antwort innerhalb von 24h`
+};
+export const contact_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Kontakt`
+};
+export const contact_intro = /** @type {(inputs: {}) => string} */ () => {
+	return `Brauchen Sie ein Angebot, Designhilfe oder Support? Rufen Sie an, besuchen Sie uns oder senden Sie eine Nachricht – wir melden uns schnell.`
+};
+export const contact_call_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Rufen Sie uns an`
+};
+export const contact_call_number = /** @type {(inputs: {}) => string} */ () => {
+	return `+355 685319389`
+};
+export const contact_visit_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Besuchen`
+};
+export const contact_visit_body = /** @type {(inputs: {}) => string} */ () => {
+	return `Inkspire HQ\nShkoder City Center\nShkoder, Albanien`
+};
+export const contact_hours_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Öffnungszeiten`
+};
+export const contact_hours_body = /** @type {(inputs: {}) => string} */ () => {
+	return `Mo-Fr: 08:00-18:00\nSa: 09:00-14:00\nSo: Geschlossen`
+};
+export const contact_highlight_fast_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Schneller Support`
+};
+export const contact_highlight_fast_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Durchschnittliche Antwortzeit unter 24h`
+};
+export const contact_highlight_reliable_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Zuverlässiges Team`
+};
+export const contact_highlight_reliable_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Fester Ansprechpartner für jede Bestellung`
+};
+export const contact_highlight_quality_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Hohe Qualität`
+};
+export const contact_highlight_quality_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Eigene Produktionskontrolle`
+};
+export const contact_highlight_secure_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Sichere Daten`
+};
+export const contact_highlight_secure_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Ihre Uploads bleiben privat`
+};
+export const contact_form_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Schreiben Sie uns`
+};
+export const contact_form_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Sagen Sie uns, was Sie brauchen, wir melden uns schnell.`
+};
+export const contact_name_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Vollständiger Name`
+};
+export const contact_name_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Geben Sie Ihren Namen ein`
+};
+export const contact_email_label = /** @type {(inputs: {}) => string} */ () => {
+	return `E-Mail-Adresse`
+};
+export const contact_email_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `sie@example.com`
+};
+export const contact_phone_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Telefonnummer`
+};
+export const contact_phone_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `685 319 389`
+};
+export const contact_phone_hint = /** @type {(inputs: {}) => string} */ () => {
+	return `Mit Landesvorwahl und nur Zahlen.`
+};
+export const contact_message_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Nachricht`
+};
+export const contact_message_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Erzählen Sie uns von Ihrem Projekt oder Ihrer Frage...`
+};
+export const contact_send_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Nachricht senden`
 };
