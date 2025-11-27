@@ -5,6 +5,8 @@
 
   let cart = [];
   let showRemoveToast = false;
+  let total = 0;
+  let totalFormatted = '0.00';
 
   function loadCart() {
     try {
@@ -13,12 +15,14 @@
     } catch {
       cart = [];
     }
+    updateTotals();
   }
 
   function removeItem(index) {
     cart = cart.filter((_, i) => i !== index);
     localStorage.setItem("cart", JSON.stringify(cart));
     window.dispatchEvent(new Event("storage"));
+    updateTotals();
     showRemoveToast = true;
     setTimeout(() => (showRemoveToast = false), 2000);
   }
@@ -27,16 +31,23 @@
     localStorage.removeItem("cart");
     cart = [];
     window.dispatchEvent(new Event("storage"));
+    updateTotals();
   }
 
-  $: total = cart.reduce((sum, item) => sum + Number(item.price) * item.qty, 0).toFixed(2);
+  function updateTotals() {
+    total = cart.reduce(
+      (sum, { price, qty }) => sum + (Number(price) || 0) * (Number(qty) || 1),
+      0
+    );
+    totalFormatted = total.toFixed(2);
+  }
 
   onMount(loadCart);
 
   function goToCheckout() {
     const isAuthenticated = Boolean($page.data?.user);
     if (!isAuthenticated) {
-      const url = `/login?reason=order_required&next=${encodeURIComponent("/cart")}`;
+      const url = `/login?reason=order_required&next=${encodeURIComponent("/checkout")}`;
       window.location.href = url;
       return;
     }
@@ -46,13 +57,13 @@
 
 {#if showRemoveToast}
   <div
-    class="fixed top-4 left-1/2 -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in"
+    class="fixed top-4 left-1/2 -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-pulse"
   >
     {m.cart_toast_removed()}
   </div>
 {/if}
 
-<section class="max-w-6xl mx-auto px-6 py-12">
+<section class="max-w-6xl mx-auto px-6 py-12 bg-gray-50 min-h-screen">
   <h1 class="text-3xl font-bold text-center text-gray-800 mb-10">{m.cart_title()}</h1>
 
   {#if cart.length === 0}
@@ -79,7 +90,7 @@
           </div>
 
           <button
-            on:click={() => removeItem(i)}
+            onclick={() => removeItem(i)}
             class="text-red-500 hover:text-red-600 font-medium text-sm transition"
           >
             {m.cart_remove_button()}
@@ -96,7 +107,7 @@
 
         <div class="flex gap-3">
           <button
-            on:click={clearCart}
+            onclick={clearCart}
             class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm"
           >
             {m.cart_clear_button()}
@@ -104,7 +115,7 @@
 
           <button
             type="button"
-            on:click={goToCheckout}
+            onclick={goToCheckout}
             class="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm"
           >
             {m.cart_checkout_button()}
@@ -114,28 +125,3 @@
     </div>
   {/if}
 </section>
-
-<style>
-  :global(body) {
-    background-color: #f9fafb;
-  }
-
-  @keyframes fadeInOut {
-    0% {
-      opacity: 0;
-      transform: translate(-50%, -10px);
-    }
-    10%, 90% {
-      opacity: 1;
-      transform: translate(-50%, 0);
-    }
-    100% {
-      opacity: 0;
-      transform: translate(-50%, -10px);
-    }
-  }
-
-  .animate-fade-in {
-    animation: fadeInOut 2s ease-in-out forwards;
-  }
-</style>

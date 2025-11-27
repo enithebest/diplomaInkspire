@@ -1,5 +1,5 @@
 <script>
-  let data = $props();
+  let data = $props();  
 </script>
 
 <section class="max-w-2xl mx-auto px-6 py-16 text-center">
