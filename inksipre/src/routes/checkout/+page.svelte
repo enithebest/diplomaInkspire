@@ -9,6 +9,7 @@
   let loading = $state(false);
   let total = $state(0);
   let totalFormatted = $state('0.00');
+  let enhanceSubmit = $state();
 
   onMount(() => {
     const raw = localStorage.getItem('cart');
@@ -20,33 +21,35 @@
     }
   });
 
-  const enhanceSubmit = enhance(
-    async ({ formData }) => {
-      formData.append('cart', JSON.stringify(cart));
-      return async ({ result }) => {
-        loading = false;
+  onMount(() => {
+    enhanceSubmit = enhance(
+      async ({ formData }) => {
+        formData.append('cart', JSON.stringify(cart));
+        return async ({ result }) => {
+          loading = false;
 
-        if (result.type === 'success') {
-          const url = result.data?.checkoutUrl;
-          if (url) {
-            window.location.href = url;
+          if (result.type === 'success') {
+            const url = result.data?.checkoutUrl;
+            if (url) {
+              window.location.href = url;
+            } else {
+              message = 'No checkout URL returned.';
+            }
+          } else if (result.type === 'failure') {
+            message = result.data?.message ?? 'Checkout failed. Please try again.';
           } else {
-            message = 'No checkout URL returned.';
+            message = 'Unexpected response. Please try again.';
           }
-        } else if (result.type === 'failure') {
-          message = result.data?.message ?? 'Checkout failed. Please try again.';
-        } else {
-          message = 'Unexpected response. Please try again.';
+        };
+      },
+      {
+        pending: () => {
+          loading = true;
+          message = '';
         }
-      };
-    },
-    {
-      pending: () => {
-        loading = true;
-        message = '';
       }
-    }
-  );
+    );
+  });
 
   function updateTotals() {
     total = cart.reduce(
