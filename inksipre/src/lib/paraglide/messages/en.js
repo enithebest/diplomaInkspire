@@ -520,3 +520,92 @@ export const categories_section_sweatshirts = /** @type {(inputs: {}) => string}
 export const categories_section_mugs = /** @type {(inputs: {}) => string} */ () => {
 	return `Mugs`
 };
+
+// Contact page
+export const contact_badge = /** @type {(inputs: {}) => string} */ () => {
+	return `We reply within 24h`
+};
+export const contact_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Contact`
+};
+export const contact_intro = /** @type {(inputs: {}) => string} */ () => {
+	return `Need a quote, design help, or support? Call, visit, or send us a message and we will respond quickly.`
+};
+export const contact_call_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Call Us`
+};
+export const contact_call_number = /** @type {(inputs: {}) => string} */ () => {
+	return `+355 685319389`
+};
+export const contact_visit_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Visit`
+};
+export const contact_visit_body = /** @type {(inputs: {}) => string} */ () => {
+	return `Inkspire HQ\nShkoder City Center\nShkoder, Albania`
+};
+export const contact_hours_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Opening Hours`
+};
+export const contact_hours_body = /** @type {(inputs: {}) => string} */ () => {
+	return `Mon-Fri: 08:00-18:00\nSat: 09:00-14:00\nSun: Closed`
+};
+export const contact_highlight_fast_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Fast Support`
+};
+export const contact_highlight_fast_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Average response time under 24h`
+};
+export const contact_highlight_reliable_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Reliable Team`
+};
+export const contact_highlight_reliable_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Dedicated contact for every order`
+};
+export const contact_highlight_quality_title = /** @type {(inputs: {}) => string} */ () => {
+	return `High Quality`
+};
+export const contact_highlight_quality_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `In-house production control`
+};
+export const contact_highlight_secure_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Secure Data`
+};
+export const contact_highlight_secure_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Your uploads stay private`
+};
+export const contact_form_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Send Us a Message`
+};
+export const contact_form_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Tell us what you need and we will get back quickly.`
+};
+export const contact_name_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Full Name`
+};
+export const contact_name_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Enter your name`
+};
+export const contact_email_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Email Address`
+};
+export const contact_email_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `you@example.com`
+};
+export const contact_phone_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Phone Number`
+};
+export const contact_phone_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `685 319 389`
+};
+export const contact_phone_hint = /** @type {(inputs: {}) => string} */ () => {
+	return `Include country code and numbers only.`
+};
+export const contact_message_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Message`
+};
+export const contact_message_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Tell us about your project or question...`
+};
+export const contact_send_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Send Message`
+};
