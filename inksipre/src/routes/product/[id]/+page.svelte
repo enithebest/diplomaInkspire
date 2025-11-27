@@ -17,6 +17,13 @@
     new Set(variants.map((v) => v.color).filter((v) => !!v))
   );
 
+  // Optional static fallbacks; put your hoodie images here (e.g. static/images/hoodie-red.jpg)
+  const colorImageFallbacks = {
+    red: '/images/zip-up-red.png',
+    black: '/images/zip-up-black.png',
+    white: '/images/zip-up-white.png'
+  };
+
   function sizesFor(color) {
     return Array.from(
       new Set(
@@ -25,10 +32,12 @@
     );
   }
 
+  // Picked a color: lock to the first variant with that color so the image updates immediately
   function chooseColor(c) {
     selectedColor = c;
-    selectedSize = '';
-    selectedVariant = null;
+    const firstMatch = variants.find((v) => v.color === c) || null;
+    selectedVariant = firstMatch;
+    selectedSize = firstMatch?.size || '';
     try {
       if (typeof localStorage !== 'undefined') {
         localStorage.setItem('selectedBaseColor', c);
@@ -42,6 +51,38 @@
     selectedSize = s;
     selectedVariant =
       variants.find((v) => v.color === selectedColor && v.size === s) || null;
+  }
+
+  function chooseVariant(variant) {
+    selectedVariant = variant;
+    selectedColor = variant?.color ?? selectedColor;
+    selectedSize = variant?.size ?? selectedSize;
+  }
+
+  $: activeImage =
+    selectedVariant?.image_url ||
+    colorImageFallbacks[selectedColor?.toLowerCase?.()] ||
+    product.image_url;
+
+  // Default to the first variant (or stored color) so an image is visible on load
+  $: if (!selectedVariant && variants.length > 0) {
+    const stored =
+      typeof localStorage !== 'undefined'
+        ? (() => {
+            try {
+              return localStorage.getItem('selectedBaseColor');
+            } catch {
+              return null;
+            }
+          })()
+        : null;
+    const initialColor =
+      (stored && colors.includes(stored) && stored) || variants[0].color || '';
+    const initialVariant =
+      variants.find((v) => v.color === initialColor) || variants[0];
+    selectedVariant = initialVariant;
+    selectedColor = initialVariant?.color || initialColor;
+    selectedSize = initialVariant?.size || '';
   }
 
 
@@ -94,8 +135,8 @@
   <section class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
     <div>
       <img
-        src={selectedVariant?.image_url ?? product.image_url}
-        alt={product.name}
+        src={activeImage}
+        alt={`${product.name} in ${selectedVariant?.color || selectedColor || 'selected color'}`}
         class="rounded-lg shadow-lg w-full max-h-[500px] object-cover"
       />
 
@@ -106,11 +147,11 @@
               <button
                 type="button"
                 class="rounded-md border border-gray-700 hover:ring-2 hover:ring-indigo-500 transition p-0"
-                on:click={() => (selectedVariant = variant)}
+                on:click={() => chooseVariant(variant)}
               >
                 <img
                   src={variant.image_url}
-                  alt="Variant thumbnail"
+                  alt={`Thumbnail ${variant.color || ''} ${variant.size || ''}`}
                   class="w-20 h-20 object-cover rounded-md"
                 />
               </button>
@@ -153,7 +194,7 @@
                 <button
                   type="button"
                   class={`w-9 h-9 rounded-full border-2 ${
-                    selectedColor === c ? 'border-indigo-500' : 'border-gray-600'
+                    selectedColor === c ? 'border-indigo-500 ring-2 ring-indigo-400/60' : 'border-gray-600'
                   } flex items-center justify-center`}
                   style={`background-color: ${c?.toLowerCase?.() || 'transparent'}`}
                   title={c}
