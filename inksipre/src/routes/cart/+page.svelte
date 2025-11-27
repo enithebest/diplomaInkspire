@@ -1,4 +1,4 @@
-<script>
+﻿<script>
   import { onMount } from "svelte";
   import { page } from "$app/stores";
   import * as m from "$lib/paraglide/messages/_index.js";
@@ -90,7 +90,7 @@
           </div>
 
           <button
-            on:click={() => removeItem(i)}
+            onclick={() => removeItem(i)}
             class="text-red-500 hover:text-red-600 font-medium text-sm transition"
           >
             {m.cart_remove_button()}
@@ -107,7 +107,7 @@
 
         <div class="flex gap-3">
           <button
-            on:click={clearCart}
+            onclick={clearCart}
             class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm"
           >
             {m.cart_clear_button()}
@@ -115,7 +115,7 @@
 
           <button
             type="button"
-            on:click={goToCheckout}
+            onclick={goToCheckout}
             class="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm"
           >
             {m.cart_checkout_button()}

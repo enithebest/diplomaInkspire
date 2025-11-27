@@ -44,6 +44,7 @@
       variants.find((v) => v.color === selectedColor && v.size === s) || null;
   }
 
+
   function formatDate(value) {
     if (!value) return '';
     const date = new Date(value);
@@ -83,7 +84,7 @@
     }
   }
 
-  const shortDesc = (product?.description || '').slice(0, 160);
+ const shortDesc = (product?.description || '').slice(0, 160);
 </script>
 
 {#if !product}
@@ -150,6 +151,7 @@
             <div class="flex items-center gap-3 flex-wrap">
               {#each colors as c}
                 <button
+                  type="button"
                   class={`w-9 h-9 rounded-full border-2 ${
                     selectedColor === c ? 'border-indigo-500' : 'border-gray-600'
                   } flex items-center justify-center`}
@@ -180,11 +182,12 @@
         </div>
       {/if}
 
-      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <form method="POST" action="?/order" class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <input type="hidden" name="variant_id" value={selectedVariant?.id} />
         <button
+          type="submit"
           class="bg-indigo-600 hover:bg-indigo-500 text-white py-3 rounded-lg font-semibold disabled:opacity-50"
           disabled={!selectedVariant}
-          on:click={addToCart}
         >
           Add to cart
         </button>
@@ -199,7 +202,7 @@
         >
           Start Designing
         </a>
-      </div>
+      </form>
 
       {#if showMore && product.description}
         <div class="mt-6">

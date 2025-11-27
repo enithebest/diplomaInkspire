@@ -8,21 +8,52 @@ import {
 	CONTACT_RECEIVER
 } from '$env/static/private';
 
+const allowedPrefixes = ['+43', '+49', '+41', '+355', '+39', '+44'];
+
+const sanitize = (value) => {
+	if (typeof value === 'string') return value.trim();
+	if (value === null || value === undefined) return '';
+	return String(value).trim();
+};
+
+const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+const isValidPhone = (phone) => /^[0-9()+\s-]{6,20}$/.test(phone);
+
 export const actions = {
 	send: async ({ request }) => {
 		const formData = await request.formData();
-		const name = formData.get('name');
-		const email = formData.get('email');
-		const message = formData.get('message');
+		const name = sanitize(formData.get('name'));
+		const email = sanitize(formData.get('email')).toLowerCase();
+		const prefix = sanitize(formData.get('prefix'));
+		const phone = sanitize(formData.get('phone'));
+		const message = sanitize(formData.get('message'));
 
-		if (!name || !email || !message) {
-			return fail(400, { error: 'Bitte alle Felder ausfüllen.' });
+		const values = { name, email, prefix, phone, message };
+
+		if (!name || name.length < 2) {
+			return fail(400, { error: 'Please enter your full name.', values });
+		}
+
+		if (!email || !isValidEmail(email)) {
+			return fail(400, { error: 'Please enter a valid email address.', values });
+		}
+
+		if (!prefix || !allowedPrefixes.includes(prefix)) {
+			return fail(400, { error: 'Please choose a phone prefix.', values });
+		}
+
+		if (!phone || !isValidPhone(phone)) {
+			return fail(400, { error: 'Please enter a valid phone number.', values });
+		}
+
+		if (!message || message.length < 10) {
+			return fail(400, { error: 'Please add a short message (min. 10 characters).', values });
 		}
 
 		const transporter = nodemailer.createTransport({
 			host: SMTP_HOST,
 			port: Number(SMTP_PORT),
-			secure: true, 
+			secure: Number(SMTP_PORT) === 465,
 			auth: {
 				user: SMTP_USER,
 				pass: SMTP_PASS
@@ -31,23 +62,30 @@ export const actions = {
 
 		try {
 			await transporter.sendMail({
-				from: `"Inkspire Kontakt" <${SMTP_USER}>`,
+				from: `"Inkspire Contact" <${SMTP_USER}>`,
 				to: CONTACT_RECEIVER,
-				subject: `Neue Nachricht von ${name}`,
-				text: `Von: ${name} <${email}>\n\n${message}`,
+				subject: `New message from ${name}`,
+				text: `From: ${name} <${email}>
+Phone: ${prefix} ${phone}
+
+${message}`,
 				html: `
-					<h2>Neue Nachricht von Inkspire</h2>
+					<h2>New message from Inkspire</h2>
 					<p><b>Name:</b> ${name}</p>
 					<p><b>Email:</b> ${email}</p>
-					<p><b>Nachricht:</b></p>
+					<p><b>Phone:</b> ${prefix} ${phone}</p>
+					<p><b>Message:</b></p>
 					<p>${message}</p>
 				`
 			});
 
-			return { success: '✅ Ihre Nachricht wurde erfolgreich gesendet.' };
+			return { success: 'Thank you! Your message was sent successfully.' };
 		} catch (error) {
-			console.error('E-Mail-Versand fehlgeschlagen:', error);
-			return fail(500, { error: 'E-Mail-Versand fehlgeschlagen. Bitte später erneut versuchen.' });
+			console.error('Email sending failed:', error);
+			return fail(500, {
+				error: 'Sending failed. Please try again in a moment.',
+				values
+			});
 		}
 	}
 };
