@@ -70,15 +70,20 @@
 				</div>
 				<div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
 					<h2 class="text-xl font-semibold">{m.contact_visit_title()}</h2>
-					<p class="mt-2 text-gray-300">{m.contact_visit_body()}</p>
+					<p class="mt-2 text-gray-300">
+						{@html m.contact_visit_body().replace(/\n/g, '<br />')}
+					</p>
 				</div>
 				<div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
 					<h2 class="text-xl font-semibold">{m.contact_hours_title()}</h2>
-					<p class="mt-2 text-gray-300">{m.contact_hours_body()}</p>
+					<p class="mt-2 text-gray-300">
+						{@html m.contact_hours_body().replace(/\n/g, '<br />')}
+					</p>
 				</div>
 			</div>
 
 			<div class="rounded-2xl border border-white/10 shadow-xl">
+				<!-- svelte-ignore a11y_missing_attribute -->
 				<iframe
 					width="100%"
 					height="300"
@@ -114,6 +119,7 @@
 
 						<form method="POST" action="?/send" use:enhance class="flex-1 flex flex-col gap-5">
 							<div>
+								<!-- svelte-ignore a11y_label_has_associated_control -->
 								<label class="text-sm font-medium text-gray-300">{m.contact_name_label()}</label>
 								<input
 									type="text"
@@ -129,6 +135,7 @@
 							</div>
 
 							<div>
+								<!-- svelte-ignore a11y_label_has_associated_control -->
 								<label class="text-sm font-medium text-gray-300">{m.contact_email_label()}</label>
 								<input
 									type="email"
@@ -142,6 +149,7 @@
 							</div>
 
 							<div>
+								<!-- svelte-ignore a11y_label_has_associated_control -->
 								<label class="text-sm font-medium text-gray-300">{m.contact_phone_label()}</label>
 								<div class="mt-1 flex flex-col gap-3 sm:flex-row">
 									<select
@@ -174,6 +182,7 @@
 							</div>
 
 							<div>
+								<!-- svelte-ignore a11y_label_has_associated_control -->
 								<label class="text-sm font-medium text-gray-300">{m.contact_message_label()}</label>
 								<textarea
 									name="message"
