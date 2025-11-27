@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <script>
   export let data;
 
@@ -21,6 +22,67 @@
     </div>
   {:else if !items.length}
     <p class="text-center text-gray-400 text-lg mt-10">Your cart is empty.</p>
+=======
+﻿<script>
+  import { onMount } from "svelte";
+  import { page } from "$app/stores";
+  import * as m from "$lib/paraglide/messages/_index.js";
+
+  let cart = [];
+  let showRemoveToast = false;
+
+  function loadCart() {
+    try {
+      const raw = localStorage.getItem("cart");
+      cart = raw ? JSON.parse(raw) : [];
+    } catch {
+      cart = [];
+    }
+  }
+
+  function removeItem(index) {
+    cart = cart.filter((_, i) => i !== index);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    window.dispatchEvent(new Event("storage"));
+    showRemoveToast = true;
+    setTimeout(() => (showRemoveToast = false), 2000);
+  }
+
+  function clearCart() {
+    localStorage.removeItem("cart");
+    cart = [];
+    window.dispatchEvent(new Event("storage"));
+  }
+
+  $: total = cart.reduce((sum, item) => sum + Number(item.price) * item.qty, 0).toFixed(2);
+
+  onMount(loadCart);
+
+  function goToCheckout() {
+    const isAuthenticated = Boolean($page.data?.user);
+    if (!isAuthenticated) {
+      const url = `/login?reason=order_required&next=${encodeURIComponent("/cart")}`;
+      window.location.href = url;
+      return;
+    }
+    window.location.href = "/checkout";
+  }
+</script>
+
+{#if showRemoveToast}
+  <div
+    class="fixed top-4 left-1/2 -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in"
+  >
+    {m.cart_toast_removed()}
+  </div>
+{/if}
+
+<section class="max-w-6xl mx-auto px-6 py-12">
+  <h1 class="text-3xl font-bold text-center text-gray-800 mb-10">{m.cart_title()}</h1>
+
+  {#if cart.length === 0}
+    <p class="text-center text-gray-500 text-lg mt-10">{m.cart_empty()}</p>
+>>>>>>> c5e71bd5eac1b664537fb8f437ab98d7e688fe0c
   {:else}
     <div class="space-y-4">
       {#each items as item}
@@ -35,11 +97,17 @@
               />
             </div>
             <div>
+<<<<<<< HEAD
               <h2 class="font-semibold text-lg">{item.name}</h2>
               <p class="text-sm text-gray-400">
                 {#if item.sku}SKU: {item.sku} · {/if}
                 {#if item.color}Color: {item.color}{/if}
                 {#if item.size} · Size: {item.size}{/if}
+=======
+              <h2 class="font-semibold text-lg text-gray-800">{item.name}</h2>
+              <p class="text-gray-600 text-sm">
+                {m.cart_color_label()} <span class="capitalize">{item.color}</span> • {m.cart_size_label()} {item.size}
+>>>>>>> c5e71bd5eac1b664537fb8f437ab98d7e688fe0c
               </p>
               <form
                 method="POST"
@@ -67,6 +135,7 @@
               <p class="text-sm text-gray-300">EUR {item.price.toFixed(2)} each</p>
             </div>
           </div>
+<<<<<<< HEAD
           <div class="text-right">
             <p class="text-lg font-semibold">EUR {(item.price * item.quantity).toFixed(2)}</p>
             <p class="text-xs text-gray-400">Pending payment</p>
@@ -85,13 +154,45 @@
 
       <div class="flex flex-col sm:flex-row justify-between items-center mt-8 border-t border-gray-700 pt-6 gap-4">
         <p class="text-xl font-semibold">Total: <span class="text-blue-400">EUR {total}</span></p>
+=======
+
+          <button
+            on:click={() => removeItem(i)}
+            class="text-red-500 hover:text-red-600 font-medium text-sm transition"
+          >
+            {m.cart_remove_button()}
+          </button>
+        </div>
+      {/each}
+
+      <div
+        class="flex flex-col sm:flex-row justify-between items-center mt-10 border-t border-gray-200 pt-6 gap-4"
+      >
+        <p class="text-xl font-semibold text-gray-800">
+          {m.cart_total_label()} <span class="text-blue-600">{total} €</span>
+        </p>
+
+>>>>>>> c5e71bd5eac1b664537fb8f437ab98d7e688fe0c
         <div class="flex gap-3">
           <a
             class="px-6 py-3 rounded-lg bg-green-600 hover:bg-green-500 text-white font-semibold"
             href="/checkout"
           >
+<<<<<<< HEAD
             Proceed to checkout
           </a>
+=======
+            {m.cart_clear_button()}
+          </button>
+
+          <button
+            type="button"
+            on:click={goToCheckout}
+            class="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm"
+          >
+            {m.cart_checkout_button()}
+          </button>
+>>>>>>> c5e71bd5eac1b664537fb8f437ab98d7e688fe0c
         </div>
       </div>
     </div>

@@ -118,7 +118,7 @@ export const email_placeholder_login = /** @type {(inputs: {}) => string} */ () 
 };
 
 export const password_placeholder_login = /** @type {(inputs: {}) => string} */ () => {
-	return `••••••••`
+	return `â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢`
 };
 
 export const login_button = /** @type {(inputs: {}) => string} */ () => {
@@ -194,7 +194,7 @@ export const content_title = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const content_intro = /** @type {(inputs: {}) => string} */ () => {
-	return `Showcase your products, apps, or packaging with high-quality 3D visuals that impress clients and boost conversions — all from your browser.`
+	return `Showcase your products, apps, or packaging with high-quality 3D visuals that impress clients and boost conversions â€” all from your browser.`
 };
 
 export const content_feature_instant_title = /** @type {(inputs: {}) => string} */ () => {
@@ -202,7 +202,7 @@ export const content_feature_instant_title = /** @type {(inputs: {}) => string} 
 };
 
 export const content_feature_instant_desc = /** @type {(inputs: {}) => string} */ () => {
-	return `Upload your design and see it applied instantly on realistic 3D surfaces — no rendering delays.`
+	return `Upload your design and see it applied instantly on realistic 3D surfaces â€” no rendering delays.`
 };
 
 export const content_feature_cloud_title = /** @type {(inputs: {}) => string} */ () => {
@@ -210,7 +210,7 @@ export const content_feature_cloud_title = /** @type {(inputs: {}) => string} */
 };
 
 export const content_feature_cloud_desc = /** @type {(inputs: {}) => string} */ () => {
-	return `All mockups are rendered in the cloud — freeing your computer and saving time.`
+	return `All mockups are rendered in the cloud â€” freeing your computer and saving time.`
 };
 
 export const content_feature_lighting_title = /** @type {(inputs: {}) => string} */ () => {
@@ -222,7 +222,7 @@ export const content_feature_lighting_desc = /** @type {(inputs: {}) => string} 
 };
 
 export const content_paragraph2 = /** @type {(inputs: {}) => string} */ () => {
-	return `From startup branding kits to full product campaigns, our 3D mockup platform makes visualization intuitive and fast — no modeling experience required.`
+	return `From startup branding kits to full product campaigns, our 3D mockup platform makes visualization intuitive and fast â€” no modeling experience required.`
 };
 
 export const content_web_tools_title = /** @type {(inputs: {}) => string} */ () => {
@@ -306,7 +306,7 @@ export const footer_contact_location = /** @type {(inputs: {}) => string} */ () 
 };
 
 export const footer_copyright = /** @type {(inputs: { year: NonNullable<unknown> }) => string} */ (i) => {
-	return `© ${i.year} Inkspire. All rights reserved.`
+	return `Â© ${i.year} Inkspire. All rights reserved.`
 };
 
 export const footer_privacy = /** @type {(inputs: {}) => string} */ () => {
@@ -367,4 +367,156 @@ export const product_tshirt_title = /** @type {(inputs: {}) => string} */ () => 
 
 export const product_tshirt_desc = /** @type {(inputs: {}) => string} */ () => {
 	return `Soft, breathable T-shirt made from organic cotton.`
+};
+
+export const admin_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Admin â€” Product Management`
+};
+
+export const admin_create_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Create new product`
+};
+
+export const admin_name_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Product name`
+};
+
+export const admin_base_price_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Base price (â‚¬)`
+};
+
+export const admin_description_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Description`
+};
+
+export const admin_category_select_default = /** @type {(inputs: {}) => string} */ () => {
+	return `-- Select category --`
+};
+
+export const admin_category_hoodies = /** @type {(inputs: {}) => string} */ () => {
+	return `Hoodies`
+};
+
+export const admin_category_tshirts = /** @type {(inputs: {}) => string} */ () => {
+	return `T-Shirts`
+};
+
+export const admin_category_sweatshirts = /** @type {(inputs: {}) => string} */ () => {
+	return `Sweatshirts`
+};
+
+export const admin_category_mugs = /** @type {(inputs: {}) => string} */ () => {
+	return `Mugs`
+};
+
+export const admin_allowed_formats = /** @type {(inputs: {}) => string} */ () => {
+	return `Allowed formats: PNG, JPG, WEBP. Max. 5MB.`
+};
+
+export const admin_create_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Create`
+};
+
+export const admin_delete_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Delete`
+};
+
+export const admin_variants_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Variants`
+};
+
+export const admin_no_variants = /** @type {(inputs: {}) => string} */ () => {
+	return `No variants available.`
+};
+
+export const admin_variant_size_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Size (e.g. M)`
+};
+
+export const admin_variant_color_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Color (e.g. Black)`
+};
+
+export const admin_variant_price_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Price (â‚¬)`
+};
+
+export const admin_add_variant_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Add variant`
+};
+
+export const cart_toast_removed = /** @type {(inputs: {}) => string} */ () => {
+	return `Item removed from cart`
+};
+
+export const cart_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Your Cart`
+};
+
+export const cart_empty = /** @type {(inputs: {}) => string} */ () => {
+	return `Your cart is empty.`
+};
+
+export const cart_color_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Color:`
+};
+
+export const cart_size_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Size:`
+};
+
+export const cart_total_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Total:`
+};
+
+export const cart_clear_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Clear Cart`
+};
+
+export const cart_checkout_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Checkout`
+};
+
+export const cart_remove_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Remove`
+};
+
+export const categories_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Our Categories`
+};
+
+export const categories_search_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Search for a product...`
+};
+
+export const categories_search_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Search`
+};
+
+export const categories_toast_design_selected = /** @type {(inputs: {}) => string} */ () => {
+	return `Design selected - pick a product`
+};
+
+export const categories_results_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Search Results`
+};
+
+export const categories_view_product = /** @type {(inputs: {}) => string} */ () => {
+	return `View Product`
+};
+
+export const categories_section_hoodies = /** @type {(inputs: {}) => string} */ () => {
+	return `Hoodies`
+};
+
+export const categories_section_tshirts = /** @type {(inputs: {}) => string} */ () => {
+	return `T-Shirts`
+};
+
+export const categories_section_sweatshirts = /** @type {(inputs: {}) => string} */ () => {
+	return `Sweatshirts`
+};
+
+export const categories_section_mugs = /** @type {(inputs: {}) => string} */ () => {
+	return `Mugs`
 };

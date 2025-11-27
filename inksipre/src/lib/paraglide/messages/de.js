@@ -66,11 +66,11 @@ export const email_placeholder = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const full_name_label = /** @type {(inputs: {}) => string} */ () => {
-	return `Vollständiger Name`
+	return `VollstÃ¤ndiger Name`
 };
 
 export const full_name_placeholder = /** @type {(inputs: {}) => string} */ () => {
-	return `Geben Sie Ihren vollständigen Namen ein`
+	return `Geben Sie Ihren vollstÃ¤ndigen Namen ein`
 };
 
 export const password_label = /** @type {(inputs: {}) => string} */ () => {
@@ -82,11 +82,11 @@ export const password_placeholder = /** @type {(inputs: {}) => string} */ () => 
 };
 
 export const confirm_password_label = /** @type {(inputs: {}) => string} */ () => {
-	return `Passwort bestätigen`
+	return `Passwort bestÃ¤tigen`
 };
 
 export const confirm_password_placeholder = /** @type {(inputs: {}) => string} */ () => {
-	return `Bestätigen Sie Ihr Passwort`
+	return `BestÃ¤tigen Sie Ihr Passwort`
 };
 
 export const create_account = /** @type {(inputs: {}) => string} */ () => {
@@ -118,7 +118,7 @@ export const email_placeholder_login = /** @type {(inputs: {}) => string} */ () 
 };
 
 export const password_placeholder_login = /** @type {(inputs: {}) => string} */ () => {
-	return `••••••••`
+	return `â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢`
 };
 
 export const login_button = /** @type {(inputs: {}) => string} */ () => {
@@ -194,7 +194,7 @@ export const content_title = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const content_intro = /** @type {(inputs: {}) => string} */ () => {
-	return `Präsentieren Sie Ihre Produkte, Apps oder Verpackungen mit hochwertigen 3D-Visuals, die Kunden beeindrucken und die Conversion-Rate steigern – alles direkt im Browser.`
+	return `PrÃ¤sentieren Sie Ihre Produkte, Apps oder Verpackungen mit hochwertigen 3D-Visuals, die Kunden beeindrucken und die Conversion-Rate steigern â€“ alles direkt im Browser.`
 };
 
 export const content_feature_instant_title = /** @type {(inputs: {}) => string} */ () => {
@@ -202,7 +202,7 @@ export const content_feature_instant_title = /** @type {(inputs: {}) => string} 
 };
 
 export const content_feature_instant_desc = /** @type {(inputs: {}) => string} */ () => {
-	return `Laden Sie Ihr Design hoch und sehen Sie es sofort auf realistischen 3D-Oberflächen angewendet – keine Render-Verzögerungen.`
+	return `Laden Sie Ihr Design hoch und sehen Sie es sofort auf realistischen 3D-OberflÃ¤chen angewendet â€“ keine Render-VerzÃ¶gerungen.`
 };
 
 export const content_feature_cloud_title = /** @type {(inputs: {}) => string} */ () => {
@@ -210,7 +210,7 @@ export const content_feature_cloud_title = /** @type {(inputs: {}) => string} */
 };
 
 export const content_feature_cloud_desc = /** @type {(inputs: {}) => string} */ () => {
-	return `Alle Mockups werden in der Cloud gerendert — so bleibt Ihr Computer frei und Sie sparen Zeit.`
+	return `Alle Mockups werden in der Cloud gerendert â€” so bleibt Ihr Computer frei und Sie sparen Zeit.`
 };
 
 export const content_feature_lighting_title = /** @type {(inputs: {}) => string} */ () => {
@@ -222,7 +222,7 @@ export const content_feature_lighting_desc = /** @type {(inputs: {}) => string} 
 };
 
 export const content_paragraph2 = /** @type {(inputs: {}) => string} */ () => {
-	return `Von Startup-Branding-Kits bis hin zu kompletten Produktkampagnen macht unsere 3D-Mockup-Plattform die Visualisierung intuitiv und schnell — keine Modelliererfahrung erforderlich.`
+	return `Von Startup-Branding-Kits bis hin zu kompletten Produktkampagnen macht unsere 3D-Mockup-Plattform die Visualisierung intuitiv und schnell â€” keine Modelliererfahrung erforderlich.`
 };
 
 export const content_web_tools_title = /** @type {(inputs: {}) => string} */ () => {
@@ -230,7 +230,7 @@ export const content_web_tools_title = /** @type {(inputs: {}) => string} */ () 
 };
 
 export const content_web_tools_paragraph = /** @type {(inputs: {}) => string} */ () => {
-	return `Entwerfen, Vorschauen und exportieren Sie Ihre Mockups direkt aus dem Browser. In Echtzeit zusammenarbeiten, Links teilen oder hochauflösende Renderings sofort herunterladen. Vereinfachen Sie noch heute Ihren kreativen Workflow.`
+	return `Entwerfen, Vorschauen und exportieren Sie Ihre Mockups direkt aus dem Browser. In Echtzeit zusammenarbeiten, Links teilen oder hochauflÃ¶sende Renderings sofort herunterladen. Vereinfachen Sie noch heute Ihren kreativen Workflow.`
 };
 
 export const footer_tagline = /** @type {(inputs: {}) => string} */ () => {
@@ -266,7 +266,7 @@ export const footer_company_contact = /** @type {(inputs: {}) => string} */ () =
 };
 
 export const footer_company_about = /** @type {(inputs: {}) => string} */ () => {
-	return `Über uns`
+	return `Ãœber uns`
 };
 
 export const footer_company_careers = /** @type {(inputs: {}) => string} */ () => {
@@ -306,7 +306,7 @@ export const footer_contact_location = /** @type {(inputs: {}) => string} */ () 
 };
 
 export const footer_copyright = /** @type {(inputs: { year: NonNullable<unknown> }) => string} */ (i) => {
-	return `© ${i.year} Inkspire. Alle Rechte vorbehalten.`
+	return `Â© ${i.year} Inkspire. Alle Rechte vorbehalten.`
 };
 
 export const footer_privacy = /** @type {(inputs: {}) => string} */ () => {
@@ -334,7 +334,7 @@ export const reviews_prev = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const reviews_next = /** @type {(inputs: {}) => string} */ () => {
-	return `Nächste Bewertungen`
+	return `NÃ¤chste Bewertungen`
 };
 
 export const reviews_carousel_aria = /** @type {(inputs: {}) => string} */ () => {
@@ -367,4 +367,156 @@ export const product_tshirt_title = /** @type {(inputs: {}) => string} */ () => 
 
 export const product_tshirt_desc = /** @type {(inputs: {}) => string} */ () => {
 	return `Weiches, atmungsaktives T-Shirt aus Bio-Baumwolle.`
+};
+
+export const admin_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Adminbereich â€“ Produktverwaltung`
+};
+
+export const admin_create_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Neues Produkt erstellen`
+};
+
+export const admin_name_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Produktname`
+};
+
+export const admin_base_price_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Basispreis (â‚¬)`
+};
+
+export const admin_description_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Beschreibung`
+};
+
+export const admin_category_select_default = /** @type {(inputs: {}) => string} */ () => {
+	return `-- Kategorie wÃ¤hlen --`
+};
+
+export const admin_category_hoodies = /** @type {(inputs: {}) => string} */ () => {
+	return `Hoodies`
+};
+
+export const admin_category_tshirts = /** @type {(inputs: {}) => string} */ () => {
+	return `T-Shirts`
+};
+
+export const admin_category_sweatshirts = /** @type {(inputs: {}) => string} */ () => {
+	return `Sweatshirts`
+};
+
+export const admin_category_mugs = /** @type {(inputs: {}) => string} */ () => {
+	return `Mugs`
+};
+
+export const admin_allowed_formats = /** @type {(inputs: {}) => string} */ () => {
+	return `Erlaubte Formate: PNG, JPG, WEBP. Max. 5MB.`
+};
+
+export const admin_create_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Erstellen`
+};
+
+export const admin_delete_button = /** @type {(inputs: {}) => string} */ () => {
+	return `LÃ¶schen`
+};
+
+export const admin_variants_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Varianten`
+};
+
+export const admin_no_variants = /** @type {(inputs: {}) => string} */ () => {
+	return `Keine Varianten vorhanden.`
+};
+
+export const admin_variant_size_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `GrÃ¶ÃŸe (z. B. M)`
+};
+
+export const admin_variant_color_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Farbe (z. B. Schwarz)`
+};
+
+export const admin_variant_price_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Preis (â‚¬)`
+};
+
+export const admin_add_variant_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Variante hinzuf?gen`
+};
+
+export const cart_toast_removed = /** @type {(inputs: {}) => string} */ () => {
+	return `Artikel aus dem Warenkorb entfernt.`
+};
+
+export const cart_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Dein Warenkorb`
+};
+
+export const cart_empty = /** @type {(inputs: {}) => string} */ () => {
+	return `Dein Warenkorb ist leer.`
+};
+
+export const cart_color_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Farbe:`
+};
+
+export const cart_size_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Groesse:`
+};
+
+export const cart_total_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Gesamt:`
+};
+
+export const cart_clear_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Warenkorb leeren`
+};
+
+export const cart_checkout_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Zur Kasse`
+};
+
+export const cart_remove_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Entfernen`
+};
+
+export const categories_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Unsere Kategorien`
+};
+
+export const categories_search_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Suche nach einem Produkt...`
+};
+
+export const categories_search_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Suchen`
+};
+
+export const categories_toast_design_selected = /** @type {(inputs: {}) => string} */ () => {
+	return `Design ausgewaehlt - Produkt waehlen`
+};
+
+export const categories_results_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Suchergebnisse`
+};
+
+export const categories_view_product = /** @type {(inputs: {}) => string} */ () => {
+	return `Produkt ansehen`
+};
+
+export const categories_section_hoodies = /** @type {(inputs: {}) => string} */ () => {
+	return `Hoodies`
+};
+
+export const categories_section_tshirts = /** @type {(inputs: {}) => string} */ () => {
+	return `T-Shirts`
+};
+
+export const categories_section_sweatshirts = /** @type {(inputs: {}) => string} */ () => {
+	return `Sweatshirts`
+};
+
+export const categories_section_mugs = /** @type {(inputs: {}) => string} */ () => {
+	return `Tassen`
 };
