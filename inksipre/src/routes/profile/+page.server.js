@@ -41,7 +41,7 @@ export const load = async ({ cookies }) => {
 
   // Load recent uploads for this user
   const [uploads] = await db.query(
-    'SELECT id, image_url, created_at FROM uploads WHERE user_id = ? ORDER BY id DESC LIMIT 50',
+    'SELECT id, image_url, created_at FROM uploads WHERE user_id = ? AND customisation_id IS NULL ORDER BY id DESC LIMIT 50',
     [user.id]
   );
 

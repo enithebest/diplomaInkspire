@@ -8,7 +8,20 @@ export const load = async ({ params, locals }) => {
 
   // Load the selected variant and its parent product
   const variantRows = await query('SELECT * FROM product_variants WHERE id = ?', [variant_id]);
-  const variant = variantRows?.[0] || null;
+  const variantRaw = variantRows?.[0] || null;
+  const variant = (() => {
+    if (!variantRaw) return null;
+    if (!variantRaw.option_values) return variantRaw;
+    try {
+      const opts =
+        typeof variantRaw.option_values === 'string'
+          ? JSON.parse(variantRaw.option_values)
+          : variantRaw.option_values;
+      return { ...variantRaw, color: opts?.color ?? null, size: opts?.size ?? null };
+    } catch {
+      return variantRaw;
+    }
+  })();
   if (!variant) {
     return { product: null, variant: null };
   }
@@ -20,7 +33,7 @@ export const load = async ({ params, locals }) => {
   let uploads = [];
   if (locals?.user?.id) {
     uploads = await query(
-      'SELECT id, image_url FROM uploads WHERE user_id = ? ORDER BY id DESC LIMIT 100',
+      'SELECT id, image_url FROM uploads WHERE user_id = ? AND customisation_id IS NULL ORDER BY id DESC LIMIT 100',
       [locals.user.id]
     );
   }
@@ -148,20 +161,21 @@ export const actions = {
       );
       const orderItemId = orderItemResult.insertId;
 
+      const [customisationResult] = await conn.query(
+        'INSERT INTO customisation (product_id, variant_id, order_item_id) VALUES (?, ?, ?)',
+        [variant.product_id, variant.id, orderItemId]
+      );
+      const customisationId = customisationResult.insertId ?? null;
+
       let uploadId = null;
       if (designUrl) {
         const [uploadResult] = await conn.query(
-          'INSERT INTO uploads (user_id, customisation_id, image_url) VALUES (?, NULL, ?)',
-          [user.id, designUrl]
+          'INSERT INTO uploads (user_id, customisation_id, image_url) VALUES (?, ?, ?)',
+          [user.id, customisationId, designUrl]
         );
         uploadId = uploadResult.insertId ?? null;
         await conn.query('UPDATE order_items SET upload_id = ? WHERE id = ?', [uploadId, orderItemId]);
       }
-
-      await conn.query(
-        'INSERT INTO customisation (product_id, variant_id, order_item_id) VALUES (?, ?, ?)',
-        [variant.product_id, variant.id, orderItemId]
-      );
 
       await conn.commit();
 

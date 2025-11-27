@@ -240,6 +240,54 @@
       if (designUrlField) designUrlField.value = orderDesignUrl;
       if (designDataField) designDataField.value = orderDesignData;
     }
+
+    snapshotCartPreview();
+  };
+
+  const captureModelImage = () => {
+    if (!browser) return '';
+    if (renderer && scene && camera) {
+      orbitControls.update();
+      renderer.render(scene, camera);
+
+      const captureCanvas = document.createElement('canvas');
+      captureCanvas.width = renderer.domElement.width;
+      captureCanvas.height = renderer.domElement.height;
+      const context = captureCanvas.getContext('2d');
+      if (context) {
+        context.drawImage(renderer.domElement, 0, 0);
+        return captureCanvas.toDataURL('image/png', 0.95);
+      }
+    }
+    return previewUrl || form?.imageUrl || data?.variant?.image_url || data?.product?.image_url || '';
+  };
+
+  const snapshotCartPreview = () => {
+    if (!browser || !data?.product || !data?.variant) return;
+    try {
+      const raw = localStorage.getItem('cart');
+      const cart = raw ? JSON.parse(raw) : [];
+      const imageUrl =
+        captureModelImage() ||
+        previewUrl ||
+        form?.imageUrl ||
+        data?.variant?.image_url ||
+        data?.product?.image_url ||
+        '';
+      cart.push({
+        product_id: data.product.id,
+        variant_id: data.variant.id,
+        name: data.product.name,
+        color: data.variant.color ?? '',
+        size: data.variant.size ?? '',
+        price: data.variant.price ?? data.product.base_price,
+        qty: 1,
+        image_url: imageUrl
+      });
+      localStorage.setItem('cart', JSON.stringify(cart));
+    } catch (err) {
+      console.error('Unable to snapshot cart preview', err);
+    }
   };
 
   const initScene = () => {
@@ -673,3 +721,5 @@
     </div>
   {/if}
 </div>
+
+
