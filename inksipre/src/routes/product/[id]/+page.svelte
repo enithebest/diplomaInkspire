@@ -44,8 +44,7 @@
       variants.find((v) => v.color === selectedColor && v.size === s) || null;
   }
 
-<<<<<<< HEAD
-=======
+
   function formatDate(value) {
     if (!value) return '';
     const date = new Date(value);
@@ -85,8 +84,7 @@
     }
   }
 
->>>>>>> c5e71bd5eac1b664537fb8f437ab98d7e688fe0c
-  const shortDesc = (product?.description || '').slice(0, 160);
+ const shortDesc = (product?.description || '').slice(0, 160);
 </script>
 
 {#if !product}
