@@ -10,6 +10,28 @@
 		{ code: '+39', country: 'Italy' },
 		{ code: '+44', country: 'United Kingdom' }
 	];
+
+	let nameValue = '';
+	let emailValue = '';
+	let phoneValue = '';
+	let messageValue = '';
+	let selectedPrefix = prefixes[0].code;
+
+	$: if (form?.values) {
+		nameValue = form.values.name ?? '';
+		emailValue = form.values.email ?? '';
+		phoneValue = form.values.phone ?? '';
+		messageValue = form.values.message ?? '';
+		selectedPrefix = form.values.prefix ?? prefixes[0].code;
+	}
+
+	$: if (form?.success) {
+		nameValue = '';
+		emailValue = '';
+		phoneValue = '';
+		messageValue = '';
+		selectedPrefix = prefixes[0].code;
+	}
 </script>
 
 <section
@@ -38,14 +60,14 @@
 			<div class="space-y-5">
 				<div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
 					<h2 class="text-xl font-semibold">Call Us</h2>
-					<p class="mt-2 text-gray-300">+43 660 123 4567</p>
+					<p class="mt-2 text-gray-300">+355 685319389</p>
 				</div>
 				<div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
 					<h2 class="text-xl font-semibold">Visit</h2>
 					<p class="mt-2 text-gray-300">
 						Inkspire HQ<br />
-						Triester Strasse 42<br />
-						1100 Vienna, Austria
+						Shkoder City Center<br />
+						Shkoder, Albania
 					</p>
 				</div>
 				<div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
@@ -67,7 +89,7 @@
 					allowfullscreen
 					referrerpolicy="no-referrer-when-downgrade"
 					class="rounded-2xl"
-					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2653.949837829918!2d16.378136!3d48.17023!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476d07b15efc1be9%3A0x3d44a14bcbb15741!2sTriester%20Str.%2042%2C%201100%20Wien!5e0!3m2!1sen!2at!4v1700000000000"
+					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3033.5770785481867!2d19.515169!3d42.068284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135268f782179bb9%3A0x63b69e0b9b318d32!2sShkod%C3%ABr%20City%20Center!5e0!3m2!1sen!2s!4v1700000000001"
 				></iframe>
 			</div>
 
@@ -93,90 +115,106 @@
 						class="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-8 lg:min-h-[calc(100vh-5rem)] lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto flex flex-col"
 					>
 						<div class="space-y-2 shrink-0">
-						<h2 class="text-3xl font-semibold">Send Us a Message</h2>
-						<p class="text-sm text-gray-300">Tell us what you need and we will get back quickly.</p>
-					</div>
+							<h2 class="text-3xl font-semibold">Send Us a Message</h2>
+							<p class="text-sm text-gray-300">Tell us what you need and we will get back quickly.</p>
+						</div>
 
 						<form method="POST" action="?/send" use:enhance class="flex-1 flex flex-col gap-5">
-						<div>
-							<label class="text-sm font-medium text-gray-300">Full Name</label>
-							<input
-								type="text"
-								name="name"
-								autocomplete="name"
-								required
-								placeholder="Enter your name"
-								class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-							/>
-						</div>
-
-						<div>
-							<label class="text-sm font-medium text-gray-300">Email Address</label>
-							<input
-								type="email"
-								name="email"
-								autocomplete="email"
-								required
-								placeholder="you@example.com"
-								class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-							/>
-						</div>
-
-						<div>
-							<label class="text-sm font-medium text-gray-300">Phone Number</label>
-							<div class="mt-1 flex flex-col gap-3 sm:flex-row">
-								<select
-									name="prefix"
-									required
-									class="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 sm:w-40"
-								>
-									{#each prefixes as option}
-										<option value={option.code} class="text-black">
-											{option.code} — {option.country}
-										</option>
-									{/each}
-								</select>
-
+							<div>
+								<label class="text-sm font-medium text-gray-300">Full Name</label>
 								<input
-									type="tel"
-									name="phone"
-									autocomplete="tel"
+									type="text"
+									name="name"
+									bind:value={nameValue}
 									required
-									placeholder="123 456 789"
-									class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+									minlength="2"
+									maxlength="80"
+									placeholder="Enter your name"
+									class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+									aria-invalid={Boolean(form?.error)}
 								/>
 							</div>
-						</div>
 
-						<div>
-							<label class="text-sm font-medium text-gray-300">Message</label>
-							<textarea
-								name="message"
-								rows="4"
-								required
-								placeholder="Tell us about your project or question..."
-								class="mt-1 w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-							></textarea>
-						</div>
+							<div>
+								<label class="text-sm font-medium text-gray-300">Email Address</label>
+								<input
+									type="email"
+									name="email"
+									bind:value={emailValue}
+									required
+									placeholder="you@example.com"
+									class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+									aria-invalid={Boolean(form?.error)}
+								/>
+							</div>
 
-						<div class="mt-auto space-y-3">
-							<button
-								type="submit"
-								class="w-full rounded-xl bg-indigo-500 py-3 text-lg font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 disabled:opacity-60"
-							>
-								Send Message
-							</button>
+							<div>
+								<label class="text-sm font-medium text-gray-300">Phone Number</label>
+								<div class="mt-1 flex flex-col gap-3 sm:flex-row">
+									<select
+										name="prefix"
+										bind:value={selectedPrefix}
+										required
+										class="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 sm:w-40"
+									>
+										{#each prefixes as option}
+											<option value={option.code} class="text-black">
+												{option.code} - {option.country}
+											</option>
+										{/each}
+									</select>
 
-							{#if form?.success}
-								<p class="text-center text-sm text-emerald-300 animate-fade-in">{form.success}</p>
-							{:else if form?.error}
-								<p class="text-center text-sm text-rose-300 animate-fade-in">{form.error}</p>
-							{/if}
-						</div>
-					</form>
+									<input
+										type="tel"
+										name="phone"
+										bind:value={phoneValue}
+										required
+										pattern="[0-9()+\s-]{6,20}"
+										minlength="6"
+										maxlength="20"
+										placeholder="685 319 389"
+										class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+										aria-invalid={Boolean(form?.error)}
+									/>
+								</div>
+								<p class="text-xs text-gray-400 mt-1">Include country code and numbers only.</p>
+							</div>
+
+							<div>
+								<label class="text-sm font-medium text-gray-300">Message</label>
+								<textarea
+									name="message"
+									rows="4"
+									bind:value={messageValue}
+									required
+									minlength="10"
+									maxlength="1500"
+									placeholder="Tell us about your project or question..."
+									class="mt-1 w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+									aria-invalid={Boolean(form?.error)}
+								></textarea>
+							</div>
+
+							<div class="mt-auto space-y-3">
+								<button
+									type="submit"
+									class="w-full rounded-xl bg-indigo-500 py-3 text-lg font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 disabled:opacity-60"
+								>
+									Send Message
+								</button>
+
+								{#if form?.success}
+									<p class="text-center text-sm text-emerald-300 animate-fade-in">{form.success}</p>
+								{:else if form?.error}
+									<p class="text-center text-sm text-rose-300 animate-fade-in">{form.error}</p>
+								{/if}
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
+
 	</div>
 </section>
 
