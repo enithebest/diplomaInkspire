@@ -2993,3 +2993,323 @@ export const categories_section_mugs = (inputs = {}, options = {}) => {
 	if (locale === "de") return de.categories_section_mugs(inputs)
 	return it.categories_section_mugs(inputs)
 };
+
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_badge = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_badge(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_badge", locale)
+	if (locale === "en") return en.contact_badge(inputs)
+	if (locale === "de") return de.contact_badge(inputs)
+	return it.contact_badge(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_title(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_title", locale)
+	if (locale === "en") return en.contact_title(inputs)
+	if (locale === "de") return de.contact_title(inputs)
+	return it.contact_title(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_intro = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_intro(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_intro", locale)
+	if (locale === "en") return en.contact_intro(inputs)
+	if (locale === "de") return de.contact_intro(inputs)
+	return it.contact_intro(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_call_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_call_title(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_call_title", locale)
+	if (locale === "en") return en.contact_call_title(inputs)
+	if (locale === "de") return de.contact_call_title(inputs)
+	return it.contact_call_title(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_call_number = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_call_number(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_call_number", locale)
+	if (locale === "en") return en.contact_call_number(inputs)
+	if (locale === "de") return de.contact_call_number(inputs)
+	return it.contact_call_number(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_visit_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_visit_title(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_visit_title", locale)
+	if (locale === "en") return en.contact_visit_title(inputs)
+	if (locale === "de") return de.contact_visit_title(inputs)
+	return it.contact_visit_title(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_visit_body = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_visit_body(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_visit_body", locale)
+	if (locale === "en") return en.contact_visit_body(inputs)
+	if (locale === "de") return de.contact_visit_body(inputs)
+	return it.contact_visit_body(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_hours_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_hours_title(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_hours_title", locale)
+	if (locale === "en") return en.contact_hours_title(inputs)
+	if (locale === "de") return de.contact_hours_title(inputs)
+	return it.contact_hours_title(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_hours_body = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_hours_body(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_hours_body", locale)
+	if (locale === "en") return en.contact_hours_body(inputs)
+	if (locale === "de") return de.contact_hours_body(inputs)
+	return it.contact_hours_body(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_highlight_fast_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_highlight_fast_title(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_highlight_fast_title", locale)
+	if (locale === "en") return en.contact_highlight_fast_title(inputs)
+	if (locale === "de") return de.contact_highlight_fast_title(inputs)
+	return it.contact_highlight_fast_title(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_highlight_fast_desc = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_highlight_fast_desc(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_highlight_fast_desc", locale)
+	if (locale === "en") return en.contact_highlight_fast_desc(inputs)
+	if (locale === "de") return de.contact_highlight_fast_desc(inputs)
+	return it.contact_highlight_fast_desc(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_highlight_reliable_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_highlight_reliable_title(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_highlight_reliable_title", locale)
+	if (locale === "en") return en.contact_highlight_reliable_title(inputs)
+	if (locale === "de") return de.contact_highlight_reliable_title(inputs)
+	return it.contact_highlight_reliable_title(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_highlight_reliable_desc = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_highlight_reliable_desc(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_highlight_reliable_desc", locale)
+	if (locale === "en") return en.contact_highlight_reliable_desc(inputs)
+	if (locale === "de") return de.contact_highlight_reliable_desc(inputs)
+	return it.contact_highlight_reliable_desc(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_highlight_quality_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_highlight_quality_title(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_highlight_quality_title", locale)
+	if (locale === "en") return en.contact_highlight_quality_title(inputs)
+	if (locale === "de") return de.contact_highlight_quality_title(inputs)
+	return it.contact_highlight_quality_title(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_highlight_quality_desc = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_highlight_quality_desc(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_highlight_quality_desc", locale)
+	if (locale === "en") return en.contact_highlight_quality_desc(inputs)
+	if (locale === "de") return de.contact_highlight_quality_desc(inputs)
+	return it.contact_highlight_quality_desc(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_highlight_secure_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_highlight_secure_title(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_highlight_secure_title", locale)
+	if (locale === "en") return en.contact_highlight_secure_title(inputs)
+	if (locale === "de") return de.contact_highlight_secure_title(inputs)
+	return it.contact_highlight_secure_title(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_highlight_secure_desc = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_highlight_secure_desc(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_highlight_secure_desc", locale)
+	if (locale === "en") return en.contact_highlight_secure_desc(inputs)
+	if (locale === "de") return de.contact_highlight_secure_desc(inputs)
+	return it.contact_highlight_secure_desc(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_form_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_form_title(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_form_title", locale)
+	if (locale === "en") return en.contact_form_title(inputs)
+	if (locale === "de") return de.contact_form_title(inputs)
+	return it.contact_form_title(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_form_subtitle = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_form_subtitle(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_form_subtitle", locale)
+	if (locale === "en") return en.contact_form_subtitle(inputs)
+	if (locale === "de") return de.contact_form_subtitle(inputs)
+	return it.contact_form_subtitle(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_name_label = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_name_label(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_name_label", locale)
+	if (locale === "en") return en.contact_name_label(inputs)
+	if (locale === "de") return de.contact_name_label(inputs)
+	return it.contact_name_label(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_name_placeholder = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_name_placeholder(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_name_placeholder", locale)
+	if (locale === "en") return en.contact_name_placeholder(inputs)
+	if (locale === "de") return de.contact_name_placeholder(inputs)
+	return it.contact_name_placeholder(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_email_label = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_email_label(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_email_label", locale)
+	if (locale === "en") return en.contact_email_label(inputs)
+	if (locale === "de") return de.contact_email_label(inputs)
+	return it.contact_email_label(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_email_placeholder = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_email_placeholder(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_email_placeholder", locale)
+	if (locale === "en") return en.contact_email_placeholder(inputs)
+	if (locale === "de") return de.contact_email_placeholder(inputs)
+	return it.contact_email_placeholder(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_phone_label = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_phone_label(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_phone_label", locale)
+	if (locale === "en") return en.contact_phone_label(inputs)
+	if (locale === "de") return de.contact_phone_label(inputs)
+	return it.contact_phone_label(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_phone_placeholder = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_phone_placeholder(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_phone_placeholder", locale)
+	if (locale === "en") return en.contact_phone_placeholder(inputs)
+	if (locale === "de") return de.contact_phone_placeholder(inputs)
+	return it.contact_phone_placeholder(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_phone_hint = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_phone_hint(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_phone_hint", locale)
+	if (locale === "en") return en.contact_phone_hint(inputs)
+	if (locale === "de") return de.contact_phone_hint(inputs)
+	return it.contact_phone_hint(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_message_label = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_message_label(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_message_label", locale)
+	if (locale === "en") return en.contact_message_label(inputs)
+	if (locale === "de") return de.contact_message_label(inputs)
+	return it.contact_message_label(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_message_placeholder = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_message_placeholder(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_message_placeholder", locale)
+	if (locale === "en") return en.contact_message_placeholder(inputs)
+	if (locale === "de") return de.contact_message_placeholder(inputs)
+	return it.contact_message_placeholder(inputs)
+};
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_send_button = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_send_button(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_send_button", locale)
+	if (locale === "en") return en.contact_send_button(inputs)
+	if (locale === "de") return de.contact_send_button(inputs)
+	return it.contact_send_button(inputs)
+};
