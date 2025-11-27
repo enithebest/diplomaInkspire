@@ -1,5 +1,6 @@
 <script>
 	import { enhance } from '$app/forms';
+	import * as m from '$lib/paraglide/messages/_index.js';
 	export let form = {};
 
 	const prefixes = [
@@ -16,6 +17,12 @@
 	let phoneValue = '';
 	let messageValue = '';
 	let selectedPrefix = prefixes[0].code;
+	const highlights = [
+		{ title: m.contact_highlight_fast_title(), desc: m.contact_highlight_fast_desc() },
+		{ title: m.contact_highlight_reliable_title(), desc: m.contact_highlight_reliable_desc() },
+		{ title: m.contact_highlight_quality_title(), desc: m.contact_highlight_quality_desc() },
+		{ title: m.contact_highlight_secure_title(), desc: m.contact_highlight_secure_desc() }
+	];
 
 	$: if (form?.values) {
 		nameValue = form.values.name ?? '';
@@ -47,36 +54,27 @@
 	<div class="relative z-10 mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 		<div class="order-2 lg:order-1 space-y-10">
 			<header class="space-y-4">
-				<p class="text-sm uppercase tracking-[0.3em] text-indigo-300/80">We reply within 24h</p>
+				<p class="text-sm uppercase tracking-[0.3em] text-indigo-300/80">{m.contact_badge()}</p>
 				<h1 class="text-4xl sm:text-5xl font-bold leading-tight">
-					Contact <span class="text-indigo-300">Inkspire</span>
+					{m.contact_title()} <span class="text-indigo-300">Inkspire</span>
 				</h1>
 				<p class="text-gray-300 text-lg">
-					Need a quote, custom design help, or support with an order? Reach out by phone, in person, or
-					use the form. We are real humans ready to help.
+					{m.contact_intro()}
 				</p>
 			</header>
 
 			<div class="space-y-5">
 				<div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-					<h2 class="text-xl font-semibold">Call Us</h2>
-					<p class="mt-2 text-gray-300">+355 685319389</p>
+					<h2 class="text-xl font-semibold">{m.contact_call_title()}</h2>
+					<p class="mt-2 text-gray-300">{m.contact_call_number()}</p>
 				</div>
 				<div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-					<h2 class="text-xl font-semibold">Visit</h2>
-					<p class="mt-2 text-gray-300">
-						Inkspire HQ<br />
-						Shkoder City Center<br />
-						Shkoder, Albania
-					</p>
+					<h2 class="text-xl font-semibold">{m.contact_visit_title()}</h2>
+					<p class="mt-2 text-gray-300">{m.contact_visit_body()}</p>
 				</div>
 				<div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-					<h2 class="text-xl font-semibold">Opening Hours</h2>
-					<p class="mt-2 text-gray-300">
-						Mon-Fri: 08:00-18:00<br />
-						Sat: 09:00-14:00<br />
-						Sun: Closed
-					</p>
+					<h2 class="text-xl font-semibold">{m.contact_hours_title()}</h2>
+					<p class="mt-2 text-gray-300">{m.contact_hours_body()}</p>
 				</div>
 			</div>
 
@@ -94,12 +92,7 @@
 			</div>
 
 			<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-				{#each [
-					{ title: 'Fast Support', desc: 'Average response time < 24h' },
-					{ title: 'Reliable Team', desc: 'Dedicated contact for every order' },
-					{ title: 'High Quality', desc: 'In-house production control' },
-					{ title: 'Secure Data', desc: 'Your uploads stay private' }
-				] as item}
+				{#each highlights as item}
 					<div class="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
 						<h3 class="text-lg font-semibold text-indigo-200">{item.title}</h3>
 						<p class="mt-1 text-gray-300 text-sm">{item.desc}</p>
@@ -115,13 +108,13 @@
 						class="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-8 lg:min-h-[calc(100vh-5rem)] lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto flex flex-col"
 					>
 						<div class="space-y-2 shrink-0">
-							<h2 class="text-3xl font-semibold">Send Us a Message</h2>
-							<p class="text-sm text-gray-300">Tell us what you need and we will get back quickly.</p>
+							<h2 class="text-3xl font-semibold">{m.contact_form_title()}</h2>
+							<p class="text-sm text-gray-300">{m.contact_form_subtitle()}</p>
 						</div>
 
 						<form method="POST" action="?/send" use:enhance class="flex-1 flex flex-col gap-5">
 							<div>
-								<label class="text-sm font-medium text-gray-300">Full Name</label>
+								<label class="text-sm font-medium text-gray-300">{m.contact_name_label()}</label>
 								<input
 									type="text"
 									name="name"
@@ -129,27 +122,27 @@
 									required
 									minlength="2"
 									maxlength="80"
-									placeholder="Enter your name"
+									placeholder={m.contact_name_placeholder()}
 									class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
 									aria-invalid={Boolean(form?.error)}
 								/>
 							</div>
 
 							<div>
-								<label class="text-sm font-medium text-gray-300">Email Address</label>
+								<label class="text-sm font-medium text-gray-300">{m.contact_email_label()}</label>
 								<input
 									type="email"
 									name="email"
 									bind:value={emailValue}
 									required
-									placeholder="you@example.com"
+									placeholder={m.contact_email_placeholder()}
 									class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
 									aria-invalid={Boolean(form?.error)}
 								/>
 							</div>
 
 							<div>
-								<label class="text-sm font-medium text-gray-300">Phone Number</label>
+								<label class="text-sm font-medium text-gray-300">{m.contact_phone_label()}</label>
 								<div class="mt-1 flex flex-col gap-3 sm:flex-row">
 									<select
 										name="prefix"
@@ -172,16 +165,16 @@
 										pattern="[0-9()+\s-]{6,20}"
 										minlength="6"
 										maxlength="20"
-										placeholder="685 319 389"
+										placeholder={m.contact_phone_placeholder()}
 										class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
 										aria-invalid={Boolean(form?.error)}
 									/>
 								</div>
-								<p class="text-xs text-gray-400 mt-1">Include country code and numbers only.</p>
+								<p class="text-xs text-gray-400 mt-1">{m.contact_phone_hint()}</p>
 							</div>
 
 							<div>
-								<label class="text-sm font-medium text-gray-300">Message</label>
+								<label class="text-sm font-medium text-gray-300">{m.contact_message_label()}</label>
 								<textarea
 									name="message"
 									rows="4"
@@ -189,7 +182,7 @@
 									required
 									minlength="10"
 									maxlength="1500"
-									placeholder="Tell us about your project or question..."
+									placeholder={m.contact_message_placeholder()}
 									class="mt-1 w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
 									aria-invalid={Boolean(form?.error)}
 								></textarea>
@@ -200,7 +193,7 @@
 									type="submit"
 									class="w-full rounded-xl bg-indigo-500 py-3 text-lg font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 disabled:opacity-60"
 								>
-									Send Message
+									{m.contact_send_button()}
 								</button>
 
 								{#if form?.success}
