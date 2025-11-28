@@ -29,10 +29,18 @@ export const load = async ({ cookies }) => {
   const itemsByOrder = {};
   for (const o of orders) {
     const [items] = await db.query(
-      `SELECT oi.order_id, oi.product_id, oi.variant_id, oi.quantity, oi.unit_price,
-              p.name
+      `SELECT
+         oi.order_id,
+         oi.product_id,
+         oi.variant_id,
+         oi.quantity,
+         oi.unit_price,
+         p.name,
+         COALESCE(u.image_url, pv.image_url, p.image_url) AS image_url
        FROM order_items oi
        JOIN products p ON p.id = oi.product_id
+       LEFT JOIN product_variants pv ON pv.id = oi.variant_id
+       LEFT JOIN uploads u ON u.id = oi.upload_id
        WHERE oi.order_id = ?
        ORDER BY oi.id ASC`,
       [o.id]
