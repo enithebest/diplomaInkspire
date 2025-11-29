@@ -1,5 +1,14 @@
 <script>
-  let data = $props();  
+  import { onMount } from 'svelte';
+  let { data } = $props();
+
+  onMount(() => {
+    try {
+      localStorage.removeItem('cart');
+    } catch (e) {
+      console.error(e);
+    }
+  });
 </script>
 
 <section class="max-w-2xl mx-auto px-6 py-16 text-center">

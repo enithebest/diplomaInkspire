@@ -18,11 +18,11 @@ export const load = ({ locals, url }) => {
 };
 
 export const actions = {
-	intent: async ({ request, locals, url }) => {
+	intent: async ({ request, locals }) => {
 		if (!locals.user) {
 			throw redirect(
 				302,
-				`/login?reason=order_required&next=${encodeURIComponent(url.pathname)}`
+				`/login?reason=order_required&next=${encodeURIComponent('/checkout')}`
 			);
 		}
 
@@ -73,12 +73,9 @@ export const actions = {
 			total += price * qty;
 
 			line_items.push({
-				price_data: {
-					currency: 'usd',
-					product_data: { name },
-					unit_amount: Math.round(price * 100)
-				},
-				quantity: Math.round(qty)
+				name,
+				qty: Math.round(qty),
+				price: Math.round(price * 100)
 			});
 		}
 
@@ -86,30 +83,29 @@ export const actions = {
 			return fail(400, { message: 'No valid items to purchase' });
 		}
 
-		try {
-			const stripe = new Stripe(STRIPE_SECRET_KEY);
-			const session = await stripe.checkout.sessions.create({
-				mode: 'payment',
-				line_items,
-				customer_email: locals.user.email,
-				shipping_address_collection: {
-					allowed_countries: ['US', 'GB', 'DE', 'FR', 'IT', 'ES', 'CA']
-				},
-				metadata: {
-					user_id: locals.user.id?.toString() || '',
-					name: full_name,
-					city,
-					postal_code,
-					country
-				},
-				success_url: `${url.origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-				cancel_url: `${url.origin}/cart`
-			});
+    try {
+      // Use Stripe default API version from SDK; no explicit override to avoid version errors.
+      const stripe = new Stripe(STRIPE_SECRET_KEY);
+      console.log('creating payment intent', { total, line_items: line_items.length });
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: Math.round(total * 100),
+        currency: 'usd',
+        receipt_email: locals.user.email,
+        metadata: {
+          user_id: locals.user.id?.toString() || '',
+          full_name,
+          city,
+          postal_code,
+          country,
+          items: JSON.stringify(line_items.slice(0, 20)) // limit metadata size
+        },
+        automatic_payment_methods: { enabled: true }
+      });
 
-			return { checkoutUrl: session.url };
-		} catch (err) {
-			console.error('Stripe session error', err);
-			return fail(500, { message: 'Unable to start checkout. Please try again.' });
-		}
-	}
+      return { clientSecret: paymentIntent.client_secret };
+    } catch (err) {
+      console.error('Stripe payment intent error', err);
+      return fail(500, { message: 'Unable to start checkout. Please try again.' });
+    }
+  }
 };

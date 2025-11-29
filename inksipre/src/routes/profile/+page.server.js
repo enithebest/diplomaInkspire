@@ -35,6 +35,7 @@ export const load = async ({ cookies }) => {
          oi.variant_id,
          oi.quantity,
          oi.unit_price,
+         (oi.quantity * oi.unit_price) AS line_total,
          p.name,
          COALESCE(u.image_url, pv.image_url, p.image_url) AS image_url
        FROM order_items oi

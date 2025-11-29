@@ -7,6 +7,18 @@
   let activeTab = $state('profile');
 
   const itemsByOrder = data.itemsByOrder ?? {};
+  const formatDateTime = (value) => {
+    if (!value) return '';
+    const d = new Date(value);
+    return d.toLocaleString();
+  };
+  const statusBadge = (status) => {
+    const s = (status || '').toLowerCase();
+    if (s === 'paid') return 'bg-green-600/20 text-green-300 border border-green-500/40';
+    if (s === 'processing' || s === 'pending') return 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/40';
+    if (s === 'failed' || s === 'requires_payment_method') return 'bg-red-500/20 text-red-300 border border-red-500/40';
+    return 'bg-gray-600/20 text-gray-200 border border-gray-500/40';
+  };
 
   const translations = {
     de: {
@@ -154,7 +166,11 @@
             {#each data.orders as o}
               <div class="border border-white/10 rounded-lg p-4">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
-                  <div class="text-sm text-gray-300">#{o.id} • {new Date(o.created_at).toLocaleString()}</div>
+                  <div class="flex items-center gap-3">
+                    <span class="text-sm text-gray-300 font-semibold">#{o.id}</span>
+                    <span class={`text-xs px-2 py-1 rounded-full ${statusBadge(o.status)}`}>{o.status ?? 'unknown'}</span>
+                    <span class="text-sm text-gray-400">{formatDateTime(o.created_at)}</span>
+                  </div>
                   <div class="text-indigo-300 font-semibold">Total: ${o.total_price}</div>
                 </div>
                 {#if (itemsByOrder[o.id] || []).length > 0}
@@ -172,7 +188,10 @@
                         {/if}
                         <div class="flex-1">
                           <div class="font-semibold text-white">{it.name}</div>
-                          <div class="text-xs text-gray-400">Qty {it.quantity} • ${it.unit_price}</div>
+                          <div class="text-xs text-gray-400">Qty {it.quantity} • ${it.unit_price} each</div>
+                        </div>
+                        <div class="text-sm text-gray-200 font-semibold">
+                          ${it.line_total ?? (Number(it.quantity || 0) * Number(it.unit_price || 0)).toFixed(2)}
                         </div>
                       </li>
                     {/each}
