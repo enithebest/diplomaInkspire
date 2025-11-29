@@ -9,6 +9,8 @@
 
   export let data;
   export let form;
+  const product = data?.product;
+  const variant = data?.variant;
 
   let file;
   let previewUrl = '';
@@ -492,12 +494,6 @@
     addImageToEditor(form.imageUrl);
   }
 
-  $: activeImage =
-    selectedVariant?.image_url ||
-    colorImageFallbacks[selectedColor?.toLowerCase?.()] ||
-    product.image_url;
-  $: altColor = selectedVariant?.color || selectedColor || m.custom_product_generic();
-
   onDestroy(() => {
     if (!browser) return;
     cancelAnimationFrame(animationId);
@@ -628,16 +624,16 @@
       <div class="sticky top-4 space-y-4">
         {#if data?.product?.description}
           <div class="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-5 max-h-[55vh] overflow-y-auto shadow-lg">
-            <h3 class="text-lg font-semibold mb-2 text-indigo-300">Product details</h3>
+            <h3 class="text-lg font-semibold mb-2 text-indigo-300">{m.custom_product_details()}</h3>
             <p class="text-gray-200 leading-relaxed whitespace-pre-line">{data.product.description}</p>
           </div>
         {/if}
 
         <div class="bg-white/5 backdrop-blur border border-blue-900/40 rounded-xl p-5 shadow-lg">
           <div class="flex flex-col gap-1 mb-3">
-            <h3 class="text-lg font-semibold text-white">Ready to order?</h3>
-            <p class="text-sm text-gray-300">We attach your current edit to a new order.</p>
-            <p class="text-xs text-gray-400">Variant: {data?.variant?.sku || data?.variant?.id || 'Selected'}</p>
+            <h3 class="text-lg font-semibold text-white">{m.custom_ready_heading()}</h3>
+            <p class="text-sm text-gray-300">{m.custom_ready_subtitle()}</p>
+            <p class="text-xs text-gray-400">{m.custom_ready_variant()} {data?.variant?.sku || data?.variant?.id || m.custom_product_generic()}</p>
           </div>
           <form
             method="POST"
@@ -652,11 +648,11 @@
               type="submit"
               class="w-full bg-green-600 hover:bg-green-500 text-white font-semibold px-6 py-3 rounded-xl transition transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-green-400 disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              Order this custom piece
+              {m.custom_ready_button()}
             </button>
             {#if form?.orderSuccess}
               <p class="text-sm text-green-400" role="status">
-                Order saved! {form.orderId ? `ID #${form.orderId}` : ''} — we’ll get it ready.
+                {form.orderId ? m.custom_order_success_with_id({ id: form.orderId }) : m.custom_order_success()}
               </p>
             {/if}
             {#if form?.orderError}
@@ -676,23 +672,23 @@
         tabindex="0"
         onclick={() => (showLibrary = false)}
         onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && (showLibrary = false)}
-        aria-label="Close library"
+        aria-label={m.custom_library_close()}
       ></div>
       <aside class="absolute right-0 top-0 h-full w-full sm:w-[28rem] bg-gray-900 border-l border-white/10 p-4 overflow-y-auto">
         <div class="flex items-center justify-between mb-3">
-          <h2 class="text-lg font-semibold">My library</h2>
-          <button class="text-sm text-gray-300 hover:text-white" onclick={() => (showLibrary = false)}>Close</button>
+          <h2 class="text-lg font-semibold">{m.custom_library_title()}</h2>
+          <button class="text-sm text-gray-300 hover:text-white" onclick={() => (showLibrary = false)}>{m.custom_library_close()}</button>
         </div>
 
         <input
           type="text"
-          placeholder="Search library"
+          placeholder={m.custom_library_search()}
           bind:value={search}
           class="w-full mb-4 px-3 py-2 rounded-md bg-white/5 border border-white/10 focus:outline-none"
         />
 
         {#if libraryItems.length === 0}
-          <p class="text-gray-400">No uploads yet.</p>
+          <p class="text-gray-400">{m.custom_library_empty()}</p>
         {:else}
           <div class="grid grid-cols-2 gap-3">
             {#each libraryItems.filter((item) => displayName(item.url).toLowerCase().includes(search.toLowerCase())) as item}
@@ -704,7 +700,7 @@
                     class="text-xs px-2 py-1 rounded bg-indigo-600 text-white hover:bg-indigo-500"
                     onclick={() => useFromLibrary(item.url)}
                   >
-                    Use
+                    {m.custom_library_use()}
                   </button>
                 </div>
               </div>
@@ -715,15 +711,15 @@
     </div>
   {/if}
 
-    {#if showEditor}
-    <div class="fixed inset-0 bg-black/95 backdrop-blur-sm flex flex-col items-center justify-center z-40 p-6">
-      <h2 class="text-2xl font-bold text-white mb-4">Adjust your images</h2>
+  {#if showEditor}
+  <div class="fixed inset-0 bg-black/95 backdrop-blur-sm flex flex-col items-center justify-center z-40 p-6">
+      <h2 class="text-2xl font-bold text-white mb-4">{m.custom_modal_adjust()}</h2>
       <div bind:this={editorContainerRef} class="bg-gray-100 rounded-lg shadow-2xl overflow-hidden"></div>
       <button
         class="mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3 rounded-full transition transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-indigo-400"
         onclick={applyToModel}
       >
-        Ready
+        {m.custom_modal_ready()}
       </button>
     </div>
   {/if}

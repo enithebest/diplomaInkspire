@@ -2,6 +2,7 @@ import { query, createConnection } from '$lib/db/mysql.js';
 import { fail, redirect } from '@sveltejs/kit';
 import { put } from '@vercel/blob';
 import { BLOB_READ_WRITE_TOKEN } from '$env/static/private';
+import * as m from '$lib/paraglide/messages/_index.js';
 
 export const load = async ({ params, locals }) => {
   const { variant_id } = params;
@@ -43,6 +44,7 @@ export const load = async ({ params, locals }) => {
 
 export const actions = {
   upload: async ({ request, locals, params }) => {
+    const locale = locals?.locale ?? 'en';
     const user = locals?.user;
     if (!user) throw redirect(302, '/login');
 
@@ -52,16 +54,16 @@ export const actions = {
     const file = form.get('design');
 
     if (!file || typeof file === 'string') {
-      return fail(400, { error: 'No file provided' });
+      return fail(400, { error: m.custom_upload_error_no_file({}, { locale }) });
     }
 
     // Validate file type and size
     const allowed = ['image/png', 'image/jpeg', 'image/webp'];
     if (!allowed.includes(file.type)) {
-      return fail(400, { error: 'Invalid file type. Allowed: PNG, JPG, WEBP.' });
+      return fail(400, { error: m.custom_upload_error_type({}, { locale }) });
     }
     if (file.size > 5_000_000) {
-      return fail(400, { error: 'File too large (max 5MB).' });
+      return fail(400, { error: m.custom_upload_error_size({}, { locale }) });
     }
 
     // Create a unique, sanitized name for the blob using the variant id
@@ -90,6 +92,7 @@ export const actions = {
   },
 
   order: async ({ request, locals, params }) => {
+    const locale = locals?.locale ?? 'en';
     const user = locals?.user;
     if (!user) throw redirect(302, '/login');
 
@@ -97,13 +100,13 @@ export const actions = {
     const variantRows = await query('SELECT * FROM product_variants WHERE id = ?', [variant_id]);
     const variant = variantRows?.[0] || null;
     if (!variant) {
-      return fail(404, { orderError: 'Variant not found' });
+      return fail(404, { orderError: m.custom_order_error_variant({}, { locale }) });
     }
 
     const productRows = await query('SELECT * FROM products WHERE id = ?', [variant.product_id]);
     const product = productRows?.[0] || null;
     if (!product) {
-      return fail(404, { orderError: 'Product not found' });
+      return fail(404, { orderError: m.custom_order_error_product({}, { locale }) });
     }
 
     const form = await request.formData();
@@ -111,7 +114,7 @@ export const actions = {
     let designUrl = (form.get('design_url') || '').toString().trim();
 
     if (!designData && !designUrl) {
-      return fail(400, { orderError: 'Please add a design before ordering.' });
+      return fail(400, { orderError: m.custom_order_error_design_required({}, { locale }) });
     }
 
     // If we received a canvas data URL, store it as a blob and keep the public URL
@@ -119,7 +122,7 @@ export const actions = {
       if (designData.startsWith('data:image/')) {
         const base64 = designData.split(',')[1];
         if (!base64) {
-          return fail(400, { orderError: 'Design image is invalid.' });
+          return fail(400, { orderError: m.custom_order_error_design_invalid({}, { locale }) });
         }
 
         const mimeMatch = designData.match(/^data:(.*?);base64,/);
@@ -127,7 +130,7 @@ export const actions = {
         const buffer = Buffer.from(base64, 'base64');
 
         if (buffer.length > 8_000_000) {
-          return fail(400, { orderError: 'Design image is too large.' });
+          return fail(400, { orderError: m.custom_order_error_design_too_large({}, { locale }) });
         }
 
         const filename = `${user.id}-${variant_id}-${Date.now()}-design.png`;
@@ -140,7 +143,7 @@ export const actions = {
       }
     } catch (err) {
       console.error('Failed to store design', err);
-      return fail(500, { orderError: 'Could not save your design. Please try again.' });
+      return fail(500, { orderError: m.custom_order_error_save_failed({}, { locale }) });
     }
 
     const conn = await createConnection();
@@ -187,7 +190,7 @@ export const actions = {
       }
       await conn.rollback();
       console.error('Failed to create order', err);
-      return fail(500, { orderError: 'Unable to place the order at the moment.' });
+      return fail(500, { orderError: m.custom_order_error_unavailable({}, { locale }) });
     } finally {
       conn.release();
     }
