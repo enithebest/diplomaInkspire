@@ -1,4 +1,5 @@
 <script>
+  import * as m from '$lib/paraglide/messages/_index.js';
   export let data;
   export let form = {};
 
@@ -63,6 +64,7 @@
     selectedVariant?.image_url ||
     colorImageFallbacks[selectedColor?.toLowerCase?.()] ||
     product.image_url;
+  $: altColor = selectedVariant?.color || selectedColor || m.product_alt_selected_color();
 
   // Default to the first variant (or stored color) so an image is visible on load
   $: if (!selectedVariant && variants.length > 0) {
@@ -111,7 +113,7 @@
       if (typeof localStorage !== 'undefined') localStorage.setItem('cart', JSON.stringify(cart));
 
       const toast = document.createElement('div');
-      toast.textContent = 'Product added to cart successfully';
+      toast.textContent = m.product_toast_added();
       toast.className =
         'fixed top-6 left-1/2 -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 toast-enter';
       document.body.appendChild(toast);
@@ -129,14 +131,14 @@
 </script>
 
 {#if !product}
-  <p class="text-center mt-20 text-gray-400 text-lg">Product not found.</p>
+  <p class="text-center mt-20 text-gray-400 text-lg">{m.product_not_found()}</p>
 {:else}
   <div class="relative isolate overflow-hidden bg-gray-900 text-gray-200 min-h-screen px-6 py-12 lg:px-12">
   <section class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
     <div>
       <img
         src={activeImage}
-        alt={`${product.name} in ${selectedVariant?.color || selectedColor || 'selected color'}`}
+        alt={`${product.name} - ${altColor}`}
         class="rounded-lg shadow-lg w-full max-h-[500px] object-cover"
       />
 
@@ -147,7 +149,7 @@
               <button
                 type="button"
                 class="rounded-md border border-gray-700 hover:ring-2 hover:ring-indigo-500 transition p-0"
-                on:click={() => chooseVariant(variant)}
+                onclick={() => chooseVariant(variant)}
               >
                 <img
                   src={variant.image_url}
@@ -170,9 +172,9 @@
             {shortDesc}...
             <button
               class="text-indigo-400 underline text-sm"
-              on:click={() => (showMore = !showMore)}
+              onclick={() => (showMore = !showMore)}
             >
-              {showMore ? 'Show less' : 'Read more'}
+              {showMore ? m.product_show_less() : m.product_read_more()}
             </button>
           {:else}
             {product.description}
@@ -186,7 +188,7 @@
 
       {#if variants && variants.length > 0}
         <div class="mt-6 space-y-4">
-          <h3 class="text-lg font-semibold text-indigo-400">Select Variant</h3>
+          <h3 class="text-lg font-semibold text-indigo-400">{m.product_select_variant()}</h3>
 
           {#if colors.length > 0}
             <div class="flex items-center gap-3 flex-wrap">
@@ -198,7 +200,7 @@
                   } flex items-center justify-center`}
                   style={`background-color: ${c?.toLowerCase?.() || 'transparent'}`}
                   title={c}
-                  on:click={() => chooseColor(c)}
+                  onclick={() => chooseColor(c)}
                 ></button>
               {/each}
             </div>
@@ -213,7 +215,7 @@
                       ? 'bg-indigo-600 text-white border-indigo-600'
                       : 'bg-gray-800 text-gray-300 border-gray-600 hover:bg-gray-700'
                   }`}
-                  on:click={() => chooseSize(s)}
+                  onclick={() => chooseSize(s)}
                 >
                   {s}
                 </button>
@@ -230,7 +232,7 @@
           class="bg-indigo-600 hover:bg-indigo-500 text-white py-3 rounded-lg font-semibold disabled:opacity-50"
           disabled={!selectedVariant}
         >
-          Add to cart
+          {m.product_add_to_cart()}
         </button>
         <a
           href={selectedVariant ? `/customisation/${selectedVariant.id}` : undefined}
@@ -241,23 +243,23 @@
           }`}
           aria-disabled={!selectedVariant}
         >
-          Start Designing
+          {m.product_start_designing()}
         </a>
       </form>
 
       {#if showMore && product.description}
         <div class="mt-6">
-          <h3 class="text-lg font-semibold text-indigo-400 mb-2">Description</h3>
+          <h3 class="text-lg font-semibold text-indigo-400 mb-2">{m.product_description_heading()}</h3>
           <p class="text-gray-300 leading-relaxed">{product.description}</p>
         </div>
       {/if}
 
       <div class="mt-6">
-        <h3 class="text-lg font-semibold text-indigo-400 mb-2">Specifications</h3>
+        <h3 class="text-lg font-semibold text-indigo-400 mb-2">{m.product_specifications_heading()}</h3>
         <ul class="list-disc list-inside text-gray-300 space-y-1">
-          <li>Fabric: Cotton blend</li>
-          <li>Fit: Regular</li>
-          <li>Weight: Mid-weight</li>
+          <li>{m.product_spec_fabric()}</li>
+          <li>{m.product_spec_fit()}</li>
+          <li>{m.product_spec_weight()}</li>
         </ul>
       </div>
     </div>
@@ -266,37 +268,41 @@
   <section class="max-w-4xl mx-auto mt-16 space-y-6">
     <div class="bg-gray-800/60 rounded-2xl border border-white/5 p-6">
       <div class="flex flex-col gap-2 mb-6">
-        <h2 class="text-2xl font-semibold text-white">Community thoughts</h2>
+        <h2 class="text-2xl font-semibold text-white">{m.product_community_title()}</h2>
         <p class="text-gray-400">
-          Share what you like (or would improve) about this product so others can decide faster.
+          {m.product_community_subtitle()}
         </p>
       </div>
 
       <form method="POST" action="?/comment" class="space-y-4" aria-label="Leave a comment">
         {#if !isAuthenticated}
           <div>
-            <label class="block text-sm text-gray-300 mb-1" for="author_name">Name</label>
+            <label class="block text-sm text-gray-300 mb-1" for="author_name">{m.product_comment_name_label()}</label>
             <input
               id="author_name"
               name="author_name"
               type="text"
-              placeholder="Jane Doe"
+              placeholder={m.product_comment_name_placeholder()}
               required
               class="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-white placeholder:text-gray-500 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400/40"
             />
           </div>
         {:else}
-          <p class="text-sm text-gray-400">Commenting as <span class="text-white font-medium">{data?.user?.full_name ?? 'Inkspire user'}</span></p>
+          <p class="text-sm text-gray-400">
+            {m.product_commenting_as({
+              name: data?.user?.full_name ?? m.product_comment_user_fallback()
+            })}
+          </p>
         {/if}
 
         <div>
-          <label class="block text-sm text-gray-300 mb-1" for="comment">Your comment</label>
+          <label class="block text-sm text-gray-300 mb-1" for="comment">{m.product_comment_label()}</label>
           <textarea
             id="comment"
             name="comment"
             rows="4"
             minlength="5"
-            placeholder="Tell everyone what stood out to you..."
+            placeholder={m.product_comment_placeholder()}
             required
             class="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-gray-500 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400/40"
           ></textarea>
@@ -307,7 +313,7 @@
             type="submit"
             class="self-start rounded-lg bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-600/30 transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-300"
           >
-            Post comment
+            {m.product_comment_submit()}
           </button>
 
           {#if form?.success}
@@ -320,9 +326,9 @@
     </div>
 
     <div class="space-y-4">
-      <h3 class="text-xl font-semibold text-white">What people already said</h3>
+      <h3 class="text-xl font-semibold text-white">{m.product_comments_title()}</h3>
       {#if comments.length === 0}
-        <p class="text-gray-400 text-sm">No comments yet. Be the first to leave your impressions.</p>
+        <p class="text-gray-400 text-sm">{m.product_comments_empty()}</p>
       {:else}
         <ul class="space-y-4">
           {#each comments as comment}

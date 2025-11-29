@@ -516,7 +516,7 @@
           <button
             type="button"
             class="text-sm text-indigo-300 hover:text-white underline"
-            on:click={() => (showLibrary = true)}
+            onclick={() => (showLibrary = true)}
           >
             My library
           </button>
@@ -531,7 +531,7 @@
               name="design"
               accept="image/*"
               required
-              on:change={handleFileChange}
+              onchange={handleFileChange}
               class="block w-full text-sm text-gray-200 border border-white/10 rounded-lg cursor-pointer bg-white/5 focus:outline-none"
             />
             <p class="mt-2 text-xs text-gray-400">Allowed: PNG, JPG, WEBP. Max size: 5MB.</p>
@@ -569,7 +569,7 @@
         <p class="text-lg font-medium mb-3">Edit your artwork</p>
         <button
           class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-3 rounded-xl transition transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-indigo-400"
-          on:click={openEditor}
+          onclick={openEditor}
         >
           {uploadedImages.length ? 'Reopen Customizer' : 'Open Customizer'}
         </button>
@@ -608,7 +608,7 @@
         </div>
         <button
           class="absolute bottom-4 right-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-3 rounded-xl shadow-lg transition transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:opacity-50 disabled:cursor-not-allowed"
-          on:click={download}
+          onclick={download}
           disabled={!modelPath}
         >
           Download render
@@ -636,7 +636,7 @@
             method="POST"
             action="?/order"
             class="space-y-3"
-            on:submit={prepareOrderSubmission}
+            onsubmit={prepareOrderSubmission}
           >
             <input type="hidden" name="design_data" value={orderDesignData} />
             <input type="hidden" name="design_url" value={orderDesignUrl} />
@@ -667,14 +667,14 @@
         class="absolute inset-0 bg-black/60"
         role="button"
         tabindex="0"
-        on:click={() => (showLibrary = false)}
-        on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && (showLibrary = false)}
+        onclick={() => (showLibrary = false)}
+        onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && (showLibrary = false)}
         aria-label="Close library"
       ></div>
       <aside class="absolute right-0 top-0 h-full w-full sm:w-[28rem] bg-gray-900 border-l border-white/10 p-4 overflow-y-auto">
         <div class="flex items-center justify-between mb-3">
           <h2 class="text-lg font-semibold">My library</h2>
-          <button class="text-sm text-gray-300 hover:text-white" on:click={() => (showLibrary = false)}>Close</button>
+          <button class="text-sm text-gray-300 hover:text-white" onclick={() => (showLibrary = false)}>Close</button>
         </div>
 
         <input
@@ -695,7 +695,7 @@
                   <span class="text-xs truncate max-w-[70%]" title={displayName(item.url)}>{displayName(item.url)}</span>
                   <button
                     class="text-xs px-2 py-1 rounded bg-indigo-600 text-white hover:bg-indigo-500"
-                    on:click={() => useFromLibrary(item.url)}
+                    onclick={() => useFromLibrary(item.url)}
                   >
                     Use
                   </button>
@@ -714,7 +714,7 @@
       <div bind:this={editorContainerRef} class="bg-gray-100 rounded-lg shadow-2xl overflow-hidden"></div>
       <button
         class="mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3 rounded-full transition transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-indigo-400"
-        on:click={applyToModel}
+        onclick={applyToModel}
       >
         Ready
       </button>

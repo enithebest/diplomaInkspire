@@ -521,6 +521,130 @@ export const categories_section_mugs = /** @type {(inputs: {}) => string} */ () 
 	return `Tassen`
 };
 
+export const product_not_found = /** @type {(inputs: {}) => string} */ () => {
+	return `Produkt nicht gefunden.`
+};
+
+export const product_alt_selected_color = /** @type {(inputs: {}) => string} */ () => {
+	return `gewählte Farbe`
+};
+
+export const product_read_more = /** @type {(inputs: {}) => string} */ () => {
+	return `Mehr lesen`
+};
+
+export const product_show_less = /** @type {(inputs: {}) => string} */ () => {
+	return `Weniger anzeigen`
+};
+
+export const product_select_variant = /** @type {(inputs: {}) => string} */ () => {
+	return `Variante auswählen`
+};
+
+export const product_add_to_cart = /** @type {(inputs: {}) => string} */ () => {
+	return `In den Warenkorb`
+};
+
+export const product_start_designing = /** @type {(inputs: {}) => string} */ () => {
+	return `Design starten`
+};
+
+export const product_description_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Beschreibung`
+};
+
+export const product_specifications_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Spezifikationen`
+};
+
+export const product_spec_fabric = /** @type {(inputs: {}) => string} */ () => {
+	return `Material: Baumwollmischung`
+};
+
+export const product_spec_fit = /** @type {(inputs: {}) => string} */ () => {
+	return `Passform: Regular`
+};
+
+export const product_spec_weight = /** @type {(inputs: {}) => string} */ () => {
+	return `Gewicht: Mittelschwer`
+};
+
+export const product_toast_added = /** @type {(inputs: {}) => string} */ () => {
+	return `Produkt erfolgreich zum Warenkorb hinzugefügt`
+};
+
+export const product_community_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Gedanken der Community`
+};
+
+export const product_community_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Teile, was dir gefällt (oder was du verbessern würdest), damit andere schneller entscheiden können.`
+};
+
+export const product_comment_name_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Name`
+};
+
+export const product_comment_name_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Max Mustermann`
+};
+
+export const product_commenting_as = /** @type {(inputs: { name: NonNullable<unknown> }) => string} */ (i) => {
+	return `Kommentierst als ${i.name}`
+};
+
+export const product_comment_user_fallback = /** @type {(inputs: {}) => string} */ () => {
+	return `Inkspire-Nutzer`
+};
+
+export const product_comment_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Dein Kommentar`
+};
+
+export const product_comment_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Erzähle allen, was dir besonders aufgefallen ist...`
+};
+
+export const product_comment_submit = /** @type {(inputs: {}) => string} */ () => {
+	return `Kommentar posten`
+};
+
+export const product_comments_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Was andere schon gesagt haben`
+};
+
+export const product_comments_empty = /** @type {(inputs: {}) => string} */ () => {
+	return `Noch keine Kommentare. Sei der Erste und teile deine Eindrücke.`
+};
+
+export const product_comment_success = /** @type {(inputs: {}) => string} */ () => {
+	return `Danke für dein Feedback!`
+};
+
+export const product_comment_error_short = /** @type {(inputs: {}) => string} */ () => {
+	return `Bitte teile wenigstens einen kurzen Satz, damit andere von deinem Feedback profitieren.`
+};
+
+export const product_comment_error_name = /** @type {(inputs: {}) => string} */ () => {
+	return `Bitte füge einen Namen hinzu, damit man weiß, von wem der Kommentar stammt.`
+};
+
+export const product_order_error_select_variant = /** @type {(inputs: {}) => string} */ () => {
+	return `Bitte wähle eine Variante aus.`
+};
+
+export const product_order_error_variant_missing = /** @type {(inputs: {}) => string} */ () => {
+	return `Variante nicht gefunden.`
+};
+
+export const product_order_error_product_missing = /** @type {(inputs: {}) => string} */ () => {
+	return `Produkt nicht gefunden.`
+};
+
+export const product_order_error_unavailable = /** @type {(inputs: {}) => string} */ () => {
+	return `Die Bestellung kann gerade nicht aufgegeben werden.`
+};
+
 export const contact_badge = /** @type {(inputs: {}) => string} */ () => {
 	return `Wir antworten innerhalb von 24 Stunden`
 };
