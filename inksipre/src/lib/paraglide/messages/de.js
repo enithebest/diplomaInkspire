@@ -645,6 +645,174 @@ export const product_order_error_unavailable = /** @type {(inputs: {}) => string
 	return `Die Bestellung kann gerade nicht aufgegeben werden.`
 };
 
+export const custom_title = /** @type {(inputs: { name: NonNullable<unknown> }) => string} */ (i) => {
+	return `Gestalte ${i.name}`
+};
+
+export const custom_product_generic = /** @type {(inputs: {}) => string} */ () => {
+	return `Produkt`
+};
+
+export const custom_upload_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Design hochladen`
+};
+
+export const custom_upload_library = /** @type {(inputs: {}) => string} */ () => {
+	return `Meine Bibliothek`
+};
+
+export const custom_upload_choose = /** @type {(inputs: {}) => string} */ () => {
+	return `Bild auswählen`
+};
+
+export const custom_upload_hint = /** @type {(inputs: {}) => string} */ () => {
+	return `Erlaubt: PNG, JPG, WEBP. Max. Größe: 5MB.`
+};
+
+export const custom_upload_success = /** @type {(inputs: {}) => string} */ () => {
+	return `Erfolgreich hochgeladen!`
+};
+
+export const custom_upload_submit = /** @type {(inputs: {}) => string} */ () => {
+	return `Hochladen & Speichern`
+};
+
+export const custom_preview_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Vorschau`
+};
+
+export const custom_preview_alt = /** @type {(inputs: {}) => string} */ () => {
+	return `Vorschau des hochgeladenen Designs`
+};
+
+export const custom_edit_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Bearbeite dein Artwork`
+};
+
+export const custom_edit_open = /** @type {(inputs: {}) => string} */ () => {
+	return `Customizer öffnen`
+};
+
+export const custom_edit_reopen = /** @type {(inputs: {}) => string} */ () => {
+	return `Customizer erneut öffnen`
+};
+
+export const custom_edit_empty = /** @type {(inputs: {}) => string} */ () => {
+	return `Lade ein Bild hoch oder wähle eines aus deiner Bibliothek, um zu starten.`
+};
+
+export const custom_edit_current = /** @type {(inputs: {}) => string} */ () => {
+	return `Aktuelles Design im Editor:`
+};
+
+export const custom_3d_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `3D-Vorschau kommt bald`
+};
+
+export const custom_download_render = /** @type {(inputs: {}) => string} */ () => {
+	return `Render herunterladen`
+};
+
+export const custom_controls_hint = /** @type {(inputs: {}) => string} */ () => {
+	return `Ziehen zum Drehen / Scrollen zum Zoomen`
+};
+
+export const custom_product_details = /** @type {(inputs: {}) => string} */ () => {
+	return `Produktdetails`
+};
+
+export const custom_ready_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Bereit zu bestellen?`
+};
+
+export const custom_ready_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Wir hängen deinen aktuellen Entwurf an eine neue Bestellung an.`
+};
+
+export const custom_ready_variant = /** @type {(inputs: {}) => string} */ () => {
+	return `Variante:`
+};
+
+export const custom_ready_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Diese Custom-Bestellung aufgeben`
+};
+
+export const custom_order_success = /** @type {(inputs: {}) => string} */ () => {
+	return `Bestellung gespeichert! Wir bereiten alles vor.`
+};
+
+export const custom_order_success_with_id = /** @type {(inputs: { id: NonNullable<unknown> }) => string} */ (i) => {
+	return `Bestellung gespeichert! ID #${i.id} - wir kümmern uns darum.`
+};
+
+export const custom_library_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Meine Bibliothek`
+};
+
+export const custom_library_close = /** @type {(inputs: {}) => string} */ () => {
+	return `Schließen`
+};
+
+export const custom_library_search = /** @type {(inputs: {}) => string} */ () => {
+	return `Bibliothek durchsuchen`
+};
+
+export const custom_library_empty = /** @type {(inputs: {}) => string} */ () => {
+	return `Noch keine Uploads.`
+};
+
+export const custom_library_use = /** @type {(inputs: {}) => string} */ () => {
+	return `Verwenden`
+};
+
+export const custom_modal_adjust = /** @type {(inputs: {}) => string} */ () => {
+	return `Passe deine Bilder an`
+};
+
+export const custom_modal_ready = /** @type {(inputs: {}) => string} */ () => {
+	return `Fertig`
+};
+
+export const custom_order_error_variant = /** @type {(inputs: {}) => string} */ () => {
+	return `Variante nicht gefunden`
+};
+
+export const custom_order_error_product = /** @type {(inputs: {}) => string} */ () => {
+	return `Produkt nicht gefunden`
+};
+
+export const custom_order_error_design_required = /** @type {(inputs: {}) => string} */ () => {
+	return `Bitte füge ein Design hinzu, bevor du bestellst.`
+};
+
+export const custom_order_error_design_invalid = /** @type {(inputs: {}) => string} */ () => {
+	return `Design-Bild ist ungültig.`
+};
+
+export const custom_order_error_design_too_large = /** @type {(inputs: {}) => string} */ () => {
+	return `Design-Bild ist zu groß.`
+};
+
+export const custom_order_error_save_failed = /** @type {(inputs: {}) => string} */ () => {
+	return `Design konnte nicht gespeichert werden. Bitte versuche es erneut.`
+};
+
+export const custom_order_error_unavailable = /** @type {(inputs: {}) => string} */ () => {
+	return `Bestellung kann im Moment nicht aufgegeben werden.`
+};
+
+export const custom_upload_error_no_file = /** @type {(inputs: {}) => string} */ () => {
+	return `Keine Datei bereitgestellt`
+};
+
+export const custom_upload_error_type = /** @type {(inputs: {}) => string} */ () => {
+	return `Ungültiger Dateityp. Erlaubt: PNG, JPG, WEBP.`
+};
+
+export const custom_upload_error_size = /** @type {(inputs: {}) => string} */ () => {
+	return `Datei zu groß (max. 5MB).`
+};
+
 export const contact_badge = /** @type {(inputs: {}) => string} */ () => {
 	return `Wir antworten innerhalb von 24 Stunden`
 };
