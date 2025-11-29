@@ -5,6 +5,7 @@
   import * as THREE from 'three';
   import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
   import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+  import * as m from '$lib/paraglide/messages/_index.js';
 
   export let data;
   export let form;
@@ -491,6 +492,12 @@
     addImageToEditor(form.imageUrl);
   }
 
+  $: activeImage =
+    selectedVariant?.image_url ||
+    colorImageFallbacks[selectedColor?.toLowerCase?.()] ||
+    product.image_url;
+  $: altColor = selectedVariant?.color || selectedColor || m.custom_product_generic();
+
   onDestroy(() => {
     if (!browser) return;
     cancelAnimationFrame(animationId);
@@ -505,26 +512,26 @@
 
 <div class="relative isolate overflow-hidden bg-gray-900 text-gray-200 min-h-screen px-6 py-10 lg:px-12">
   <h1 class="text-3xl font-bold mb-6 text-center text-white">
-    Customize {data?.product?.name ?? 'Product'}
+    {m.custom_title({ name: data?.product?.name ?? m.custom_product_generic() })}
   </h1>
 
   <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
     <aside class="lg:col-span-3 space-y-6">
       <div class="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-5 shadow-lg">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="text-lg font-semibold">Upload design</h2>
+          <h2 class="text-lg font-semibold">{m.custom_upload_heading()}</h2>
           <button
             type="button"
             class="text-sm text-indigo-300 hover:text-white underline"
             onclick={() => (showLibrary = true)}
           >
-            My library
+            {m.custom_upload_library()}
           </button>
         </div>
 
         <form method="POST" enctype="multipart/form-data" action="?/upload" use:enhance class="space-y-5">
           <div>
-            <label for="design" class="block mb-2 text-sm font-medium text-gray-200">Choose image</label>
+            <label for="design" class="block mb-2 text-sm font-medium text-gray-200">{m.custom_upload_choose()}</label>
             <input
               id="design"
               type="file"
@@ -534,14 +541,14 @@
               onchange={handleFileChange}
               class="block w-full text-sm text-gray-200 border border-white/10 rounded-lg cursor-pointer bg-white/5 focus:outline-none"
             />
-            <p class="mt-2 text-xs text-gray-400">Allowed: PNG, JPG, WEBP. Max size: 5MB.</p>
+            <p class="mt-2 text-xs text-gray-400">{m.custom_upload_hint()}</p>
           </div>
 
           {#if form?.error}
             <p class="text-sm text-red-500" role="alert" aria-live="polite">{form.error}</p>
           {/if}
           {#if form?.success}
-            <p class="text-sm text-green-400" role="status">Uploaded successfully!</p>
+            <p class="text-sm text-green-400" role="status">{m.custom_upload_success()}</p>
           {/if}
 
           <button
@@ -549,16 +556,16 @@
             formaction="?/upload"
             class="w-full flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg transition focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
-            Upload &amp; Save
+            {m.custom_upload_submit()}
           </button>
         </form>
 
         {#if previewUrl || form?.imageUrl}
           <div class="mt-4 space-y-2">
-            <h3 class="text-sm font-medium">Preview</h3>
+            <h3 class="text-sm font-medium">{m.custom_preview_heading()}</h3>
             <img
               src={previewUrl || form?.imageUrl}
-              alt="Uploaded design preview"
+              alt={m.custom_preview_alt()}
               class="max-h-48 w-auto rounded-md shadow border border-white/10"
             />
           </div>
@@ -566,24 +573,24 @@
       </div>
 
       <div class="bg-gray-800/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-700 shadow-lg">
-        <p class="text-lg font-medium mb-3">Edit your artwork</p>
+        <p class="text-lg font-medium mb-3">{m.custom_edit_heading()}</p>
         <button
           class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-3 rounded-xl transition transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-indigo-400"
           onclick={openEditor}
         >
-          {uploadedImages.length ? 'Reopen Customizer' : 'Open Customizer'}
+          {uploadedImages.length ? m.custom_edit_reopen() : m.custom_edit_open()}
         </button>
 
         <div class="mt-4 space-y-4 text-sm text-gray-400">
           {#if uploadedImages.length === 0}
-            <p>Upload an image using the form or pick one from your library to start editing.</p>
+            <p>{m.custom_edit_empty()}</p>
           {:else}
-            <p>Current design loaded in the editor:</p>
+            <p>{m.custom_edit_current()}</p>
             <div class="flex flex-wrap gap-3">
               {#each uploadedImages as imgUrl}
                 <img
                   src={imgUrl}
-                  alt="Preview"
+                  alt={m.custom_preview_alt()}
                   class="w-16 h-16 object-cover rounded-lg border-2 border-gray-600 shadow-md hover:scale-110 transition transform duration-200"
                 />
               {/each}
@@ -602,7 +609,7 @@
             <div class="pointer-events-none absolute inset-0 flex items-end justify-center pb-4">            </div>
           {:else}
             <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <div class="bg-black/50 text-white px-4 py-2 rounded-lg border border-white/10 text-sm">3D preview coming soon</div>
+              <div class="bg-black/50 text-white px-4 py-2 rounded-lg border border-white/10 text-sm">{m.custom_3d_placeholder()}</div>
             </div>
           {/if}
         </div>
@@ -611,10 +618,10 @@
           onclick={download}
           disabled={!modelPath}
         >
-          Download render
+          {m.custom_download_render()}
         </button>
       </div>
-      <p class="text-center text-sm text-gray-400">Drag to rotate / Scroll to zoom</p>
+      <p class="text-center text-sm text-gray-400">{m.custom_controls_hint()}</p>
     </main>
 
     <aside class="lg:col-span-3 space-y-4">
