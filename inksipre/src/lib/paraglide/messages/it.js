@@ -813,6 +813,86 @@ export const custom_upload_error_size = /** @type {(inputs: {}) => string} */ ()
 	return `File troppo grande (max 5MB).`
 };
 
+export const profile_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Il mio profilo`
+};
+
+export const profile_email_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Email`
+};
+
+export const profile_name_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Nome completo`
+};
+
+export const profile_password_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Nuova password (opzionale)`
+};
+
+export const profile_password_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `••••••••`
+};
+
+export const profile_update_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Aggiorna profilo`
+};
+
+export const profile_update_success = /** @type {(inputs: {}) => string} */ () => {
+	return `Profilo aggiornato con successo!`
+};
+
+export const profile_tab_profile = /** @type {(inputs: {}) => string} */ () => {
+	return `Profilo`
+};
+
+export const profile_tab_orders = /** @type {(inputs: {}) => string} */ () => {
+	return `Ordini`
+};
+
+export const profile_tab_uploads = /** @type {(inputs: {}) => string} */ () => {
+	return `Upload`
+};
+
+export const profile_orders_empty = /** @type {(inputs: {}) => string} */ () => {
+	return `Nessun ordine ancora.`
+};
+
+export const profile_orders_total = /** @type {(inputs: {}) => string} */ () => {
+	return `Totale:`
+};
+
+export const profile_orders_item = /** @type {(inputs: { qty: NonNullable<unknown>, name: NonNullable<unknown>, price: NonNullable<unknown> }) => string} */ (i) => {
+	return `${i.qty} × ${i.name} (${i.price})`
+};
+
+export const profile_orders_reorder = /** @type {(inputs: {}) => string} */ () => {
+	return `Riordina nel carrello`
+};
+
+export const profile_uploads_empty = /** @type {(inputs: {}) => string} */ () => {
+	return `Ancora nessun upload.`
+};
+
+export const profile_uploads_use = /** @type {(inputs: {}) => string} */ () => {
+	return `Usa`
+};
+
+export const profile_uploads_delete = /** @type {(inputs: {}) => string} */ () => {
+	return `Elimina`
+};
+
+export const profile_uploads_alt = /** @type {(inputs: {}) => string} */ () => {
+	return `immagine caricata`
+};
+
+export const profile_reorder_alert = /** @type {(inputs: {}) => string} */ () => {
+	return `Articoli aggiunti al carrello`
+};
+
+export const profile_error_invalid_upload = /** @type {(inputs: {}) => string} */ () => {
+	return `ID upload non valido`
+};
+
 export const contact_badge = /** @type {(inputs: {}) => string} */ () => {
 	return `Rispondiamo entro 24 ore`
 };

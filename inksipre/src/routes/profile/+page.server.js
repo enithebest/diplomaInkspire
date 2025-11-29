@@ -1,6 +1,7 @@
 import { createConnection } from '$lib/db/mysql';
 import { redirect, fail } from '@sveltejs/kit';
 import bcrypt from 'bcrypt';
+import * as m from '$lib/paraglide/messages/_index.js';
 
 export const load = async ({ cookies }) => {
   const token = cookies.get('session');
@@ -51,7 +52,8 @@ export const load = async ({ cookies }) => {
 };
 
 export const actions = {
-  update: async ({ request, cookies }) => {
+  update: async ({ request, cookies, locals }) => {
+    const locale = locals?.locale ?? 'en';
     const token = cookies.get('session');
     if (!token) throw redirect(302, '/login');
 
@@ -69,16 +71,17 @@ export const actions = {
     }
 
     db.release();
-    return { success: true, message: 'Profile updated successfully' };
+    return { success: true, message: m.profile_update_success({}, { locale }) };
   },
 
-  delete_upload: async ({ request, cookies }) => {
+  delete_upload: async ({ request, cookies, locals }) => {
+    const locale = locals?.locale ?? 'en';
     const token = cookies.get('session');
     if (!token) throw redirect(302, '/login');
 
     const form = await request.formData();
     const uploadId = Number(form.get('upload_id')) || 0;
-    if (!uploadId) return fail(400, { message: 'Invalid upload id' });
+    if (!uploadId) return fail(400, { message: m.profile_error_invalid_upload({}, { locale }) });
 
     const db = await createConnection();
     const [users] = await db.query('SELECT id FROM users WHERE session_token = ?', [token]);

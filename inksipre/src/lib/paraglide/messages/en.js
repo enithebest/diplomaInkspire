@@ -813,6 +813,86 @@ export const custom_upload_error_size = /** @type {(inputs: {}) => string} */ ()
 	return `File too large (max 5MB).`
 };
 
+export const profile_title = /** @type {(inputs: {}) => string} */ () => {
+	return `My Profile`
+};
+
+export const profile_email_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Email`
+};
+
+export const profile_name_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Full Name`
+};
+
+export const profile_password_label = /** @type {(inputs: {}) => string} */ () => {
+	return `New Password (optional)`
+};
+
+export const profile_password_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `••••••••`
+};
+
+export const profile_update_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Update Profile`
+};
+
+export const profile_update_success = /** @type {(inputs: {}) => string} */ () => {
+	return `Profile updated successfully!`
+};
+
+export const profile_tab_profile = /** @type {(inputs: {}) => string} */ () => {
+	return `Profile`
+};
+
+export const profile_tab_orders = /** @type {(inputs: {}) => string} */ () => {
+	return `Orders`
+};
+
+export const profile_tab_uploads = /** @type {(inputs: {}) => string} */ () => {
+	return `Uploads`
+};
+
+export const profile_orders_empty = /** @type {(inputs: {}) => string} */ () => {
+	return `No orders yet.`
+};
+
+export const profile_orders_total = /** @type {(inputs: {}) => string} */ () => {
+	return `Total:`
+};
+
+export const profile_orders_item = /** @type {(inputs: { qty: NonNullable<unknown>, name: NonNullable<unknown>, price: NonNullable<unknown> }) => string} */ (i) => {
+	return `${i.qty} × ${i.name} (${i.price})`
+};
+
+export const profile_orders_reorder = /** @type {(inputs: {}) => string} */ () => {
+	return `Reorder to cart`
+};
+
+export const profile_uploads_empty = /** @type {(inputs: {}) => string} */ () => {
+	return `No uploads yet.`
+};
+
+export const profile_uploads_use = /** @type {(inputs: {}) => string} */ () => {
+	return `Use`
+};
+
+export const profile_uploads_delete = /** @type {(inputs: {}) => string} */ () => {
+	return `Delete`
+};
+
+export const profile_uploads_alt = /** @type {(inputs: {}) => string} */ () => {
+	return `upload image`
+};
+
+export const profile_reorder_alert = /** @type {(inputs: {}) => string} */ () => {
+	return `Items added to cart`
+};
+
+export const profile_error_invalid_upload = /** @type {(inputs: {}) => string} */ () => {
+	return `Invalid upload id`
+};
+
 export const contact_badge = /** @type {(inputs: {}) => string} */ () => {
 	return `We reply within 24h`
 };
