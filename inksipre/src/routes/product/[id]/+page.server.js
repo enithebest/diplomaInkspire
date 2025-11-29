@@ -1,5 +1,6 @@
 import { query, createConnection } from '$lib/db/mysql.js';
 import { fail, redirect } from '@sveltejs/kit';
+import * as m from '$lib/paraglide/messages/_index.js';
 
 export const load = async ({ params, locals }) => {
 	const { id } = params;
@@ -49,6 +50,7 @@ export const load = async ({ params, locals }) => {
 
 export const actions = {
 	comment: async ({ request, locals, params }) => {
+		const locale = locals?.locale ?? 'en';
 		const data = await request.formData();
 		const body = data.get('comment');
 		let authorName = data.get('author_name');
@@ -56,15 +58,15 @@ export const actions = {
 		const trimmedBody = typeof body === 'string' ? body.trim() : '';
 		if (!trimmedBody || trimmedBody.length < 5) {
 			return fail(400, {
-				error: 'Please share at least a short sentence so that others can benefit from your feedback.'
+				error: m.product_comment_error_short({}, { locale })
 			});
 		}
 
 		const isLoggedIn = Boolean(locals?.user);
 		if (isLoggedIn) {
-			authorName = locals.user.full_name || 'Inkspire user';
+			authorName = locals.user.full_name || m.product_comment_user_fallback({}, { locale });
 		} else if (!authorName || !authorName.trim()) {
-			return fail(400, { error: 'Please add a name so people know who left the comment.' });
+			return fail(400, { error: m.product_comment_error_name({}, { locale }) });
 		} else {
 			authorName = authorName.trim();
 		}
@@ -74,9 +76,10 @@ export const actions = {
 			[params.id, isLoggedIn ? locals.user.id : null, authorName, trimmedBody]
 		);
 
-		return { success: 'Thanks for sharing your thoughts!' };
+		return { success: m.product_comment_success({}, { locale }) };
 	},
 	order: async ({ request, locals, params }) => {
+		const locale = locals?.locale ?? 'en';
 		const user = locals?.user;
 		if (!user) {
 			throw redirect(302, `/login?next=/product/${params.id}`);
@@ -86,7 +89,7 @@ export const actions = {
 		const variantId = Number(form.get('variant_id'));
 
 		if (!Number.isFinite(variantId)) {
-			return fail(400, { orderError: 'Please select a variant.' });
+			return fail(400, { orderError: m.product_order_error_select_variant({}, { locale }) });
 		}
 
 		const variantRows = await query(
@@ -95,13 +98,13 @@ export const actions = {
 		);
 		const variant = variantRows?.[0];
 		if (!variant) {
-			return fail(404, { orderError: 'Variant not found.' });
+			return fail(404, { orderError: m.product_order_error_variant_missing({}, { locale }) });
 		}
 
 		const productRows = await query('SELECT * FROM products WHERE id = ?', [params.id]);
 		const product = productRows?.[0];
 		if (!product) {
-			return fail(404, { orderError: 'Product not found.' });
+			return fail(404, { orderError: m.product_order_error_product_missing({}, { locale }) });
 		}
 
 		const price = Number(variant.price ?? product.base_price ?? 0);
@@ -129,7 +132,7 @@ export const actions = {
 			}
 			await conn.rollback();
 			console.error('Failed to create order from product page', err);
-			return fail(500, { orderError: 'Unable to place the order right now.' });
+			return fail(500, { orderError: m.product_order_error_unavailable({}, { locale }) });
 		} finally {
 			conn.release();
 		}
