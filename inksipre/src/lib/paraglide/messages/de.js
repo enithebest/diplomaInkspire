@@ -520,3 +520,187 @@ export const categories_section_sweatshirts = /** @type {(inputs: {}) => string}
 export const categories_section_mugs = /** @type {(inputs: {}) => string} */ () => {
 	return `Tassen`
 };
+
+export const contact_badge = /** @type {(inputs: {}) => string} */ () => {
+	return `Wir antworten innerhalb von 24 Stunden`
+};
+
+export const contact_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Kontaktieren Sie Inkspire`
+};
+
+export const contact_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Sie benötigen ein Angebot, Hilfe bei einem individuellen Design oder Unterstützung bei einer Bestellung? Melden Sie sich telefonisch, persönlich oder über das Formular. Wir sind echte Menschen und helfen gerne.`
+};
+
+export const contact_call_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Rufen Sie uns an`
+};
+
+export const contact_call_phone = /** @type {(inputs: {}) => string} */ () => {
+	return `+355 685319389`
+};
+
+export const contact_visit_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Besuchen Sie uns`
+};
+
+export const contact_visit_line1 = /** @type {(inputs: {}) => string} */ () => {
+	return `Inkspire Hauptsitz`
+};
+
+export const contact_visit_line2 = /** @type {(inputs: {}) => string} */ () => {
+	return `Shkoder Stadtzentrum`
+};
+
+export const contact_visit_line3 = /** @type {(inputs: {}) => string} */ () => {
+	return `Shkoder, Albanien`
+};
+
+export const contact_hours_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Öffnungszeiten`
+};
+
+export const contact_hours_weekdays = /** @type {(inputs: {}) => string} */ () => {
+	return `Mo-Fr: 08:00-18:00`
+};
+
+export const contact_hours_saturday = /** @type {(inputs: {}) => string} */ () => {
+	return `Sa: 09:00-14:00`
+};
+
+export const contact_hours_sunday = /** @type {(inputs: {}) => string} */ () => {
+	return `So: Geschlossen`
+};
+
+export const contact_feature_fast_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Schneller Support`
+};
+
+export const contact_feature_fast_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Durchschnittliche Antwortzeit < 24 Std.`
+};
+
+export const contact_feature_reliable_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Zuverlässiges Team`
+};
+
+export const contact_feature_reliable_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Persönlicher Ansprechpartner für jede Bestellung`
+};
+
+export const contact_feature_quality_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Hohe Qualität`
+};
+
+export const contact_feature_quality_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Interne Produktionskontrolle`
+};
+
+export const contact_feature_secure_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Sichere Daten`
+};
+
+export const contact_feature_secure_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Ihre Uploads bleiben privat`
+};
+
+export const contact_form_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Schreiben Sie uns eine Nachricht`
+};
+
+export const contact_form_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Sagen Sie uns, was Sie brauchen, wir melden uns schnell.`
+};
+
+export const contact_form_name_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Vollständiger Name`
+};
+
+export const contact_form_name_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Geben Sie Ihren Namen ein`
+};
+
+export const contact_form_email_label = /** @type {(inputs: {}) => string} */ () => {
+	return `E-Mail-Adresse`
+};
+
+export const contact_form_email_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `sie@beispiel.de`
+};
+
+export const contact_form_phone_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Telefonnummer`
+};
+
+export const contact_form_phone_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `685 319 389`
+};
+
+export const contact_form_phone_hint = /** @type {(inputs: {}) => string} */ () => {
+	return `Bitte Landesvorwahl angeben und nur Ziffern verwenden.`
+};
+
+export const contact_form_message_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Nachricht`
+};
+
+export const contact_form_message_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Erzählen Sie uns von Ihrem Projekt oder Ihrer Frage...`
+};
+
+export const contact_form_submit = /** @type {(inputs: {}) => string} */ () => {
+	return `Nachricht senden`
+};
+
+export const contact_form_success = /** @type {(inputs: {}) => string} */ () => {
+	return `Danke! Ihre Nachricht wurde erfolgreich gesendet.`
+};
+
+export const contact_form_error_name = /** @type {(inputs: {}) => string} */ () => {
+	return `Bitte geben Sie Ihren vollständigen Namen ein.`
+};
+
+export const contact_form_error_email = /** @type {(inputs: {}) => string} */ () => {
+	return `Bitte geben Sie eine gültige E-Mail-Adresse ein.`
+};
+
+export const contact_form_error_prefix = /** @type {(inputs: {}) => string} */ () => {
+	return `Bitte wählen Sie eine Telefonvorwahl aus.`
+};
+
+export const contact_form_error_phone = /** @type {(inputs: {}) => string} */ () => {
+	return `Bitte geben Sie eine gültige Telefonnummer ein.`
+};
+
+export const contact_form_error_message = /** @type {(inputs: {}) => string} */ () => {
+	return `Bitte fügen Sie eine kurze Nachricht hinzu (mind. 10 Zeichen).`
+};
+
+export const contact_form_error_send = /** @type {(inputs: {}) => string} */ () => {
+	return `Senden fehlgeschlagen. Bitte versuchen Sie es in Kürze erneut.`
+};
+
+export const contact_country_austria = /** @type {(inputs: {}) => string} */ () => {
+	return `Österreich`
+};
+
+export const contact_country_germany = /** @type {(inputs: {}) => string} */ () => {
+	return `Deutschland`
+};
+
+export const contact_country_switzerland = /** @type {(inputs: {}) => string} */ () => {
+	return `Schweiz`
+};
+
+export const contact_country_albania = /** @type {(inputs: {}) => string} */ () => {
+	return `Albanien`
+};
+
+export const contact_country_italy = /** @type {(inputs: {}) => string} */ () => {
+	return `Italien`
+};
+
+export const contact_country_uk = /** @type {(inputs: {}) => string} */ () => {
+	return `Vereinigtes Königreich`
+};
