@@ -1,4 +1,4 @@
-﻿<script>
+<script>
   import { onMount } from "svelte";
   import { page } from "$app/stores";
   import * as m from "$lib/paraglide/messages/_index.js";
@@ -64,81 +64,110 @@
 
 {#if showRemoveToast}
   <div
-    class="fixed top-4 left-1/2 -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-pulse"
+    class="fixed top-6 left-1/2 -translate-x-1/2 z-50 rounded-full border border-white/10 bg-red-600/90 px-6 py-3 text-sm font-medium text-white shadow-xl shadow-red-900/30 backdrop-blur"
   >
     {m.cart_toast_removed()}
   </div>
 {/if}
 
-<section class="max-w-6xl mx-auto px-6 py-12 bg-gray-50 min-h-screen">
-  <h1 class="text-3xl font-bold text-center text-gray-800 mb-10">{m.cart_title()}</h1>
+<section class="relative isolate overflow-hidden bg-gray-950 text-gray-100 min-h-screen px-6 py-16">
+  <div class="absolute inset-0 -z-10 opacity-40">
+    <div class="absolute top-[-12rem] right-[-8rem] h-96 w-96 rounded-full bg-indigo-600 blur-3xl"></div>
+    <div class="absolute bottom-[-10rem] left-[-8rem] h-80 w-80 rounded-full bg-blue-500 blur-3xl"></div>
+  </div>
 
-  {#if cart.length === 0}
-    <p class="text-center text-gray-500 text-lg mt-10">{m.cart_empty()}</p>
-  {:else}
-    <div class="space-y-6">
-      {#each cart as item, i}
-        <div
-          class="flex items-center justify-between bg-white border border-gray-200 rounded-lg shadow-sm p-4"
-        >
-          <div class="flex items-center gap-4">
-            <img
-              src={item.image_url}
-              alt={item.name}
-              class="w-20 h-20 object-cover rounded-lg border border-gray-300"
-            />
-            <div>
-              <h2 class="font-semibold text-lg text-gray-800">{item.name}</h2>
-              <p class="text-gray-600 text-sm">
-                {m.cart_color_label()} <span class="capitalize">{item.color}</span> • {m.cart_size_label()} {item.size}
-              </p>
-              <p class="text-gray-500 text-sm">{item.price} €</p>
-              <div class="mt-2 flex items-center gap-2">
-                <label class="text-xs text-gray-500">Qty</label>
-                <input
-                  type="number"
-                  min="1"
-                  value={item.qty || 1}
-                  class="w-16 rounded border border-gray-300 px-2 py-1 text-sm"
-                  onchange={(e) => updateQty(i, e.target.value)}
-                />
-              </div>
-            </div>
-          </div>
-
-          <button
-            onclick={() => removeItem(i)}
-            class="text-red-500 hover:text-red-600 font-medium text-sm transition"
-          >
-            {m.cart_remove_button()}
-          </button>
-        </div>
-      {/each}
-
-      <div
-        class="flex flex-col sm:flex-row justify-between items-center mt-10 border-t border-gray-200 pt-6 gap-4"
-      >
-        <p class="text-xl font-semibold text-gray-800">
-          {m.cart_total_label()} <span class="text-blue-600">{totalFormatted} ?</span>
-        </p>
-
-        <div class="flex gap-3">
-          <button
-            onclick={clearCart}
-            class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm"
-          >
-            {m.cart_clear_button()}
-          </button>
-
-          <button
-            type="button"
-            onclick={goToCheckout}
-            class="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm"
-          >
-            {m.cart_checkout_button()}
-          </button>
-        </div>
-      </div>
+  <div class="max-w-6xl mx-auto space-y-10">
+    <div class="text-center space-y-2">
+      <p class="text-sm uppercase tracking-[0.2em] text-indigo-300/80">{m.cart_title()}</p>
+      <h1 class="text-4xl font-semibold text-white drop-shadow-[0_10px_35px_rgba(99,102,241,0.35)]">
+        {m.cart_title()}
+      </h1>
     </div>
-  {/if}
+
+    {#if cart.length === 0}
+      <div class="mx-auto max-w-xl rounded-2xl border border-gray-800 bg-white/5 p-8 text-center shadow-2xl backdrop-blur">
+        <p class="text-lg text-gray-300 mb-4">{m.cart_empty()}</p>
+        <a
+          class="inline-flex items-center justify-center rounded-xl border border-indigo-500/60 bg-indigo-600/80 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-900/40 transition hover:-translate-y-0.5 hover:bg-indigo-500/90"
+          href="/categories"
+        >
+          Continue shopping
+        </a>
+      </div>
+    {:else}
+      <div class="grid gap-8 lg:grid-cols-[2fr_1fr]">
+        <div class="space-y-4">
+          {#each cart as item, i}
+            <article class="relative overflow-hidden rounded-2xl border border-gray-800 bg-white/5 p-4 shadow-xl backdrop-blur">
+              <div class="absolute inset-0 pointer-events-none rounded-2xl border border-white/5"></div>
+              <div class="flex gap-4">
+                <div class="relative h-24 w-24 rounded-xl border border-gray-700 bg-gray-900/80 overflow-hidden">
+                  <img src={item.image_url} alt={item.name} class="h-full w-full object-cover" />
+                  <div class="absolute inset-0 rounded-xl ring-1 ring-white/5"></div>
+                </div>
+
+                <div class="flex flex-1 flex-col gap-3">
+                  <div class="flex items-start justify-between gap-3">
+                    <div class="space-y-1">
+                      <h2 class="text-lg font-semibold text-white leading-tight">{item.name}</h2>
+                      <p class="text-sm text-gray-300">
+                        {m.cart_color_label()} <span class="capitalize text-white">{item.color}</span>
+                        <span class="mx-2 text-gray-500">|</span>
+                        {m.cart_size_label()} <span class="uppercase text-white">{item.size}</span>
+                      </p>
+                    </div>
+                    <button
+                      onclick={() => removeItem(i)}
+                      class="text-sm font-semibold text-red-400 transition hover:text-red-300"
+                    >
+                      {m.cart_remove_button()}
+                    </button>
+                  </div>
+
+                  <div class="flex flex-wrap items-center justify-between gap-4 text-sm text-gray-300">
+                    <span class="inline-flex items-center gap-1 text-base font-semibold text-indigo-200">
+                      ${item.price}
+                    </span>
+                    <div class="flex items-center gap-2">
+                      <label class="text-xs uppercase tracking-wide text-gray-400">Qty</label>
+                      <input
+                        type="number"
+                        min="1"
+                        value={item.qty || 1}
+                        class="w-20 rounded-lg border border-gray-700 bg-gray-900/80 px-3 py-2 text-white shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/40"
+                        onchange={(e) => updateQty(i, e.target.value)}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          {/each}
+        </div>
+
+        <aside class="space-y-5 rounded-2xl border border-gray-800 bg-white/5 p-6 shadow-2xl backdrop-blur">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-semibold text-white">{m.cart_total_label()}</h3>
+            <span class="text-3xl font-bold text-indigo-200">${totalFormatted}</span>
+          </div>
+          <p class="text-sm text-gray-400">Taxes and shipping calculated at checkout.</p>
+          <div class="grid gap-3">
+            <button
+              type="button"
+              onclick={goToCheckout}
+              class="w-full rounded-xl bg-indigo-600/90 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-900/40 transition hover:-translate-y-0.5 hover:bg-indigo-500"
+            >
+              {m.cart_checkout_button()}
+            </button>
+            <button
+              onclick={clearCart}
+              class="w-full rounded-xl border border-gray-700 bg-gray-900/60 px-5 py-3 text-sm font-semibold text-gray-200 transition hover:-translate-y-0.5 hover:border-indigo-500 hover:text-white"
+            >
+              {m.cart_clear_button()}
+            </button>
+          </div>
+        </aside>
+      </div>
+    {/if}
+  </div>
 </section>

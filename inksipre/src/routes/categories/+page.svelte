@@ -6,7 +6,7 @@
   export let form;
 
   const { hoodies, tshirts, sweatshirts, mugs } = data;
-  const short = (text, len = 90) => (text ? `${text.slice(0, len)}${text.length > len ? '...' : ''}` : '');
+   const short = (text, len = 90) => (text ? `${text.slice(0, len)}${text.length > len ? '…' : ''}` : '');
   const featureBadges = (product) => {
     const cat = (product?.category || '').toLowerCase();
     const name = (product?.name || '').toLowerCase();
