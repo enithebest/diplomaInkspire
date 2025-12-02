@@ -1,14 +1,22 @@
 <script>
 	import { enhance } from '$app/forms';
+	import * as m from '$lib/paraglide/messages/_index.js';
 	export let form = {};
 
 	const prefixes = [
-		{ code: '+43', country: 'Austria' },
-		{ code: '+49', country: 'Germany' },
-		{ code: '+41', country: 'Switzerland' },
-		{ code: '+355', country: 'Albania' },
-		{ code: '+39', country: 'Italy' },
-		{ code: '+44', country: 'United Kingdom' }
+		{ code: '+43', country: m.contact_country_austria },
+		{ code: '+49', country: m.contact_country_germany },
+		{ code: '+41', country: m.contact_country_switzerland },
+		{ code: '+355', country: m.contact_country_albania },
+		{ code: '+39', country: m.contact_country_italy },
+		{ code: '+44', country: m.contact_country_uk }
+	];
+
+	const features = [
+		{ title: m.contact_feature_fast_title, desc: m.contact_feature_fast_desc },
+		{ title: m.contact_feature_reliable_title, desc: m.contact_feature_reliable_desc },
+		{ title: m.contact_feature_quality_title, desc: m.contact_feature_quality_desc },
+		{ title: m.contact_feature_secure_title, desc: m.contact_feature_secure_desc }
 	];
 
 	let nameValue = '';
@@ -47,40 +55,40 @@
 	<div class="relative z-10 mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 		<div class="order-2 lg:order-1 space-y-10">
 			<header class="space-y-4">
-				<p class="text-sm uppercase tracking-[0.3em] text-indigo-300/80">We reply within 24h</p>
+				<p class="text-sm uppercase tracking-[0.3em] text-indigo-300/80">{m.contact_badge()}</p>
 				<h1 class="text-4xl sm:text-5xl font-bold leading-tight">
-					Contact <span class="text-indigo-300">Inkspire</span>
+					{m.contact_title()}
 				</h1>
 				<p class="text-gray-300 text-lg">
-					Need a quote, custom design help, or support with an order? Reach out by phone, in person, or
-					use the form. We are real humans ready to help.
+					{m.contact_subtitle()}
 				</p>
 			</header>
 
 			<div class="space-y-5">
 				<div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-					<h2 class="text-xl font-semibold">Call Us</h2>
-					<p class="mt-2 text-gray-300">+355 685319389</p>
+					<h2 class="text-xl font-semibold">{m.contact_call_heading()}</h2>
+					<p class="mt-2 text-gray-300">{m.contact_call_phone()}</p>
 				</div>
 				<div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-					<h2 class="text-xl font-semibold">Visit</h2>
+					<h2 class="text-xl font-semibold">{m.contact_visit_heading()}</h2>
 					<p class="mt-2 text-gray-300">
-						Inkspire HQ<br />
-						Shkoder City Center<br />
-						Shkoder, Albania
+						{m.contact_visit_line1()}<br />
+						{m.contact_visit_line2()}<br />
+						{m.contact_visit_line3()}
 					</p>
 				</div>
 				<div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-					<h2 class="text-xl font-semibold">Opening Hours</h2>
+					<h2 class="text-xl font-semibold">{m.contact_hours_heading()}</h2>
 					<p class="mt-2 text-gray-300">
-						Mon-Fri: 08:00-18:00<br />
-						Sat: 09:00-14:00<br />
-						Sun: Closed
+						{m.contact_hours_weekdays()}<br />
+						{m.contact_hours_saturday()}<br />
+						{m.contact_hours_sunday()}
 					</p>
 				</div>
 			</div>
 
 			<div class="rounded-2xl border border-white/10 shadow-xl">
+				<!-- svelte-ignore a11y_missing_attribute -->
 				<iframe
 					width="100%"
 					height="300"
@@ -94,15 +102,10 @@
 			</div>
 
 			<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-				{#each [
-					{ title: 'Fast Support', desc: 'Average response time < 24h' },
-					{ title: 'Reliable Team', desc: 'Dedicated contact for every order' },
-					{ title: 'High Quality', desc: 'In-house production control' },
-					{ title: 'Secure Data', desc: 'Your uploads stay private' }
-				] as item}
+				{#each features as item}
 					<div class="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
-						<h3 class="text-lg font-semibold text-indigo-200">{item.title}</h3>
-						<p class="mt-1 text-gray-300 text-sm">{item.desc}</p>
+						<h3 class="text-lg font-semibold text-indigo-200">{item.title()}</h3>
+						<p class="mt-1 text-gray-300 text-sm">{item.desc()}</p>
 					</div>
 				{/each}
 			</div>
@@ -115,13 +118,14 @@
 						class="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-8 lg:min-h-[calc(100vh-5rem)] lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto flex flex-col"
 					>
 						<div class="space-y-2 shrink-0">
-							<h2 class="text-3xl font-semibold">Send Us a Message</h2>
-							<p class="text-sm text-gray-300">Tell us what you need and we will get back quickly.</p>
+							<h2 class="text-3xl font-semibold">{m.contact_form_title()}</h2>
+							<p class="text-sm text-gray-300">{m.contact_form_subtitle()}</p>
 						</div>
 
 						<form method="POST" action="?/send" use:enhance class="flex-1 flex flex-col gap-5">
 							<div>
-								<label class="text-sm font-medium text-gray-300">Full Name</label>
+								<!-- svelte-ignore a11y_label_has_associated_control -->
+								<label class="text-sm font-medium text-gray-300">{m.contact_form_name_label()}</label>
 								<input
 									type="text"
 									name="name"
@@ -129,27 +133,29 @@
 									required
 									minlength="2"
 									maxlength="80"
-									placeholder="Enter your name"
+									placeholder={m.contact_form_name_placeholder()}
 									class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
 									aria-invalid={Boolean(form?.error)}
 								/>
 							</div>
 
 							<div>
-								<label class="text-sm font-medium text-gray-300">Email Address</label>
+								<!-- svelte-ignore a11y_label_has_associated_control -->
+								<label class="text-sm font-medium text-gray-300">{m.contact_form_email_label()}</label>
 								<input
 									type="email"
 									name="email"
 									bind:value={emailValue}
 									required
-									placeholder="you@example.com"
+									placeholder={m.contact_form_email_placeholder()}
 									class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
 									aria-invalid={Boolean(form?.error)}
 								/>
 							</div>
 
 							<div>
-								<label class="text-sm font-medium text-gray-300">Phone Number</label>
+								<!-- svelte-ignore a11y_label_has_associated_control -->
+								<label class="text-sm font-medium text-gray-300">{m.contact_form_phone_label()}</label>
 								<div class="mt-1 flex flex-col gap-3 sm:flex-row">
 									<select
 										name="prefix"
@@ -159,7 +165,7 @@
 									>
 										{#each prefixes as option}
 											<option value={option.code} class="text-black">
-												{option.code} - {option.country}
+												{option.code} - {option.country()}
 											</option>
 										{/each}
 									</select>
@@ -172,16 +178,17 @@
 										pattern="[0-9()+\s-]{6,20}"
 										minlength="6"
 										maxlength="20"
-										placeholder="685 319 389"
+										placeholder={m.contact_form_phone_placeholder()}
 										class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
 										aria-invalid={Boolean(form?.error)}
 									/>
 								</div>
-								<p class="text-xs text-gray-400 mt-1">Include country code and numbers only.</p>
+								<p class="text-xs text-gray-400 mt-1">{m.contact_form_phone_hint()}</p>
 							</div>
 
 							<div>
-								<label class="text-sm font-medium text-gray-300">Message</label>
+								<!-- svelte-ignore a11y_label_has_associated_control -->
+								<label class="text-sm font-medium text-gray-300">{m.contact_form_message_label()}</label>
 								<textarea
 									name="message"
 									rows="4"
@@ -189,7 +196,7 @@
 									required
 									minlength="10"
 									maxlength="1500"
-									placeholder="Tell us about your project or question..."
+									placeholder={m.contact_form_message_placeholder()}
 									class="mt-1 w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
 									aria-invalid={Boolean(form?.error)}
 								></textarea>
@@ -200,7 +207,7 @@
 									type="submit"
 									class="w-full rounded-xl bg-indigo-500 py-3 text-lg font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 disabled:opacity-60"
 								>
-									Send Message
+									{m.contact_form_submit()}
 								</button>
 
 								{#if form?.success}

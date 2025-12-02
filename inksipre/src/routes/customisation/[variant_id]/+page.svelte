@@ -5,9 +5,12 @@
   import * as THREE from 'three';
   import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
   import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+  import * as m from '$lib/paraglide/messages/_index.js';
 
   export let data;
   export let form;
+  const product = data?.product;
+  const variant = data?.variant;
 
   let file;
   let previewUrl = '';
@@ -505,43 +508,43 @@
 
 <div class="relative isolate overflow-hidden bg-gray-900 text-gray-200 min-h-screen px-6 py-10 lg:px-12">
   <h1 class="text-3xl font-bold mb-6 text-center text-white">
-    Customize {data?.product?.name ?? 'Product'}
+    {m.custom_title({ name: data?.product?.name ?? m.custom_product_generic() })}
   </h1>
 
   <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
     <aside class="lg:col-span-3 space-y-6">
       <div class="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-5 shadow-lg">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="text-lg font-semibold">Upload design</h2>
+          <h2 class="text-lg font-semibold">{m.custom_upload_heading()}</h2>
           <button
             type="button"
             class="text-sm text-indigo-300 hover:text-white underline"
-            on:click={() => (showLibrary = true)}
+            onclick={() => (showLibrary = true)}
           >
-            My library
+            {m.custom_upload_library()}
           </button>
         </div>
 
         <form method="POST" enctype="multipart/form-data" action="?/upload" use:enhance class="space-y-5">
           <div>
-            <label for="design" class="block mb-2 text-sm font-medium text-gray-200">Choose image</label>
+            <label for="design" class="block mb-2 text-sm font-medium text-gray-200">{m.custom_upload_choose()}</label>
             <input
               id="design"
               type="file"
               name="design"
               accept="image/*"
               required
-              on:change={handleFileChange}
+              onchange={handleFileChange}
               class="block w-full text-sm text-gray-200 border border-white/10 rounded-lg cursor-pointer bg-white/5 focus:outline-none"
             />
-            <p class="mt-2 text-xs text-gray-400">Allowed: PNG, JPG, WEBP. Max size: 5MB.</p>
+            <p class="mt-2 text-xs text-gray-400">{m.custom_upload_hint()}</p>
           </div>
 
           {#if form?.error}
             <p class="text-sm text-red-500" role="alert" aria-live="polite">{form.error}</p>
           {/if}
           {#if form?.success}
-            <p class="text-sm text-green-400" role="status">Uploaded successfully!</p>
+            <p class="text-sm text-green-400" role="status">{m.custom_upload_success()}</p>
           {/if}
 
           <button
@@ -549,16 +552,16 @@
             formaction="?/upload"
             class="w-full flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg transition focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
-            Upload &amp; Save
+            {m.custom_upload_submit()}
           </button>
         </form>
 
         {#if previewUrl || form?.imageUrl}
           <div class="mt-4 space-y-2">
-            <h3 class="text-sm font-medium">Preview</h3>
+            <h3 class="text-sm font-medium">{m.custom_preview_heading()}</h3>
             <img
               src={previewUrl || form?.imageUrl}
-              alt="Uploaded design preview"
+              alt={m.custom_preview_alt()}
               class="max-h-48 w-auto rounded-md shadow border border-white/10"
             />
           </div>
@@ -566,24 +569,24 @@
       </div>
 
       <div class="bg-gray-800/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-700 shadow-lg">
-        <p class="text-lg font-medium mb-3">Edit your artwork</p>
+        <p class="text-lg font-medium mb-3">{m.custom_edit_heading()}</p>
         <button
           class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-3 rounded-xl transition transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-indigo-400"
-          on:click={openEditor}
+          onclick={openEditor}
         >
-          {uploadedImages.length ? 'Reopen Customizer' : 'Open Customizer'}
+          {uploadedImages.length ? m.custom_edit_reopen() : m.custom_edit_open()}
         </button>
 
         <div class="mt-4 space-y-4 text-sm text-gray-400">
           {#if uploadedImages.length === 0}
-            <p>Upload an image using the form or pick one from your library to start editing.</p>
+            <p>{m.custom_edit_empty()}</p>
           {:else}
-            <p>Current design loaded in the editor:</p>
+            <p>{m.custom_edit_current()}</p>
             <div class="flex flex-wrap gap-3">
               {#each uploadedImages as imgUrl}
                 <img
                   src={imgUrl}
-                  alt="Preview"
+                  alt={m.custom_preview_alt()}
                   class="w-16 h-16 object-cover rounded-lg border-2 border-gray-600 shadow-md hover:scale-110 transition transform duration-200"
                 />
               {/each}
@@ -602,41 +605,41 @@
             <div class="pointer-events-none absolute inset-0 flex items-end justify-center pb-4">            </div>
           {:else}
             <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <div class="bg-black/50 text-white px-4 py-2 rounded-lg border border-white/10 text-sm">3D preview coming soon</div>
+              <div class="bg-black/50 text-white px-4 py-2 rounded-lg border border-white/10 text-sm">{m.custom_3d_placeholder()}</div>
             </div>
           {/if}
         </div>
         <button
           class="absolute bottom-4 right-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-3 rounded-xl shadow-lg transition transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:opacity-50 disabled:cursor-not-allowed"
-          on:click={download}
+          onclick={download}
           disabled={!modelPath}
         >
-          Download render
+          {m.custom_download_render()}
         </button>
       </div>
-      <p class="text-center text-sm text-gray-400">Drag to rotate / Scroll to zoom</p>
+      <p class="text-center text-sm text-gray-400">{m.custom_controls_hint()}</p>
     </main>
 
     <aside class="lg:col-span-3 space-y-4">
       <div class="sticky top-4 space-y-4">
         {#if data?.product?.description}
           <div class="bg-white/5 backdrop-blur border border-white/10 rounded-xl p-5 max-h-[55vh] overflow-y-auto shadow-lg">
-            <h3 class="text-lg font-semibold mb-2 text-indigo-300">Product details</h3>
+            <h3 class="text-lg font-semibold mb-2 text-indigo-300">{m.custom_product_details()}</h3>
             <p class="text-gray-200 leading-relaxed whitespace-pre-line">{data.product.description}</p>
           </div>
         {/if}
 
         <div class="bg-white/5 backdrop-blur border border-blue-900/40 rounded-xl p-5 shadow-lg">
           <div class="flex flex-col gap-1 mb-3">
-            <h3 class="text-lg font-semibold text-white">Ready to order?</h3>
-            <p class="text-sm text-gray-300">We attach your current edit to a new order.</p>
-            <p class="text-xs text-gray-400">Variant: {data?.variant?.sku || data?.variant?.id || 'Selected'}</p>
+            <h3 class="text-lg font-semibold text-white">{m.custom_ready_heading()}</h3>
+            <p class="text-sm text-gray-300">{m.custom_ready_subtitle()}</p>
+            <p class="text-xs text-gray-400">{m.custom_ready_variant()} {data?.variant?.sku || data?.variant?.id || m.custom_product_generic()}</p>
           </div>
           <form
             method="POST"
             action="?/order"
             class="space-y-3"
-            on:submit={prepareOrderSubmission}
+            onsubmit={prepareOrderSubmission}
           >
             <input type="hidden" name="design_data" value={orderDesignData} />
             <input type="hidden" name="design_url" value={orderDesignUrl} />
@@ -645,11 +648,11 @@
               type="submit"
               class="w-full bg-green-600 hover:bg-green-500 text-white font-semibold px-6 py-3 rounded-xl transition transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-green-400 disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              Order this custom piece
+              {m.custom_ready_button()}
             </button>
             {#if form?.orderSuccess}
               <p class="text-sm text-green-400" role="status">
-                Order saved! {form.orderId ? `ID #${form.orderId}` : ''} — we’ll get it ready.
+                {form.orderId ? m.custom_order_success_with_id({ id: form.orderId }) : m.custom_order_success()}
               </p>
             {/if}
             {#if form?.orderError}
@@ -667,25 +670,25 @@
         class="absolute inset-0 bg-black/60"
         role="button"
         tabindex="0"
-        on:click={() => (showLibrary = false)}
-        on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && (showLibrary = false)}
-        aria-label="Close library"
+        onclick={() => (showLibrary = false)}
+        onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && (showLibrary = false)}
+        aria-label={m.custom_library_close()}
       ></div>
       <aside class="absolute right-0 top-0 h-full w-full sm:w-[28rem] bg-gray-900 border-l border-white/10 p-4 overflow-y-auto">
         <div class="flex items-center justify-between mb-3">
-          <h2 class="text-lg font-semibold">My library</h2>
-          <button class="text-sm text-gray-300 hover:text-white" on:click={() => (showLibrary = false)}>Close</button>
+          <h2 class="text-lg font-semibold">{m.custom_library_title()}</h2>
+          <button class="text-sm text-gray-300 hover:text-white" onclick={() => (showLibrary = false)}>{m.custom_library_close()}</button>
         </div>
 
         <input
           type="text"
-          placeholder="Search library"
+          placeholder={m.custom_library_search()}
           bind:value={search}
           class="w-full mb-4 px-3 py-2 rounded-md bg-white/5 border border-white/10 focus:outline-none"
         />
 
         {#if libraryItems.length === 0}
-          <p class="text-gray-400">No uploads yet.</p>
+          <p class="text-gray-400">{m.custom_library_empty()}</p>
         {:else}
           <div class="grid grid-cols-2 gap-3">
             {#each libraryItems.filter((item) => displayName(item.url).toLowerCase().includes(search.toLowerCase())) as item}
@@ -695,9 +698,9 @@
                   <span class="text-xs truncate max-w-[70%]" title={displayName(item.url)}>{displayName(item.url)}</span>
                   <button
                     class="text-xs px-2 py-1 rounded bg-indigo-600 text-white hover:bg-indigo-500"
-                    on:click={() => useFromLibrary(item.url)}
+                    onclick={() => useFromLibrary(item.url)}
                   >
-                    Use
+                    {m.custom_library_use()}
                   </button>
                 </div>
               </div>
@@ -708,15 +711,15 @@
     </div>
   {/if}
 
-    {#if showEditor}
-    <div class="fixed inset-0 bg-black/95 backdrop-blur-sm flex flex-col items-center justify-center z-40 p-6">
-      <h2 class="text-2xl font-bold text-white mb-4">Adjust your images</h2>
+  {#if showEditor}
+  <div class="fixed inset-0 bg-black/95 backdrop-blur-sm flex flex-col items-center justify-center z-40 p-6">
+      <h2 class="text-2xl font-bold text-white mb-4">{m.custom_modal_adjust()}</h2>
       <div bind:this={editorContainerRef} class="bg-gray-100 rounded-lg shadow-2xl overflow-hidden"></div>
       <button
         class="mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3 rounded-full transition transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-indigo-400"
-        on:click={applyToModel}
+        onclick={applyToModel}
       >
-        Ready
+        {m.custom_modal_ready()}
       </button>
     </div>
   {/if}

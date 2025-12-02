@@ -7,6 +7,7 @@ import {
 	SMTP_PASS,
 	CONTACT_RECEIVER
 } from '$env/static/private';
+import * as m from '$lib/paraglide/messages/_index.js';
 
 const allowedPrefixes = ['+43', '+49', '+41', '+355', '+39', '+44'];
 
@@ -20,7 +21,8 @@ const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 const isValidPhone = (phone) => /^[0-9()+\s-]{6,20}$/.test(phone);
 
 export const actions = {
-	send: async ({ request }) => {
+	send: async ({ request, locals }) => {
+		const locale = locals?.locale ?? 'en';
 		const formData = await request.formData();
 		const name = sanitize(formData.get('name'));
 		const email = sanitize(formData.get('email')).toLowerCase();
@@ -31,23 +33,23 @@ export const actions = {
 		const values = { name, email, prefix, phone, message };
 
 		if (!name || name.length < 2) {
-			return fail(400, { error: 'Please enter your full name.', values });
+			return fail(400, { error: m.contact_form_error_name({}, { locale }), values });
 		}
 
 		if (!email || !isValidEmail(email)) {
-			return fail(400, { error: 'Please enter a valid email address.', values });
+			return fail(400, { error: m.contact_form_error_email({}, { locale }), values });
 		}
 
 		if (!prefix || !allowedPrefixes.includes(prefix)) {
-			return fail(400, { error: 'Please choose a phone prefix.', values });
+			return fail(400, { error: m.contact_form_error_prefix({}, { locale }), values });
 		}
 
 		if (!phone || !isValidPhone(phone)) {
-			return fail(400, { error: 'Please enter a valid phone number.', values });
+			return fail(400, { error: m.contact_form_error_phone({}, { locale }), values });
 		}
 
 		if (!message || message.length < 10) {
-			return fail(400, { error: 'Please add a short message (min. 10 characters).', values });
+			return fail(400, { error: m.contact_form_error_message({}, { locale }), values });
 		}
 
 		const transporter = nodemailer.createTransport({
@@ -79,11 +81,11 @@ ${message}`,
 				`
 			});
 
-			return { success: 'Thank you! Your message was sent successfully.' };
+			return { success: m.contact_form_success({}, { locale }) };
 		} catch (error) {
 			console.error('Email sending failed:', error);
 			return fail(500, {
-				error: 'Sending failed. Please try again in a moment.',
+				error: m.contact_form_error_send({}, { locale }),
 				values
 			});
 		}

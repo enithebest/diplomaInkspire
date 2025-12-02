@@ -520,3 +520,559 @@ export const categories_section_sweatshirts = /** @type {(inputs: {}) => string}
 export const categories_section_mugs = /** @type {(inputs: {}) => string} */ () => {
 	return `Mugs`
 };
+
+export const product_not_found = /** @type {(inputs: {}) => string} */ () => {
+	return `Product not found.`
+};
+
+export const product_alt_selected_color = /** @type {(inputs: {}) => string} */ () => {
+	return `selected color`
+};
+
+export const product_read_more = /** @type {(inputs: {}) => string} */ () => {
+	return `Read more`
+};
+
+export const product_show_less = /** @type {(inputs: {}) => string} */ () => {
+	return `Show less`
+};
+
+export const product_select_variant = /** @type {(inputs: {}) => string} */ () => {
+	return `Select Variant`
+};
+
+export const product_add_to_cart = /** @type {(inputs: {}) => string} */ () => {
+	return `Add to cart`
+};
+
+export const product_start_designing = /** @type {(inputs: {}) => string} */ () => {
+	return `Start Designing`
+};
+
+export const product_description_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Description`
+};
+
+export const product_specifications_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Specifications`
+};
+
+export const product_spec_fabric = /** @type {(inputs: {}) => string} */ () => {
+	return `Fabric: Cotton blend`
+};
+
+export const product_spec_fit = /** @type {(inputs: {}) => string} */ () => {
+	return `Fit: Regular`
+};
+
+export const product_spec_weight = /** @type {(inputs: {}) => string} */ () => {
+	return `Weight: Mid-weight`
+};
+
+export const product_toast_added = /** @type {(inputs: {}) => string} */ () => {
+	return `Product added to cart successfully`
+};
+
+export const product_community_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Community thoughts`
+};
+
+export const product_community_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Share what you like (or would improve) about this product so others can decide faster.`
+};
+
+export const product_comment_name_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Name`
+};
+
+export const product_comment_name_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Jane Doe`
+};
+
+export const product_commenting_as = /** @type {(inputs: { name: NonNullable<unknown> }) => string} */ (i) => {
+	return `Commenting as ${i.name}`
+};
+
+export const product_comment_user_fallback = /** @type {(inputs: {}) => string} */ () => {
+	return `Inkspire user`
+};
+
+export const product_comment_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Your comment`
+};
+
+export const product_comment_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Tell everyone what stood out to you...`
+};
+
+export const product_comment_submit = /** @type {(inputs: {}) => string} */ () => {
+	return `Post comment`
+};
+
+export const product_comments_title = /** @type {(inputs: {}) => string} */ () => {
+	return `What people already said`
+};
+
+export const product_comments_empty = /** @type {(inputs: {}) => string} */ () => {
+	return `No comments yet. Be the first to leave your impressions.`
+};
+
+export const product_comment_success = /** @type {(inputs: {}) => string} */ () => {
+	return `Thanks for sharing your thoughts!`
+};
+
+export const product_comment_error_short = /** @type {(inputs: {}) => string} */ () => {
+	return `Please share at least a short sentence so that others can benefit from your feedback.`
+};
+
+export const product_comment_error_name = /** @type {(inputs: {}) => string} */ () => {
+	return `Please add a name so people know who left the comment.`
+};
+
+export const product_order_error_select_variant = /** @type {(inputs: {}) => string} */ () => {
+	return `Please select a variant.`
+};
+
+export const product_order_error_variant_missing = /** @type {(inputs: {}) => string} */ () => {
+	return `Variant not found.`
+};
+
+export const product_order_error_product_missing = /** @type {(inputs: {}) => string} */ () => {
+	return `Product not found.`
+};
+
+export const product_order_error_unavailable = /** @type {(inputs: {}) => string} */ () => {
+	return `Unable to place the order right now.`
+};
+
+export const custom_title = /** @type {(inputs: { name: NonNullable<unknown> }) => string} */ (i) => {
+	return `Customize ${i.name}`
+};
+
+export const custom_product_generic = /** @type {(inputs: {}) => string} */ () => {
+	return `Product`
+};
+
+export const custom_upload_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Upload design`
+};
+
+export const custom_upload_library = /** @type {(inputs: {}) => string} */ () => {
+	return `My library`
+};
+
+export const custom_upload_choose = /** @type {(inputs: {}) => string} */ () => {
+	return `Choose image`
+};
+
+export const custom_upload_hint = /** @type {(inputs: {}) => string} */ () => {
+	return `Allowed: PNG, JPG, WEBP. Max size: 5MB.`
+};
+
+export const custom_upload_success = /** @type {(inputs: {}) => string} */ () => {
+	return `Uploaded successfully!`
+};
+
+export const custom_upload_submit = /** @type {(inputs: {}) => string} */ () => {
+	return `Upload & Save`
+};
+
+export const custom_preview_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Preview`
+};
+
+export const custom_preview_alt = /** @type {(inputs: {}) => string} */ () => {
+	return `Uploaded design preview`
+};
+
+export const custom_edit_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Edit your artwork`
+};
+
+export const custom_edit_open = /** @type {(inputs: {}) => string} */ () => {
+	return `Open Customizer`
+};
+
+export const custom_edit_reopen = /** @type {(inputs: {}) => string} */ () => {
+	return `Reopen Customizer`
+};
+
+export const custom_edit_empty = /** @type {(inputs: {}) => string} */ () => {
+	return `Upload an image using the form or pick one from your library to start editing.`
+};
+
+export const custom_edit_current = /** @type {(inputs: {}) => string} */ () => {
+	return `Current design loaded in the editor:`
+};
+
+export const custom_3d_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `3D preview coming soon`
+};
+
+export const custom_download_render = /** @type {(inputs: {}) => string} */ () => {
+	return `Download render`
+};
+
+export const custom_controls_hint = /** @type {(inputs: {}) => string} */ () => {
+	return `Drag to rotate / Scroll to zoom`
+};
+
+export const custom_product_details = /** @type {(inputs: {}) => string} */ () => {
+	return `Product details`
+};
+
+export const custom_ready_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Ready to order?`
+};
+
+export const custom_ready_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `We attach your current edit to a new order.`
+};
+
+export const custom_ready_variant = /** @type {(inputs: {}) => string} */ () => {
+	return `Variant:`
+};
+
+export const custom_ready_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Order this custom piece`
+};
+
+export const custom_order_success = /** @type {(inputs: {}) => string} */ () => {
+	return `Order saved! We'll get it ready.`
+};
+
+export const custom_order_success_with_id = /** @type {(inputs: { id: NonNullable<unknown> }) => string} */ (i) => {
+	return `Order saved! ID #${i.id} - we'll get it ready.`
+};
+
+export const custom_library_title = /** @type {(inputs: {}) => string} */ () => {
+	return `My library`
+};
+
+export const custom_library_close = /** @type {(inputs: {}) => string} */ () => {
+	return `Close`
+};
+
+export const custom_library_search = /** @type {(inputs: {}) => string} */ () => {
+	return `Search library`
+};
+
+export const custom_library_empty = /** @type {(inputs: {}) => string} */ () => {
+	return `No uploads yet.`
+};
+
+export const custom_library_use = /** @type {(inputs: {}) => string} */ () => {
+	return `Use`
+};
+
+export const custom_modal_adjust = /** @type {(inputs: {}) => string} */ () => {
+	return `Adjust your images`
+};
+
+export const custom_modal_ready = /** @type {(inputs: {}) => string} */ () => {
+	return `Ready`
+};
+
+export const custom_order_error_variant = /** @type {(inputs: {}) => string} */ () => {
+	return `Variant not found`
+};
+
+export const custom_order_error_product = /** @type {(inputs: {}) => string} */ () => {
+	return `Product not found`
+};
+
+export const custom_order_error_design_required = /** @type {(inputs: {}) => string} */ () => {
+	return `Please add a design before ordering.`
+};
+
+export const custom_order_error_design_invalid = /** @type {(inputs: {}) => string} */ () => {
+	return `Design image is invalid.`
+};
+
+export const custom_order_error_design_too_large = /** @type {(inputs: {}) => string} */ () => {
+	return `Design image is too large.`
+};
+
+export const custom_order_error_save_failed = /** @type {(inputs: {}) => string} */ () => {
+	return `Could not save your design. Please try again.`
+};
+
+export const custom_order_error_unavailable = /** @type {(inputs: {}) => string} */ () => {
+	return `Unable to place the order at the moment.`
+};
+
+export const custom_upload_error_no_file = /** @type {(inputs: {}) => string} */ () => {
+	return `No file provided`
+};
+
+export const custom_upload_error_type = /** @type {(inputs: {}) => string} */ () => {
+	return `Invalid file type. Allowed: PNG, JPG, WEBP.`
+};
+
+export const custom_upload_error_size = /** @type {(inputs: {}) => string} */ () => {
+	return `File too large (max 5MB).`
+};
+
+export const profile_title = /** @type {(inputs: {}) => string} */ () => {
+	return `My Profile`
+};
+
+export const profile_email_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Email`
+};
+
+export const profile_name_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Full Name`
+};
+
+export const profile_password_label = /** @type {(inputs: {}) => string} */ () => {
+	return `New Password (optional)`
+};
+
+export const profile_password_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `••••••••`
+};
+
+export const profile_update_button = /** @type {(inputs: {}) => string} */ () => {
+	return `Update Profile`
+};
+
+export const profile_update_success = /** @type {(inputs: {}) => string} */ () => {
+	return `Profile updated successfully!`
+};
+
+export const profile_tab_profile = /** @type {(inputs: {}) => string} */ () => {
+	return `Profile`
+};
+
+export const profile_tab_orders = /** @type {(inputs: {}) => string} */ () => {
+	return `Orders`
+};
+
+export const profile_tab_uploads = /** @type {(inputs: {}) => string} */ () => {
+	return `Uploads`
+};
+
+export const profile_orders_empty = /** @type {(inputs: {}) => string} */ () => {
+	return `No orders yet.`
+};
+
+export const profile_orders_total = /** @type {(inputs: {}) => string} */ () => {
+	return `Total:`
+};
+
+export const profile_orders_item = /** @type {(inputs: { qty: NonNullable<unknown>, name: NonNullable<unknown>, price: NonNullable<unknown> }) => string} */ (i) => {
+	return `${i.qty} × ${i.name} (${i.price})`
+};
+
+export const profile_orders_reorder = /** @type {(inputs: {}) => string} */ () => {
+	return `Reorder to cart`
+};
+
+export const profile_uploads_empty = /** @type {(inputs: {}) => string} */ () => {
+	return `No uploads yet.`
+};
+
+export const profile_uploads_use = /** @type {(inputs: {}) => string} */ () => {
+	return `Use`
+};
+
+export const profile_uploads_delete = /** @type {(inputs: {}) => string} */ () => {
+	return `Delete`
+};
+
+export const profile_uploads_alt = /** @type {(inputs: {}) => string} */ () => {
+	return `upload image`
+};
+
+export const profile_reorder_alert = /** @type {(inputs: {}) => string} */ () => {
+	return `Items added to cart`
+};
+
+export const profile_error_invalid_upload = /** @type {(inputs: {}) => string} */ () => {
+	return `Invalid upload id`
+};
+
+export const contact_badge = /** @type {(inputs: {}) => string} */ () => {
+	return `We reply within 24h`
+};
+
+export const contact_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Contact Inkspire`
+};
+
+export const contact_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Need a quote, custom design help, or support with an order? Reach out by phone, in person, or use the form. We are real humans ready to help.`
+};
+
+export const contact_call_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Call Us`
+};
+
+export const contact_call_phone = /** @type {(inputs: {}) => string} */ () => {
+	return `+355 685319389`
+};
+
+export const contact_visit_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Visit`
+};
+
+export const contact_visit_line1 = /** @type {(inputs: {}) => string} */ () => {
+	return `Inkspire HQ`
+};
+
+export const contact_visit_line2 = /** @type {(inputs: {}) => string} */ () => {
+	return `Shkoder City Center`
+};
+
+export const contact_visit_line3 = /** @type {(inputs: {}) => string} */ () => {
+	return `Shkoder, Albania`
+};
+
+export const contact_hours_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Opening Hours`
+};
+
+export const contact_hours_weekdays = /** @type {(inputs: {}) => string} */ () => {
+	return `Mon-Fri: 08:00-18:00`
+};
+
+export const contact_hours_saturday = /** @type {(inputs: {}) => string} */ () => {
+	return `Sat: 09:00-14:00`
+};
+
+export const contact_hours_sunday = /** @type {(inputs: {}) => string} */ () => {
+	return `Sun: Closed`
+};
+
+export const contact_feature_fast_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Fast Support`
+};
+
+export const contact_feature_fast_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Average response time < 24h`
+};
+
+export const contact_feature_reliable_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Reliable Team`
+};
+
+export const contact_feature_reliable_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Dedicated contact for every order`
+};
+
+export const contact_feature_quality_title = /** @type {(inputs: {}) => string} */ () => {
+	return `High Quality`
+};
+
+export const contact_feature_quality_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `In-house production control`
+};
+
+export const contact_feature_secure_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Secure Data`
+};
+
+export const contact_feature_secure_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Your uploads stay private`
+};
+
+export const contact_form_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Send Us a Message`
+};
+
+export const contact_form_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Tell us what you need and we will get back quickly.`
+};
+
+export const contact_form_name_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Full Name`
+};
+
+export const contact_form_name_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Enter your name`
+};
+
+export const contact_form_email_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Email Address`
+};
+
+export const contact_form_email_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `you@example.com`
+};
+
+export const contact_form_phone_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Phone Number`
+};
+
+export const contact_form_phone_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `685 319 389`
+};
+
+export const contact_form_phone_hint = /** @type {(inputs: {}) => string} */ () => {
+	return `Include country code and numbers only.`
+};
+
+export const contact_form_message_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Message`
+};
+
+export const contact_form_message_placeholder = /** @type {(inputs: {}) => string} */ () => {
+	return `Tell us about your project or question...`
+};
+
+export const contact_form_submit = /** @type {(inputs: {}) => string} */ () => {
+	return `Send Message`
+};
+
+export const contact_form_success = /** @type {(inputs: {}) => string} */ () => {
+	return `Thank you! Your message was sent successfully.`
+};
+
+export const contact_form_error_name = /** @type {(inputs: {}) => string} */ () => {
+	return `Please enter your full name.`
+};
+
+export const contact_form_error_email = /** @type {(inputs: {}) => string} */ () => {
+	return `Please enter a valid email address.`
+};
+
+export const contact_form_error_prefix = /** @type {(inputs: {}) => string} */ () => {
+	return `Please choose a phone prefix.`
+};
+
+export const contact_form_error_phone = /** @type {(inputs: {}) => string} */ () => {
+	return `Please enter a valid phone number.`
+};
+
+export const contact_form_error_message = /** @type {(inputs: {}) => string} */ () => {
+	return `Please add a short message (min. 10 characters).`
+};
+
+export const contact_form_error_send = /** @type {(inputs: {}) => string} */ () => {
+	return `Sending failed. Please try again in a moment.`
+};
+
+export const contact_country_austria = /** @type {(inputs: {}) => string} */ () => {
+	return `Austria`
+};
+
+export const contact_country_germany = /** @type {(inputs: {}) => string} */ () => {
+	return `Germany`
+};
+
+export const contact_country_switzerland = /** @type {(inputs: {}) => string} */ () => {
+	return `Switzerland`
+};
+
+export const contact_country_albania = /** @type {(inputs: {}) => string} */ () => {
+	return `Albania`
+};
+
+export const contact_country_italy = /** @type {(inputs: {}) => string} */ () => {
+	return `Italy`
+};
+
+export const contact_country_uk = /** @type {(inputs: {}) => string} */ () => {
+	return `United Kingdom`
+};
