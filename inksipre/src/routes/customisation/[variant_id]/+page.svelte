@@ -49,7 +49,6 @@
   let pendingEditorInit = false;
   let orderDesignData = '';
   let orderDesignUrl = '';
-  let isAddingToCart = false;
 
   let libraryItems = [];
   let jacketColor = (data?.variant?.color ?? '').toString().trim();
@@ -267,44 +266,6 @@
       }
     }
     return previewUrl || form?.imageUrl || data?.variant?.image_url || data?.product?.image_url || '';
-  };
-
-  const snapshotCartPreview = () => {
-    if (!browser || !data?.product || !data?.variant) return;
-    try {
-      const raw = localStorage.getItem('cart');
-      const cart = raw ? JSON.parse(raw) : [];
-      const imageUrl =
-        captureModelImage() ||
-        previewUrl ||
-        form?.imageUrl ||
-        data?.variant?.image_url ||
-        data?.product?.image_url ||
-        '';
-      cart.push({
-        product_id: data.product.id,
-        variant_id: data.variant.id,
-        name: data.product.name,
-        color: data.variant.color ?? '',
-        size: data.variant.size ?? '',
-        price: data.variant.price ?? data.product.base_price,
-        qty: 1,
-        image_url: imageUrl
-      });
-      localStorage.setItem('cart', JSON.stringify(cart));
-    } catch (err) {
-      console.error('Unable to snapshot cart preview', err);
-    }
-  };
-
-  const addToCart = () => {
-    if (!browser) return;
-    isAddingToCart = true;
-    try {
-      snapshotCartPreview();
-    } finally {
-      isAddingToCart = false;
-    }
   };
 
   const initScene = () => {
@@ -623,16 +584,9 @@
             </div>
           {/if}
         </div>
-        <div class="absolute bottom-4 right-4 flex gap-2">
+        <div class="flex justify-end mt-3">
           <button
-            class="bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-3 rounded-xl shadow-lg transition transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-green-400 disabled:opacity-50 disabled:cursor-not-allowed"
-            on:click={addToCart}
-            disabled={isAddingToCart}
-          >
-            {isAddingToCart ? 'Adding...' : 'Add to cart'}
-          </button>
-          <button
-            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-3 rounded-xl shadow-lg transition transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:opacity-50 disabled:cursor-not-allowed"
+            class="bg-gray-800/70 border border-white/15 text-white font-semibold px-3 py-2 rounded-lg shadow-md backdrop-blur transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-400 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
             on:click={download}
             disabled={!modelPath}
           >

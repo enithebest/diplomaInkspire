@@ -5,8 +5,11 @@
 
   let lang = $state('de');
   let activeTab = $state('profile');
+  let filterStatus = $state('all');
+  let filteredOrders = $state(data.orders || []);
 
   const itemsByOrder = data.itemsByOrder ?? {};
+  let uploads = $state(data.uploads || []);
   const formatDateTime = (value) => {
     if (!value) return '';
     const d = new Date(value);
@@ -40,6 +43,12 @@
   };
 
   const t = (key) => translations[lang][key];
+  $effect(() => {
+    filteredOrders =
+      filterStatus === 'all'
+        ? data.orders || []
+        : (data.orders || []).filter((o) => (o.status || '').toLowerCase() === filterStatus.toLowerCase());
+  });
 
   function reorderToCart(orderId) {
     try {
@@ -158,13 +167,29 @@
     {/if}
 
     {#if activeTab === 'orders'}
-      <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl p-6">
+      <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl p-6 space-y-4">
+        <div class="flex flex-wrap items-center gap-3">
+          <label class="text-sm text-gray-200">Status filter:</label>
+          <div class="relative">
+            <select
+              class="appearance-none bg-white/5 border border-white/15 rounded-lg px-3 py-2 text-sm text-white shadow-inner shadow-black/20 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 pr-10"
+              bind:value={filterStatus}
+            >
+              <option class="bg-gray-900 text-white" value="all">All</option>
+              <option class="bg-gray-900 text-white" value="paid">Paid</option>
+              <option class="bg-gray-900 text-white" value="processing">Processing</option>
+              <option class="bg-gray-900 text-white" value="pending">Pending</option>
+              <option class="bg-gray-900 text-white" value="failed">Failed</option>
+            </select>
+            <span class="pointer-events-none absolute inset-y-0 right-2 flex items-center text-gray-400">▾</span>
+          </div>
+        </div>
         {#if (data.orders || []).length === 0}
           <p class="text-center text-gray-300">No orders yet.</p>
         {:else}
           <div class="space-y-6">
-            {#each data.orders as o}
-              <div class="border border-white/10 rounded-lg p-4">
+            {#each filteredOrders as o}
+              <div class="bg-gray-800/60 backdrop-blur-sm border border-gray-700 rounded-2xl p-4 shadow-lg">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
                   <div class="flex items-center gap-3">
                     <span class="text-sm text-gray-300 font-semibold">#{o.id}</span>
@@ -197,6 +222,24 @@
                     {/each}
                   </ul>
                 {/if}
+                {#if o.ship_line1 || o.ship_city || o.ship_country}
+                  <div class="mt-3 text-sm text-gray-300 space-y-0.5">
+                    <div class="font-semibold text-white">Shipping</div>
+                    {#if o.ship_name}<div>{o.ship_name}</div>{/if}
+                    {#if o.ship_line1}<div>{o.ship_line1}</div>{/if}
+                    {#if o.ship_line2}<div>{o.ship_line2}</div>{/if}
+                    <div>
+                      {#if o.ship_city}{o.ship_city}{/if}
+                      {#if o.ship_region}, {o.ship_region}{/if}
+                      {#if o.ship_postal} {o.ship_postal}{/if}
+                    </div>
+                    {#if o.ship_country}<div>{o.ship_country}</div>{/if}
+                  </div>
+                {/if}
+                <div class="mt-3 flex justify-between items-center text-sm text-gray-300">
+                  <span>Receipt (coming soon)</span>
+                  <button class="px-3 py-1 rounded bg-indigo-600 hover:bg-indigo-500 text-white text-xs" disabled>Download</button>
+                </div>
                 <div class="mt-3 text-right">
                   <button class="px-3 py-2 rounded bg-indigo-600 hover:bg-indigo-500 text-white text-sm" onclick={() => reorderToCart(o.id)}>Reorder to cart</button>
                 </div>
@@ -209,11 +252,11 @@
 
     {#if activeTab === 'uploads'}
       <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl p-6">
-        {#if (data.uploads || []).length === 0}
+        {#if (uploads || []).length === 0}
           <p class="text-center text-gray-300">No uploads yet.</p>
         {:else}
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {#each data.uploads as u}
+            {#each uploads as u}
               <div class="border border-white/10 rounded-md overflow-hidden">
                 <img
                   src={u.image_url}
@@ -229,10 +272,30 @@
                     class="text-xs px-2 py-1 rounded bg-indigo-600 hover:bg-indigo-500 text-white"
                     onclick={() => { try { localStorage.setItem('selectedDesignUrl', u.image_url); location.href = '/categories'; } catch (e) { console.error(e); } }}
                   >Use</button>
-                  <form method="POST" action="?/delete_upload">
-                    <input type="hidden" name="upload_id" value={u.id} />
-                    <button class="text-xs px-2 py-1 rounded bg-red-600 hover:bg-red-500 text-white">Delete</button>
-                  </form>
+                  <button
+                    type="button"
+                    class="text-xs px-2 py-1 rounded bg-red-600 hover:bg-red-500 text-white"
+                    onclick={async () => {
+                      try {
+                        const res = await fetch('?/delete_upload', {
+                          method: 'POST',
+                          headers: { 'content-type': 'application/x-www-form-urlencoded' },
+                          credentials: 'same-origin',
+                          body: new URLSearchParams({ upload_id: String(u.id) })
+                        });
+                        if (res.ok) {
+                          // Optimistically remove from UI
+                          uploads = (uploads || []).filter((x) => x.id !== u.id);
+                        } else {
+                          console.error('Delete failed', res.status);
+                        }
+                      } catch (err) {
+                        console.error('Failed to delete upload', err);
+                      }
+                    }}
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             {/each}
