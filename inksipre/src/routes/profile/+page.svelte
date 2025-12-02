@@ -169,6 +169,7 @@
     {#if activeTab === 'orders'}
       <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl p-6 space-y-4">
         <div class="flex flex-wrap items-center gap-3">
+          <!-- svelte-ignore a11y_label_has_associated_control -->
           <label class="text-sm text-gray-200">Status filter:</label>
           <div class="relative">
             <select
