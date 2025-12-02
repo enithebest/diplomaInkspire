@@ -185,7 +185,7 @@ export const actions = {
 
       await conn.commit();
 
-      throw redirect(303, `/cart?orderId=${orderId}`);
+      return { orderSuccess: true, orderId };
     } catch (err) {
       if (err?.status && err.status >= 300 && err.status < 400) {
         // Allow redirects to bubble up without showing a failure state
