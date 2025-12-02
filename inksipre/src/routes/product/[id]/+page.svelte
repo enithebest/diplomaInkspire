@@ -19,11 +19,10 @@
     new Set(variants.map((v) => v.color).filter((v) => !!v))
   );
 
-  // Optional static fallbacks; put your hoodie images here (e.g. static/images/hoodie-red.jpg)
   const colorImageFallbacks = {
-    red: '/images/zip-up-red.png',
-    black: '/images/zip-up-black.png',
-    white: '/images/zip-up-white.png'
+    red: '/images/zipUp/zip-up-red.png',
+    black: '/images/zipUp/zip-up-black.png',
+    white: '/images/zipUp/zip-up-white.png'
   };
 
   function sizesFor(color) {
