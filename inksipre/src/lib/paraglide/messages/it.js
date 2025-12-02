@@ -869,6 +869,46 @@ export const profile_orders_reorder = /** @type {(inputs: {}) => string} */ () =
 	return `Riordina nel carrello`
 };
 
+export const profile_orders_filter_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Filtro stato:`
+};
+
+export const profile_orders_filter_all = /** @type {(inputs: {}) => string} */ () => {
+	return `Tutti`
+};
+
+export const profile_orders_filter_paid = /** @type {(inputs: {}) => string} */ () => {
+	return `Pagato`
+};
+
+export const profile_orders_filter_processing = /** @type {(inputs: {}) => string} */ () => {
+	return `In lavorazione`
+};
+
+export const profile_orders_filter_pending = /** @type {(inputs: {}) => string} */ () => {
+	return `In attesa`
+};
+
+export const profile_orders_filter_failed = /** @type {(inputs: {}) => string} */ () => {
+	return `Fallito`
+};
+
+export const profile_orders_shipping = /** @type {(inputs: {}) => string} */ () => {
+	return `Spedizione`
+};
+
+export const profile_orders_receipt = /** @type {(inputs: {}) => string} */ () => {
+	return `Ricevuta (presto disponibile)`
+};
+
+export const profile_orders_download = /** @type {(inputs: {}) => string} */ () => {
+	return `Download`
+};
+
+export const profile_orders_line = /** @type {(inputs: { qty: NonNullable<unknown>, price: NonNullable<unknown> }) => string} */ (i) => {
+	return `Qtà ${i.qty} · ${i.price} cad`
+};
+
 export const profile_uploads_empty = /** @type {(inputs: {}) => string} */ () => {
 	return `Ancora nessun upload.`
 };

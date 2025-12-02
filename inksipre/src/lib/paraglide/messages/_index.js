@@ -5007,6 +5007,236 @@ export const profile_orders_reorder = (inputs = {}, options = {}) => {
 * @returns {string}
 */
 /* @__NO_SIDE_EFFECTS__ */
+export const profile_orders_filter_label = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.profile_orders_filter_label(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("profile_orders_filter_label", locale)
+	if (locale === "en") return en.profile_orders_filter_label(inputs)
+	if (locale === "de") return de.profile_orders_filter_label(inputs)
+	return it.profile_orders_filter_label(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const profile_orders_filter_all = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.profile_orders_filter_all(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("profile_orders_filter_all", locale)
+	if (locale === "en") return en.profile_orders_filter_all(inputs)
+	if (locale === "de") return de.profile_orders_filter_all(inputs)
+	return it.profile_orders_filter_all(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const profile_orders_filter_paid = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.profile_orders_filter_paid(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("profile_orders_filter_paid", locale)
+	if (locale === "en") return en.profile_orders_filter_paid(inputs)
+	if (locale === "de") return de.profile_orders_filter_paid(inputs)
+	return it.profile_orders_filter_paid(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const profile_orders_filter_processing = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.profile_orders_filter_processing(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("profile_orders_filter_processing", locale)
+	if (locale === "en") return en.profile_orders_filter_processing(inputs)
+	if (locale === "de") return de.profile_orders_filter_processing(inputs)
+	return it.profile_orders_filter_processing(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const profile_orders_filter_pending = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.profile_orders_filter_pending(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("profile_orders_filter_pending", locale)
+	if (locale === "en") return en.profile_orders_filter_pending(inputs)
+	if (locale === "de") return de.profile_orders_filter_pending(inputs)
+	return it.profile_orders_filter_pending(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const profile_orders_filter_failed = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.profile_orders_filter_failed(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("profile_orders_filter_failed", locale)
+	if (locale === "en") return en.profile_orders_filter_failed(inputs)
+	if (locale === "de") return de.profile_orders_filter_failed(inputs)
+	return it.profile_orders_filter_failed(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const profile_orders_shipping = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.profile_orders_shipping(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("profile_orders_shipping", locale)
+	if (locale === "en") return en.profile_orders_shipping(inputs)
+	if (locale === "de") return de.profile_orders_shipping(inputs)
+	return it.profile_orders_shipping(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const profile_orders_receipt = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.profile_orders_receipt(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("profile_orders_receipt", locale)
+	if (locale === "en") return en.profile_orders_receipt(inputs)
+	if (locale === "de") return de.profile_orders_receipt(inputs)
+	return it.profile_orders_receipt(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const profile_orders_download = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.profile_orders_download(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("profile_orders_download", locale)
+	if (locale === "en") return en.profile_orders_download(inputs)
+	if (locale === "de") return de.profile_orders_download(inputs)
+	return it.profile_orders_download(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{ qty: NonNullable<unknown>, price: NonNullable<unknown> }} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const profile_orders_line = (inputs, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.profile_orders_line(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("profile_orders_line", locale)
+	if (locale === "en") return en.profile_orders_line(inputs)
+	if (locale === "de") return de.profile_orders_line(inputs)
+	return it.profile_orders_line(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 export const profile_uploads_empty = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.profile_uploads_empty(inputs) 

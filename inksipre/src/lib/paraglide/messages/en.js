@@ -869,6 +869,46 @@ export const profile_orders_reorder = /** @type {(inputs: {}) => string} */ () =
 	return `Reorder to cart`
 };
 
+export const profile_orders_filter_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Status filter:`
+};
+
+export const profile_orders_filter_all = /** @type {(inputs: {}) => string} */ () => {
+	return `All`
+};
+
+export const profile_orders_filter_paid = /** @type {(inputs: {}) => string} */ () => {
+	return `Paid`
+};
+
+export const profile_orders_filter_processing = /** @type {(inputs: {}) => string} */ () => {
+	return `Processing`
+};
+
+export const profile_orders_filter_pending = /** @type {(inputs: {}) => string} */ () => {
+	return `Pending`
+};
+
+export const profile_orders_filter_failed = /** @type {(inputs: {}) => string} */ () => {
+	return `Failed`
+};
+
+export const profile_orders_shipping = /** @type {(inputs: {}) => string} */ () => {
+	return `Shipping`
+};
+
+export const profile_orders_receipt = /** @type {(inputs: {}) => string} */ () => {
+	return `Receipt (coming soon)`
+};
+
+export const profile_orders_download = /** @type {(inputs: {}) => string} */ () => {
+	return `Download`
+};
+
+export const profile_orders_line = /** @type {(inputs: { qty: NonNullable<unknown>, price: NonNullable<unknown> }) => string} */ (i) => {
+	return `Qty ${i.qty} · ${i.price} each`
+};
+
 export const profile_uploads_empty = /** @type {(inputs: {}) => string} */ () => {
 	return `No uploads yet.`
 };
