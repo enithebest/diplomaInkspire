@@ -148,6 +148,9 @@ export const actions = {
 
     const conn = await createConnection();
     const price = Number(variant.price ?? product.base_price ?? 0);
+    if (!Number.isFinite(price) || price <= 0) {
+      return fail(400, { orderError: 'This variant is missing a price. Please contact support.' });
+    }
 
     try {
       await conn.beginTransaction();

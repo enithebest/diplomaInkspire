@@ -42,6 +42,13 @@
     totalFormatted = total.toFixed(2);
   }
 
+  function updateQty(index, value) {
+    const qty = Math.max(1, Number(value) || 1);
+    cart = cart.map((item, i) => (i === index ? { ...item, qty } : item));
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateTotals();
+  }
+
   onMount(loadCart);
 
   function goToCheckout() {
@@ -85,7 +92,17 @@
               <p class="text-gray-600 text-sm">
                 {m.cart_color_label()} <span class="capitalize">{item.color}</span> • {m.cart_size_label()} {item.size}
               </p>
-              <p class="text-gray-500 text-sm">{item.price} ?</p>
+              <p class="text-gray-500 text-sm">{item.price} €</p>
+              <div class="mt-2 flex items-center gap-2">
+                <label class="text-xs text-gray-500">Qty</label>
+                <input
+                  type="number"
+                  min="1"
+                  value={item.qty || 1}
+                  class="w-16 rounded border border-gray-300 px-2 py-1 text-sm"
+                  onchange={(e) => updateQty(i, e.target.value)}
+                />
+              </div>
             </div>
           </div>
 

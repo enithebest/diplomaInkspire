@@ -21,7 +21,23 @@ export const load = async ({ cookies }) => {
 
   // Load recent orders for this user
   const [orders] = await db.query(
-    'SELECT id, total_price, status, created_at FROM orders WHERE user_id = ? ORDER BY created_at DESC LIMIT 10',
+    `SELECT
+       o.id,
+       o.total_price,
+       o.status,
+       o.created_at,
+       a.full_name AS ship_name,
+       a.line1 AS ship_line1,
+       a.line2 AS ship_line2,
+       a.city AS ship_city,
+       a.region AS ship_region,
+       a.postal_code AS ship_postal,
+       a.country AS ship_country
+     FROM orders o
+     LEFT JOIN addresses a ON a.id = o.shipping_address_id
+     WHERE o.user_id = ?
+     ORDER BY o.created_at DESC
+     LIMIT 10`,
     [user.id]
   );
 
@@ -29,10 +45,19 @@ export const load = async ({ cookies }) => {
   const itemsByOrder = {};
   for (const o of orders) {
     const [items] = await db.query(
-      `SELECT oi.order_id, oi.product_id, oi.variant_id, oi.quantity, oi.unit_price,
-              p.name
+      `SELECT
+         oi.order_id,
+         oi.product_id,
+         oi.variant_id,
+         oi.quantity,
+         oi.unit_price,
+         (oi.quantity * oi.unit_price) AS line_total,
+         p.name,
+         COALESCE(u.image_url, pv.image_url, p.image_url) AS image_url
        FROM order_items oi
        JOIN products p ON p.id = oi.product_id
+       LEFT JOIN product_variants pv ON pv.id = oi.variant_id
+       LEFT JOIN uploads u ON u.id = oi.upload_id
        WHERE oi.order_id = ?
        ORDER BY oi.id ASC`,
       [o.id]

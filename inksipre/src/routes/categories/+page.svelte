@@ -6,7 +6,24 @@
   export let form;
 
   const { hoodies, tshirts, sweatshirts, mugs } = data;
-  const short = (text, len = 90) => (text ? `${text.slice(0, len)}${text.length > len ? '.' : ''}` : '');
+  const short = (text, len = 90) => (text ? `${text.slice(0, len)}${text.length > len ? '...' : ''}` : '');
+  const featureBadges = (product) => {
+    const cat = (product?.category || '').toLowerCase();
+    const name = (product?.name || '').toLowerCase();
+    if (cat.includes('hood') || name.includes('hoodie')) {
+      return ['Heavyweight fleece', 'Brushed interior', 'Rib cuffs'];
+    }
+    if (cat.includes('tshirt') || name.includes('tee')) {
+      return ['100% cotton', 'Side-seamed', 'Ribbed neck'];
+    }
+    if (cat.includes('sweat')) {
+      return ['Loopback terry', 'Clean fit', 'Reinforced cuffs'];
+    }
+    if (cat.includes('mug')) {
+      return ['Dishwasher-safe', 'Glossy finish', 'Premium ceramic'];
+    }
+    return ['Quality build', 'Comfort fit', 'Made to last'];
+  };
 
   // Redirect to product detail page instead of customisation
   function viewProduct(id) {
@@ -95,8 +112,9 @@
                 <p class="text-gray-400 text-sm line-clamp-2">{short(product.description, 110)}</p>
               {/if}
               <div class="flex flex-wrap gap-2 text-xs text-gray-300">
-                <span class="px-2 py-1 rounded-full bg-white/5 border border-white/10">Customisable</span>
-                <span class="px-2 py-1 rounded-full bg-white/5 border border-white/10">Fast setup</span>
+                {#each featureBadges(product) as feat}
+                  <span class="px-2 py-1 rounded-full bg-white/5 border border-white/10">{feat}</span>
+                {/each}
               </div>
             </div>
             <button
@@ -145,8 +163,9 @@
                 <p class="text-gray-400 text-sm line-clamp-2">{short(product.description, 110)}</p>
               {/if}
               <div class="flex flex-wrap gap-2 text-xs text-gray-300">
-                <span class="px-2 py-1 rounded-full bg-white/5 border border-white/10">Customisable</span>
-                <span class="px-2 py-1 rounded-full bg-white/5 border border-white/10">Fast setup</span>
+                {#each featureBadges(product) as feat}
+                  <span class="px-2 py-1 rounded-full bg-white/5 border border-white/10">{feat}</span>
+                {/each}
               </div>
             </div>
             <button
