@@ -1,4 +1,4 @@
-﻿<script>
+<script>
   import { enhance } from '$app/forms';
   import { onMount } from 'svelte';
   import * as m from '$lib/paraglide/messages/_index.js';
@@ -6,7 +6,7 @@
   export let form;
 
   const { hoodies, tshirts, sweatshirts, mugs } = data;
-  const short = (text, len = 90) => (text ? `${text.slice(0, len)}${text.length > len ? '…' : ''}` : '');
+  const short = (text, len = 90) => (text ? `${text.slice(0, len)}${text.length > len ? '.' : ''}` : '');
 
   // Redirect to product detail page instead of customisation
   function viewProduct(id) {
@@ -162,5 +162,3 @@
     {/each}
   </div>
 </div>
-
-
