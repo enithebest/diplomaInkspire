@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { productImages } from '../../categories/productImages.js';
 
   export let data;
   export let form = {};
@@ -19,11 +20,7 @@
     new Set(variants.map((v) => v.color).filter((v) => !!v))
   );
 
-  const colorImageFallbacks = {
-    red: '/images/zipUp/zip-up-red.png',
-    black: '/images/zipUp/zip-up-black.png',
-    white: '/images/zipUp/zip-up-white.png'
-  };
+  const colorImageFallbacks = productImages[product.id]?.colors || {};
 
   function sizesFor(color) {
     return Array.from(
@@ -33,7 +30,6 @@
     );
   }
 
-  // Picked a color: lock to the first variant with that color so the image updates immediately
   function chooseColor(c) {
     selectedColor = c;
     const firstMatch = variants.find((v) => v.color === c) || null;
@@ -43,9 +39,7 @@
       if (typeof localStorage !== 'undefined') {
         localStorage.setItem('selectedBaseColor', c);
       }
-    } catch (err) {
-      console.warn('Unable to persist base color', err);
-    }
+    } catch (err) {}
   }
 
   function chooseSize(s) {
@@ -62,10 +56,10 @@
 
   $: activeImage =
     selectedVariant?.image_url ||
-    colorImageFallbacks[selectedColor?.toLowerCase?.()] ||
-    product.image_url;
+    (selectedColor
+      ? colorImageFallbacks[selectedColor?.toLowerCase?.()] ?? product.image_url
+      : product.image_url);
 
-  // Default to the first variant (or stored color) so an image is visible on load
   $: if (!selectedVariant && variants.length > 0) {
     const stored =
       typeof localStorage !== 'undefined'
@@ -86,7 +80,6 @@
     selectedSize = initialVariant?.size || '';
   }
 
-
   function formatDate(value) {
     if (!value) return '';
     const date = new Date(value);
@@ -96,15 +89,22 @@
   function addToCart() {
     if (!selectedVariant) return;
     try {
+      const chosenImage =
+        selectedVariant.image_url ||
+        (selectedColor
+          ? colorImageFallbacks[selectedColor?.toLowerCase?.()]
+          : null) ||
+        product.image_url;
+
       const item = {
         product_id: product.id,
         variant_id: selectedVariant.id,
         name: product.name,
-        color: selectedVariant.color,
+        color: selectedVariant.color ?? selectedColor,
         size: selectedVariant.size,
         price: selectedVariant.price ?? product.base_price,
         qty: 1,
-        image_url: selectedVariant.image_url ?? product.image_url
+        image_url: chosenImage
       };
       let cart = [];
       if (typeof localStorage !== 'undefined') {
@@ -163,7 +163,7 @@
             {#if variant.image_url}
               <button
                 type="button"
-                class="rounded-md border border-gray-700 hover:ring-2 hover:ring-indigo-500 transition p-0"
+                class="rounded-md border border-gray-700 hover:ring-2 hover:ring-[#6366F1] transition p-0"
                 on:click={() => chooseVariant(variant)}
               >
                 <img
@@ -211,7 +211,7 @@
                 <button
                   type="button"
                   class={`w-9 h-9 rounded-full border-2 ${
-                    selectedColor === c ? 'border-indigo-500 ring-2 ring-indigo-400/60' : 'border-gray-600'
+                    selectedColor === c ? 'border-[#4F46E5] ring-2 ring-[#6366F1]/60' : 'border-gray-600'
                   } flex items-center justify-center`}
                   style={`background-color: ${c?.toLowerCase?.() || 'transparent'}`}
                   title={c}
@@ -227,7 +227,7 @@
                 <button
                   class={`px-3 py-1.5 rounded-md border text-sm ${
                     selectedSize === s
-                      ? 'bg-indigo-600 text-white border-indigo-600'
+                      ? 'bg-[#4F46E5] text-white border-[#4F46E5]'
                       : 'bg-gray-800 text-gray-300 border-gray-600 hover:bg-gray-700'
                   }`}
                   on:click={() => chooseSize(s)}
@@ -243,17 +243,19 @@
       <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
         <button
           type="button"
-          class="bg-indigo-600 hover:bg-indigo-500 text-white py-3 rounded-lg font-semibold disabled:opacity-50"
+          class="bg-[#4F46E5] hover:bg-[#6366F1] text-white py-3 rounded-lg font-semibold disabled:opacity-50"
           disabled={!selectedVariant}
           on:click={addToCart}
         >
           Add to cart
         </button>
         <a
-          href={selectedVariant ? `/customisation/${selectedVariant.id}` : undefined}
+          href={selectedVariant
+            ? `/customisation/${selectedVariant.id}?color=${selectedColor || selectedVariant.color || ''}`
+            : undefined}
           class={`text-center py-3 rounded-lg font-semibold ${
             selectedVariant
-              ? 'bg-indigo-600 hover:bg-indigo-700 text-white'
+              ? 'bg-[#4F46E5] hover:bg-[#6366F1] text-white'
               : 'bg-gray-700 text-gray-300 cursor-not-allowed'
           }`}
           aria-disabled={!selectedVariant}
@@ -322,7 +324,7 @@
         <div class="flex flex-col gap-2">
           <button
             type="submit"
-            class="self-start rounded-lg bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-600/30 transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-300"
+            class="self-start rounded-lg bg-[#4F46E5] px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#4F46E5]/30 transition hover:bg-[#6366F1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6366F1]"
           >
             Post comment
           </button>

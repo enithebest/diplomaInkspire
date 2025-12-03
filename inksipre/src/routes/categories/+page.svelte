@@ -80,7 +80,7 @@
     />
     <button
       type="submit"
-      class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2 rounded-lg font-medium transition"
+      class="bg-[#4F46E5] hover:bg-[#6366F1] text-white px-6 py-2 rounded-lg font-medium transition"
     >
       {m.categories_search_button()}
     </button>
@@ -135,7 +135,7 @@
             </div>
             <button
               onclick={() => viewProduct(product.id)}
-              class="mt-3 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg transition"
+              class="mt-3 bg-[#4F46E5] hover:bg-[#6366F1] text-white px-4 py-2 rounded-lg transition"
             >
               {m.categories_view_product()}
             </button>
@@ -186,7 +186,7 @@
             </div>
             <button
               onclick={() => viewProduct(product.id)}
-              class="mt-3 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg transition"
+              class="mt-3 bg-[#4F46E5] hover:bg-[#6366F1] text-white px-4 py-2 rounded-lg transition"
             >
               View Product
             </button>

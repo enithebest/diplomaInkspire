@@ -132,7 +132,7 @@
 
         <button
           type="submit"
-          class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg shadow-lg shadow-blue-500/20 transition-all duration-200"
+          class="w-full bg-[#4F46E5] hover:bg-[#6366F1] text-white font-semibold py-3 rounded-lg shadow-lg shadow-[#4F46E5]/20 transition-all duration-200"
         >
           {m.profile_update_button()}
         </button>
@@ -214,10 +214,10 @@
                 {/if}
                 <div class="mt-3 flex justify-between items-center text-sm text-gray-300">
                   <span>{m.profile_orders_receipt()}</span>
-                  <button class="px-3 py-1 rounded bg-indigo-600 hover:bg-indigo-500 text-white text-xs" disabled>{m.profile_orders_download()}</button>
+                  <button class="px-3 py-1 rounded bg-[#4F46E5] hover:bg-[#6366F1] text-white text-xs" disabled>{m.profile_orders_download()}</button>
                 </div>
                 <div class="mt-3 text-right">
-                  <button class="px-3 py-2 rounded bg-indigo-600 hover:bg-indigo-500 text-white text-sm" onclick={() => reorderToCart(o.id)}>{m.profile_orders_reorder()}</button>
+                  <button class="px-3 py-2 rounded bg-[#4F46E5] hover:bg-[#6366F1] text-white text-sm" onclick={() => reorderToCart(o.id)}>{m.profile_orders_reorder()}</button>
                 </div>
               </div>
             {/each}
@@ -245,7 +245,7 @@
                 <div class="p-2 flex items-center justify-end gap-2">
                   <button
                     type="button"
-                    class="text-xs px-2 py-1 rounded bg-indigo-600 hover:bg-indigo-500 text-white"
+                    class="text-xs px-2 py-1 rounded bg-[#4F46E5] hover:bg-[#6366F1] text-white"
                     onclick={() => {
                       try {
                         localStorage.setItem('selectedDesignUrl', u.image_url);

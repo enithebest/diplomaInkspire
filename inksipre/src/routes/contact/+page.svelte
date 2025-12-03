@@ -205,7 +205,7 @@
 							<div class="mt-auto space-y-3">
 								<button
 									type="submit"
-									class="w-full rounded-xl bg-indigo-500 py-3 text-lg font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 disabled:opacity-60"
+									class="w-full rounded-xl bg-[#4F46E5] py-3 text-lg font-semibold text-white shadow-lg shadow-[#4F46E5]/30 transition hover:bg-[#6366F1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6366F1] disabled:opacity-60"
 								>
 									{m.contact_form_submit()}
 								</button>

@@ -586,7 +586,7 @@
           <button
             type="submit"
             formaction="?/upload"
-            class="w-full flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg transition focus:outline-none focus:ring-2 focus:ring-blue-400"
+            class="w-full flex items-center justify-center gap-2 bg-[#4F46E5] hover:bg-[#6366F1] text-white font-semibold px-6 py-2 rounded-lg transition focus:outline-none focus:ring-2 focus:ring-[#6366F1]"
           >
             Upload &amp; Save
           </button>
@@ -607,7 +607,7 @@
       <div class="bg-gray-800/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-700 shadow-lg">
         <p class="text-lg font-medium mb-3">Edit your artwork</p>
         <button
-          class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-3 rounded-xl transition transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          class="w-full bg-[#4F46E5] hover:bg-[#6366F1] text-white font-semibold px-6 py-3 rounded-xl transition transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-[#6366F1]"
           onclick={openEditor}
         >
           {uploadedImages.length ? 'Reopen Customizer' : 'Open Customizer'}
@@ -733,7 +733,7 @@
                 <div class="p-2 flex items-center justify-between">
                   <span class="text-xs truncate max-w-[70%]" title={displayName(item.url)}>{displayName(item.url)}</span>
                   <button
-                    class="text-xs px-2 py-1 rounded bg-indigo-600 text-white hover:bg-indigo-500"
+                    class="text-xs px-2 py-1 rounded bg-[#4F46E5] text-white hover:bg-[#6366F1]"
                     onclick={() => useFromLibrary(item.url)}
                   >
                     Use
@@ -752,7 +752,7 @@
       <h2 class="text-2xl font-bold text-white mb-4">Adjust your images</h2>
       <div bind:this={editorContainerRef} class="bg-gray-100 rounded-lg shadow-2xl overflow-hidden"></div>
       <button
-        class="mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3 rounded-full transition transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        class="mt-6 bg-[#4F46E5] hover:bg-[#6366F1] text-white font-semibold px-8 py-3 rounded-full transition transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#6366F1]"
         onclick={applyToModel}
       >
         Ready

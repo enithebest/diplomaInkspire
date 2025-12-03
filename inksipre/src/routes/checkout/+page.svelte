@@ -245,7 +245,7 @@
 
         <button
           type="submit"
-          class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-2 rounded-md bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-60"
+          class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-2 rounded-md bg-[#4F46E5] text-white font-semibold hover:bg-[#6366F1] transition disabled:opacity-60"
           disabled={loading}
         >
           {#if loading}

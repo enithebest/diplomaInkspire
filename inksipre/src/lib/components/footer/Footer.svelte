@@ -58,9 +58,9 @@
             placeholder={m.footer_newsletter_placeholder()}
             class="flex-1 rounded-md bg-white/5 border border-white/10 px-3 py-2 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
-          <button type="submit" class="rounded-md bg-indigo-500 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-            {m.footer_newsletter_subscribe()}
-          </button>
+          <button type="submit" class="rounded-md bg-[#4F46E5] px-4 py-2 text-sm font-semibold text-white hover:bg-[#6366F1] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6366F1]">
+              {m.footer_newsletter_subscribe()}
+            </button>
         </div>
       </form>
 

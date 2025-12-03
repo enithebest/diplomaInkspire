@@ -87,7 +87,7 @@
       <!-- Submit -->
       <button
         type="submit"
-        class="w-full flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-lg transition"
+        class="w-full flex items-center justify-center gap-2 bg-[#4F46E5] hover:bg-[#6366F1] text-white font-medium py-2 rounded-lg transition"
       >
         <i class="fas fa-user-plus"></i>
         {m.create_account()}

@@ -88,7 +88,7 @@
       <div class="mx-auto max-w-xl rounded-2xl border border-gray-800 bg-white/5 p-8 text-center shadow-2xl backdrop-blur">
         <p class="text-lg text-gray-300 mb-4">{m.cart_empty()}</p>
         <a
-          class="inline-flex items-center justify-center rounded-xl border border-indigo-500/60 bg-indigo-600/80 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-900/40 transition hover:-translate-y-0.5 hover:bg-indigo-500/90"
+          class="inline-flex items-center justify-center rounded-xl border border-[#4F46E5]/60 bg-[#4F46E5]/80 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#4F46E5]/40 transition hover:-translate-y-0.5 hover:bg-[#6366F1]"
           href="/categories"
         >
           Continue shopping
@@ -155,7 +155,7 @@
             <button
               type="button"
               onclick={goToCheckout}
-              class="w-full rounded-xl bg-indigo-600/90 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-900/40 transition hover:-translate-y-0.5 hover:bg-indigo-500"
+              class="w-full rounded-xl bg-[#4F46E5]/90 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[#4F46E5]/40 transition hover:-translate-y-0.5 hover:bg-[#6366F1]"
             >
               {m.cart_checkout_button()}
             </button>

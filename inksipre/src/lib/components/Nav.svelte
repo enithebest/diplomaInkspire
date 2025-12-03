@@ -95,7 +95,7 @@
         <form method="POST" action="/logout">
           <button
             type="submit"
-            class="bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600 text-sm"
+            class="bg-[#4F46E5] text-white px-4 py-2 rounded-lg hover:bg-[#6366F1] text-sm"
           >
             {m.nav_logout()}
           </button>
@@ -104,7 +104,7 @@
         <a href="/login" class="text-gray-300 hover:text-white font-medium">{m.nav_login()}</a>
         <a
           href="/register"
-          class="bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-400 transition text-sm"
+          class="bg-[#4F46E5] text-white px-4 py-2 rounded-lg hover:bg-[#6366F1] transition text-sm"
         >
           {m.nav_register()}
         </a>

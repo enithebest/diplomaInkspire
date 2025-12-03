@@ -58,7 +58,7 @@
       <!-- Submit -->
       <button
         type="submit"
-        class="w-full flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-lg transition"
+        class="w-full flex items-center justify-center gap-2 bg-[#4F46E5] hover:bg-[#6366F1] text-white font-medium py-2 rounded-lg transition"
       >
         <i class="fas fa-sign-in-alt"></i>
           {m.login_button()}
@@ -91,7 +91,7 @@
         <h2 class="text-white text-lg font-semibold mb-2">{m.login_required()}</h2>
         <p class="text-gray-300 mb-4">{m.please_login()}</p>
       <div class="flex justify-end gap-2">
-          <button type="button" class="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-500" onclick={closeNotice}>{m.ok_button()}</button>
+          <button type="button" class="px-4 py-2 rounded bg-[#4F46E5] text-white hover:bg-[#6366F1]" onclick={closeNotice}>{m.ok_button()}</button>
       </div>
     </div>
   </div>

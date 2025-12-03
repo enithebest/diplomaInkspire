@@ -18,7 +18,7 @@
         <h1 class="text-5xl font-semibold tracking-tight text-balance text-white sm:text-7xl">{m.hero_title()}</h1>
         <p class="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">{m.hero_subtitle()}</p>
         <div class="mt-10 flex items-center justify-center gap-x-6">
-          <a href="/categories" class="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">{m.hero_cta_primary()}</a>
+          <a href="/categories" class="rounded-md bg-[#4F46E5] px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-[#6366F1] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6366F1]">{m.hero_cta_primary()}</a>
           <a href="#mockups" class="text-sm/6 font-semibold text-white">{m.hero_cta_secondary()} <span aria-hidden="true">&rarr;</span></a>
         </div>
       </div>

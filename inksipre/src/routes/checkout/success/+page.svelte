@@ -39,7 +39,7 @@
   {/if}
 
   <div class="flex justify-center gap-3">
-    <a href="/orders" class="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700">View orders</a>
+    <a href="/orders" class="px-4 py-2 rounded-md bg-[#4F46E5] text-white hover:bg-[#6366F1]">View orders</a>
     <a href="/categories" class="px-4 py-2 rounded-md bg-gray-200 text-gray-800 hover:bg-gray-300">Continue shopping</a>
   </div>
 </section>
