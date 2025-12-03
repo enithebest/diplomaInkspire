@@ -63,7 +63,7 @@
       <a href="/" class="text-gray-300 hover:text-white font-medium">{m.nav_home()}</a>
       <a href="/categories" class="text-gray-300 hover:text-white font-medium">{m.nav_shop()}</a>
       <a href="/contact" class="text-gray-300 hover:text-white font-medium">{m.nav_contact()}</a>
-      <a href="/about" class="text-gray-300 hover:text-white font-medium">About</a>
+      <a href="/about" class="text-gray-300 hover:text-white font-medium">{m.nav_about()}</a>
 
       {#if user?.role === 'admin'}
         <a href="/admin" class="text-gray-300 hover:text-white font-medium">{m.nav_admin()}</a>

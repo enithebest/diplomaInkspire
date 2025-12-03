@@ -17,6 +17,14 @@ export const nav_contact = /** @type {(inputs: {}) => string} */ () => {
 	return `Kontakt`
 };
 
+export const nav_about = /** @type {(inputs: {}) => string} */ () => {
+	return `Über uns`
+};
+
+export const nav_about = /** @type {(inputs: {}) => string} */ () => {
+	return `Über uns`
+};
+
 export const nav_admin = /** @type {(inputs: {}) => string} */ () => {
 	return `Admin`
 };
