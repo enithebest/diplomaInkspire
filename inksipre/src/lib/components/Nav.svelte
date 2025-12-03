@@ -26,7 +26,13 @@
 
     // Listen for changes triggered in other tabs
     window.addEventListener('storage', updateCartCount);
-    return () => window.removeEventListener('storage', updateCartCount);
+    const handleCartUpdated = () => updateCartCount();
+    window.addEventListener('cart-updated', handleCartUpdated);
+
+    return () => {
+      window.removeEventListener('storage', updateCartCount);
+      window.removeEventListener('cart-updated', handleCartUpdated);
+    };
   });
 
   $: availableLocales = locales?.length ? locales : ['en'];

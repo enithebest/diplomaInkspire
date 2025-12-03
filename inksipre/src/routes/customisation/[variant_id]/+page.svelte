@@ -6,16 +6,15 @@
   import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
   import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-  export let data;
-  export let form;
+  let { data, form } = $props();
 
-  let file;
-  let previewUrl = '';
-  let showLibrary = false;
-  let search = '';
+  let file = $state(null);
+  let previewUrl = $state('');
+  let showLibrary = $state(false);
+  let search = $state('');
 
-  let containerRef;
-  let editorContainerRef;
+  let containerRef = $state(null);
+  let editorContainerRef = $state(null);
 
   let scene;
   let camera;
@@ -39,25 +38,35 @@
     return null;
   })();
 
-  let showEditor = false;
-  let uploadedImages = [];
+  let showEditor = $state(false);
+  let uploadedImages = $state([]);
   let stage;
   let layer;
-  let lastSyncedImage = null;
+  let lastSyncedImage = $state(null);
   let Konva;
   let konvaReady = false;
-  let pendingEditorInit = false;
-  let orderDesignData = '';
-  let orderDesignUrl = '';
+  let pendingEditorInit = $state(false);
+  let orderDesignData = $state('');
+  let orderDesignUrl = $state('');
+  let lastOrderHandled = $state(null);
 
-  let libraryItems = [];
-  let jacketColor = (data?.variant?.color ?? '').toString().trim();
-
-  $: libraryItems = (data?.uploads ?? []).map((upload) => ({
+  let libraryItems = $derived((data?.uploads ?? []).map((upload) => ({
     id: upload.id,
     url: upload.image_url,
     created_at: upload.created_at
-  }));
+  })));
+  const variantOptions = (() => {
+    try {
+      if (typeof data?.variant?.option_values === 'string') {
+        return JSON.parse(data.variant.option_values);
+      }
+      return data?.variant?.option_values || {};
+    } catch (err) {
+      console.error('Unable to parse variant options', err);
+      return {};
+    }
+  })();
+  let jacketColor = (data?.variant?.color ?? '').toString().trim();
 
   const handleFileChange = (event) => {
     file = event.target?.files?.[0];
@@ -214,6 +223,18 @@
     setTextureOnModel(texture);
 
     showEditor = false;
+  };
+
+  // Capture a snapshot of the current model or fallback design URL for cart/order preview
+  const snapshotCartPreview = () => {
+    try {
+      const img = captureModelImage();
+      if (img) {
+        orderDesignUrl = img;
+      }
+    } catch (err) {
+      console.error('Preview snapshot failed', err);
+    }
   };
 
   const prepareOrderSubmission = (event) => {
@@ -463,11 +484,51 @@
     }
   });
 
-  $: if (browser && form?.imageUrl && form.imageUrl !== lastSyncedImage) {
-    lastSyncedImage = form.imageUrl;
-    previewUrl = form.imageUrl;
-    addImageToEditor(form.imageUrl);
-  }
+  $effect(() => {
+    if (browser && form?.imageUrl && form.imageUrl !== lastSyncedImage) {
+      lastSyncedImage = form.imageUrl;
+      previewUrl = form.imageUrl;
+      addImageToEditor(form.imageUrl);
+    }
+  });
+
+  // When an order succeeds, mirror it into the local cart so it appears immediately
+  $effect(() => {
+    if (!browser) return;
+    if (!form?.orderSuccess) return;
+    const handledKey = form?.orderId || 'order';
+    if (lastOrderHandled === handledKey) return;
+    lastOrderHandled = handledKey;
+
+    const color = (variantOptions?.color || data?.variant?.color || '').toString();
+    const size = (variantOptions?.size || data?.variant?.size || '').toString();
+    const price = Number(data?.variant?.price ?? data?.product?.base_price ?? 0) || 0;
+    const image =
+      orderDesignUrl ||
+      previewUrl ||
+      form?.imageUrl ||
+      data?.variant?.image_url ||
+      data?.product?.image_url ||
+      '';
+
+    try {
+      const cartRaw = localStorage.getItem('cart');
+      const cart = cartRaw ? JSON.parse(cartRaw) : [];
+      cart.unshift({
+        name: data?.product?.name || 'Custom product',
+        sku: data?.variant?.sku || data?.variant?.id || '',
+        size,
+        color,
+        price,
+        qty: 1,
+        image
+      });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      window.dispatchEvent(new Event('cart-updated'));
+    } catch (err) {
+      console.error('Failed to sync cart', err);
+    }
+  });
 
   onDestroy(() => {
     if (!browser) return;
@@ -494,7 +555,7 @@
           <button
             type="button"
             class="text-sm text-indigo-300 hover:text-white underline"
-            on:click={() => (showLibrary = true)}
+            onclick={() => (showLibrary = true)}
           >
             My library
           </button>
@@ -509,7 +570,7 @@
               name="design"
               accept="image/*"
               required
-              on:change={handleFileChange}
+              onchange={handleFileChange}
               class="block w-full text-sm text-gray-200 border border-white/10 rounded-lg cursor-pointer bg-white/5 focus:outline-none"
             />
             <p class="mt-2 text-xs text-gray-400">Allowed: PNG, JPG, WEBP. Max size: 5MB.</p>
@@ -547,7 +608,7 @@
         <p class="text-lg font-medium mb-3">Edit your artwork</p>
         <button
           class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-3 rounded-xl transition transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-indigo-400"
-          on:click={openEditor}
+          onclick={openEditor}
         >
           {uploadedImages.length ? 'Reopen Customizer' : 'Open Customizer'}
         </button>
@@ -587,7 +648,7 @@
         <div class="flex justify-end mt-3">
           <button
             class="bg-gray-800/70 border border-white/15 text-white font-semibold px-3 py-2 rounded-lg shadow-md backdrop-blur transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-400 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
-            on:click={download}
+            onclick={download}
             disabled={!modelPath}
           >
             Download render
@@ -616,7 +677,7 @@
             method="POST"
             action="?/order"
             class="space-y-3"
-            on:submit={prepareOrderSubmission}
+            onsubmit={prepareOrderSubmission}
           >
             <input type="hidden" name="design_data" value={orderDesignData} />
             <input type="hidden" name="design_url" value={orderDesignUrl} />
@@ -628,9 +689,7 @@
               Order this custom piece
             </button>
             {#if form?.orderSuccess}
-              <p class="text-sm text-green-400" role="status">
-                Order saved! {form.orderId ? `ID #${form.orderId}` : ''} — we’ll get it ready.
-              </p>
+              <p class="text-sm text-green-400" role="status">Order saved! We’ll get it ready.</p>
             {/if}
             {#if form?.orderError}
               <p class="text-sm text-red-400" role="alert">{form.orderError}</p>
@@ -647,14 +706,14 @@
         class="absolute inset-0 bg-black/60"
         role="button"
         tabindex="0"
-        on:click={() => (showLibrary = false)}
-        on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && (showLibrary = false)}
+        onclick={() => (showLibrary = false)}
+        onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && (showLibrary = false)}
         aria-label="Close library"
       ></div>
       <aside class="absolute right-0 top-0 h-full w-full sm:w-[28rem] bg-gray-900 border-l border-white/10 p-4 overflow-y-auto">
         <div class="flex items-center justify-between mb-3">
           <h2 class="text-lg font-semibold">My library</h2>
-          <button class="text-sm text-gray-300 hover:text-white" on:click={() => (showLibrary = false)}>Close</button>
+          <button class="text-sm text-gray-300 hover:text-white" onclick={() => (showLibrary = false)}>Close</button>
         </div>
 
         <input
@@ -675,7 +734,7 @@
                   <span class="text-xs truncate max-w-[70%]" title={displayName(item.url)}>{displayName(item.url)}</span>
                   <button
                     class="text-xs px-2 py-1 rounded bg-indigo-600 text-white hover:bg-indigo-500"
-                    on:click={() => useFromLibrary(item.url)}
+                    onclick={() => useFromLibrary(item.url)}
                   >
                     Use
                   </button>
@@ -694,7 +753,7 @@
       <div bind:this={editorContainerRef} class="bg-gray-100 rounded-lg shadow-2xl overflow-hidden"></div>
       <button
         class="mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3 rounded-full transition transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-indigo-400"
-        on:click={applyToModel}
+        onclick={applyToModel}
       >
         Ready
       </button>
