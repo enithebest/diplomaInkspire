@@ -21,10 +21,6 @@ export const nav_about = /** @type {(inputs: {}) => string} */ () => {
 	return `About`
 };
 
-export const nav_about = /** @type {(inputs: {}) => string} */ () => {
-	return `About`
-};
-
 export const nav_admin = /** @type {(inputs: {}) => string} */ () => {
 	return `Admin`
 };
