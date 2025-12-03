@@ -5,6 +5,9 @@
   export let data;
   export let form;
 
+  import { productImages } from "./productImages.js";
+  let selectedColor = {};
+
   const { hoodies, tshirts, sweatshirts, mugs } = data;
    const short = (text, len = 90) => (text ? `${text.slice(0, len)}${text.length > len ? '…' : ''}` : '');
   const featureBadges = (product) => {
@@ -97,11 +100,24 @@
             class="bg-gray-800/60 backdrop-blur-sm border border-gray-700 shadow-lg rounded-2xl p-4 flex flex-col transition hover:-translate-y-1 hover:shadow-indigo-500/30 duration-300"
           >
             <div class="w-full h-48 rounded-xl bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 border border-gray-700 overflow-hidden flex items-center justify-center">
-              {#if product.image_url}
-                <img src={product.image_url} alt={product.name} class="w-full h-full object-cover" />
-              {:else}
-                <span class="text-gray-400 text-sm">Image coming soon</span>
-              {/if}
+            {#if productImages[product.id] && selectedColor[product.id]}
+  <!-- Variante gewählt -->
+  <img
+    src={productImages[product.id].colors[selectedColor[product.id]]}
+    alt={product.name}
+    class="w-full h-full object-cover"
+  />
+{:else if product.image_url}
+  <!-- Standard DB Bild -->
+  <img
+    src={product.image_url}
+    alt={product.name}
+    class="w-full h-full object-cover"
+  />
+{:else}
+  <span class="text-gray-400 text-sm">Image coming soon</span>
+{/if}
+
             </div>
             <div class="mt-3 flex-1 flex flex-col gap-2">
               <div class="flex items-center justify-between gap-2">
