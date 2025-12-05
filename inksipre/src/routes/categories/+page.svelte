@@ -1,4 +1,5 @@
 <script>
+  import { goto } from '$app/navigation';
   import { enhance } from '$app/forms';
   import { onMount } from 'svelte';
   import * as m from '$lib/paraglide/messages/_index.js';
@@ -39,6 +40,8 @@
     { title: m.categories_section_sweatshirts(), items: sweatshirts },
     { title: m.categories_section_mugs(), items: mugs }
   ];
+
+  const clearSearch = () => goto('/categories');
   onMount(() => {
     try {
       const url = typeof localStorage !== 'undefined' ? localStorage.getItem('selectedDesignUrl') : null;
@@ -71,13 +74,26 @@
 
   <!-- Search Bar -->
   <form method="POST" action="?/search" use:enhance class="flex flex-col sm:flex-row gap-3 justify-center mb-12">
-    <input
-      type="text"
-      name="name"
-      placeholder={m.categories_search_placeholder()}
-      class="border border-gray-700 bg-gray-800 text-gray-200 placeholder-gray-400 rounded-lg px-4 py-2 w-full sm:w-1/2 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-      required
-    />
+    <div class="relative w-full sm:w-1/2">
+      <input
+        type="text"
+        name="name"
+        placeholder={form?.searchTerm || m.categories_search_placeholder()}
+        class="border border-gray-700 bg-gray-800 text-gray-200 placeholder:text-gray-500 rounded-lg px-4 py-2 w-full pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+        required
+        aria-label="Produkt suchen"
+      />
+      {#if form?.searchTerm}
+        <button
+          type="button"
+          class="absolute inset-y-0 right-2 my-auto h-8 w-8 rounded-full bg-gray-700 text-gray-200 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+          onclick={clearSearch}
+          aria-label="Suche zurücksetzen und zum Shop"
+        >
+          ✕
+        </button>
+      {/if}
+    </div>
     <button
       type="submit"
       class="bg-[#4F46E5] hover:bg-[#6366F1] text-white px-6 py-2 rounded-lg font-medium transition"

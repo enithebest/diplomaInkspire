@@ -937,6 +937,267 @@ export const profile_error_invalid_upload = /** @type {(inputs: {}) => string} *
 	return `ID upload non valido`
 };
 
+export const about_page_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Chi è Inkspire | Storia, spedizioni e policy`
+};
+
+export const about_meta_description = /** @type {(inputs: {}) => string} */ () => {
+	return `Scopri Inkspire: missione, team, tempi di spedizione, resi, privacy, cookie e termini di servizio.`
+};
+
+export const about_badge = /** @type {(inputs: {}) => string} */ () => {
+	return `Su Inkspire`
+};
+
+export const about_badge_location = /** @type {(inputs: {}) => string} */ () => {
+	return `Studio di Lipsia, spedizione in tutto il mondo`
+};
+
+export const about_hero_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Inkspire crea streetwear in edizione limitata che sembra artigianale, non prodotto in massa.`
+};
+
+export const about_hero_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Un mix di tessuti tattili, stampe precise e produzione reattiva: ogni drop è personale, da Lipsia a casa tua.`
+};
+
+export const about_last_updated_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Ultimo aggiornamento`
+};
+
+export const about_last_updated_value = /** @type {(inputs: {}) => string} */ () => {
+	return `02 dicembre 2025`
+};
+
+export const about_address_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Studio`
+};
+
+export const about_address_value = /** @type {(inputs: {}) => string} */ () => {
+	return `Karl-Liebknecht-Str. 12
+04107 Lipsia, Germania`
+};
+
+export const about_email_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Email supporto`
+};
+
+export const about_email_value = /** @type {(inputs: {}) => string} */ () => {
+	return `support@inkspire.studio`
+};
+
+export const about_phone_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Telefono`
+};
+
+export const about_phone_value = /** @type {(inputs: {}) => string} */ () => {
+	return `+49 341 000000`
+};
+
+export const about_hours_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Orari supporto`
+};
+
+export const about_hours_value = /** @type {(inputs: {}) => string} */ () => {
+	return `Lun-Ven, 9:00-18:00 CET`
+};
+
+export const about_mission_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Missione e valori`
+};
+
+export const about_mission_intro = /** @type {(inputs: {}) => string} */ () => {
+	return `Inkspire porta lo streetwear di livello premium con drop a piccoli lotti, approvvigionamento trasparente e storytelling tangibile. Collaboriamo con artisti e stampatori per mantenere ogni uscita chiara e tracciabile.`
+};
+
+export const about_value1_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Drop limitati`
+};
+
+export const about_value1_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Piccoli lotti mirati che rendono speciale ogni uscita.`
+};
+
+export const about_value2_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Forniture responsabili`
+};
+
+export const about_value2_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Filature affidabili, partner equi e coloranti rispettosi del pianeta.`
+};
+
+export const about_value3_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Trasparenza radicale`
+};
+
+export const about_value3_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Materiali, tempi e prezzi spiegati in anticipo.`
+};
+
+export const about_team_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Snapshot del team`
+};
+
+export const about_team_chip = /** @type {(inputs: {}) => string} */ () => {
+	return `Nota del founder pronta`
+};
+
+export const about_team_body = /** @type {(inputs: {}) => string} */ () => {
+	return `Aggiungi una foto del team o un breve messaggio del founder per mostrare i volti dietro le macchine. Mantienilo autentico.`
+};
+
+export const about_team_quote = /** @type {(inputs: {}) => string} */ () => {
+	return `"Ogni capo dovrebbe dirti chi lo ha fatto e perché conta."`
+};
+
+export const about_team_note = /** @type {(inputs: {}) => string} */ () => {
+	return `Inserisci qui il testo del founder o un breve riferimento audio/video.`
+};
+
+export const about_shipping_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Spedizioni`
+};
+
+export const about_shipping_badge_dhl = /** @type {(inputs: {}) => string} */ () => {
+	return `DHL Paket (UE)`
+};
+
+export const about_shipping_badge_ups = /** @type {(inputs: {}) => string} */ () => {
+	return `UPS Worldwide (internazionale)`
+};
+
+export const about_shipping_badge_handling = /** @type {(inputs: {}) => string} */ () => {
+	return `Handling: 1-2 giorni`
+};
+
+export const about_shipping_window_de_at = /** @type {(inputs: {}) => string} */ () => {
+	return `DE / AT`
+};
+
+export const about_shipping_window_de_at_value = /** @type {(inputs: {}) => string} */ () => {
+	return `2-4 giorni lavorativi`
+};
+
+export const about_shipping_window_eu = /** @type {(inputs: {}) => string} */ () => {
+	return `Resto UE`
+};
+
+export const about_shipping_window_eu_value = /** @type {(inputs: {}) => string} */ () => {
+	return `4-6 giorni lavorativi`
+};
+
+export const about_shipping_window_world = /** @type {(inputs: {}) => string} */ () => {
+	return `Nord America / APAC`
+};
+
+export const about_shipping_window_world_value = /** @type {(inputs: {}) => string} */ () => {
+	return `7-12 giorni lavorativi`
+};
+
+export const about_shipping_cost_free = /** @type {(inputs: {}) => string} */ () => {
+	return `Spedizione gratuita`
+};
+
+export const about_shipping_cost_free_detail = /** @type {(inputs: {}) => string} */ () => {
+	return `Ordini sopra 120 € in Germania`
+};
+
+export const about_shipping_cost_domestic = /** @type {(inputs: {}) => string} */ () => {
+	return `Nazionale`
+};
+
+export const about_shipping_cost_domestic_detail = /** @type {(inputs: {}) => string} */ () => {
+	return `5 € in tutta la DE`
+};
+
+export const about_shipping_cost_eu = /** @type {(inputs: {}) => string} */ () => {
+	return `UE`
+};
+
+export const about_shipping_cost_eu_detail = /** @type {(inputs: {}) => string} */ () => {
+	return `12 € in UE`
+};
+
+export const about_shipping_cost_intl = /** @type {(inputs: {}) => string} */ () => {
+	return `Internazionale`
+};
+
+export const about_shipping_cost_intl_detail = /** @type {(inputs: {}) => string} */ () => {
+	return `18-25 € nel mondo`
+};
+
+export const about_shipping_customs = /** @type {(inputs: {}) => string} */ () => {
+	return `Dazi e oneri di importazione sono a carico del destinatario. Le email di tracking partono automaticamente appena viene stampata l'etichetta.`
+};
+
+export const about_returns_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Resi e rimborsi`
+};
+
+export const about_return_rule1 = /** @type {(inputs: {}) => string} */ () => {
+	return `30 giorni dalla consegna; capi non usati e non lavati.`
+};
+
+export const about_return_rule2 = /** @type {(inputs: {}) => string} */ () => {
+	return `Articoli su misura/personalizzati e saldo finale esclusi salvo difetti.`
+};
+
+export const about_return_rule3 = /** @type {(inputs: {}) => string} */ () => {
+	return `Per clienti UE forniamo etichetta DHL prepagata; le altre regioni coprono la spedizione di ritorno.`
+};
+
+export const about_return_start = /** @type {(inputs: {}) => string} */ () => {
+	return `Per un reso scrivi a returns@inkspire.studio con il numero ordine. UE: etichetta DHL prepagata; altre regioni scelgono il corriere preferito.`
+};
+
+export const about_return_refund = /** @type {(inputs: {}) => string} */ () => {
+	return `I rimborsi vengono emessi entro 5 giorni lavorativi dopo il controllo. Possiamo anche proporre cambi o riparazioni se possibile.`
+};
+
+export const about_privacy_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Privacy e cookie`
+};
+
+export const about_privacy_point1 = /** @type {(inputs: {}) => string} */ () => {
+	return `Cosa raccogliamo: dati account/ordine, stato pagamenti, storico supporto. Analytics/ads solo dopo il tuo consenso.`
+};
+
+export const about_privacy_point2 = /** @type {(inputs: {}) => string} */ () => {
+	return `Perché e per quanto: contabilità e tasse 5 anni; analytics fino a 18 mesi.`
+};
+
+export const about_privacy_point3 = /** @type {(inputs: {}) => string} */ () => {
+	return `I tuoi diritti: copia, rettifica o cancellazione dati, e revoca del consenso in ogni momento. DPO: privacy@inkspire.studio.`
+};
+
+export const about_cookie_notice = /** @type {(inputs: {}) => string} */ () => {
+	return `Cookie: usiamo quelli essenziali per carrello, checkout e login. Analytics/ads restano spenti finché non acconsenti; scelta revocabile in qualsiasi momento.`
+};
+
+export const about_tos_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Termini di servizio`
+};
+
+export const about_tos_point1 = /** @type {(inputs: {}) => string} */ () => {
+	return `Uso del sito: niente scraping, abusi automatici o attività dannose.`
+};
+
+export const about_tos_point2 = /** @type {(inputs: {}) => string} */ () => {
+	return `Ordini: possibili correzioni di prezzo; IVA inclusa dove applicabile.`
+};
+
+export const about_tos_point3 = /** @type {(inputs: {}) => string} */ () => {
+	return `Proprietà intellettuale: tutti i design, artwork e contenuti appartengono a Inkspire.`
+};
+
+export const about_tos_point4 = /** @type {(inputs: {}) => string} */ () => {
+	return `Responsabilità: limitata al massimo consentito dalla legge.`
+};
+
+export const about_tos_point5 = /** @type {(inputs: {}) => string} */ () => {
+	return `Legge applicabile: diritto tedesco; foro di Lipsia, Germania.`
+};
+
 export const contact_badge = /** @type {(inputs: {}) => string} */ () => {
 	return `Rispondiamo entro 24 ore`
 };
