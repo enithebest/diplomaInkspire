@@ -1203,7 +1203,7 @@ export const about_partner_heading = /** @type {(inputs: {}) => string} */ () =>
 };
 
 export const about_partner_lead = /** @type {(inputs: {}) => string} */ () => {
-	return `Pr“ziser 3D-Druck und Textilveredelung fr individuelle Apparel- und Merch-Auftr“ge.`
+	return `Präziser 3D-Druck und Textilveredelung für individuelle Apparel- und Merch-Aufträge.`
 };
 
 export const about_partner_name = /** @type {(inputs: {}) => string} */ () => {
@@ -1215,7 +1215,7 @@ export const about_partner_coverage = /** @type {(inputs: {}) => string} */ () =
 };
 
 export const about_partner_facility = /** @type {(inputs: {}) => string} */ () => {
-	return `1.800 m2 Produktionsfl“che mit klimatisiertem Druckbereich sowie eigener Veredelung und Verpackung.`
+	return `1.800 m2 Produktionsfläche mit klimatisiertem Druckbereich sowie eigener Veredelung und Verpackung.`
 };
 
 export const about_partner_banner_note = /** @type {(inputs: {}) => string} */ () => {
@@ -1223,27 +1223,27 @@ export const about_partner_banner_note = /** @type {(inputs: {}) => string} */ (
 };
 
 export const about_partner_capabilities_title = /** @type {(inputs: {}) => string} */ () => {
-	return `F“higkeiten & Ausstattung`
+	return `Fähigkeiten & Ausstattung`
 };
 
 export const about_partner_capability_dtg = /** @type {(inputs: {}) => string} */ () => {
-	return `DTG: Kornit Atlas MAX + Brother GTXpro Bulk fr Baumwollmischungen.`
+	return `DTG: Kornit Atlas MAX + Brother GTXpro Bulk für Baumwollmischungen.`
 };
 
 export const about_partner_capability_uv = /** @type {(inputs: {}) => string} */ () => {
-	return `UV-Flachbett: Canon Arizona fr Hardgoods (Metall, Acryl).`
+	return `UV-Flachbett: Canon Arizona für Hardgoods (Metall, Acryl).`
 };
 
 export const about_partner_capability_dyesub = /** @type {(inputs: {}) => string} */ () => {
-	return `Sublimation: Epson SureColor F-Serie fr Performance-Stoffe.`
+	return `Sublimation: Epson SureColor F-Serie für Performance-Stoffe.`
 };
 
 export const about_partner_capability_finishing = /** @type {(inputs: {}) => string} */ () => {
-	return `Finishing: 6-Stationen-Transferlinie, Laser-Konturschneider fr Patches, Inline-QC + Bagging.`
+	return `Finishing: 6-Stationen-Transferlinie, Laser-Konturschneider für Patches, Inline-QC + Bagging.`
 };
 
 export const about_partner_capability_color = /** @type {(inputs: {}) => string} */ () => {
-	return `Farbe: ICC-gefhrte Workflows; Pantone-Matching auf Textilien, wo m”glich.`
+	return `Farbe: ICC-gefährte Workflows; Pantone-Matching auf Textilien, wo möglich.`
 };
 
 export const about_partner_materials_title = /** @type {(inputs: {}) => string} */ () => {
@@ -1255,23 +1255,23 @@ export const about_partner_materials_inks = /** @type {(inputs: {}) => string} *
 };
 
 export const about_partner_materials_garments = /** @type {(inputs: {}) => string} */ () => {
-	return `Textilien: ringgesponnene Baumwoll-Shirts/Hoodies; recycelte Polyester-Optionen fr Performance-Linien; Keramikrohlinge fr Tassen.`
+	return `Textilien: ringgesponnene Baumwoll-Shirts/Hoodies; recycelte Polyester-Optionen für Performance-Linien; Keramikrohlinge für Tassen.`
 };
 
 export const about_partner_quality_title = /** @type {(inputs: {}) => string} */ () => {
-	return `Qualit“t & Prozess`
+	return `Qualität & Prozess`
 };
 
 export const about_partner_quality_qc = /** @type {(inputs: {}) => string} */ () => {
-	return `3-stufige QC: Vorabprfung von Stoff/Blank, Sichtkontrolle nach dem Druck, abschlieáender Pack-Audit.`
+	return `3-stufige QC: Vorabprüfung von Stoff/Blank, Sichtkontrolle nach dem Druck, abschliesender Pack-Audit.`
 };
 
 export const about_partner_quality_profiling = /** @type {(inputs: {}) => string} */ () => {
-	return `Profiling: ger“teverknpfte ICC-Profile pro Substrat; w”chentliche Dsenchecks und Kalibrierung.`
+	return `Profilierung: gerätegebundene ICC-Profile pro Substrat; wöchentliche Düsenprüfungen und Kalibrierung.`
 };
 
 export const about_partner_quality_samples = /** @type {(inputs: {}) => string} */ () => {
-	return `Sample-Protokoll: Erstdruck-Beleg wird 30 Tage aufbewahrt; Foto-Freigabe m”glich.`
+	return `Sample-Protokoll: Erstdruck-Beleg wird 30 Tage aufbewahrt; Foto-Freigabe möglich.`
 };
 
 export const about_partner_sla_title = /** @type {(inputs: {}) => string} */ () => {
@@ -1279,7 +1279,7 @@ export const about_partner_sla_title = /** @type {(inputs: {}) => string} */ () 
 };
 
 export const about_partner_sla_production = /** @type {(inputs: {}) => string} */ () => {
-	return `Standard: 48-72h Produktion nach Artwork-Freigabe; Rush-Lane <24h fr Lager-SKUs.`
+	return `Standard: 48-72h Produktion nach Artwork-Freigabe; Rush-Lane <24h für Lager-SKUs.`
 };
 
 export const about_partner_sla_packaging = /** @type {(inputs: {}) => string} */ () => {
@@ -1319,7 +1319,7 @@ export const about_partner_logistics_title = /** @type {(inputs: {}) => string} 
 };
 
 export const about_partner_logistics_lanes = /** @type {(inputs: {}) => string} */ () => {
-	return `DHL/UPS-Lanes; EU-weit zollfrei; Hinweise fr Nicht-EU-Sendungen auf Anfrage.`
+	return `DHL/UPS-Lanes; EU-weit zollfrei; Hinweise für Nicht-EU-Sendungen auf Anfrage.`
 };
 
 export const about_partner_cta_checklist = /** @type {(inputs: {}) => string} */ () => {

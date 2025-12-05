@@ -374,7 +374,7 @@ export const product_tshirt_desc = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const admin_title = /** @type {(inputs: {}) => string} */ () => {
-	return `Admin â€” Product Management`
+	return `Admin Product Management`
 };
 
 export const admin_create_heading = /** @type {(inputs: {}) => string} */ () => {
