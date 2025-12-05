@@ -32,7 +32,7 @@
 
 	<div class="relative z-10 max-w-5xl mx-auto space-y-10">
 		<h1 class="text-4xl md:text-5xl font-bold text-center mb-6 bg-gradient-to-r from-blue-300 to-purple-400 bg-clip-text text-transparent">
-			{m.admin_title()}
+			Adminbereich Produktverwaltung
 		</h1>
 
 		<form
@@ -108,7 +108,7 @@
 							<h3 class="text-xl font-semibold text-blue-300">{product.name}</h3>
 							<p class="text-gray-300">{product.description}</p>
 							<p class="text-sm text-gray-400">{product.category}</p>
-							<p class="mt-1 font-medium text-white">{product.base_price} €</p>
+							<p class="mt-1 font-medium text-white">{product.base_price} â‚¬</p>
 						</div>
 					</div>
 
@@ -133,16 +133,16 @@
 									class="flex justify-between items-center bg-white/10 rounded-lg px-3 py-2 text-gray-200 hover:bg-white/20 transition"
 								>
 									<span class="font-mono">
-										{ov?.size || '–'} / {ov?.color || '–'}
+										{ov?.size || 'â€“'} / {ov?.color || 'â€“'}
 									</span>
 									<div class="flex items-center gap-4">
-										<span class="text-sm font-medium">{v.price} €</span>
+										<span class="text-sm font-medium">{v.price} â‚¬</span>
 										<form method="POST" action="?/deleteVariant" use:enhance>
 											<input type="hidden" name="id" value={v.id} />
 											<button
 												class="text-red-400 hover:text-red-500 text-sm font-medium"
 											>
-												Löschen
+												LÃ¶schen
 											</button>
 										</form>
 									</div>
@@ -185,7 +185,7 @@
 		{#if hasMore}
 			<div class="flex justify-center mt-10">
 				<button
-					onclick={loadMore}
+					on:click={loadMore}
 					class="bg-[#4F46E5] hover:bg-[#6366F1] text-white font-semibold py-3 px-8 rounded-lg transition-all duration-200 shadow-lg shadow-[#4F46E5]/20"
 				>
 					Load More Products
