@@ -195,6 +195,4 @@
 	</div>
 </section>
 
-<style>
-/* Animations removed per user request */
-</style>
+
