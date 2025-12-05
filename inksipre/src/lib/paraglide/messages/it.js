@@ -98,7 +98,7 @@ export const create_account = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const already_have_account = /** @type {(inputs: {}) => string} */ () => {
-	return `Hai giÃ  un account?`
+	return `Hai già un account?`
 };
 
 export const login_here = /** @type {(inputs: {}) => string} */ () => {
@@ -122,7 +122,7 @@ export const email_placeholder_login = /** @type {(inputs: {}) => string} */ () 
 };
 
 export const password_placeholder_login = /** @type {(inputs: {}) => string} */ () => {
-	return `â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢`
+	return `password`
 };
 
 export const login_button = /** @type {(inputs: {}) => string} */ () => {
@@ -174,7 +174,7 @@ export const hero_cta_secondary = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const bestsellers_title = /** @type {(inputs: {}) => string} */ () => {
-	return `I piÃ¹ venduti`
+	return `Il più venduti`
 };
 
 export const bestsellers_subtitle = /** @type {(inputs: {}) => string} */ () => {
@@ -198,7 +198,7 @@ export const content_title = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const content_intro = /** @type {(inputs: {}) => string} */ () => {
-	return `Mostra i tuoi prodotti, app o packaging con visual 3D di alta qualitÃ  che impressionano i clienti e aumentano le conversioni â€” tutto dal tuo browser.`
+	return `Mostra i tuoi prodotti, app o packaging con visual 3D di alta qualità  che impressionano i clienti e aumentano le conversioni tutto dal tuo browser.`
 };
 
 export const content_feature_instant_title = /** @type {(inputs: {}) => string} */ () => {
@@ -206,7 +206,7 @@ export const content_feature_instant_title = /** @type {(inputs: {}) => string} 
 };
 
 export const content_feature_instant_desc = /** @type {(inputs: {}) => string} */ () => {
-	return `Carica il tuo design e vedi l'applicazione istantanea su superfici 3D realistiche â€” senza ritardi di rendering.`
+	return `Carica il tuo design e vedi l'applicazione istantanea su superfici 3D realistiche ” senza ritardi di rendering.`
 };
 
 export const content_feature_cloud_title = /** @type {(inputs: {}) => string} */ () => {
@@ -374,7 +374,7 @@ export const product_tshirt_desc = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const admin_title = /** @type {(inputs: {}) => string} */ () => {
-	return `Admin â€” Gestione prodotti`
+	return `Admin Gestione dei prodotti`
 };
 
 export const admin_create_heading = /** @type {(inputs: {}) => string} */ () => {
