@@ -70,11 +70,11 @@ export const email_placeholder = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const full_name_label = /** @type {(inputs: {}) => string} */ () => {
-	return `VollstÃ¤ndiger Name`
+	return `Vollständiger Name`
 };
 
 export const full_name_placeholder = /** @type {(inputs: {}) => string} */ () => {
-	return `Geben Sie Ihren vollstÃ¤ndigen Namen ein`
+	return `Geben Sie Ihren vollständigen Namen ein`
 };
 
 export const password_label = /** @type {(inputs: {}) => string} */ () => {
@@ -86,11 +86,11 @@ export const password_placeholder = /** @type {(inputs: {}) => string} */ () => 
 };
 
 export const confirm_password_label = /** @type {(inputs: {}) => string} */ () => {
-	return `Passwort bestÃ¤tigen`
+	return `Passwort bestätigen`
 };
 
 export const confirm_password_placeholder = /** @type {(inputs: {}) => string} */ () => {
-	return `BestÃ¤tigen Sie Ihr Passwort`
+	return `Bestätigen Sie Ihr Passwort`
 };
 
 export const create_account = /** @type {(inputs: {}) => string} */ () => {
@@ -122,7 +122,7 @@ export const email_placeholder_login = /** @type {(inputs: {}) => string} */ () 
 };
 
 export const password_placeholder_login = /** @type {(inputs: {}) => string} */ () => {
-	return `â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢`
+	return `password`
 };
 
 export const login_button = /** @type {(inputs: {}) => string} */ () => {
@@ -198,7 +198,7 @@ export const content_title = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const content_intro = /** @type {(inputs: {}) => string} */ () => {
-	return `PrÃ¤sentieren Sie Ihre Produkte, Apps oder Verpackungen mit hochwertigen 3D-Visuals, die Kunden beeindrucken und die Conversion-Rate steigern â€“ alles direkt im Browser.`
+	return `Präsentieren Sie Ihre Produkte, Apps oder Verpackungen mit hochwertigen 3D-Visuals, die Kunden beeindrucken und die Conversion-Rate steigern“ alles direkt im Browser.`
 };
 
 export const content_feature_instant_title = /** @type {(inputs: {}) => string} */ () => {
@@ -206,7 +206,7 @@ export const content_feature_instant_title = /** @type {(inputs: {}) => string} 
 };
 
 export const content_feature_instant_desc = /** @type {(inputs: {}) => string} */ () => {
-	return `Laden Sie Ihr Design hoch und sehen Sie es sofort auf realistischen 3D-OberflÃ¤chen angewendet â€“ keine Render-VerzÃ¶gerungen.`
+	return `Laden Sie Ihr Design hoch und sehen Sie es sofort auf realistischen 3D-Oberflächen angewendet“ keine Render-Verzeugerungen.`
 };
 
 export const content_feature_cloud_title = /** @type {(inputs: {}) => string} */ () => {
@@ -214,7 +214,7 @@ export const content_feature_cloud_title = /** @type {(inputs: {}) => string} */
 };
 
 export const content_feature_cloud_desc = /** @type {(inputs: {}) => string} */ () => {
-	return `Alle Mockups werden in der Cloud gerendert â€” so bleibt Ihr Computer frei und Sie sparen Zeit.`
+	return `Alle Mockups werden in der Cloud gerendert” so bleibt Ihr Computer frei und Sie sparen Zeit.`
 };
 
 export const content_feature_lighting_title = /** @type {(inputs: {}) => string} */ () => {
@@ -226,7 +226,7 @@ export const content_feature_lighting_desc = /** @type {(inputs: {}) => string} 
 };
 
 export const content_paragraph2 = /** @type {(inputs: {}) => string} */ () => {
-	return `Von Startup-Branding-Kits bis hin zu kompletten Produktkampagnen macht unsere 3D-Mockup-Plattform die Visualisierung intuitiv und schnell â€” keine Modelliererfahrung erforderlich.`
+	return `Von Startup-Branding-Kits bis hin zu kompletten Produktkampagnen macht unsere 3D-Mockup-Plattform die Visualisierung intuitiv und schnell” keine Modelliererfahrung erforderlich.`
 };
 
 export const content_web_tools_title = /** @type {(inputs: {}) => string} */ () => {
@@ -234,7 +234,7 @@ export const content_web_tools_title = /** @type {(inputs: {}) => string} */ () 
 };
 
 export const content_web_tools_paragraph = /** @type {(inputs: {}) => string} */ () => {
-	return `Entwerfen, Vorschauen und exportieren Sie Ihre Mockups direkt aus dem Browser. In Echtzeit zusammenarbeiten, Links teilen oder hochauflÃ¶sende Renderings sofort herunterladen. Vereinfachen Sie noch heute Ihren kreativen Workflow.`
+	return `Entwerfen, Vorschauen und exportieren Sie Ihre Mockups direkt aus dem Browser. In Echtzeit zusammenarbeiten, Links teilen oder hochauflösende Renderings sofort herunterladen. Vereinfachen Sie noch heute Ihren kreativen Workflow.`
 };
 
 export const footer_tagline = /** @type {(inputs: {}) => string} */ () => {
@@ -242,7 +242,7 @@ export const footer_tagline = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const footer_shop_header = /** @type {(inputs: {}) => string} */ () => {
-	return `Shop`
+	return `Geschäft`
 };
 
 export const footer_shop_all_categories = /** @type {(inputs: {}) => string} */ () => {
@@ -270,7 +270,7 @@ export const footer_company_contact = /** @type {(inputs: {}) => string} */ () =
 };
 
 export const footer_company_about = /** @type {(inputs: {}) => string} */ () => {
-	return `Ãœber uns`
+	return `Über uns`
 };
 
 export const footer_company_careers = /** @type {(inputs: {}) => string} */ () => {
@@ -374,7 +374,7 @@ export const product_tshirt_desc = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const admin_title = /** @type {(inputs: {}) => string} */ () => {
-	return `Adminbereich â€“ Produktverwaltung`
+	return `Adminbereich Produktverwaltung`
 };
 
 export const admin_create_heading = /** @type {(inputs: {}) => string} */ () => {
@@ -386,7 +386,7 @@ export const admin_name_placeholder = /** @type {(inputs: {}) => string} */ () =
 };
 
 export const admin_base_price_placeholder = /** @type {(inputs: {}) => string} */ () => {
-	return `Basispreis (â‚¬)`
+	return `Basispreis `
 };
 
 export const admin_description_placeholder = /** @type {(inputs: {}) => string} */ () => {
@@ -394,7 +394,7 @@ export const admin_description_placeholder = /** @type {(inputs: {}) => string} 
 };
 
 export const admin_category_select_default = /** @type {(inputs: {}) => string} */ () => {
-	return `-- Kategorie wÃ¤hlen --`
+	return `-- Kategorie wählen --`
 };
 
 export const admin_category_hoodies = /** @type {(inputs: {}) => string} */ () => {
@@ -422,7 +422,7 @@ export const admin_create_button = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const admin_delete_button = /** @type {(inputs: {}) => string} */ () => {
-	return `LÃ¶schen`
+	return `Löschen`
 };
 
 export const admin_variants_heading = /** @type {(inputs: {}) => string} */ () => {
@@ -434,7 +434,7 @@ export const admin_no_variants = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const admin_variant_size_placeholder = /** @type {(inputs: {}) => string} */ () => {
-	return `GrÃ¶ÃŸe (z. B. M)`
+	return `Größe (z. B. M)`
 };
 
 export const admin_variant_color_placeholder = /** @type {(inputs: {}) => string} */ () => {
@@ -446,7 +446,7 @@ export const admin_variant_price_placeholder = /** @type {(inputs: {}) => string
 };
 
 export const admin_add_variant_button = /** @type {(inputs: {}) => string} */ () => {
-	return `Variante hinzuf?gen`
+	return `Variante hinzufügen`
 };
 
 export const cart_toast_removed = /** @type {(inputs: {}) => string} */ () => {
@@ -935,6 +935,399 @@ export const profile_reorder_alert = /** @type {(inputs: {}) => string} */ () =>
 
 export const profile_error_invalid_upload = /** @type {(inputs: {}) => string} */ () => {
 	return `Ungültige Upload-ID`
+};
+
+export const about_page_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Über Inkspire | Story, Versand und Richtlinien`
+};
+
+export const about_meta_description = /** @type {(inputs: {}) => string} */ () => {
+	return `Erfahren Sie mehr über Inkspire: unsere Mission, Team, Versandzeiten, Rückgaben, Datenschutz, Cookies und AGB.`
+};
+
+export const about_badge = /** @type {(inputs: {}) => string} */ () => {
+	return `Über Inkspire`
+};
+
+export const about_badge_location = /** @type {(inputs: {}) => string} */ () => {
+	return `Studio Leipzig, Versand weltweit`
+};
+
+export const about_hero_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Inkspire macht limitierte Streetwear, die handgemacht wirkt – nicht massenhaft.`
+};
+
+export const about_hero_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Wir verbinden haptische Stoffe, präzise Drucke und reaktionsschnelle Fertigung, damit sich jeder Drop persönlich anfühlt – von Leipzig bis vor deine Tür.`
+};
+
+export const about_last_updated_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Letzte Aktualisierung`
+};
+
+export const about_last_updated_value = /** @type {(inputs: {}) => string} */ () => {
+	return `02. Dezember 2025`
+};
+
+export const about_address_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Studio`
+};
+
+export const about_address_value = /** @type {(inputs: {}) => string} */ () => {
+	return `Karl-Liebknecht-Str. 12
+04107 Leipzig, Deutschland`
+};
+
+export const about_email_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Support-E-Mail`
+};
+
+export const about_email_value = /** @type {(inputs: {}) => string} */ () => {
+	return `support@inkspire.studio`
+};
+
+export const about_phone_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Telefon`
+};
+
+export const about_phone_value = /** @type {(inputs: {}) => string} */ () => {
+	return `+49 341 000000`
+};
+
+export const about_hours_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Supportzeiten`
+};
+
+export const about_hours_value = /** @type {(inputs: {}) => string} */ () => {
+	return `Mo-Fr, 9:00-18:00 CET`
+};
+
+export const about_mission_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Mission & Werte`
+};
+
+export const about_mission_intro = /** @type {(inputs: {}) => string} */ () => {
+	return `Inkspire bringt hochwertige Streetwear mit Small-Batch-Drops, ehrlichem Sourcing und fühlbarem Storytelling auf den Punkt. Wir arbeiten eng mit Artists und Druckereien, um jede Veröffentlichung transparent und nachvollziehbar zu halten.`
+};
+
+export const about_value1_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Limitierte Drops`
+};
+
+export const about_value1_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Kleine, sorgfältige Chargen, die jeden Release besonders machen.`
+};
+
+export const about_value2_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Verantwortungsvolle Beschaffung`
+};
+
+export const about_value2_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Vertrauenswürdige Webereien, faire Partner und farbstoffe mit Fokus auf den Planeten.`
+};
+
+export const about_value3_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Radikale Transparenz`
+};
+
+export const about_value3_desc = /** @type {(inputs: {}) => string} */ () => {
+	return `Materialien, Laufzeiten und Preise klar vorab kommuniziert.`
+};
+
+export const about_team_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Team-Überblick`
+};
+
+export const about_team_chip = /** @type {(inputs: {}) => string} */ () => {
+	return `Gründer-Notiz bereit`
+};
+
+export const about_team_body = /** @type {(inputs: {}) => string} */ () => {
+	return `Füge ein Teamfoto oder eine kurze Gründerbotschaft hinzu, um die Gesichter hinter den Pressen zu zeigen. Authentisch und menschlich.`
+};
+
+export const about_team_quote = /** @type {(inputs: {}) => string} */ () => {
+	return `"Jedes Kleidungsstück sollte sagen, wer es gemacht hat und warum es zählt."`
+};
+
+export const about_team_note = /** @type {(inputs: {}) => string} */ () => {
+	return `Füge hier deinen Gründertext oder einen kurzen Audio/Video-Hinweis ein.`
+};
+
+export const about_shipping_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Versand`
+};
+
+export const about_shipping_badge_dhl = /** @type {(inputs: {}) => string} */ () => {
+	return `DHL Paket (EU)`
+};
+
+export const about_shipping_badge_ups = /** @type {(inputs: {}) => string} */ () => {
+	return `UPS Worldwide (international)`
+};
+
+export const about_shipping_badge_handling = /** @type {(inputs: {}) => string} */ () => {
+	return `Bearbeitungszeit: 1-2 Tage`
+};
+
+export const about_shipping_window_de_at = /** @type {(inputs: {}) => string} */ () => {
+	return `DE / AT`
+};
+
+export const about_shipping_window_de_at_value = /** @type {(inputs: {}) => string} */ () => {
+	return `2-4 Werktage`
+};
+
+export const about_shipping_window_eu = /** @type {(inputs: {}) => string} */ () => {
+	return `Rest der EU`
+};
+
+export const about_shipping_window_eu_value = /** @type {(inputs: {}) => string} */ () => {
+	return `4-6 Werktage`
+};
+
+export const about_shipping_window_world = /** @type {(inputs: {}) => string} */ () => {
+	return `Nordamerika / APAC`
+};
+
+export const about_shipping_window_world_value = /** @type {(inputs: {}) => string} */ () => {
+	return `7-12 Werktage`
+};
+
+export const about_shipping_cost_free = /** @type {(inputs: {}) => string} */ () => {
+	return `Kostenloser Versand`
+};
+
+export const about_shipping_cost_free_detail = /** @type {(inputs: {}) => string} */ () => {
+	return `Bestellungen über 120 € innerhalb Deutschlands`
+};
+
+export const about_shipping_cost_domestic = /** @type {(inputs: {}) => string} */ () => {
+	return `Inland`
+};
+
+export const about_shipping_cost_domestic_detail = /** @type {(inputs: {}) => string} */ () => {
+	return `5 € überall in DE`
+};
+
+export const about_shipping_cost_eu = /** @type {(inputs: {}) => string} */ () => {
+	return `EU`
+};
+
+export const about_shipping_cost_eu_detail = /** @type {(inputs: {}) => string} */ () => {
+	return `12 € in der EU`
+};
+
+export const about_shipping_cost_intl = /** @type {(inputs: {}) => string} */ () => {
+	return `International`
+};
+
+export const about_shipping_cost_intl_detail = /** @type {(inputs: {}) => string} */ () => {
+	return `18-25 € weltweit`
+};
+
+export const about_shipping_customs = /** @type {(inputs: {}) => string} */ () => {
+	return `Zölle und Einfuhrabgaben trägt der Empfänger. Tracking-E-Mails werden automatisch versendet, sobald ein Label gedruckt ist.`
+};
+
+export const about_returns_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Retouren & Erstattungen`
+};
+
+export const about_return_rule1 = /** @type {(inputs: {}) => string} */ () => {
+	return `30 Tage ab Zustellung; Ware ungetragen und ungewaschen.`
+};
+
+export const about_return_rule2 = /** @type {(inputs: {}) => string} */ () => {
+	return `Maß-/Sonderanfertigungen und reduzierte Artikel sind ausgeschlossen, außer bei Mängeln.`
+};
+
+export const about_return_rule3 = /** @type {(inputs: {}) => string} */ () => {
+	return `Für EU-Kunden stellen wir ein DHL-Retourlabel; andere Regionen tragen die Rücksendekosten.`
+};
+
+export const about_return_start = /** @type {(inputs: {}) => string} */ () => {
+	return `Um eine Rücksendung zu starten, schreibe an returns@inkspire.studio mit deiner Bestellnummer. EU-Kunden erhalten ein DHL-Label, andere Regionen wählen ihren bevorzugten Carrier.`
+};
+
+export const about_return_refund = /** @type {(inputs: {}) => string} */ () => {
+	return `Erstattungen erfolgen innerhalb von 5 Werktagen nach Prüfung. Wir können, wenn möglich, auch Umtausch oder Reparatur anbieten.`
+};
+
+export const about_privacy_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Datenschutz & Cookies`
+};
+
+export const about_privacy_point1 = /** @type {(inputs: {}) => string} */ () => {
+	return `Was wir sammeln: Konto- und Bestelldaten, Zahlungsstatus und Support-Historie. Optionale Analytics/Ads nur nach Zustimmung.`
+};
+
+export const about_privacy_point2 = /** @type {(inputs: {}) => string} */ () => {
+	return `Warum und wie lange: Buchhaltung und Steuern 5 Jahre; Analytics bis zu 18 Monate.`
+};
+
+export const about_privacy_point3 = /** @type {(inputs: {}) => string} */ () => {
+	return `Deine Rechte: Kopie anfordern, korrigieren oder löschen, Einwilligung jederzeit widerrufen. DPO: privacy@inkspire.studio.`
+};
+
+export const about_cookie_notice = /** @type {(inputs: {}) => string} */ () => {
+	return `Cookie-Hinweis: Essenzielle Cookies für Warenkorb, Checkout und Login. Analytics/Ads bleiben aus, bis du zustimmst; die Wahl kannst du jederzeit ändern.`
+};
+
+export const about_tos_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Nutzungsbedingungen`
+};
+
+export const about_tos_point1 = /** @type {(inputs: {}) => string} */ () => {
+	return `Seitennutzung: kein Scraping, kein automatischer Missbrauch, keine schädlichen Aktivitäten.`
+};
+
+export const about_tos_point2 = /** @type {(inputs: {}) => string} */ () => {
+	return `Bestellungen: gelegentliche Preis-Korrekturen möglich; MwSt. inklusive, wo zutreffend.`
+};
+
+export const about_tos_point3 = /** @type {(inputs: {}) => string} */ () => {
+	return `Urheberrecht: Alle Designs, Artworks und Inhalte gehören Inkspire.`
+};
+
+export const about_tos_point4 = /** @type {(inputs: {}) => string} */ () => {
+	return `Haftung: Haftung im gesetzlich zulässigen Rahmen begrenzt.`
+};
+
+export const about_tos_point5 = /** @type {(inputs: {}) => string} */ () => {
+	return `Anwendbares Recht: Deutsches Recht; Gerichte Leipzig, Deutschland.`
+};
+
+export const about_partner_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Produktion & Fulfillment`
+};
+
+export const about_partner_lead = /** @type {(inputs: {}) => string} */ () => {
+	return `Präziser 3D-Druck und Textilveredelung für individuelle Apparel- und Merch-Aufträge.`
+};
+
+export const about_partner_name = /** @type {(inputs: {}) => string} */ () => {
+	return `Aurora Print Labs (Leipzig, DE)`
+};
+
+export const about_partner_coverage = /** @type {(inputs: {}) => string} */ () => {
+	return `HQ Leipzig; EU-weiter Versand; DHL/UPS: 1-3 Tage DACH, 3-6 Tage restliche EU.`
+};
+
+export const about_partner_facility = /** @type {(inputs: {}) => string} */ () => {
+	return `1.800 m2 Produktionsfläche mit klimatisiertem Druckbereich sowie eigener Veredelung und Verpackung.`
+};
+
+export const about_partner_banner_note = /** @type {(inputs: {}) => string} */ () => {
+	return `Breites Produktionsbanner mit DTG/UV-Druckern; Inset mit QC-Station.`
+};
+
+export const about_partner_capabilities_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Fähigkeiten & Ausstattung`
+};
+
+export const about_partner_capability_dtg = /** @type {(inputs: {}) => string} */ () => {
+	return `DTG: Kornit Atlas MAX + Brother GTXpro Bulk für Baumwollmischungen.`
+};
+
+export const about_partner_capability_uv = /** @type {(inputs: {}) => string} */ () => {
+	return `UV-Flachbett: Canon Arizona für Hardgoods (Metall, Acryl).`
+};
+
+export const about_partner_capability_dyesub = /** @type {(inputs: {}) => string} */ () => {
+	return `Sublimation: Epson SureColor F-Serie für Performance-Stoffe.`
+};
+
+export const about_partner_capability_finishing = /** @type {(inputs: {}) => string} */ () => {
+	return `Finishing: 6-Stationen-Transferlinie, Laser-Konturschneider für Patches, Inline-QC + Bagging.`
+};
+
+export const about_partner_capability_color = /** @type {(inputs: {}) => string} */ () => {
+	return `Farbe: ICC-gefährte Workflows; Pantone-Matching auf Textilien, wo möglich.`
+};
+
+export const about_partner_materials_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Materialien & Tinten`
+};
+
+export const about_partner_materials_inks = /** @type {(inputs: {}) => string} */ () => {
+	return `Wasserbasierte, OEKO-TEX Eco Passport Tinten; GOTS-Optionen auf Anfrage.`
+};
+
+export const about_partner_materials_garments = /** @type {(inputs: {}) => string} */ () => {
+	return `Textilien: ringgesponnene Baumwoll-Shirts/Hoodies; recycelte Polyester-Optionen für Performance-Linien; Keramikrohlinge für Tassen.`
+};
+
+export const about_partner_quality_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Qualität & Prozess`
+};
+
+export const about_partner_quality_qc = /** @type {(inputs: {}) => string} */ () => {
+	return `3-stufige QC: Vorabprüfung von Stoff/Blank, Sichtkontrolle nach dem Druck, abschliesender Pack-Audit.`
+};
+
+export const about_partner_quality_profiling = /** @type {(inputs: {}) => string} */ () => {
+	return `Profilierung: gerätegebundene ICC-Profile pro Substrat; wöchentliche Düsenprüfungen und Kalibrierung.`
+};
+
+export const about_partner_quality_samples = /** @type {(inputs: {}) => string} */ () => {
+	return `Sample-Protokoll: Erstdruck-Beleg wird 30 Tage aufbewahrt; Foto-Freigabe möglich.`
+};
+
+export const about_partner_sla_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Durchlaufzeit & SLA`
+};
+
+export const about_partner_sla_production = /** @type {(inputs: {}) => string} */ () => {
+	return `Standard: 48-72h Produktion nach Artwork-Freigabe; Rush-Lane <24h für Lager-SKUs.`
+};
+
+export const about_partner_sla_packaging = /** @type {(inputs: {}) => string} */ () => {
+	return `Verpackung: gebrandet oder neutral; recycelte Mailer als Standard.`
+};
+
+export const about_partner_sla_returns = /** @type {(inputs: {}) => string} */ () => {
+	return `Returns/Remakes: Druckfehler innerhalb 48h neu gefertigt; Transportsch“den mit Fotobeleg melden.`
+};
+
+export const about_partner_sustainability_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Nachhaltigkeit & Compliance`
+};
+
+export const about_partner_sustainability_power = /** @type {(inputs: {}) => string} */ () => {
+	return `Standort mit erneuerbarem Strom; Abwasserfiltration bei DTG-Vorbehandlung.`
+};
+
+export const about_partner_sustainability_certs = /** @type {(inputs: {}) => string} */ () => {
+	return `Zertifizierungen geplant/gefhrt: OEKO-TEX Eco Passport Tinten, FSC-Verpackung; dokumentierte ISO 9001-lite SOPs.`
+};
+
+export const about_partner_team_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Team & Kontakt`
+};
+
+export const about_partner_team_photo = /** @type {(inputs: {}) => string} */ () => {
+	return `Foto von Druckleitung + QC-Supervisor; zwei Schichten Mo-Sa.`
+};
+
+export const about_partner_team_contact = /** @type {(inputs: {}) => string} */ () => {
+	return `Kontakt: production@inkspire.studio | +49 341 000000; Besichtigungen nach Termin.`
+};
+
+export const about_partner_logistics_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Karte & Logistik`
+};
+
+export const about_partner_logistics_lanes = /** @type {(inputs: {}) => string} */ () => {
+	return `DHL/UPS-Lanes; EU-weit zollfrei; Hinweise für Nicht-EU-Sendungen auf Anfrage.`
+};
+
+export const about_partner_cta_checklist = /** @type {(inputs: {}) => string} */ () => {
+	return `Unsere Druck-Checkliste ansehen`
+};
+
+export const about_partner_cta_call = /** @type {(inputs: {}) => string} */ () => {
+	return `Production-Call anfragen`
 };
 
 export const contact_badge = /** @type {(inputs: {}) => string} */ () => {

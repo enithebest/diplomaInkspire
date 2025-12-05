@@ -1,4 +1,4 @@
-﻿<script>
+<script>
 	import { enhance } from '$app/forms';
 	import * as m from '$lib/paraglide/messages/_index.js';
 	export let data;
@@ -10,6 +10,17 @@
 		} catch (e) {
 			return {};
 		}
+	};
+
+	// Pagination state: show 3 products per load
+	let displayCount = 3;
+	const productsPerPage = 3;
+
+	$: visibleProducts = data.products.slice(0, displayCount);
+	$: hasMore = displayCount < data.products.length;
+
+	const loadMore = () => {
+		displayCount += productsPerPage;
 	};
 </script>
 
@@ -84,7 +95,7 @@
 			</button>
 		</form>
 
-		{#each data.products as product}
+		{#each visibleProducts as product}
 			<div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-xl p-6 mb-6">
 				<div class="flex justify-between items-start gap-6 flex-wrap">
 					<div class="flex gap-4 items-center flex-1 min-w-[250px]">
@@ -170,6 +181,17 @@
 				</div>
 			</div>
 		{/each}
+
+		{#if hasMore}
+			<div class="flex justify-center mt-10">
+				<button
+					on:click={loadMore}
+					class="bg-[#4F46E5] hover:bg-[#6366F1] text-white font-semibold py-3 px-8 rounded-lg transition-all duration-200 shadow-lg shadow-[#4F46E5]/20"
+				>
+					Load More Products
+				</button>
+			</div>
+		{/if}
 
 		{#if form?.message}
 			<p class="text-center text-red-400 font-medium">{form.message}</p>
