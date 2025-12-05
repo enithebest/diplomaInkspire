@@ -32,9 +32,8 @@
 
 	<div class="relative z-10 max-w-5xl mx-auto space-y-10">
 		<h1 class="text-4xl md:text-5xl font-bold text-center mb-6 bg-gradient-to-r from-blue-300 to-purple-400 bg-clip-text text-transparent">
-			Adminbereich Produktverwaltung
+		Product Management		
 		</h1>
-
 		<form
 			method="POST"
 			action="?/create"
