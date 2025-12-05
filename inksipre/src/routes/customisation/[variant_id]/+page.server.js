@@ -112,6 +112,10 @@ export const actions = {
     const form = await request.formData();
     const designData = (form.get('design_data') || '').toString();
     let designUrl = (form.get('design_url') || '').toString().trim();
+    const rotation = Number(form.get('rotation') || 0);
+    const scale = Number(form.get('scale') || 1);
+    const position_x = Number(form.get('position_x') || 0);
+    const position_y = Number(form.get('position_y') || 0);
 
     if (!designData && !designUrl) {
       return fail(400, { orderError: m.custom_order_error_design_required({}, { locale }) });
@@ -168,8 +172,16 @@ export const actions = {
       const orderItemId = orderItemResult.insertId;
 
       const [customisationResult] = await conn.query(
-        'INSERT INTO customisation (product_id, variant_id, order_item_id) VALUES (?, ?, ?)',
-        [variant.product_id, variant.id, orderItemId]
+        'INSERT INTO customisation (product_id, variant_id, order_item_id, rotation, scale, position_x, position_y) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        [
+          variant.product_id,
+          variant.id,
+          orderItemId,
+          Number.isFinite(rotation) ? rotation : 0,
+          Number.isFinite(scale) ? scale : 1,
+          Number.isFinite(position_x) ? position_x : 0,
+          Number.isFinite(position_y) ? position_y : 0
+        ]
       );
       const customisationId = customisationResult.insertId ?? null;
 

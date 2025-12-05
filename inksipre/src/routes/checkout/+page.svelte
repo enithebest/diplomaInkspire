@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { loadStripe } from '@stripe/stripe-js';
+  import { calculateShippingFee } from '$lib/shipping';
 
   const { data } = $props();
 
@@ -9,6 +10,10 @@
   let loading = $state(false);
   let total = $state(0);
   let totalFormatted = $state('0.00');
+  let shipping = $state({ amount: 0, label: 'Enter country to calculate shipping', tier: 'missing_country' });
+  let grandTotal = $state(0);
+  let grandTotalFormatted = $state('0.00');
+  let country = $state('');
   let stripe = $state(null);
   let elements = $state(null);
   let paymentElement;
@@ -16,10 +21,12 @@
   let mountedSecret = '';
   let hasPaymentElement = false;
   let buttonLabel = $state('Continue to payment');
+  let removedInvalidItems = $state(0);
 
   onMount(() => {
     const raw = localStorage.getItem('cart');
     cart = raw ? JSON.parse(raw) : [];
+    sanitizeCart();
     updateTotals();
 
     if (!cart.length) {
@@ -35,16 +42,54 @@
     }
   });
 
+  function sanitizeCart() {
+    const valid = [];
+    let removed = 0;
+    for (const item of cart) {
+      const productId = Number(item.product_id ?? item.productId);
+      const price = Number(item.price);
+      const qty = Number(item.qty) || 1;
+      if (Number.isFinite(productId) && productId > 0 && Number.isFinite(price) && price > 0 && qty > 0) {
+        valid.push({ ...item, product_id: productId, qty });
+      } else {
+        removed += 1;
+      }
+    }
+    if (removed > 0) {
+      cart = valid;
+      removedInvalidItems = removed;
+      try {
+        localStorage.setItem('cart', JSON.stringify(cart));
+      } catch (err) {
+        console.warn('Unable to persist sanitized cart', err);
+      }
+    }
+  }
+
   function updateTotals() {
     total = cart.reduce(
       (sum, item) => sum + (Number(item.price) || 0) * (Number(item.qty) || 1),
       0
     );
     totalFormatted = total.toFixed(2);
+    refreshShipping();
   }
 
   const lineTotal = (item) =>
     ((Number(item.price) || 0) * (Number(item.qty) || 1)).toFixed(2);
+
+  function refreshShipping() {
+    const fee = calculateShippingFee({ subtotal: total, country });
+    shipping = fee;
+    grandTotal = total + fee.amount;
+    grandTotalFormatted = grandTotal.toFixed(2);
+  }
+
+  const handleCountryInput = (event) => {
+    const raw = event?.target?.value ?? '';
+    country = raw.toString().toUpperCase();
+    refreshShipping();
+  };
 
   async function mountElements(secret) {
     if (!stripe || !secret) return;
@@ -124,6 +169,8 @@
       // Otherwise create a new intent and mount the payment element
       const formData = new FormData(event.currentTarget);
       formData.append('cart', JSON.stringify(cart));
+      formData.append('shipping_amount', shipping.amount.toString());
+      formData.append('shipping_label', shipping.label);
       const res = await fetch('/api/checkout-intent', {
         method: 'POST',
         headers: { accept: 'application/json' },
@@ -224,6 +271,8 @@
               maxlength="2"
               autocomplete="country"
               required
+              bind:value={country}
+              oninput={handleCountryInput}
               class="mt-1 w-full uppercase rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </label>
@@ -232,6 +281,11 @@
         {#if message}
           <div class="text-sm text-red-600 bg-red-50 border border-red-200 px-3 py-2 rounded">
             {message}
+          </div>
+        {/if}
+        {#if removedInvalidItems > 0}
+          <div class="text-sm text-amber-700 bg-amber-50 border border-amber-200 px-3 py-2 rounded">
+            Removed {removedInvalidItems} invalid cart item(s). Please review your cart before paying.
           </div>
         {/if}
 
@@ -275,9 +329,25 @@
           {/each}
         </div>
 
-        <div class="border-t border-gray-200 mt-4 pt-4 flex justify-between text-gray-900 font-semibold">
-          <span>Total</span>
-          <span>{totalFormatted} $</span>
+        <div class="border-t border-gray-200 mt-4 pt-4 space-y-2 text-sm text-gray-700">
+          <div class="flex justify-between">
+            <span>Subtotal</span>
+            <span class="font-semibold">{totalFormatted} $</span>
+          </div>
+          <div class="flex justify-between">
+            <div>
+              <span>Shipping</span>
+              <p class="text-xs text-gray-500">{shipping.label}</p>
+            </div>
+            <span class="font-semibold">{shipping.amount.toFixed(2)} $</span>
+          </div>
+          <div class="flex justify-between border-t border-dashed border-gray-200 pt-2 text-gray-900 font-semibold">
+            <span>Order total</span>
+            <span>{grandTotalFormatted} $</span>
+          </div>
+          <p class="text-xs text-gray-500">
+            Shipping fees follow the About page tiers (DE free over EUR 120, EUR 5 domestic, EUR 12 EU, EUR 18-25 international).
+          </p>
         </div>
       {/if}
     </aside>

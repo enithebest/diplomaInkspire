@@ -2,6 +2,59 @@ import Stripe from 'stripe';
 import { STRIPE_SECRET_KEY } from '$env/static/private';
 import { json, redirect } from '@sveltejs/kit';
 import { createConnection } from '$lib/db/mysql.js';
+import { calculateShippingFee } from '$lib/shipping.js';
+
+const findOrCreateAddress = async (conn, userId, address) => {
+  const [existing] = await conn.query(
+    `
+    SELECT id FROM addresses
+    WHERE user_id = ?
+      AND full_name = ?
+      AND line1 = ?
+      AND COALESCE(line2, '') = COALESCE(?, '')
+      AND city = ?
+      AND COALESCE(region, '') = COALESCE(?, '')
+      AND postal_code = ?
+      AND country = ?
+    ORDER BY id DESC
+    LIMIT 1
+    `,
+    [
+      userId,
+      address.full_name,
+      address.line1,
+      address.line2 || '',
+      address.city,
+      address.region || '',
+      address.postal_code,
+      address.country
+    ]
+  );
+
+  if (existing?.length) {
+    return existing[0].id;
+  }
+
+  const [insertResult] = await conn.query(
+    `
+    INSERT INTO addresses (user_id, full_name, line1, line2, city, region, postal_code, country, phone, is_default_shipping)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+    `,
+    [
+      userId,
+      address.full_name,
+      address.line1,
+      address.line2 || null,
+      address.city,
+      address.region || null,
+      address.postal_code,
+      address.country,
+      address.phone || null
+    ]
+  );
+
+  return insertResult.insertId;
+};
 
 export const POST = async ({ request, locals }) => {
   if (!locals.user) {
@@ -13,9 +66,12 @@ export const POST = async ({ request, locals }) => {
   const rawCart = form.get('cart');
   const full_name = (form.get('full_name') || '').toString().trim();
   const line1 = (form.get('line1') || '').toString().trim();
+  const line2 = (form.get('line2') || '').toString().trim();
   const city = (form.get('city') || '').toString().trim();
+  const region = (form.get('region') || '').toString().trim();
   const postal_code = (form.get('postal_code') || '').toString().trim();
   const country = (form.get('country') || '').toString().trim().toUpperCase();
+  const phone = (form.get('phone') || '').toString().trim();
 
   if (!rawCart) {
     return json({ message: 'Missing cart data' }, { status: 400 });
@@ -41,19 +97,25 @@ export const POST = async ({ request, locals }) => {
   }
 
   const line_items = [];
-  let total = 0;
+  let subtotal = 0;
   const rawItems = [];
 
   for (const item of cart) {
     const qty = Number(item.qty) || 1;
     const price = Number(item.price);
     const name = (item.name || 'Item').toString().slice(0, 100);
+    const productId = Number(item.product_id ?? item.productId);
+    const variantId = Number(item.variant_id ?? item.variantId);
 
     if (!Number.isFinite(price) || price <= 0 || qty <= 0) {
       continue;
     }
+    if (!Number.isFinite(productId) || productId <= 0) {
+      // Invalid cart line; skip it
+      continue;
+    }
 
-    total += price * qty;
+    subtotal += price * qty;
 
     line_items.push({
       name,
@@ -61,28 +123,48 @@ export const POST = async ({ request, locals }) => {
       price: Math.round(price * 100)
     });
     rawItems.push({
-      product_id: item.product_id || null,
-      variant_id: item.variant_id || null,
+      product_id: productId,
+      variant_id: Number.isFinite(variantId) && variantId > 0 ? variantId : null,
       quantity: Math.round(qty),
       unit_price: price
     });
   }
 
-  if (!line_items.length || total <= 0) {
-    return json({ message: 'No valid items to purchase' }, { status: 400 });
+  if (!line_items.length || subtotal <= 0) {
+    return json({ message: 'No valid items to purchase. Please re-add items to your cart.' }, { status: 400 });
   }
+
+  const shipping = calculateShippingFee({ subtotal, country });
+  const grandTotal = subtotal + shipping.amount;
 
   // Create order + order_items so we can mark paid on success
   let orderId = null;
+  let addressId = null;
   const conn = await createConnection();
 
   try {
     const stripe = new Stripe(STRIPE_SECRET_KEY);
-    console.log('creating payment intent', { total, line_items: line_items.length });
+    console.log('creating payment intent', {
+      subtotal,
+      shipping: shipping.amount,
+      line_items: line_items.length
+    });
     await conn.beginTransaction();
+
+    addressId = await findOrCreateAddress(conn, locals.user.id, {
+      full_name,
+      line1,
+      line2,
+      city,
+      region,
+      postal_code,
+      country,
+      phone
+    });
+
     const [orderResult] = await conn.query(
-      'INSERT INTO orders (user_id, total_price, status) VALUES (?, ?, ?)',
-      [locals.user.id, total, 'pending']
+      'INSERT INTO orders (user_id, total_price, status, shipping_address_id) VALUES (?, ?, ?, ?)',
+      [locals.user.id, grandTotal, 'pending', addressId]
     );
     orderId = orderResult.insertId;
 
@@ -94,7 +176,7 @@ export const POST = async ({ request, locals }) => {
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(total * 100),
+      amount: Math.round(grandTotal * 100),
       currency: 'usd',
       receipt_email: locals.user.email,
       metadata: {
@@ -104,6 +186,14 @@ export const POST = async ({ request, locals }) => {
         city,
         postal_code,
         country,
+        shipping_address_id: addressId,
+        address_line1: line1,
+        address_city: city,
+        address_postal: postal_code,
+        address_country: country,
+        shipping_amount: shipping.amount,
+        shipping_label: shipping.label,
+        order_subtotal: subtotal,
         items: JSON.stringify(line_items.slice(0, 20)) // limit metadata size
       },
       payment_method_types: ['card'], // keep it simple in test; avoid wallets/link hanging in HTTP

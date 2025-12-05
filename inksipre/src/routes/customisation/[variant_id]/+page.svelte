@@ -143,18 +143,18 @@
     });
   };
 
+  const editorWidth = 400;
+  const editorHeight = 300;
+
   const initEditor = () => {
     if (!konvaReady || !Konva) return;
     if (!editorContainerRef) return;
     if (stage) stage.destroy();
 
-    const width = 400;
-    const height = 300;
-
     stage = new Konva.Stage({
       container: editorContainerRef,
-      width,
-      height
+      width: editorWidth,
+      height: editorHeight
     });
 
     layer = new Konva.Layer();
@@ -163,8 +163,8 @@
     const background = new Konva.Rect({
       x: 0,
       y: 0,
-      width,
-      height,
+      width: editorWidth,
+      height: editorHeight,
       fill: '#f0f0f0',
       stroke: '#aaa',
       strokeWidth: 2
@@ -182,7 +182,8 @@
           y: 50 + index * 20,
           width: 150,
           height: 150,
-          draggable: true
+          draggable: true,
+          name: 'design-image'
         });
         layer.add(konvaImage);
 
@@ -244,8 +245,16 @@
       if (event?.target) {
         const designUrlField = event.target.querySelector('input[name="design_url"]');
         const designDataField = event.target.querySelector('input[name="design_data"]');
+        const rotationField = event.target.querySelector('input[name="rotation"]');
+        const scaleField = event.target.querySelector('input[name="scale"]');
+        const posXField = event.target.querySelector('input[name="position_x"]');
+        const posYField = event.target.querySelector('input[name="position_y"]');
         if (designUrlField) designUrlField.value = orderDesignUrl;
         if (designDataField) designDataField.value = orderDesignData;
+        if (rotationField) rotationField.value = '0';
+        if (scaleField) scaleField.value = '1';
+        if (posXField) posXField.value = '0';
+        if (posYField) posYField.value = '0';
       }
       return;
     }
@@ -261,11 +270,27 @@
       orderDesignData = '';
     }
 
+    const designImage = stage.find('.design-image')?.[0];
+    const rotation = designImage?.rotation?.() ?? 0;
+    const scaleX = designImage?.scaleX?.() ?? 1;
+    const scaleY = designImage?.scaleY?.() ?? 1;
+    const scale = (scaleX + scaleY) / 2;
+    const posX = (designImage?.x?.() ?? 0) / editorWidth;
+    const posY = (designImage?.y?.() ?? 0) / editorHeight;
+
     if (event?.target) {
       const designUrlField = event.target.querySelector('input[name="design_url"]');
       const designDataField = event.target.querySelector('input[name="design_data"]');
+      const rotationField = event.target.querySelector('input[name="rotation"]');
+      const scaleField = event.target.querySelector('input[name="scale"]');
+      const posXField = event.target.querySelector('input[name="position_x"]');
+      const posYField = event.target.querySelector('input[name="position_y"]');
       if (designUrlField) designUrlField.value = orderDesignUrl;
       if (designDataField) designDataField.value = orderDesignData;
+      if (rotationField) rotationField.value = rotation.toFixed(2);
+      if (scaleField) scaleField.value = scale.toFixed(2);
+      if (posXField) posXField.value = posX.toFixed(2);
+      if (posYField) posYField.value = posY.toFixed(2);
     }
 
     snapshotCartPreview();
@@ -516,6 +541,8 @@
       const cart = cartRaw ? JSON.parse(cartRaw) : [];
       cart.unshift({
         name: data?.product?.name || 'Custom product',
+        product_id: data?.product?.id || null,
+        variant_id: data?.variant?.id || null,
         sku: data?.variant?.sku || data?.variant?.id || '',
         size,
         color,
@@ -681,6 +708,10 @@
           >
             <input type="hidden" name="design_data" value={orderDesignData} />
             <input type="hidden" name="design_url" value={orderDesignUrl} />
+            <input type="hidden" name="rotation" value="0" />
+            <input type="hidden" name="scale" value="1" />
+            <input type="hidden" name="position_x" value="0" />
+            <input type="hidden" name="position_y" value="0" />
 
             <button
               type="submit"

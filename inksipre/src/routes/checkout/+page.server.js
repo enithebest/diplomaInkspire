@@ -1,6 +1,7 @@
 import Stripe from 'stripe';
 import { STRIPE_SECRET_KEY, STRIPE_PUBLIC_KEY } from '$env/static/private';
 import { fail, redirect } from '@sveltejs/kit';
+import { calculateShippingFee } from '$lib/shipping.js';
 
 export const load = ({ locals, url }) => {
 	if (!locals.user) {
@@ -59,7 +60,7 @@ export const actions = {
 		}
 
 		const line_items = [];
-		let total = 0;
+		let subtotal = 0;
 
 		for (const item of cart) {
 			const qty = Number(item.qty) || 1;
@@ -70,7 +71,7 @@ export const actions = {
 				continue;
 			}
 
-			total += price * qty;
+			subtotal += price * qty;
 
 			line_items.push({
 				name,
@@ -79,33 +80,43 @@ export const actions = {
 			});
 		}
 
-		if (!line_items.length || total <= 0) {
+		if (!line_items.length || subtotal <= 0) {
 			return fail(400, { message: 'No valid items to purchase' });
 		}
 
-    try {
-      // Use Stripe default API version from SDK; no explicit override to avoid version errors.
-      const stripe = new Stripe(STRIPE_SECRET_KEY);
-      console.log('creating payment intent', { total, line_items: line_items.length });
-      const paymentIntent = await stripe.paymentIntents.create({
-        amount: Math.round(total * 100),
-        currency: 'usd',
-        receipt_email: locals.user.email,
-        metadata: {
-          user_id: locals.user.id?.toString() || '',
-          full_name,
-          city,
-          postal_code,
-          country,
-          items: JSON.stringify(line_items.slice(0, 20)) // limit metadata size
-        },
-        automatic_payment_methods: { enabled: true }
-      });
+		const shipping = calculateShippingFee({ subtotal, country });
+		const grandTotal = subtotal + shipping.amount;
 
-      return { clientSecret: paymentIntent.client_secret };
-    } catch (err) {
-      console.error('Stripe payment intent error', err);
-      return fail(500, { message: 'Unable to start checkout. Please try again.' });
-    }
+		try {
+			// Use Stripe default API version from SDK; no explicit override to avoid version errors.
+			const stripe = new Stripe(STRIPE_SECRET_KEY);
+			console.log('creating payment intent', {
+				subtotal,
+				shipping: shipping.amount,
+				line_items: line_items.length
+			});
+			const paymentIntent = await stripe.paymentIntents.create({
+				amount: Math.round(grandTotal * 100),
+				currency: 'usd',
+				receipt_email: locals.user.email,
+				metadata: {
+					user_id: locals.user.id?.toString() || '',
+					full_name,
+					city,
+					postal_code,
+					country,
+					shipping_amount: shipping.amount,
+					shipping_label: shipping.label,
+					order_subtotal: subtotal,
+					items: JSON.stringify(line_items.slice(0, 20)) // limit metadata size
+				},
+				automatic_payment_methods: { enabled: true }
+			});
+
+			return { clientSecret: paymentIntent.client_secret };
+		} catch (err) {
+			console.error('Stripe payment intent error', err);
+			return fail(500, { message: 'Unable to start checkout. Please try again.' });
+		}
   }
 };
