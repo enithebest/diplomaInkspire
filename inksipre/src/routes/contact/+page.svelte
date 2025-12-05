@@ -25,6 +25,7 @@
 	let messageValue = '';
 	let selectedPrefix = prefixes[0].code;
 
+
 	$: if (form?.values) {
 		nameValue = form.values.name ?? '';
 		emailValue = form.values.email ?? '';
@@ -40,28 +41,21 @@
 		messageValue = '';
 		selectedPrefix = prefixes[0].code;
 	}
+
 </script>
 
-<section
-	class="relative min-h-screen bg-gradient-to-b from-[#0b0b20] via-[#111132] to-[#0b0b20] text-white px-4 sm:px-6 lg:px-10 pt-16 pb-32 overflow-hidden"
->
-	<div
-		class="pointer-events-none absolute -top-32 left-1/2 w-[900px] h-[900px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-3xl"
-	></div>
-	<div
-		class="pointer-events-none absolute -bottom-48 right-1/4 w-[700px] h-[700px] rounded-full bg-purple-600/20 blur-3xl"
-	></div>
+<section class="relative min-h-screen bg-gradient-to-b from-[#0b0b20] via-[#111132] to-[#0b0b20] text-white px-4 sm:px-6 lg:px-10 pt-16 pb-32">
 
-	<div class="relative z-10 mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+	<div class="pointer-events-none absolute -top-32 left-1/2 w-[900px] h-[900px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-3xl"></div>
+	<div class="pointer-events-none absolute -bottom-48 right-1/4 w-[700px] h-[700px] rounded-full bg-purple-600/20 blur-3xl"></div>
+
+	<div class="relative z-10 mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
 		<div class="order-2 lg:order-1 space-y-10">
 			<header class="space-y-4">
 				<p class="text-sm uppercase tracking-[0.3em] text-indigo-300/80">{m.contact_badge()}</p>
-				<h1 class="text-4xl sm:text-5xl font-bold leading-tight">
-					{m.contact_title()}
-				</h1>
-				<p class="text-gray-300 text-lg">
-					{m.contact_subtitle()}
-				</p>
+				<h1 class="text-4xl sm:text-5xl font-bold leading-tight">{m.contact_title()}</h1>
+				<p class="text-gray-300 text-lg">{m.contact_subtitle()}</p>
 			</header>
 
 			<div class="space-y-5">
@@ -88,7 +82,6 @@
 			</div>
 
 			<div class="rounded-2xl border border-white/10 shadow-xl">
-				<!-- svelte-ignore a11y_missing_attribute -->
 				<iframe
 					width="100%"
 					height="300"
@@ -112,83 +105,59 @@
 		</div>
 
 		<div class="order-1 lg:order-2 w-full lg:pl-6">
-			<div class="mx-auto w-full max-w-xl lg:ml-auto lg:mr-0 lg:max-w-none lg:w-[520px]">
-				<div class="lg:sticky lg:top-10">
-					<div
-						class="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-8 lg:min-h-[calc(100vh-5rem)] lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto flex flex-col"
-					>
-						<div class="space-y-2 shrink-0">
-							<h2 class="text-3xl font-semibold">{m.contact_form_title()}</h2>
+			<div class="mx-auto w-full max-w-2xl lg:mx-auto lg:max-w-none lg:w-[640px]">
+
+				<div class="relative">
+
+					<div class="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl 
+								space-y-8 flex flex-col">
+
+						<div class="space-y-2">
+							<h2 class="text-4xl font-semibold">{m.contact_form_title()}</h2>
 							<p class="text-sm text-gray-300">{m.contact_form_subtitle()}</p>
 						</div>
 
-						<form method="POST" action="?/send" use:enhance class="flex-1 flex flex-col gap-5">
+						<form method="POST" action="?/send" use:enhance class="flex flex-col gap-5">
+
 							<div>
-								<!-- svelte-ignore a11y_label_has_associated_control -->
 								<label class="text-sm font-medium text-gray-300">{m.contact_form_name_label()}</label>
-								<input
-									type="text"
-									name="name"
-									bind:value={nameValue}
-									required
-									minlength="2"
-									maxlength="80"
-									placeholder={m.contact_form_name_placeholder()}
-									class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-									aria-invalid={Boolean(form?.error)}
-								/>
+								<input type="text" name="name" bind:value={nameValue} required minlength="2"
+									class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 
+									       placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
 							</div>
 
 							<div>
-								<!-- svelte-ignore a11y_label_has_associated_control -->
 								<label class="text-sm font-medium text-gray-300">{m.contact_form_email_label()}</label>
-								<input
-									type="email"
-									name="email"
-									bind:value={emailValue}
-									required
-									placeholder={m.contact_form_email_placeholder()}
-									class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-									aria-invalid={Boolean(form?.error)}
-								/>
+								<input type="email" name="email" bind:value={emailValue} required
+									class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 
+									       placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
 							</div>
 
 							<div>
-								<!-- svelte-ignore a11y_label_has_associated_control -->
 								<label class="text-sm font-medium text-gray-300">{m.contact_form_phone_label()}</label>
 								<div class="mt-1 flex flex-col gap-3 sm:flex-row">
-									<select
-										name="prefix"
-										bind:value={selectedPrefix}
-										required
-										class="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 sm:w-40"
-									>
+
+									<select name="prefix" bind:value={selectedPrefix} required
+										class="rounded-xl border border-white/10 bg-[#4F46E5] text-white px-4 py-3 
+											   focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 sm:w-40">
 										{#each prefixes as option}
-											<option value={option.code} class="text-black">
+											<option value={option.code}>
 												{option.code} - {option.country()}
 											</option>
 										{/each}
 									</select>
 
-									<input
-										type="tel"
-										name="phone"
-										bind:value={phoneValue}
-										required
-										pattern="[0-9()+\s-]{6,20}"
-										minlength="6"
-										maxlength="20"
-										placeholder={m.contact_form_phone_placeholder()}
-										class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-										aria-invalid={Boolean(form?.error)}
-									/>
+									<input type="tel" name="phone" bind:value={phoneValue} required minlength="6"
+										class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 
+										       placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
 								</div>
+
 								<p class="text-xs text-gray-400 mt-1">{m.contact_form_phone_hint()}</p>
 							</div>
 
 							<div>
-								<!-- svelte-ignore a11y_label_has_associated_control -->
 								<label class="text-sm font-medium text-gray-300">{m.contact_form_message_label()}</label>
+
 								<textarea
 									name="message"
 									rows="4"
@@ -196,27 +165,28 @@
 									required
 									minlength="10"
 									maxlength="1500"
-									placeholder={m.contact_form_message_placeholder()}
-									class="mt-1 w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-									aria-invalid={Boolean(form?.error)}
+									class="mt-1 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 
+										   placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 
+										   overflow-hidden min-h-[180px]"
 								></textarea>
 							</div>
 
-							<div class="mt-auto space-y-3">
-								<button
-									type="submit"
-									class="w-full rounded-xl bg-[#4F46E5] py-3 text-lg font-semibold text-white shadow-lg shadow-[#4F46E5]/30 transition hover:bg-[#6366F1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6366F1] disabled:opacity-60"
-								>
+							<div class="space-y-3">
+								<button type="submit"
+									class="w-full rounded-xl bg-[#4F46E5] py-3 text-lg font-semibold text-white 
+									       shadow-lg shadow-[#4F46E5]/30 hover:bg-[#6366F1]">
 									{m.contact_form_submit()}
 								</button>
 
 								{#if form?.success}
-									<p class="text-center text-sm text-emerald-300 animate-fade-in">{form.success}</p>
+									<p class="text-center text-sm text-emerald-300">{form.success}</p>
 								{:else if form?.error}
-									<p class="text-center text-sm text-rose-300 animate-fade-in">{form.error}</p>
+									<p class="text-center text-sm text-rose-300">{form.error}</p>
 								{/if}
 							</div>
+
 						</form>
+
 					</div>
 				</div>
 			</div>
@@ -226,17 +196,5 @@
 </section>
 
 <style>
-	@keyframes fade-in {
-		from {
-			opacity: 0;
-			transform: translateY(8px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-	.animate-fade-in {
-		animation: fade-in 0.35s ease-out forwards;
-	}
+/* Animations removed per user request */
 </style>
