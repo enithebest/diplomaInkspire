@@ -122,7 +122,7 @@ export const email_placeholder_login = /** @type {(inputs: {}) => string} */ () 
 };
 
 export const password_placeholder_login = /** @type {(inputs: {}) => string} */ () => {
-	return `â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢`
+	return `password`
 };
 
 export const login_button = /** @type {(inputs: {}) => string} */ () => {
@@ -198,7 +198,7 @@ export const content_title = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const content_intro = /** @type {(inputs: {}) => string} */ () => {
-	return `Showcase your products, apps, or packaging with high-quality 3D visuals that impress clients and boost conversions â€” all from your browser.`
+	return `Showcase your products, apps, or packaging with high-quality 3D visuals that impress clients and boost conversions” all from your browser.`
 };
 
 export const content_feature_instant_title = /** @type {(inputs: {}) => string} */ () => {
@@ -206,7 +206,7 @@ export const content_feature_instant_title = /** @type {(inputs: {}) => string} 
 };
 
 export const content_feature_instant_desc = /** @type {(inputs: {}) => string} */ () => {
-	return `Upload your design and see it applied instantly on realistic 3D surfaces â€” no rendering delays.`
+	return `Upload your design and see it applied instantly on realistic 3D surfaces” no rendering delays.`
 };
 
 export const content_feature_cloud_title = /** @type {(inputs: {}) => string} */ () => {
@@ -214,7 +214,7 @@ export const content_feature_cloud_title = /** @type {(inputs: {}) => string} */
 };
 
 export const content_feature_cloud_desc = /** @type {(inputs: {}) => string} */ () => {
-	return `All mockups are rendered in the cloud â€” freeing your computer and saving time.`
+	return `All mockups are rendered in the cloud ” freeing your computer and saving time.`
 };
 
 export const content_feature_lighting_title = /** @type {(inputs: {}) => string} */ () => {
@@ -226,7 +226,7 @@ export const content_feature_lighting_desc = /** @type {(inputs: {}) => string} 
 };
 
 export const content_paragraph2 = /** @type {(inputs: {}) => string} */ () => {
-	return `From startup branding kits to full product campaigns, our 3D mockup platform makes visualization intuitive and fast â€” no modeling experience required.`
+	return `From startup branding kits to full product campaigns, our 3D mockup platform makes visualization intuitive and fast ” no modeling experience required.`
 };
 
 export const content_web_tools_title = /** @type {(inputs: {}) => string} */ () => {
@@ -374,7 +374,7 @@ export const product_tshirt_desc = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const admin_title = /** @type {(inputs: {}) => string} */ () => {
-	return `Admin â€” Product Management`
+	return `Admin Product Management`
 };
 
 export const admin_create_heading = /** @type {(inputs: {}) => string} */ () => {
@@ -1196,6 +1196,138 @@ export const about_tos_point4 = /** @type {(inputs: {}) => string} */ () => {
 
 export const about_tos_point5 = /** @type {(inputs: {}) => string} */ () => {
 	return `Governing law: German law applies; courts of Leipzig, Germany have jurisdiction.`
+};
+
+export const about_partner_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Production & Fulfillment`
+};
+
+export const about_partner_lead = /** @type {(inputs: {}) => string} */ () => {
+	return `Precision 3D-printing and textile finishing for custom apparel and merch.`
+};
+
+export const about_partner_name = /** @type {(inputs: {}) => string} */ () => {
+	return `Aurora Print Labs (Leipzig, DE)`
+};
+
+export const about_partner_coverage = /** @type {(inputs: {}) => string} */ () => {
+	return `Leipzig HQ; EU-wide distribution; DHL/UPS lanes: 1-3 day transit for DACH, 3-6 days for the rest of the EU.`
+};
+
+export const about_partner_facility = /** @type {(inputs: {}) => string} */ () => {
+	return `1,800 m2 production floor with a climate-controlled print bay and on-site finishing/packing.`
+};
+
+export const about_partner_banner_note = /** @type {(inputs: {}) => string} */ () => {
+	return `Wide production floor banner with DTG/UV printers; inset showing the QC station.`
+};
+
+export const about_partner_capabilities_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Capabilities & equipment`
+};
+
+export const about_partner_capability_dtg = /** @type {(inputs: {}) => string} */ () => {
+	return `DTG: Kornit Atlas MAX + Brother GTXpro bulk for cotton blends.`
+};
+
+export const about_partner_capability_uv = /** @type {(inputs: {}) => string} */ () => {
+	return `UV flatbed: Canon Arizona for hard goods (metal, acrylic).`
+};
+
+export const about_partner_capability_dyesub = /** @type {(inputs: {}) => string} */ () => {
+	return `Dye-sub: Epson SureColor F-series for performance fabrics.`
+};
+
+export const about_partner_capability_finishing = /** @type {(inputs: {}) => string} */ () => {
+	return `Finishing: 6-station heat press line, laser contour cutter for patches, inline QC + bagging.`
+};
+
+export const about_partner_capability_color = /** @type {(inputs: {}) => string} */ () => {
+	return `Color: ICC-managed workflows; Pantone matching on textiles where possible.`
+};
+
+export const about_partner_materials_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Materials & inks`
+};
+
+export const about_partner_materials_inks = /** @type {(inputs: {}) => string} */ () => {
+	return `Water-based, OEKO-TEX Eco Passport inks; GOTS-compliant options on request.`
+};
+
+export const about_partner_materials_garments = /** @type {(inputs: {}) => string} */ () => {
+	return `Garments: ring-spun cotton tees/hoodies; recycled polyester options for performance lines; ceramic blanks for mugs.`
+};
+
+export const about_partner_quality_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Quality & process`
+};
+
+export const about_partner_quality_qc = /** @type {(inputs: {}) => string} */ () => {
+	return `3-stage QC: pre-print fabric/blank inspection, post-print visual check, final pack audit.`
+};
+
+export const about_partner_quality_profiling = /** @type {(inputs: {}) => string} */ () => {
+	return `Profiling: device-linked ICC profiles per substrate; weekly nozzle checks and calibration.`
+};
+
+export const about_partner_quality_samples = /** @type {(inputs: {}) => string} */ () => {
+	return `Sample protocol: first-run proof kept for 30 days; photo confirmation available.`
+};
+
+export const about_partner_sla_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Turnaround & SLA`
+};
+
+export const about_partner_sla_production = /** @type {(inputs: {}) => string} */ () => {
+	return `Standard lead: 48-72h production after artwork approval; rush lane available for <24h on stocked SKUs.`
+};
+
+export const about_partner_sla_packaging = /** @type {(inputs: {}) => string} */ () => {
+	return `Packaging: branded or neutral; recycled mailers as default.`
+};
+
+export const about_partner_sla_returns = /** @type {(inputs: {}) => string} */ () => {
+	return `Returns/remakes: print defects remade within 48h; shipping damage claims with photo evidence.`
+};
+
+export const about_partner_sustainability_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Sustainability & compliance`
+};
+
+export const about_partner_sustainability_power = /** @type {(inputs: {}) => string} */ () => {
+	return `Renewable electricity at the facility; wastewater filtration on DTG pretreat.`
+};
+
+export const about_partner_sustainability_certs = /** @type {(inputs: {}) => string} */ () => {
+	return `Certifications pursued/held: OEKO-TEX Eco Passport inks, FSC packaging; ISO 9001-lite SOPs documented.`
+};
+
+export const about_partner_team_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Team & contact`
+};
+
+export const about_partner_team_photo = /** @type {(inputs: {}) => string} */ () => {
+	return `Print lead + QC supervisor shown; two shifts Monday-Saturday.`
+};
+
+export const about_partner_team_contact = /** @type {(inputs: {}) => string} */ () => {
+	return `Contact: production@inkspire.studio | +49 341 000000; tours by appointment.`
+};
+
+export const about_partner_logistics_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Map & logistics`
+};
+
+export const about_partner_logistics_lanes = /** @type {(inputs: {}) => string} */ () => {
+	return `DHL/UPS lanes; customs-free within the EU; guidance for non-EU orders on request.`
+};
+
+export const about_partner_cta_checklist = /** @type {(inputs: {}) => string} */ () => {
+	return `See our print checklist`
+};
+
+export const about_partner_cta_call = /** @type {(inputs: {}) => string} */ () => {
+	return `Request a production call`
 };
 
 export const contact_badge = /** @type {(inputs: {}) => string} */ () => {

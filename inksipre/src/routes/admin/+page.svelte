@@ -1,4 +1,4 @@
-﻿<script>
+<script>
 	import { enhance } from '$app/forms';
 	import * as m from '$lib/paraglide/messages/_index.js';
 	export let data;
