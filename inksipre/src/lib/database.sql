@@ -119,4 +119,21 @@ ALTER TABLE customisation
   ADD CONSTRAINT fk_customisation_order_item
   FOREIGN KEY (order_item_id) REFERENCES order_items(id) ON DELETE SET NULL;
 
+-- PRODUCT RATINGS (per-user, per-product attribute scores)
+CREATE TABLE IF NOT EXISTS product_ratings (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  product_id INT NOT NULL,
+  user_id INT NULL,
+  shipping TINYINT UNSIGNED NOT NULL CHECK (shipping BETWEEN 1 AND 5),
+  print_quality TINYINT UNSIGNED NOT NULL CHECK (print_quality BETWEEN 1 AND 5),
+  material TINYINT UNSIGNED NOT NULL CHECK (material BETWEEN 1 AND 5),
+  comfort TINYINT UNSIGNED NOT NULL CHECK (comfort BETWEEN 1 AND 5),
+  overall TINYINT UNSIGNED NOT NULL CHECK (overall BETWEEN 1 AND 5),
+  comment TEXT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uniq_product_user (product_id, user_id),
+  FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+);
+
 

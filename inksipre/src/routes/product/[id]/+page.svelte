@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { Star } from '@lucide/svelte';
   import { productImages } from '../../categories/productImages.js';
 
   export let data;
@@ -19,6 +20,16 @@
   const colors = Array.from(
     new Set(variants.map((v) => v.color).filter((v) => !!v))
   );
+  const ratings = data?.ratings ?? {};
+  const userRating = data?.userRating ?? null;
+  const ratingCategories = [
+    { key: 'overall', label: 'Overall' },
+    { key: 'shipping', label: 'Shipping' },
+    { key: 'print_quality', label: 'Print quality' },
+    { key: 'material', label: 'Material' },
+    { key: 'comfort', label: 'Comfort' }
+  ];
+  const starLevels = [1, 2, 3, 4, 5];
 
   const colorImageFallbacks = productImages[product.id]?.colors || {};
 
@@ -143,6 +154,12 @@
       selectedSize = first.size || '';
     }
   });
+
+  const formatRating = (value) => {
+    const num = Number(value ?? 0);
+    if (!Number.isFinite(num) || num <= 0) return '—';
+    return num.toFixed(1);
+  };
 </script>
 
 {#if !product}
@@ -282,60 +299,152 @@
     </div>
   </section>
 
-  <section class="max-w-4xl mx-auto mt-16 space-y-6">
-    <div class="bg-gray-800/60 rounded-2xl border border-white/5 p-6">
-      <div class="flex flex-col gap-2 mb-6">
-        <h2 class="text-2xl font-semibold text-white">Community thoughts</h2>
-        <p class="text-gray-400">
-          Share what you like (or would improve) about this product so others can decide faster.
-        </p>
+  <section class="max-w-6xl mx-auto mt-16 space-y-6">
+    <div class="grid gap-6 md:grid-cols-[1fr_2fr] items-start">
+      <div id="ratings" class="bg-gray-800/60 rounded-2xl border border-white/5 p-6 space-y-5 flex flex-col">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <h2 class="text-2xl font-semibold text-white">Product ratings</h2>
+            <p class="text-gray-400 text-sm">Attribute scores from customers.</p>
+          </div>
+          <div class="text-right">
+            <p class="text-3xl font-semibold text-white leading-tight">
+              {formatRating(ratings.overall_avg)}
+            </p>
+            <p class="text-xs text-gray-400">{ratings.count || 0} ratings</p>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          {#each ratingCategories as cat}
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-sm text-gray-300">{cat.label}</span>
+              <div class="flex items-center gap-1 text-amber-300">
+                {#each starLevels as level}
+                  <Star
+                    size="18"
+                    class={level <= Math.round(ratings[`${cat.key}_avg`] ?? 0) ? 'fill-amber-300 stroke-amber-300' : 'stroke-amber-300/70'}
+                  />
+                {/each}
+                <span class="ml-2 text-xs text-gray-400">{formatRating(ratings[`${cat.key}_avg`])}</span>
+              </div>
+            </div>
+          {/each}
+        </div>
+
+        <div class="h-px bg-white/5"></div>
+
+        {#if !isAuthenticated}
+          <p class="text-sm text-gray-300">
+            <a class="text-indigo-400 underline" href={`/login?next=/product/${product.id}#ratings`}>Log in</a> to rate this product.
+          </p>
+        {:else}
+          <form method="POST" action="?/rate" class="space-y-4">
+            {#each ratingCategories as cat}
+              <div class="space-y-1">
+                <label class="block text-sm text-gray-300">{cat.label}</label>
+                <div class="flex items-center gap-2">
+                  {#each starLevels as level}
+                    <label class="flex items-center gap-1 text-sm text-gray-200 cursor-pointer select-none">
+                      <input
+                        type="radio"
+                        name={cat.key}
+                        value={level}
+                        required
+                        checked={userRating ? userRating[cat.key] === level : level === 5}
+                        class="hidden"
+                      />
+                      <Star
+                        size="18"
+                        class={`pointer-events-none ${level <= (userRating?.[cat.key] ?? 5) ? 'fill-amber-300 stroke-amber-300' : 'stroke-amber-300/70'}`}
+                      />
+                    </label>
+                  {/each}
+                </div>
+              </div>
+            {/each}
+
+            <div>
+              <label class="block text-sm text-gray-300 mb-1" for="rating_note">Optional note</label>
+              <textarea
+                id="rating_note"
+                name="rating_note"
+                rows="3"
+                placeholder="Share a quick note about fit, print, or shipping."
+                class="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-gray-500 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400/30"
+              >{userRating?.comment ?? ''}</textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="inline-flex items-center justify-center rounded-lg bg-[#4F46E5] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#4F46E5]/30 transition hover:bg-[#6366F1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6366F1]"
+            >
+              {userRating ? 'Update rating' : 'Submit rating'}
+            </button>
+
+            {#if form?.ratingError}
+              <p class="text-sm text-rose-300">{form.ratingError}</p>
+            {/if}
+          </form>
+        {/if}
       </div>
 
-      <form method="POST" action="?/comment" class="space-y-4" aria-label="Leave a comment">
-        {#if !isAuthenticated}
-          <div>
-            <label class="block text-sm text-gray-300 mb-1" for="author_name">Name</label>
-            <input
-              id="author_name"
-              name="author_name"
-              type="text"
-              placeholder="Jane Doe"
-              required
-              class="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-white placeholder:text-gray-500 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400/40"
-            />
+      <div class="space-y-5 flex flex-col">
+        <div class="bg-gray-800/60 rounded-2xl border border-white/5 p-6 flex flex-col">
+          <div class="flex flex-col gap-2 mb-6">
+            <h2 class="text-2xl font-semibold text-white">Community thoughts</h2>
+            <p class="text-gray-400">
+              Share what you like (or would improve) about this product so others can decide faster.
+            </p>
           </div>
-        {:else}
-          <p class="text-sm text-gray-400">Commenting as <span class="text-white font-medium">{data?.user?.full_name ?? 'Inkspire user'}</span></p>
-        {/if}
 
-        <div>
-          <label class="block text-sm text-gray-300 mb-1" for="comment">Your comment</label>
-          <textarea
-            id="comment"
-            name="comment"
-            rows="4"
-            minlength="5"
-            placeholder="Tell everyone what stood out to you..."
-            required
-            class="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-gray-500 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400/40"
-          ></textarea>
+          <form method="POST" action="?/comment" class="space-y-4" aria-label="Leave a comment">
+            {#if !isAuthenticated}
+              <div>
+                <label class="block text-sm text-gray-300 mb-1" for="author_name">Name</label>
+                <input
+                  id="author_name"
+                  name="author_name"
+                  type="text"
+                  placeholder="Jane Doe"
+                  required
+                  class="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-white placeholder:text-gray-500 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400/40"
+                />
+              </div>
+            {:else}
+              <p class="text-sm text-gray-400">Commenting as <span class="text-white font-medium">{data?.user?.full_name ?? 'Inkspire user'}</span></p>
+            {/if}
+
+            <div>
+              <label class="block text-sm text-gray-300 mb-1" for="comment">Your comment</label>
+              <textarea
+                id="comment"
+                name="comment"
+                rows="4"
+                minlength="5"
+                placeholder="Tell everyone what stood out to you..."
+                required
+                class="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-gray-500 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400/40"
+              ></textarea>
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <button
+                type="submit"
+                class="self-start rounded-lg bg-[#4F46E5] px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#4F46E5]/30 transition hover:bg-[#6366F1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6366F1]"
+              >
+                Post comment
+              </button>
+
+              {#if form?.success}
+                <p class="text-sm text-emerald-300">{form.success}</p>
+              {:else if form?.error}
+                <p class="text-sm text-rose-300">{form.error}</p>
+              {/if}
+            </div>
+          </form>
         </div>
-
-        <div class="flex flex-col gap-2">
-          <button
-            type="submit"
-            class="self-start rounded-lg bg-[#4F46E5] px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#4F46E5]/30 transition hover:bg-[#6366F1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6366F1]"
-          >
-            Post comment
-          </button>
-
-          {#if form?.success}
-            <p class="text-sm text-emerald-300">{form.success}</p>
-          {:else if form?.error}
-            <p class="text-sm text-rose-300">{form.error}</p>
-          {/if}
-        </div>
-      </form>
+      </div>
     </div>
 
     <div class="space-y-4">

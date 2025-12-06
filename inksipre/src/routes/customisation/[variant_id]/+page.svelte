@@ -49,6 +49,8 @@
   let orderDesignData = $state('');
   let orderDesignUrl = $state('');
   let lastOrderHandled = $state(null);
+  const primaryButton =
+    'inline-flex items-center justify-center gap-2 rounded-lg bg-[#4F46E5] text-white font-semibold shadow-lg shadow-[#4F46E5]/30 transition hover:bg-[#6366F1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6366F1] disabled:opacity-60 disabled:cursor-not-allowed';
 
   let libraryItems = $derived((data?.uploads ?? []).map((upload) => ({
     id: upload.id,
@@ -581,7 +583,7 @@
           <h2 class="text-lg font-semibold">Upload design</h2>
           <button
             type="button"
-            class="text-sm text-indigo-300 hover:text-white underline"
+            class={`${primaryButton} px-3 py-2 text-sm`}
             onclick={() => (showLibrary = true)}
           >
             My library
@@ -613,7 +615,7 @@
           <button
             type="submit"
             formaction="?/upload"
-            class="w-full flex items-center justify-center gap-2 bg-[#4F46E5] hover:bg-[#6366F1] text-white font-semibold px-6 py-2 rounded-lg transition focus:outline-none focus:ring-2 focus:ring-[#6366F1]"
+            class={`${primaryButton} w-full px-6 py-3`}
           >
             Upload &amp; Save
           </button>
@@ -634,7 +636,7 @@
       <div class="bg-gray-800/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-700 shadow-lg">
         <p class="text-lg font-medium mb-3">Edit your artwork</p>
         <button
-          class="w-full bg-[#4F46E5] hover:bg-[#6366F1] text-white font-semibold px-6 py-3 rounded-xl transition transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-[#6366F1]"
+          class={`${primaryButton} w-full px-6 py-3`}
           onclick={openEditor}
         >
           {uploadedImages.length ? 'Reopen Customizer' : 'Open Customizer'}
@@ -674,7 +676,7 @@
         </div>
         <div class="flex justify-end mt-3">
           <button
-            class="bg-gray-800/70 border border-white/15 text-white font-semibold px-3 py-2 rounded-lg shadow-md backdrop-blur transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-400 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+            class={`${primaryButton} px-4 py-2 text-sm`}
             onclick={download}
             disabled={!modelPath}
           >
@@ -715,12 +717,12 @@
 
             <button
               type="submit"
-              class="w-full bg-green-600 hover:bg-green-500 text-white font-semibold px-6 py-3 rounded-xl transition transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-green-400 disabled:opacity-60 disabled:cursor-not-allowed"
+              class={`${primaryButton} w-full px-6 py-3`}
             >
               Order this custom piece
             </button>
             {#if form?.orderSuccess}
-              <p class="text-sm text-green-400" role="status">Order saved! We’ll get it ready.</p>
+              <p class="text-sm text-green-400" role="status">Order saved! We'll get it ready.</p>
             {/if}
             {#if form?.orderError}
               <p class="text-sm text-red-400" role="alert">{form.orderError}</p>
@@ -744,7 +746,7 @@
       <aside class="absolute right-0 top-0 h-full w-full sm:w-[28rem] bg-gray-900 border-l border-white/10 p-4 overflow-y-auto">
         <div class="flex items-center justify-between mb-3">
           <h2 class="text-lg font-semibold">My library</h2>
-          <button class="text-sm text-gray-300 hover:text-white" onclick={() => (showLibrary = false)}>Close</button>
+          <button class={`${primaryButton} px-3 py-2 text-sm`} onclick={() => (showLibrary = false)}>Close</button>
         </div>
 
         <input
@@ -764,7 +766,7 @@
                 <div class="p-2 flex items-center justify-between">
                   <span class="text-xs truncate max-w-[70%]" title={displayName(item.url)}>{displayName(item.url)}</span>
                   <button
-                    class="text-xs px-2 py-1 rounded bg-[#4F46E5] text-white hover:bg-[#6366F1]"
+                    class={`${primaryButton} text-xs px-3 py-2 w-full justify-center`}
                     onclick={() => useFromLibrary(item.url)}
                   >
                     Use
@@ -783,7 +785,7 @@
       <h2 class="text-2xl font-bold text-white mb-4">Adjust your images</h2>
       <div bind:this={editorContainerRef} class="bg-gray-100 rounded-lg shadow-2xl overflow-hidden"></div>
       <button
-        class="mt-6 bg-[#4F46E5] hover:bg-[#6366F1] text-white font-semibold px-8 py-3 rounded-full transition transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#6366F1]"
+        class={`${primaryButton} mt-6 px-8 py-3`}
         onclick={applyToModel}
       >
         Ready

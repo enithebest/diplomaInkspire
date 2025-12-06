@@ -45,7 +45,50 @@ export const load = async ({ params, locals }) => {
 		[id]
 	);
 
-	return { product, variants, comments, isAuthenticated: Boolean(user), user };
+	const ratingSummaryRows = await query(
+		`SELECT
+        AVG(shipping) AS shipping_avg,
+        AVG(print_quality) AS print_quality_avg,
+        AVG(material) AS material_avg,
+        AVG(comfort) AS comfort_avg,
+        AVG(overall) AS overall_avg,
+        COUNT(*) AS count
+      FROM product_ratings
+      WHERE product_id = ?`,
+		[id]
+	);
+
+	const userRatingRows =
+		user && user.id
+			? await query(
+					`SELECT shipping, print_quality, material, comfort, overall, comment
+           FROM product_ratings
+           WHERE product_id = ? AND user_id = ?
+           LIMIT 1`,
+					[id, user.id]
+				)
+			: [];
+
+	const ratings = ratingSummaryRows?.[0] || {
+		shipping_avg: null,
+		print_quality_avg: null,
+		material_avg: null,
+		comfort_avg: null,
+		overall_avg: null,
+		count: 0
+	};
+
+	const userRating = userRatingRows?.[0] || null;
+
+	return {
+		product,
+		variants,
+		comments,
+		ratings,
+		userRating,
+		isAuthenticated: Boolean(user),
+		user
+	};
 };
 
 export const actions = {
@@ -77,6 +120,52 @@ export const actions = {
 		);
 
 		return { success: m.product_comment_success({}, { locale }) };
+	},
+	rate: async ({ request, locals, params, url }) => {
+		const locale = locals?.locale ?? 'en';
+		const user = locals?.user;
+		if (!user) {
+			throw redirect(302, `/login?next=/product/${params.id}#ratings`);
+		}
+
+		const data = await request.formData();
+		const note = (data.get('rating_note') ?? '').toString().trim().slice(0, 500);
+		const keys = ['shipping', 'print_quality', 'material', 'comfort', 'overall'];
+		const values = {};
+
+		for (const key of keys) {
+			const raw = Number(data.get(key));
+			if (!Number.isInteger(raw) || raw < 1 || raw > 5) {
+				return fail(400, { ratingError: m.product_rating_error_invalid({}, { locale }) });
+			}
+			values[key] = raw;
+		}
+
+		await query(
+			`INSERT INTO product_ratings
+        (product_id, user_id, shipping, print_quality, material, comfort, overall, comment)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      ON DUPLICATE KEY UPDATE
+        shipping = VALUES(shipping),
+        print_quality = VALUES(print_quality),
+        material = VALUES(material),
+        comfort = VALUES(comfort),
+        overall = VALUES(overall),
+        comment = VALUES(comment),
+        created_at = CURRENT_TIMESTAMP`,
+			[
+				params.id,
+				user.id,
+				values.shipping,
+				values.print_quality,
+				values.material,
+				values.comfort,
+				values.overall,
+				note || null
+			]
+		);
+
+		throw redirect(303, `/product/${params.id}#ratings`);
 	},
 	order: async ({ request, locals, params }) => {
 		const locale = locals?.locale ?? 'en';

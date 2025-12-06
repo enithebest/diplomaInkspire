@@ -122,7 +122,7 @@
         </div>
       </div>
 
-      <div class="space-y-3 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-indigo-500/10">
+      <div id="team" class="space-y-3 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-indigo-500/10">
         <div class="flex items-center justify-between gap-3">
           <div class="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-100">{m.about_team_heading()}</div>
           <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-200">{m.about_team_chip()}</span>
@@ -143,7 +143,7 @@
     </section>
 
     <section class="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-      <div class="space-y-4 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-indigo-500/10">
+      <div id="returns" class="space-y-4 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-indigo-500/10">
         <div class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-indigo-100">
           <Globe size="16" />
           {m.about_shipping_heading()}
@@ -197,7 +197,7 @@
     </section>
 
     <section class="grid gap-6 lg:grid-cols-2">
-      <div class="space-y-4 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-indigo-500/10">
+      <div id="privacy" class="space-y-4 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-indigo-500/10">
         <div class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-indigo-100">
           <ShieldCheck size="16" />
           {m.about_privacy_heading()}
@@ -210,12 +210,12 @@
             </li>
           {/each}
         </ul>
-        <div class="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-gray-100">
+        <div id="cookies" class="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-gray-100">
           {m.about_cookie_notice()}
         </div>
       </div>
 
-      <div class="space-y-4 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-indigo-500/10">
+      <div id="terms" class="space-y-4 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-indigo-500/10">
         <div class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-indigo-100">
           <Globe size="16" />
           {m.about_tos_heading()}
