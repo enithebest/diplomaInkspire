@@ -1,58 +1,198 @@
 <script>
 	import { enhance } from '$app/forms';
-	export let form;
+	import * as m from '$lib/paraglide/messages/_index.js';
+	export let form = {};
+
+	const prefixes = [
+		{ code: '+43', country: m.contact_country_austria },
+		{ code: '+49', country: m.contact_country_germany },
+		{ code: '+41', country: m.contact_country_switzerland },
+		{ code: '+355', country: m.contact_country_albania },
+		{ code: '+39', country: m.contact_country_italy },
+		{ code: '+44', country: m.contact_country_uk }
+	];
+
+	const features = [
+		{ title: m.contact_feature_fast_title, desc: m.contact_feature_fast_desc },
+		{ title: m.contact_feature_reliable_title, desc: m.contact_feature_reliable_desc },
+		{ title: m.contact_feature_quality_title, desc: m.contact_feature_quality_desc },
+		{ title: m.contact_feature_secure_title, desc: m.contact_feature_secure_desc }
+	];
+
+	let nameValue = '';
+	let emailValue = '';
+	let phoneValue = '';
+	let messageValue = '';
+	let selectedPrefix = prefixes[0].code;
+
+
+	$: if (form?.values) {
+		nameValue = form.values.name ?? '';
+		emailValue = form.values.email ?? '';
+		phoneValue = form.values.phone ?? '';
+		messageValue = form.values.message ?? '';
+		selectedPrefix = form.values.prefix ?? prefixes[0].code;
+	}
+
+	$: if (form?.success) {
+		nameValue = '';
+		emailValue = '';
+		phoneValue = '';
+		messageValue = '';
+		selectedPrefix = prefixes[0].code;
+	}
+
 </script>
 
-<div class="min-h-screen flex flex-col items-center justify-center bg-gray-50 py-12 px-4">
-	<div class="max-w-2xl w-full bg-white p-8 rounded-2xl shadow-md">
-		<h1 class="text-3xl font-bold mb-6 text-center text-gray-800"> Contact Us</h1>
-		<p class="text-gray-600 mb-6 text-center">
-			Have questions, suggestions, or need help? Fill out the form below and we'll get back to you soon.
-		</p>
+<section class="relative min-h-screen bg-gradient-to-b from-[#0b0b20] via-[#111132] to-[#0b0b20] text-white px-4 sm:px-6 lg:px-10 pt-16 pb-32">
 
-		<form method="POST" action="?/send" use:enhance class="space-y-4">
-			<div>
-				<label class="block text-sm font-medium text-gray-700">Name</label>
-				<input
-					type="text"
-					name="name"
-					required
-					class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-black"
-				/>
+	<div class="pointer-events-none absolute -top-32 left-1/2 w-[900px] h-[900px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-3xl"></div>
+	<div class="pointer-events-none absolute -bottom-48 right-1/4 w-[700px] h-[700px] rounded-full bg-purple-600/20 blur-3xl"></div>
+
+	<div class="relative z-10 mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+		<div class="order-2 lg:order-1 space-y-10">
+			<header class="space-y-4">
+				<p class="text-sm uppercase tracking-[0.3em] text-indigo-300/80">{m.contact_badge()}</p>
+				<h1 class="text-4xl sm:text-5xl font-bold leading-tight">{m.contact_title()}</h1>
+				<p class="text-gray-300 text-lg">{m.contact_subtitle()}</p>
+			</header>
+
+			<div class="space-y-5">
+				<div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+					<h2 class="text-xl font-semibold">{m.contact_call_heading()}</h2>
+					<p class="mt-2 text-gray-300">{m.contact_call_phone()}</p>
+				</div>
+				<div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+					<h2 class="text-xl font-semibold">{m.contact_visit_heading()}</h2>
+					<p class="mt-2 text-gray-300">
+						{m.contact_visit_line1()}<br />
+						{m.contact_visit_line2()}<br />
+						{m.contact_visit_line3()}
+					</p>
+				</div>
+				<div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+					<h2 class="text-xl font-semibold">{m.contact_hours_heading()}</h2>
+					<p class="mt-2 text-gray-300">
+						{m.contact_hours_weekdays()}<br />
+						{m.contact_hours_saturday()}<br />
+						{m.contact_hours_sunday()}
+					</p>
+				</div>
 			</div>
 
-			<div>
-				<label class="block text-sm font-medium text-gray-700">Email</label>
-				<input
-					type="email"
-					name="email"
-					required
-					class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-black"
-				/>
+			<div class="rounded-2xl border border-white/10 shadow-xl">
+				<iframe
+					width="100%"
+					height="300"
+					style="border:0;"
+					loading="lazy"
+					allowfullscreen
+					referrerpolicy="no-referrer-when-downgrade"
+					class="rounded-2xl"
+					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3033.5770785481867!2d19.515169!3d42.068284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135268f782179bb9%3A0x63b69e0b9b318d32!2sShkod%C3%ABr%20City%20Center!5e0!3m2!1sen!2s!4v1700000000001"
+				></iframe>
 			</div>
 
-			<div>
-				<label class="block text-sm font-medium text-gray-700">Message</label>
-				<textarea
-					name="message"
-					rows="5"
-					required
-					class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-black"
-				></textarea>
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+				{#each features as item}
+					<div class="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
+						<h3 class="text-lg font-semibold text-indigo-200">{item.title()}</h3>
+						<p class="mt-1 text-gray-300 text-sm">{item.desc()}</p>
+					</div>
+				{/each}
 			</div>
+		</div>
 
-			<button
-				type="submit"
-				class="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 transition-colors"
-			>
-				Send Message
-			</button>
+		<div class="order-1 lg:order-2 w-full lg:pl-6">
+			<div class="mx-auto w-full max-w-2xl lg:mx-auto lg:max-w-none lg:w-[640px]">
 
-			{#if form?.success}
-				<p class="text-green-600 text-center mt-3">{form.success}</p>
-			{:else if form?.error}
-				<p class="text-red-600 text-center mt-3">{form.error}</p>
-			{/if}
-		</form>
+				<div class="relative">
+
+					<div class="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl 
+								space-y-8 flex flex-col">
+
+						<div class="space-y-2">
+							<h2 class="text-4xl font-semibold">{m.contact_form_title()}</h2>
+							<p class="text-sm text-gray-300">{m.contact_form_subtitle()}</p>
+						</div>
+
+						<form method="POST" action="?/send" use:enhance class="flex flex-col gap-5">
+
+							<div>
+								<label class="text-sm font-medium text-gray-300">{m.contact_form_name_label()}</label>
+								<input type="text" name="name" bind:value={nameValue} required minlength="2"
+									class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 
+									       placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+							</div>
+
+							<div>
+								<label class="text-sm font-medium text-gray-300">{m.contact_form_email_label()}</label>
+								<input type="email" name="email" bind:value={emailValue} required
+									class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 
+									       placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+							</div>
+
+							<div>
+								<label class="text-sm font-medium text-gray-300">{m.contact_form_phone_label()}</label>
+								<div class="mt-1 flex flex-col gap-3 sm:flex-row">
+
+									<select name="prefix" bind:value={selectedPrefix} required
+										class="rounded-xl border border-white/10 bg-[#4F46E5] text-white px-4 py-3 
+											   focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 sm:w-40">
+										{#each prefixes as option}
+											<option value={option.code}>
+												{option.code} - {option.country()}
+											</option>
+										{/each}
+									</select>
+
+									<input type="tel" name="phone" bind:value={phoneValue} required minlength="6"
+										class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 
+										       placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+								</div>
+
+								<p class="text-xs text-gray-400 mt-1">{m.contact_form_phone_hint()}</p>
+							</div>
+
+							<div>
+								<label class="text-sm font-medium text-gray-300">{m.contact_form_message_label()}</label>
+
+								<textarea
+									name="message"
+									rows="4"
+									bind:value={messageValue}
+									required
+									minlength="10"
+									maxlength="1500"
+									class="mt-1 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 
+										   placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 
+										   overflow-hidden min-h-[180px]"
+								></textarea>
+							</div>
+
+							<div class="space-y-3">
+								<button type="submit"
+									class="w-full rounded-xl bg-[#4F46E5] py-3 text-lg font-semibold text-white 
+									       shadow-lg shadow-[#4F46E5]/30 hover:bg-[#6366F1]">
+									{m.contact_form_submit()}
+								</button>
+
+								{#if form?.success}
+									<p class="text-center text-sm text-emerald-300">{form.success}</p>
+								{:else if form?.error}
+									<p class="text-center text-sm text-rose-300">{form.error}</p>
+								{/if}
+							</div>
+
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
-</div>
+</section>
+
+

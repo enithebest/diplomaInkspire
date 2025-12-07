@@ -1,8 +1,10 @@
 // src/routes/+layout.server.js
 
 export const load = async ({ locals }) => {
-  // locals.user is set in hooks.server.js when a valid session exists
-  return {
-    user: locals.user || null
-  };
+	// locals.user is set in hooks.server.js when a valid session exists
+	return {
+		user: locals.user || null,
+		locale: locals.locale ?? 'en',
+		locales: locals.locales ?? ['en']
+	};
 };
