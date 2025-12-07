@@ -187,8 +187,21 @@
                         {/if}
                         <div class="flex-1">
                           <div class="font-semibold text-white">{it.name}</div>
-                          <div class="text-xs text-gray-400">
-                            {m.profile_orders_line({ qty: it.quantity, price: `$${it.unit_price}` })}
+                          <div class="flex items-center gap-3 text-xs text-gray-400">
+                            <span>{m.profile_orders_line({ qty: it.quantity, price: `$${it.unit_price}` })}</span>
+                            {#if it.color}
+                              <span class="inline-flex items-center gap-1 text-white">
+                                <span
+                                  class="inline-block h-3 w-3 rounded-full border border-white/40"
+                                  style={`background:${it.color};`}
+                                  aria-hidden="true"
+                                ></span>
+                                <span class="capitalize text-gray-200">{it.color}</span>
+                              </span>
+                            {/if}
+                            {#if it.size}
+                              <span class="uppercase text-gray-300">{it.size}</span>
+                            {/if}
                           </div>
                         </div>
                         <div class="text-sm text-gray-200 font-semibold">

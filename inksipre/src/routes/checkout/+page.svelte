@@ -94,7 +94,20 @@
   async function mountElements(secret) {
     if (!stripe || !secret) return;
     if (elements && mountedSecret === secret) return;
-    elements = stripe.elements({ clientSecret: secret });
+    elements = stripe.elements({
+      clientSecret: secret,
+      appearance: {
+        theme: 'night',
+        variables: {
+          colorPrimary: '#6366F1',
+          colorBackground: 'rgba(255,255,255,0.04)',
+          colorText: '#e5e7eb',
+          colorTextSecondary: '#9ca3af',
+          colorDanger: '#f87171',
+          borderRadius: '10px'
+        }
+      }
+    });
     const paymentEl = elements.create('payment', { layout: 'tabs' });
     const target = document.getElementById('payment-element');
     if (target) {
@@ -199,157 +212,175 @@
   }
 </script>
 
-<section class="max-w-6xl mx-auto px-6 py-12">
-  <h1 class="text-3xl font-bold text-gray-900 mb-6">Checkout</h1>
-
-  <div class="grid lg:grid-cols-3 gap-8">
-    <div class="lg:col-span-2 space-y-6">
-      <form
-        method="POST"
-        onsubmit={submitCheckout}
-        class="space-y-4 bg-white shadow-sm border border-gray-200 rounded-lg p-6"
-      >
-        <h2 class="text-xl font-semibold text-gray-800 mb-2">Shipping details</h2>
-
-        <div class="grid md:grid-cols-2 gap-4">
-          <label class="block text-sm font-medium text-gray-700">
-            Full name
-            <input
-              name="full_name"
-              autocomplete="name"
-              required
-              value={data.user?.full_name}
-              class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </label>
-          <label class="block text-sm font-medium text-gray-700">
-            Email
-            <input
-              name="email"
-              type="email"
-              autocomplete="email"
-              disabled
-              value={data.user?.email}
-              class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 bg-gray-100 text-gray-600"
-            />
-          </label>
-        </div>
-
-        <label class="block text-sm font-medium text-gray-700">
-          Address line
-          <input
-            name="line1"
-            autocomplete="address-line1"
-            required
-            class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </label>
-
-        <div class="grid md:grid-cols-3 gap-4">
-          <label class="block text-sm font-medium text-gray-700">
-            City
-            <input
-              name="city"
-              autocomplete="address-level2"
-              required
-              class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </label>
-          <label class="block text-sm font-medium text-gray-700">
-            Postal code
-            <input
-              name="postal_code"
-              autocomplete="postal-code"
-              required
-              class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </label>
-          <label class="block text-sm font-medium text-gray-700">
-            Country (2-letter)
-            <input
-              name="country"
-              maxlength="2"
-              autocomplete="country"
-              required
-              bind:value={country}
-              oninput={handleCountryInput}
-              class="mt-1 w-full uppercase rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </label>
-        </div>
-
-        {#if message}
-          <div class="text-sm text-red-600 bg-red-50 border border-red-200 px-3 py-2 rounded">
-            {message}
-          </div>
-        {/if}
-        {#if removedInvalidItems > 0}
-          <div class="text-sm text-amber-700 bg-amber-50 border border-amber-200 px-3 py-2 rounded">
-            Removed {removedInvalidItems} invalid cart item(s). Please review your cart before paying.
-          </div>
-        {/if}
-
-        {#if !data.stripeReady}
-          <p class="text-sm text-red-600">
-            Payment is not configured (server missing STRIPE_SECRET_KEY).
-          </p>
-        {:else}
-          <div id="payment-element" class="border border-gray-200 rounded-lg p-4 bg-gray-50"></div>
-        {/if}
-
-        <button
-          type="submit"
-          class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-2 rounded-md bg-[#4F46E5] text-white font-semibold hover:bg-[#6366F1] transition disabled:opacity-60"
-          disabled={loading}
-        >
-          {#if loading}
-            <span class="animate-pulse">Processing...</span>
-          {:else}
-            {buttonLabel}
-          {/if}
-        </button>
-      </form>
+<div class="min-h-screen bg-[#0b1120]">
+<section class="max-w-7xl mx-auto px-4 lg:px-6 py-12 text-gray-100">
+  <div class="bg-gradient-to-br from-[#0f172a] via-[#0b1223] to-[#0d1326] rounded-3xl border border-white/5 shadow-2xl shadow-black/30 p-6 lg:p-10">
+    <div class="flex items-center justify-between flex-wrap gap-3 mb-8">
+      <div>
+        <p class="text-sm text-indigo-300 uppercase tracking-wide">Checkout</p>
+        <h1 class="text-3xl font-bold text-white">Complete your order</h1>
+      </div>
+      <div class="text-sm text-gray-400">
+        Secure payments powered by Stripe
+      </div>
     </div>
 
-<aside class="bg-white shadow-sm border border-gray-200 rounded-lg p-6">
-  <h2 class="text-xl font-semibold text-gray-800 mb-4">Order summary</h2>
+    <div class="grid lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2 space-y-6">
+        <form
+          method="POST"
+          onsubmit={submitCheckout}
+          class="space-y-5 bg-white/5 border border-white/10 rounded-2xl p-6 shadow-lg shadow-black/20 backdrop-blur-sm"
+        >
+          <div class="flex items-center justify-between">
+            <h2 class="text-xl font-semibold text-white">Shipping details</h2>
+            <span class="text-xs text-gray-400">All fields required</span>
+          </div>
 
-      {#if cart.length === 0}
-        <p class="text-gray-500 text-sm">Your cart is empty.</p>
-      {:else}
-        <div class="space-y-3">
-          {#each cart as item}
-            <div class="flex justify-between text-sm text-gray-700">
-              <div>
-                <p class="font-medium">{item.name}</p>
-                <p class="text-gray-500">Qty: {item.qty} - {item.color} {item.size}</p>
+          <div class="grid md:grid-cols-2 gap-4">
+            <label class="block text-sm font-medium text-gray-200">
+              Full name
+              <input
+                name="full_name"
+                autocomplete="name"
+                required
+                value={data.user?.full_name}
+                class="mt-1 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              />
+            </label>
+            <label class="block text-sm font-medium text-gray-200">
+              Email
+              <input
+                name="email"
+                type="email"
+                autocomplete="email"
+                disabled
+                value={data.user?.email}
+                class="mt-1 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-gray-400"
+              />
+            </label>
+          </div>
+
+          <label class="block text-sm font-medium text-gray-200">
+            Address line
+            <input
+              name="line1"
+              autocomplete="address-line1"
+              required
+              class="mt-1 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            />
+          </label>
+
+          <div class="grid md:grid-cols-3 gap-4">
+            <label class="block text-sm font-medium text-gray-200">
+              City
+              <input
+                name="city"
+                autocomplete="address-level2"
+                required
+                class="mt-1 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              />
+            </label>
+            <label class="block text-sm font-medium text-gray-200">
+              Postal code
+              <input
+                name="postal_code"
+                autocomplete="postal-code"
+                required
+                class="mt-1 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              />
+            </label>
+            <label class="block text-sm font-medium text-gray-200">
+              Country (2-letter)
+              <input
+                name="country"
+                maxlength="2"
+                autocomplete="country"
+                required
+                bind:value={country}
+                oninput={handleCountryInput}
+                class="mt-1 w-full uppercase rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              />
+            </label>
+          </div>
+
+          {#if message}
+            <div class="text-sm text-red-300 bg-red-900/30 border border-red-500/40 px-3 py-2 rounded">
+              {message}
+            </div>
+          {/if}
+          {#if removedInvalidItems > 0}
+            <div class="text-sm text-amber-200 bg-amber-900/30 border border-amber-500/40 px-3 py-2 rounded">
+              Removed {removedInvalidItems} invalid cart item(s). Please review your cart before paying.
+            </div>
+          {/if}
+
+          {#if !data.stripeReady}
+            <p class="text-sm text-red-300">
+              Payment is not configured (server missing STRIPE_SECRET_KEY).
+            </p>
+        {:else}
+            <div id="payment-element" class="border border-white/10 rounded-lg p-4 bg-white/5"></div>
+        {/if}
+
+          <button
+            type="submit"
+            class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#4F46E5] text-white font-semibold shadow-lg shadow-[#4F46E5]/30 transition hover:bg-[#6366F1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6366F1] disabled:opacity-60"
+            disabled={loading}
+          >
+            {#if loading}
+              <span class="animate-pulse">Processing...</span>
+            {:else}
+              {buttonLabel}
+            {/if}
+          </button>
+        </form>
+      </div>
+
+      <aside class="bg-white/5 border border-white/10 rounded-2xl p-6 shadow-lg shadow-black/20 backdrop-blur-sm">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-xl font-semibold text-white">Order summary</h2>
+          <span class="text-xs text-gray-400">Review your items</span>
+        </div>
+
+        {#if cart.length === 0}
+          <p class="text-gray-400 text-sm">Your cart is empty.</p>
+        {:else}
+          <div class="space-y-3">
+            {#each cart as item}
+              <div class="flex justify-between text-sm text-gray-200 border-b border-white/5 pb-2">
+                <div>
+                  <p class="font-medium text-white">{item.name}</p>
+                  <p class="text-gray-400">Qty: {item.qty} - {item.color} {item.size}</p>
+                </div>
+                <p class="font-semibold text-white">{lineTotal(item)} $</p>
               </div>
-              <p class="font-semibold">{lineTotal(item)} $</p>
-            </div>
-          {/each}
-        </div>
+            {/each}
+          </div>
 
-        <div class="border-t border-gray-200 mt-4 pt-4 space-y-2 text-sm text-gray-700">
-          <div class="flex justify-between">
-            <span>Subtotal</span>
-            <span class="font-semibold">{totalFormatted} $</span>
-          </div>
-          <div class="flex justify-between">
-            <div>
-              <span>Shipping</span>
-              <p class="text-xs text-gray-500">{shipping.label}</p>
+          <div class="border-t border-white/10 mt-4 pt-4 space-y-2 text-sm text-gray-200">
+            <div class="flex justify-between">
+              <span>Subtotal</span>
+              <span class="font-semibold text-white">{totalFormatted} $</span>
             </div>
-            <span class="font-semibold">{shipping.amount.toFixed(2)} $</span>
+            <div class="flex justify-between">
+              <div>
+                <span>Shipping</span>
+                <p class="text-xs text-gray-400">{shipping.label}</p>
+              </div>
+              <span class="font-semibold text-white">{shipping.amount.toFixed(2)} $</span>
+            </div>
+            <div class="flex justify-between border-t border-dashed border-white/10 pt-2 text-white font-semibold">
+              <span>Order total</span>
+              <span>{grandTotalFormatted} $</span>
+            </div>
+            <p class="text-xs text-gray-400">
+              Shipping fees follow the About page tiers (DE free over EUR 120, EUR 5 domestic, EUR 12 EU, EUR 18-25 international).
+            </p>
           </div>
-          <div class="flex justify-between border-t border-dashed border-gray-200 pt-2 text-gray-900 font-semibold">
-            <span>Order total</span>
-            <span>{grandTotalFormatted} $</span>
-          </div>
-          <p class="text-xs text-gray-500">
-            Shipping fees follow the About page tiers (DE free over EUR 120, EUR 5 domestic, EUR 12 EU, EUR 18-25 international).
-          </p>
-        </div>
-      {/if}
-    </aside>
+        {/if}
+      </aside>
+    </div>
   </div>
 </section>
+</div>
