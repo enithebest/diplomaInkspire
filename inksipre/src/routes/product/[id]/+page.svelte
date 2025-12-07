@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { Star } from '@lucide/svelte';
+  import { Star, Truck, Printer, Layers, Feather, ChevronDown } from '@lucide/svelte';
   import { productImages } from '../../categories/productImages.js';
 
   export let data;
@@ -9,6 +9,16 @@
   const product = data.product;
   const variants = data.variants || [];
   const isAuthenticated = data.isAuthenticated ?? false;
+  const hasPurchased = data.hasPurchased ?? false;
+  const ratings =
+    data?.ratings ?? {
+      overall_avg: null,
+      shipping_avg: null,
+      print_quality_avg: null,
+      material_avg: null,
+      comfort_avg: null,
+      count: 0
+    };
   let comments = data.comments || [];
   $: comments = data.comments || [];
 
@@ -20,7 +30,6 @@
   const colors = Array.from(
     new Set(variants.map((v) => v.color).filter((v) => !!v))
   );
-  const ratings = data?.ratings ?? {};
   const userRating = data?.userRating ?? null;
   const ratingCategories = [
     { key: 'overall', label: 'Overall' },
@@ -30,6 +39,49 @@
     { key: 'comfort', label: 'Comfort' }
   ];
   const starLevels = [1, 2, 3, 4, 5];
+  const summaryCategories = ratingCategories.filter((cat) => cat.key !== 'overall');
+  let draftRatings = {
+    overall: userRating?.overall ?? null,
+    shipping: userRating?.shipping ?? null,
+    print_quality: userRating?.print_quality ?? null,
+    material: userRating?.material ?? null,
+    comfort: userRating?.comfort ?? null
+  };
+  const categoryIcons = {
+    shipping: Truck,
+    print_quality: Printer,
+    material: Layers,
+    comfort: Feather
+  };
+  const specSections = [
+    {
+      key: 'fabric',
+      title: 'Fabric',
+      summary: 'Soft, breathable cotton blend',
+      detail:
+        'A balanced cotton blend that keeps shape, resists pilling, and feels soft against skin for everyday wear.'
+    },
+    {
+      key: 'fit',
+      title: 'Fit',
+      summary: 'Regular, true to size',
+      detail:
+        'Designed for a relaxed silhouette with room to layer. Most customers report it runs true to size.'
+    },
+    {
+      key: 'weight',
+      title: 'Weight',
+      summary: 'Mid-weight comfort',
+      detail:
+        'Sturdy enough to feel premium yet breathable for daily use; ideal for layering across seasons.'
+    }
+  ];
+  let specOpen = {
+    fabric: false,
+    fit: false,
+    weight: false
+  };
+  let derivedOverallAvg = null;
 
   const colorImageFallbacks = productImages[product.id]?.colors || {};
 
@@ -156,194 +208,246 @@
   });
 
   const formatRating = (value) => {
-    const num = Number(value ?? 0);
-    if (!Number.isFinite(num) || num <= 0) return '—';
+    const num = Number(value);
+    if (!Number.isFinite(num) || num <= 0) return '-';
     return num.toFixed(1);
   };
+
+  $: {
+    const values = summaryCategories
+      .map((cat) => Number(ratings[`${cat.key}_avg`]))
+      .filter((n) => Number.isFinite(n) && n > 0);
+    derivedOverallAvg = values.length ? values.reduce((a, b) => a + b, 0) / values.length : null;
+  }
+
 </script>
 
 {#if !product}
   <p class="text-center mt-20 text-gray-400 text-lg">Product not found.</p>
 {:else}
-  <div class="relative isolate overflow-hidden bg-gray-900 text-gray-200 min-h-screen px-6 py-12 lg:px-12">
-  <section class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
-    <div>
-      <img
-        src={activeImage}
-        alt={`${product.name} in ${selectedVariant?.color || selectedColor || 'selected color'}`}
-        class="rounded-lg shadow-lg w-full max-h-[500px] object-cover"
-      />
+  <div class="relative isolate overflow-hidden bg-gray-900 text-gray-200 min-h-screen px-4 py-10 lg:px-8">
+  <section class="max-w-7xl mx-auto relative">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div>
+        <img
+          src={activeImage}
+          alt={`${product.name} in ${selectedVariant?.color || selectedColor || 'selected color'}`}
+          class="rounded-lg shadow-lg w-full max-h-[500px] object-cover"
+        />
 
-      {#if variants && variants.length > 0}
-        <div class="flex gap-3 mt-4 flex-wrap justify-center">
-          {#each variants as variant}
-            {#if variant.image_url}
-              <button
-                type="button"
-                class="rounded-md border border-gray-700 hover:ring-2 hover:ring-[#6366F1] transition p-0"
-                on:click={() => chooseVariant(variant)}
-              >
-                <img
-                  src={variant.image_url}
-                  alt={`Thumbnail ${variant.color || ''} ${variant.size || ''}`}
-                  class="w-20 h-20 object-cover rounded-md"
-                />
-              </button>
-            {/if}
-          {/each}
-        </div>
-      {/if}
-    </div>
-
-    <div class="space-y-5">
-      <h1 class="text-4xl font-bold text-white">{product.name}</h1>
-
-      {#if product.description}
-        <p class="text-gray-300 leading-relaxed">
-          {#if product.description.length > 160}
-            {shortDesc}...
-            <button
-              class="text-indigo-400 underline text-sm"
-              on:click={() => (showMore = !showMore)}
-            >
-              {showMore ? 'Show less' : 'Read more'}
-            </button>
-          {:else}
-            {product.description}
-          {/if}
-        </p>
-      {/if}
-
-      <p class="text-2xl font-semibold text-indigo-400">
-        ${selectedVariant?.price ?? product.base_price}
-      </p>
-
-      {#if variants && variants.length > 0}
-        <div class="mt-6 space-y-4">
-          <h3 class="text-lg font-semibold text-indigo-400">Select Variant</h3>
-
-          {#if colors.length > 0}
-            <div class="flex items-center gap-3 flex-wrap">
-              {#each colors as c}
+        {#if variants && variants.length > 0}
+          <div class="flex gap-3 mt-4 flex-wrap justify-center">
+            {#each variants as variant}
+              {#if variant.image_url}
                 <button
                   type="button"
-                  class={`w-9 h-9 rounded-full border-2 ${
-                    selectedColor === c ? 'border-[#4F46E5] ring-2 ring-[#6366F1]/60' : 'border-gray-600'
-                  } flex items-center justify-center`}
-                  style={`background-color: ${c?.toLowerCase?.() || 'transparent'}`}
-                  title={c}
-                  on:click={() => chooseColor(c)}
-                ></button>
-              {/each}
-            </div>
-          {/if}
-
-          {#if selectedColor}
-            <div class="flex items-center gap-2 flex-wrap">
-              {#each sizesFor(selectedColor) as s}
-                <button
-                  class={`px-3 py-1.5 rounded-md border text-sm ${
-                    selectedSize === s
-                      ? 'bg-[#4F46E5] text-white border-[#4F46E5]'
-                      : 'bg-gray-800 text-gray-300 border-gray-600 hover:bg-gray-700'
-                  }`}
-                  on:click={() => chooseSize(s)}
+                  class="rounded-md border border-gray-700 hover:ring-2 hover:ring-[#6366F1] transition p-0"
+                  on:click={() => chooseVariant(variant)}
                 >
-                  {s}
+                  <img
+                    src={variant.image_url}
+                    alt={`Thumbnail ${variant.color || ''} ${variant.size || ''}`}
+                    class="w-20 h-20 object-cover rounded-md"
+                  />
                 </button>
-              {/each}
-            </div>
-          {/if}
-        </div>
-      {/if}
-
-      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <button
-          type="button"
-          class="bg-[#4F46E5] hover:bg-[#6366F1] text-white py-3 rounded-lg font-semibold disabled:opacity-50"
-          disabled={!selectedVariant}
-          on:click={addToCart}
-        >
-          Add to cart
-        </button>
-        <a
-          href={selectedVariant
-            ? `/customisation/${selectedVariant.id}?color=${selectedColor || selectedVariant.color || ''}`
-            : undefined}
-          class={`text-center py-3 rounded-lg font-semibold ${
-            selectedVariant
-              ? 'bg-[#4F46E5] hover:bg-[#6366F1] text-white'
-              : 'bg-gray-700 text-gray-300 cursor-not-allowed'
-          }`}
-          aria-disabled={!selectedVariant}
-        >
-          Start Designing
-        </a>
+              {/if}
+            {/each}
+          </div>
+        {/if}
       </div>
 
-      {#if showMore && product.description}
-        <div class="mt-6">
-          <h3 class="text-lg font-semibold text-indigo-400 mb-2">Description</h3>
-          <p class="text-gray-300 leading-relaxed">{product.description}</p>
+      <div class="space-y-5">
+        <h1 class="text-4xl font-bold text-white">{product.name}</h1>
+        <div class="flex flex-wrap items-center gap-2 text-amber-300">
+          <div class="flex items-center gap-1.5">
+            {#each starLevels as level}
+              <Star
+                size="20"
+                class={level <= Math.round(derivedOverallAvg ?? 0) ? 'fill-amber-300 stroke-amber-300' : 'stroke-amber-300/70'}
+              />
+            {/each}
+          </div>
+          <span class="text-sm text-gray-400">{formatRating(derivedOverallAvg)} average</span>
+          <span class="text-xs text-gray-500">({ratings.count || 0} ratings)</span>
         </div>
-      {/if}
 
-      <div class="mt-6">
-        <h3 class="text-lg font-semibold text-indigo-400 mb-2">Specifications</h3>
-        <ul class="list-disc list-inside text-gray-300 space-y-1">
-          <li>Fabric: Cotton blend</li>
-          <li>Fit: Regular</li>
-          <li>Weight: Mid-weight</li>
-        </ul>
+        {#if product.description}
+          <p class="text-gray-300 leading-relaxed">
+            {#if product.description.length > 160}
+              {shortDesc}...
+              <button
+                class="text-indigo-400 underline text-sm"
+                on:click={() => (showMore = !showMore)}
+              >
+                {showMore ? 'Show less' : 'Read more'}
+              </button>
+            {:else}
+              {product.description}
+            {/if}
+          </p>
+        {/if}
+
+        <div class="flex flex-col md:flex-row gap-4 w-full">
+          <div class="flex flex-col gap-3 w-full md:w-1/2">
+            <p class="text-2xl font-semibold text-indigo-400">
+              ${selectedVariant?.price ?? product.base_price}
+            </p>
+            <div class="w-full rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-transparent px-5 py-4 shadow-xl shadow-black/30 space-y-3 backdrop-blur-sm">
+              {#each summaryCategories as cat}
+                <div class="flex items-center justify-between gap-3">
+                  <div class="flex items-center gap-2 text-gray-200">
+                    {#if categoryIcons[cat.key]}
+                      {@const Icon = categoryIcons[cat.key]}
+                      <Icon size="16" class="text-indigo-300" />
+                    {/if}
+                    <span class="text-sm">{cat.label}</span>
+                  </div>
+                  <div class="flex items-center gap-1.5 text-amber-300">
+                    {#each starLevels as level}
+                      <Star
+                        size="18"
+                        class={level <= Math.round(ratings[`${cat.key}_avg`] ?? 0) ? 'fill-amber-300 stroke-amber-300' : 'stroke-amber-300/70'}
+                      />
+                    {/each}
+                    <span class="ml-2 text-xs text-gray-400">{formatRating(ratings[`${cat.key}_avg`])}</span>
+                  </div>
+                </div>
+              {/each}
+            </div>
+          </div>
+
+          <div class="w-full md:w-1/2 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 shadow-lg shadow-black/25 backdrop-blur-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-indigo-300">Specifications</h3>
+              <span class="text-xs text-gray-400">Tap to expand</span>
+            </div>
+            {#each specSections as spec}
+              <div class="rounded-xl border border-white/10 bg-white/5 overflow-hidden">
+                <button
+                  type="button"
+                  class="w-full flex items-center justify-between px-4 py-3 text-left text-gray-100 hover:bg-white/5 transition"
+                  on:click={() => (specOpen = { ...specOpen, [spec.key]: !specOpen[spec.key] })}
+                >
+                  <div>
+                    <p class="text-sm font-semibold">{spec.title}</p>
+                    <p class="text-xs text-gray-400">{spec.summary}</p>
+                  </div>
+                  <ChevronDown
+                    size="18"
+                    class={`${specOpen[spec.key] ? 'rotate-180 text-indigo-300' : 'text-gray-400'} transition-transform`}
+                  />
+                </button>
+                {#if specOpen[spec.key]}
+                  <div class="px-4 pb-3 text-sm text-gray-300 leading-relaxed">
+                    {spec.detail}
+                  </div>
+                {/if}
+              </div>
+            {/each}
+          </div>
+        </div>
+
+        {#if variants && variants.length > 0}
+          <div class="mt-4 space-y-4">
+            <h3 class="text-lg font-semibold text-indigo-400">Select Variant</h3>
+
+            {#if colors.length > 0}
+              <div class="flex items-center gap-3 flex-wrap">
+                {#each colors as c}
+                  <button
+                    type="button"
+                    class={`w-9 h-9 rounded-full border-2 ${
+                      selectedColor === c ? 'border-[#4F46E5] ring-2 ring-[#6366F1]/60' : 'border-gray-600'
+                    } flex items-center justify-center`}
+                    style={`background-color: ${c?.toLowerCase?.() || 'transparent'}`}
+                    title={c}
+                    on:click={() => chooseColor(c)}
+                  ></button>
+                {/each}
+              </div>
+            {/if}
+
+            {#if selectedColor}
+              <div class="flex items-center gap-2 flex-wrap">
+                {#each sizesFor(selectedColor) as s}
+                  <button
+                    class={`px-3 py-1.5 rounded-md border text-sm ${
+                      selectedSize === s
+                        ? 'bg-[#4F46E5] text-white border-[#4F46E5]'
+                        : 'bg-gray-800 text-gray-300 border-gray-600 hover:bg-gray-700'
+                    }`}
+                    on:click={() => chooseSize(s)}
+                  >
+                    {s}
+                  </button>
+                {/each}
+              </div>
+            {/if}
+          </div>
+        {/if}
+
+        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <button
+            type="button"
+            class="bg-[#4F46E5] hover:bg-[#6366F1] text-white py-3 rounded-lg font-semibold disabled:opacity-50"
+            disabled={!selectedVariant}
+            on:click={addToCart}
+          >
+            Add to cart
+          </button>
+          <a
+            href={selectedVariant
+              ? `/customisation/${selectedVariant.id}?color=${selectedColor || selectedVariant.color || ''}`
+              : undefined}
+            class={`text-center py-3 rounded-lg font-semibold ${
+              selectedVariant
+                ? 'bg-[#4F46E5] hover:bg-[#6366F1] text-white'
+                : 'bg-gray-700 text-gray-300 cursor-not-allowed'
+            }`}
+            aria-disabled={!selectedVariant}
+          >
+            Start Designing
+          </a>
+        </div>
+
+        {#if showMore && product.description}
+          <div class="mt-6">
+            <h3 class="text-lg font-semibold text-indigo-400 mb-2">Description</h3>
+            <p class="text-gray-300 leading-relaxed">{product.description}</p>
+          </div>
+        {/if}
       </div>
     </div>
+
   </section>
 
-  <section class="max-w-6xl mx-auto mt-16 space-y-6">
-    <div class="grid gap-6 md:grid-cols-[1fr_2fr] items-start">
+  <section class="max-w-7xl w-full mx-auto mt-16 space-y-6">
+    <div class="grid gap-6 lg:grid-cols-[1fr_2fr] items-start">
       <div id="ratings" class="bg-gray-800/60 rounded-2xl border border-white/5 p-6 space-y-5 flex flex-col">
         <div class="flex items-start justify-between gap-3">
           <div>
             <h2 class="text-2xl font-semibold text-white">Product ratings</h2>
-            <p class="text-gray-400 text-sm">Attribute scores from customers.</p>
+            <p class="text-gray-400 text-sm">Tap the stars to share your score.</p>
           </div>
-          <div class="text-right">
-            <p class="text-3xl font-semibold text-white leading-tight">
-              {formatRating(ratings.overall_avg)}
-            </p>
-            <p class="text-xs text-gray-400">{ratings.count || 0} ratings</p>
-          </div>
+          <span class="inline-flex items-center gap-2 rounded-full border border-emerald-400/50 bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+            Verified ratings
+          </span>
         </div>
-
-        <div class="space-y-3">
-          {#each ratingCategories as cat}
-            <div class="flex items-center justify-between gap-3">
-              <span class="text-sm text-gray-300">{cat.label}</span>
-              <div class="flex items-center gap-1 text-amber-300">
-                {#each starLevels as level}
-                  <Star
-                    size="18"
-                    class={level <= Math.round(ratings[`${cat.key}_avg`] ?? 0) ? 'fill-amber-300 stroke-amber-300' : 'stroke-amber-300/70'}
-                  />
-                {/each}
-                <span class="ml-2 text-xs text-gray-400">{formatRating(ratings[`${cat.key}_avg`])}</span>
-              </div>
-            </div>
-          {/each}
-        </div>
-
-        <div class="h-px bg-white/5"></div>
 
         {#if !isAuthenticated}
           <p class="text-sm text-gray-300">
             <a class="text-indigo-400 underline" href={`/login?next=/product/${product.id}#ratings`}>Log in</a> to rate this product.
           </p>
+        {:else if !hasPurchased}
+          <p class="text-sm text-gray-300">
+            Only verified buyers can rate this product.
+          </p>
         {:else}
           <form method="POST" action="?/rate" class="space-y-4">
             {#each ratingCategories as cat}
               <div class="space-y-1">
-                <label class="block text-sm text-gray-300">{cat.label}</label>
-                <div class="flex items-center gap-2">
+                <p class="text-sm text-gray-300">{cat.label}</p>
+                <div class="flex items-center gap-2.5" aria-label={`${cat.label} rating`}>
                   {#each starLevels as level}
                     <label class="flex items-center gap-1 text-sm text-gray-200 cursor-pointer select-none">
                       <input
@@ -351,29 +455,19 @@
                         name={cat.key}
                         value={level}
                         required
-                        checked={userRating ? userRating[cat.key] === level : level === 5}
+                        checked={draftRatings[cat.key] === level}
+                        on:change={() => (draftRatings = { ...draftRatings, [cat.key]: level })}
                         class="hidden"
                       />
                       <Star
-                        size="18"
-                        class={`pointer-events-none ${level <= (userRating?.[cat.key] ?? 5) ? 'fill-amber-300 stroke-amber-300' : 'stroke-amber-300/70'}`}
+                        size="20"
+                        class={`pointer-events-none ${level <= (draftRatings[cat.key] ?? 0) ? 'fill-amber-300 stroke-amber-300' : 'stroke-amber-300/70'}`}
                       />
                     </label>
                   {/each}
                 </div>
               </div>
             {/each}
-
-            <div>
-              <label class="block text-sm text-gray-300 mb-1" for="rating_note">Optional note</label>
-              <textarea
-                id="rating_note"
-                name="rating_note"
-                rows="3"
-                placeholder="Share a quick note about fit, print, or shipping."
-                class="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-gray-500 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400/30"
-              >{userRating?.comment ?? ''}</textarea>
-            </div>
 
             <button
               type="submit"
@@ -447,14 +541,14 @@
       </div>
     </div>
 
-    <div class="space-y-4">
+    <div class="space-y-4 w-full max-w-none">
       <h3 class="text-xl font-semibold text-white">What people already said</h3>
       {#if comments.length === 0}
         <p class="text-gray-400 text-sm">No comments yet. Be the first to leave your impressions.</p>
       {:else}
-        <ul class="space-y-4">
+        <ul class="space-y-4 w-full">
           {#each comments as comment}
-            <li class="rounded-2xl border border-white/5 bg-gray-800/60 p-4">
+            <li class="w-full rounded-2xl border border-white/5 bg-gray-800/60 p-4">
               <div class="flex items-center justify-between text-sm text-gray-400 mb-2">
                 <span class="font-medium text-white">
                   {comment.registered_name || comment.author_name}

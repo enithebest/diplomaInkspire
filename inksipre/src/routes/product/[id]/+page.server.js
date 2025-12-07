@@ -69,6 +69,18 @@ export const load = async ({ params, locals }) => {
 				)
 			: [];
 
+	const purchaseRows =
+		user && user.id
+			? await query(
+					`SELECT 1
+           FROM order_items oi
+           JOIN orders o ON o.id = oi.order_id
+           WHERE o.user_id = ? AND oi.product_id = ?
+           LIMIT 1`,
+					[user.id, id]
+				)
+			: [];
+
 	const ratings = ratingSummaryRows?.[0] || {
 		shipping_avg: null,
 		print_quality_avg: null,
@@ -79,6 +91,7 @@ export const load = async ({ params, locals }) => {
 	};
 
 	const userRating = userRatingRows?.[0] || null;
+	const hasPurchased = purchaseRows.length > 0;
 
 	return {
 		product,
@@ -87,7 +100,8 @@ export const load = async ({ params, locals }) => {
 		ratings,
 		userRating,
 		isAuthenticated: Boolean(user),
-		user
+		user,
+		hasPurchased
 	};
 };
 
@@ -126,6 +140,18 @@ export const actions = {
 		const user = locals?.user;
 		if (!user) {
 			throw redirect(302, `/login?next=/product/${params.id}#ratings`);
+		}
+
+		const purchaseRows = await query(
+			`SELECT 1
+       FROM order_items oi
+       JOIN orders o ON o.id = oi.order_id
+       WHERE o.user_id = ? AND oi.product_id = ?
+       LIMIT 1`,
+			[user.id, params.id]
+		);
+		if (!purchaseRows.length) {
+			return fail(403, { ratingError: 'Only verified buyers can rate this product.' });
 		}
 
 		const data = await request.formData();
