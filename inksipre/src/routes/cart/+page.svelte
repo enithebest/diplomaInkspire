@@ -149,10 +149,11 @@
                       ${item.price}
                     </span>
                     <div class="flex items-center gap-2">
-                      <label class="text-xs uppercase tracking-wide text-gray-400">Qty</label>
+                      <span class="text-xs uppercase tracking-wide text-gray-400">Qty</span>
                       <input
                         type="number"
                         min="1"
+                        aria-label="Quantity"
                         value={item.qty || 1}
                         class="w-20 rounded-lg border border-gray-700 bg-gray-900/80 px-3 py-2 text-white shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/40"
                         onchange={(e) => updateQty(i, e.target.value)}

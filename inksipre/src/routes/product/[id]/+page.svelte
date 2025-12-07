@@ -410,28 +410,30 @@
       </div>
 
       <!-- SPECIFICATIONS horizontal strip -->
-      <section class="max-w-7xl w-full mx-auto mt-8">
-        <div class="grid gap-4 md:grid-cols-3">
-          {#each specSections as spec}
-            <div
-              class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-5 shadow-lg shadow-black/30 transition hover:bg-white/10 cursor-pointer"
-              on:click={() => (specOpen = { ...specOpen, [spec.key]: !specOpen[spec.key] })}
-            >
-              <div class="flex items-center justify-between mb-2">
-                <p class="text-lg font-semibold text-indigo-300">{spec.title}</p>
-                <ChevronDown
-                  size="18"
-                  class={`${specOpen[spec.key] ? 'rotate-180 text-indigo-300' : 'text-gray-400'} transition-transform`}
+        <section class="max-w-7xl w-full mx-auto mt-8">
+          <div class="grid gap-4 md:grid-cols-3">
+            {#each specSections as spec}
+              <button
+                type="button"
+                class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-5 shadow-lg shadow-black/30 transition hover:bg-white/10 cursor-pointer text-left"
+                on:click={() => (specOpen = { ...specOpen, [spec.key]: !specOpen[spec.key] })}
+                aria-expanded={specOpen[spec.key]}
+              >
+                <div class="flex items-center justify-between mb-2">
+                  <p class="text-lg font-semibold text-indigo-300">{spec.title}</p>
+                  <ChevronDown
+                    size="18"
+                    class={`${specOpen[spec.key] ? 'rotate-180 text-indigo-300' : 'text-gray-400'} transition-transform`}
                 />
               </div>
-              <p class="text-sm text-gray-400">{spec.summary}</p>
-              {#if specOpen[spec.key]}
-                <p class="mt-3 text-sm text-gray-300 leading-relaxed">{spec.detail}</p>
-              {/if}
-            </div>
-          {/each}
-        </div>
-      </section>
+                <p class="text-sm text-gray-400">{spec.summary}</p>
+                {#if specOpen[spec.key]}
+                  <p class="mt-3 text-sm text-gray-300 leading-relaxed">{spec.detail}</p>
+                {/if}
+              </button>
+            {/each}
+          </div>
+        </section>
 
       <!-- RATINGS & COMMENTS area (below main section) -->
       <section class="max-w-7xl w-full mx-auto mt-12 space-y-6">

@@ -85,6 +85,7 @@
 				<iframe
 					width="100%"
 					height="300"
+					title="Inkspire location map"
 					style="border:0;"
 					loading="lazy"
 					allowfullscreen
@@ -120,21 +121,21 @@
 						<form method="POST" action="?/send" use:enhance class="flex flex-col gap-5">
 
 							<div>
-								<label class="text-sm font-medium text-gray-300">{m.contact_form_name_label()}</label>
-								<input type="text" name="name" bind:value={nameValue} required minlength="2"
+								<label class="text-sm font-medium text-gray-300" for="contact-name">{m.contact_form_name_label()}</label>
+								<input id="contact-name" type="text" name="name" bind:value={nameValue} required minlength="2"
 									class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 
 									       placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
 							</div>
 
 							<div>
-								<label class="text-sm font-medium text-gray-300">{m.contact_form_email_label()}</label>
-								<input type="email" name="email" bind:value={emailValue} required
+								<label class="text-sm font-medium text-gray-300" for="contact-email">{m.contact_form_email_label()}</label>
+								<input id="contact-email" type="email" name="email" bind:value={emailValue} required
 									class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 
 									       placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
 							</div>
 
 							<div>
-								<label class="text-sm font-medium text-gray-300">{m.contact_form_phone_label()}</label>
+								<label class="text-sm font-medium text-gray-300" for="contact-phone">{m.contact_form_phone_label()}</label>
 								<div class="mt-1 flex flex-col gap-3 sm:flex-row">
 
 									<select name="prefix" bind:value={selectedPrefix} required
@@ -147,7 +148,7 @@
 										{/each}
 									</select>
 
-									<input type="tel" name="phone" bind:value={phoneValue} required minlength="6"
+									<input id="contact-phone" type="tel" name="phone" bind:value={phoneValue} required minlength="6"
 										class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 
 										       placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
 								</div>
@@ -156,9 +157,10 @@
 							</div>
 
 							<div>
-								<label class="text-sm font-medium text-gray-300">{m.contact_form_message_label()}</label>
+								<label class="text-sm font-medium text-gray-300" for="contact-message">{m.contact_form_message_label()}</label>
 
 								<textarea
+									id="contact-message"
 									name="message"
 									rows="4"
 									bind:value={messageValue}

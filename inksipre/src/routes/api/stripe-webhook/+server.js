@@ -1,4 +1,4 @@
-import { STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import Stripe from 'stripe';
 import { json } from '@sveltejs/kit';
 import { createConnection } from '$lib/db/mysql.js';
@@ -6,6 +6,9 @@ import { createConnection } from '$lib/db/mysql.js';
 // This route expects the raw body. Ensure your deployment preserves the raw body for webhook verification.
 
 export const POST = async ({ request }) => {
+  const STRIPE_SECRET_KEY = env.STRIPE_SECRET_KEY;
+  const STRIPE_WEBHOOK_SECRET = env.STRIPE_WEBHOOK_SECRET;
+
   if (!STRIPE_SECRET_KEY || !STRIPE_WEBHOOK_SECRET) {
     return json({ error: 'Webhook not configured' }, { status: 500 });
   }

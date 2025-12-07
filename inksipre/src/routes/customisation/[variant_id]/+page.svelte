@@ -125,7 +125,7 @@
   const convertImageToTexture = (imageUrl) => {
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load(imageUrl);
-    texture.encoding = THREE.sRGBEncoding;
+    texture.colorSpace = THREE.SRGBColorSpace;
     texture.flipY = false;
     texture.wrapS = THREE.ClampToEdgeWrapping;
     texture.wrapT = THREE.ClampToEdgeWrapping;
@@ -328,7 +328,7 @@
     renderer.setClearColor(0x131316, 0);
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(800, 800); // initial; will be resized to container below
-    renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
     containerRef.appendChild(renderer.domElement);
 
     orbitControls = new OrbitControls(camera, renderer.domElement);

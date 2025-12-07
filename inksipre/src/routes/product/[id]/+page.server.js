@@ -162,7 +162,7 @@ export const actions = {
 		for (const key of keys) {
 			const raw = Number(data.get(key));
 			if (!Number.isInteger(raw) || raw < 1 || raw > 5) {
-				return fail(400, { ratingError: m.product_rating_error_invalid({}, { locale }) });
+				return fail(400, { ratingError: 'Invalid rating value. Please choose 1 to 5 stars.' });
 			}
 			values[key] = raw;
 		}
