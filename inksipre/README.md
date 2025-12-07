@@ -1,38 +1,48 @@
-# sv
+# Inkspire – Product Customizer & Ratings
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Inkspire is a SvelteKit app for browsing products, customizing variants, placing orders, and leaving verified ratings/comments.
 
-## Creating a project
+## Stack
+- SvelteKit + Vite
+- Tailwind (unstyled utility usage)
+- MySQL (via `mysql2`)
+- Stripe (client + server SDKs installed)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Prerequisites
+- Node 18+ (LTS recommended)
+- MySQL database
+- Copy `./.env` (or create one) with your values:
+  - Database connection (host, port, user, password, database)
+  - Stripe keys
+  - Email/SMTP values if you enable mailers
 
+## Setup
 ```sh
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+npm install
+# create and configure .env (see above)
+# initialize DB schema
+mysql -u <user> -p <dbname> < src/lib/database.sql
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
+## Run
 ```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
+npm run dev          # start dev server (port 5177)
 npm run dev -- --open
 ```
 
-## Building
-
-To create a production version of your app:
-
+## Build & Preview
 ```sh
 npm run build
+npm run preview
 ```
 
-You can preview the production build with `npm run preview`.
+## Lint / Format
+```sh
+npm run lint
+npm run format
+```
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+## Notes
+- Ratings are limited to verified buyers (users with an order containing the product).
+- Specs accordion and rating summary live on the product page; user rating form gated by auth + purchase.
+- DB schema is in `src/lib/database.sql`; run it before first start.***
