@@ -13,7 +13,9 @@
   let shipping = $state({ amount: 0, label: 'Enter country to calculate shipping', tier: 'missing_country' });
   let grandTotal = $state(0);
   let grandTotalFormatted = $state('0.00');
-  let country = $state('');
+  let country = $state((data?.user?.country ?? 'AL').toUpperCase());
+  let cityInput = $state('');
+  let cityLookupStatus = $state('');
   let stripe = $state(null);
   let elements = $state(null);
   let paymentElement;
@@ -22,6 +24,50 @@
   let hasPaymentElement = false;
   let buttonLabel = $state('Continue to payment');
   let removedInvalidItems = $state(0);
+  let cityLookupTimeout;
+
+  const countries = [
+    { code: 'AL', name: 'Albania' },
+    { code: 'AD', name: 'Andorra' },
+    { code: 'AT', name: 'Austria' },
+    { code: 'BE', name: 'Belgium' },
+    { code: 'BG', name: 'Bulgaria' },
+    { code: 'HR', name: 'Croatia' },
+    { code: 'CY', name: 'Cyprus' },
+    { code: 'CZ', name: 'Czech Republic' },
+    { code: 'DK', name: 'Denmark' },
+    { code: 'EE', name: 'Estonia' },
+    { code: 'FI', name: 'Finland' },
+    { code: 'FR', name: 'France' },
+    { code: 'DE', name: 'Germany' },
+    { code: 'GR', name: 'Greece' },
+    { code: 'HU', name: 'Hungary' },
+    { code: 'IS', name: 'Iceland' },
+    { code: 'IE', name: 'Ireland' },
+    { code: 'IT', name: 'Italy' },
+    { code: 'LV', name: 'Latvia' },
+    { code: 'LI', name: 'Liechtenstein' },
+    { code: 'LT', name: 'Lithuania' },
+    { code: 'LU', name: 'Luxembourg' },
+    { code: 'MT', name: 'Malta' },
+    { code: 'MC', name: 'Monaco' },
+    { code: 'NL', name: 'Netherlands' },
+    { code: 'MK', name: 'North Macedonia' },
+    { code: 'NO', name: 'Norway' },
+    { code: 'PL', name: 'Poland' },
+    { code: 'PT', name: 'Portugal' },
+    { code: 'RO', name: 'Romania' },
+    { code: 'SM', name: 'San Marino' },
+    { code: 'RS', name: 'Serbia' },
+    { code: 'SK', name: 'Slovakia' },
+    { code: 'SI', name: 'Slovenia' },
+    { code: 'ES', name: 'Spain' },
+    { code: 'SE', name: 'Sweden' },
+    { code: 'CH', name: 'Switzerland' },
+    { code: 'TR', name: 'Turkey' },
+    { code: 'UA', name: 'Ukraine' },
+    { code: 'GB', name: 'United Kingdom' }
+  ];
 
   onMount(() => {
     const raw = localStorage.getItem('cart');
@@ -90,6 +136,36 @@
     country = raw.toString().toUpperCase();
     refreshShipping();
   };
+
+  const handleCityInput = (event) => {
+    const raw = event?.target?.value ?? '';
+    cityInput = raw;
+    cityLookupStatus = raw.trim().length ? 'Searching…' : '';
+    clearTimeout(cityLookupTimeout);
+    if (raw.trim().length < 2) return;
+    cityLookupTimeout = setTimeout(() => lookupCountryForCity(raw), 400);
+  };
+
+  async function lookupCountryForCity(cityText) {
+    const query = cityText.trim();
+    if (query.length < 2) return;
+    try {
+      const res = await fetch(`/api/city-country?city=${encodeURIComponent(query)}`);
+      const payload = await res.json().catch(() => null);
+      if (res.ok && payload?.countryCode) {
+        country = payload.countryCode.toUpperCase();
+        refreshShipping();
+        cityLookupStatus = payload.countryName
+          ? `Detected ${payload.countryName} (${country})`
+          : `Detected ${country}`;
+      } else {
+        cityLookupStatus = 'No matching country found for that city';
+      }
+    } catch (err) {
+      console.error('City lookup failed', err);
+      cityLookupStatus = 'Could not look up country right now';
+    }
+  }
 
   async function mountElements(secret) {
     if (!stripe || !secret) return;
