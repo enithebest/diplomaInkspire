@@ -764,9 +764,9 @@
               <div class="bg-white/5 border border-white/10 rounded-md overflow-hidden group">
                 <img src={item.url} alt={displayName(item.url)} class="w-full h-28 object-cover" />
                 <div class="p-2 flex items-center justify-between">
-                  <span class="text-xs truncate max-w-[70%]" title={displayName(item.url)}>{displayName(item.url)}</span>
+                  <span class="text-xs truncate max-w-[65%]" title={displayName(item.url)}>{displayName(item.url)}</span>
                   <button
-                    class={`${primaryButton} text-xs px-3 py-2 w-full justify-center`}
+                    class="inline-flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-semibold rounded-md bg-white/5 text-gray-100 border border-white/20 hover:bg-white/10 hover:border-white/30 transition shadow-sm backdrop-blur-sm"
                     onclick={() => useFromLibrary(item.url)}
                   >
                     Use

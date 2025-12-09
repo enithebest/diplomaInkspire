@@ -3,6 +3,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import { put } from '@vercel/blob';
 import { BLOB_READ_WRITE_TOKEN } from '$env/static/private';
 import * as m from '$lib/paraglide/messages/_index.js';
+import { sendPrinterEmail } from '$lib/email/mailer.js';
 
 export const load = async ({ params, locals }) => {
   const { variant_id } = params;
@@ -98,7 +99,20 @@ export const actions = {
 
     const { variant_id } = params;
     const variantRows = await query('SELECT * FROM product_variants WHERE id = ?', [variant_id]);
-    const variant = variantRows?.[0] || null;
+    const variantRaw = variantRows?.[0] || null;
+    const variant = (() => {
+      if (!variantRaw) return null;
+      if (!variantRaw.option_values) return variantRaw;
+      try {
+        const opts =
+          typeof variantRaw.option_values === 'string'
+            ? JSON.parse(variantRaw.option_values)
+            : variantRaw.option_values;
+        return { ...variantRaw, color: opts?.color ?? null, size: opts?.size ?? null };
+      } catch {
+        return variantRaw;
+      }
+    })();
     if (!variant) {
       return fail(404, { orderError: m.custom_order_error_variant({}, { locale }) });
     }
@@ -116,6 +130,8 @@ export const actions = {
     const scale = Number(form.get('scale') || 1);
     const position_x = Number(form.get('position_x') || 0);
     const position_y = Number(form.get('position_y') || 0);
+    let renderBuffer = null;
+    let renderContentType = 'image/png';
 
     if (!designData && !designUrl) {
       return fail(400, { orderError: m.custom_order_error_design_required({}, { locale }) });
@@ -130,17 +146,17 @@ export const actions = {
         }
 
         const mimeMatch = designData.match(/^data:(.*?);base64,/);
-        const contentType = mimeMatch?.[1] || 'image/png';
-        const buffer = Buffer.from(base64, 'base64');
+        renderContentType = mimeMatch?.[1] || 'image/png';
+        renderBuffer = Buffer.from(base64, 'base64');
 
-        if (buffer.length > 8_000_000) {
+        if (renderBuffer.length > 8_000_000) {
           return fail(400, { orderError: m.custom_order_error_design_too_large({}, { locale }) });
         }
 
         const filename = `${user.id}-${variant_id}-${Date.now()}-design.png`;
-        const blob = await put(filename, buffer, {
+        const blob = await put(filename, renderBuffer, {
           access: 'public',
-          contentType,
+          contentType: renderContentType,
           token: BLOB_READ_WRITE_TOKEN
         });
         designUrl = blob.url;
@@ -196,6 +212,28 @@ export const actions = {
       }
 
       await conn.commit();
+
+      try {
+        await sendPrinterEmail({
+          order: { id: orderId, total_price: price, status: 'pending' },
+          orderItem: { id: orderItemId, quantity: 1, unit_price: price },
+          product,
+          variant,
+          user,
+          designUrl,
+          renderUrl: designUrl,
+          renderBuffer,
+          customisation: {
+            rotation: Number.isFinite(rotation) ? rotation : 0,
+            scale: Number.isFinite(scale) ? scale : 1,
+            position_x: Number.isFinite(position_x) ? position_x : 0,
+            position_y: Number.isFinite(position_y) ? position_y : 0
+          },
+          shippingAddress: null
+        });
+      } catch (emailErr) {
+        console.error('Printer email failed', emailErr);
+      }
 
       return { orderSuccess: true, orderId };
     } catch (err) {

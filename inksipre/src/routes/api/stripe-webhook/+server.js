@@ -2,6 +2,7 @@ import { env } from '$env/dynamic/private';
 import Stripe from 'stripe';
 import { json } from '@sveltejs/kit';
 import { createConnection } from '$lib/db/mysql.js';
+import { sendPrinterEmail } from '$lib/email/mailer.js';
 
 // This route expects the raw body. Ensure your deployment preserves the raw body for webhook verification.
 
@@ -35,6 +36,80 @@ export const POST = async ({ request }) => {
         try {
           const newStatus = event.type === 'payment_intent.succeeded' ? 'paid' : 'processing';
           await conn.query('UPDATE orders SET status = ? WHERE id = ?', [newStatus, orderId]);
+
+          if (event.type === 'payment_intent.succeeded') {
+            // Fetch order details to dispatch to printer
+            const [orderRows] = await conn.query('SELECT * FROM orders WHERE id = ?', [orderId]);
+            const order = orderRows?.[0] || null;
+            if (order) {
+              const [userRows] = await conn.query('SELECT id, email, full_name FROM users WHERE id = ?', [
+                order.user_id
+              ]);
+              const user = userRows?.[0] || null;
+
+              const [addressRows] = await conn.query(
+                'SELECT full_name, line1, line2, city, region, postal_code, country, phone FROM addresses WHERE id = ?',
+                [order.shipping_address_id]
+              );
+              const shippingAddress = addressRows?.[0] || null;
+
+              const [items] = await conn.query(
+                'SELECT * FROM order_items WHERE order_id = ? ORDER BY id ASC',
+                [orderId]
+              );
+              for (const item of items || []) {
+                const [productRows] = await conn.query(
+                  'SELECT id, name, base_price, image_url FROM products WHERE id = ?',
+                  [item.product_id]
+                );
+                const product = productRows?.[0] || null;
+
+                let variant = null;
+                if (item.variant_id) {
+                  const [variantRows] = await conn.query('SELECT * FROM product_variants WHERE id = ?', [
+                    item.variant_id
+                  ]);
+                  const variantRaw = variantRows?.[0] || null;
+                  if (variantRaw) {
+                    try {
+                      const opts =
+                        typeof variantRaw.option_values === 'string'
+                          ? JSON.parse(variantRaw.option_values)
+                          : variantRaw.option_values;
+                      variant = { ...variantRaw, color: opts?.color ?? null, size: opts?.size ?? null };
+                    } catch {
+                      variant = variantRaw;
+                    }
+                  }
+                }
+
+                let designUrl = '';
+                if (item.upload_id) {
+                  const [uploadRows] = await conn.query('SELECT image_url FROM uploads WHERE id = ?', [
+                    item.upload_id
+                  ]);
+                  designUrl = uploadRows?.[0]?.image_url || '';
+                }
+
+                try {
+                  await sendPrinterEmail({
+                    order,
+                    orderItem: item,
+                    product,
+                    variant,
+                    user,
+                    designUrl,
+                    renderUrl: designUrl,
+                    renderBuffer: null,
+                    customisation: null,
+                    shippingAddress
+                  });
+                } catch (emailErr) {
+                  console.error('Printer email failed (webhook)', emailErr);
+                }
+              }
+            }
+          }
         } finally {
           conn.release();
         }
