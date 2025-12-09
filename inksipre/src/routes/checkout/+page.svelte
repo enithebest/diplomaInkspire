@@ -140,10 +140,14 @@
   const handleCityInput = (event) => {
     const raw = event?.target?.value ?? '';
     cityInput = raw;
-    cityLookupStatus = raw.trim().length ? 'Searching…' : '';
+    const trimmed = raw.trim();
+    cityLookupStatus = trimmed.length ? 'Searching…' : '';
     clearTimeout(cityLookupTimeout);
-    if (raw.trim().length < 2) return;
-    cityLookupTimeout = setTimeout(() => lookupCountryForCity(raw), 400);
+    if (trimmed.length < 2) {
+      cityLookupStatus = trimmed.length ? 'Enter at least 2 characters' : '';
+      return;
+    }
+    cityLookupTimeout = setTimeout(() => lookupCountryForCity(trimmed), 400);
   };
 
   async function lookupCountryForCity(cityText) {
@@ -354,8 +358,13 @@
                 name="city"
                 autocomplete="address-level2"
                 required
+                bind:value={cityInput}
+                oninput={handleCityInput}
                 class="mt-1 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
               />
+              {#if cityLookupStatus}
+                <p class="mt-1 text-xs text-indigo-200">{cityLookupStatus}</p>
+              {/if}
             </label>
             <label class="block text-sm font-medium text-gray-200">
               Postal code
@@ -368,15 +377,26 @@
             </label>
             <label class="block text-sm font-medium text-gray-200">
               Country (2-letter)
-              <input
-                name="country"
-                maxlength="2"
-                autocomplete="country"
-                required
-                bind:value={country}
-                oninput={handleCountryInput}
-                class="mt-1 w-full uppercase rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              />
+              <div class="mt-1 relative">
+                <select
+                  name="country"
+                  autocomplete="country-name"
+                  required
+                  bind:value={country}
+                  onchange={handleCountryInput}
+                  class="w-full appearance-none rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 pr-10 uppercase"
+                >
+                  <option value="" disabled>Select your country</option>
+                  {#each countries as option}
+                    <option value={option.code} class="bg-[#0b1120] text-white">
+                      {option.name} ({option.code})
+                    </option>
+                  {/each}
+                </select>
+                <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
             </label>
           </div>
 
