@@ -147,6 +147,7 @@
           <div class="relative">
             <select
               class="appearance-none bg-white/5 border border-white/15 rounded-lg px-3 py-2 text-sm text-white shadow-inner shadow-black/20 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 pr-10"
+              style="appearance:none;-webkit-appearance:none;-moz-appearance:none;"
               bind:value={filterStatus}
             >
               <option class="bg-gray-900 text-white" value="all">{m.profile_orders_filter_all()}</option>
@@ -161,9 +162,9 @@
         {#if (data.orders || []).length === 0}
           <p class="text-center text-gray-300">{m.profile_orders_empty()}</p>
         {:else}
-          <div class="space-y-6">
+          <div class="grid gap-4 sm:grid-cols-2">
             {#each filteredOrders as o}
-              <div class="bg-gray-800/60 backdrop-blur-sm border border-gray-700 rounded-2xl p-4 shadow-lg">
+              <div class="bg-gray-800/60 backdrop-blur-sm border border-gray-700 rounded-2xl p-4 shadow-lg h-full">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
                   <div class="flex items-center gap-3">
                     <span class="text-sm text-gray-300 font-semibold">#{o.id}</span>
