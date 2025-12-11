@@ -14,7 +14,6 @@ export async function login(email, password) {
 
   const user = rows[0];
 
-  // ✅ extra safety: trim email & lowercase
   const valid = await bcrypt.compare(password, user.password_hash);
 
   if (!valid) {

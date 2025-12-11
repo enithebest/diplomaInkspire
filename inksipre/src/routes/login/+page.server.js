@@ -15,15 +15,12 @@ export const actions = {
     const email = data.get('email');
     const password = data.get('password');
 
-    // Validate email and password
     if (!validateEmail(email)) return fail(400, { message: 'Invalid email format' });
     if (!validatePassword(password)) return fail(400, { message: 'Password must be at least 8 characters' });
 
-    // Attempt login
     const result = await login(email, password);
 
     if (result.token) {
-      // Set session cookie
       cookies.set('session', result.token, {
         path: '/',
         httpOnly: true,
