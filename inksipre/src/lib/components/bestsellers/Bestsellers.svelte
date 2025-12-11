@@ -1,9 +1,13 @@
 ﻿<script>
   export let products = [];
   import * as m from '$lib/paraglide/messages/_index.js';
+  import { productImages } from '../../../routes/categories/productImages.js';
 
-  const fallbackImg = (id) =>
-    `https://picsum.photos/seed/inkspire-${id}/600/400`;
+  const getProductImage = (product) => {
+    if (product?.image_url) return product.image_url;
+    const colors = productImages[product?.id]?.colors;
+    return colors ? Object.values(colors)[0] : '';
+  };
 </script>
 
 <section class="bg-gray-900 py-16">
@@ -18,17 +22,24 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {#each products as p}
+        {@const imageSrc = getProductImage(p)}
         <a
           href={`/product/${p.id}`}
           class="group bg-white/5 rounded-xl border border-white/10 overflow-hidden hover:border-indigo-400/60 hover:shadow-[0_20px_60px_-30px_rgba(99,102,241,0.8)] transition"
         >
           <div class="aspect-[4/3] bg-gray-800 overflow-hidden">
-            <img
-              src={fallbackImg(p.id)}
-              alt={p.name}
-              class="w-full h-full object-cover group-hover:scale-105 transition"
-              loading="lazy"
-            />
+            {#if imageSrc}
+              <img
+                src={imageSrc}
+                alt={p.name}
+                class="w-full h-full object-cover group-hover:scale-105 transition"
+                loading="lazy"
+              />
+            {:else}
+              <div class="w-full h-full flex items-center justify-center text-sm text-gray-400">
+                Image coming soon
+              </div>
+            {/if}
           </div>
           <div class="p-4 space-y-2">
             <h3 class="text-white font-semibold truncate">{p.name}</h3>
