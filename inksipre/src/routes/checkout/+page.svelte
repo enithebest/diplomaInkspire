@@ -252,14 +252,12 @@
     loading = true;
     message = '';
     try {
-      // If the payment element is already mounted with this clientSecret, confirm the payment
       if (hasPaymentElement && clientSecret && mountedSecret === clientSecret) {
         const confirmError = await confirmPayment(clientSecret);
         if (confirmError) message = confirmError;
         return;
       }
 
-      // Otherwise create a new intent and mount the payment element
       const formData = new FormData(event.currentTarget);
       formData.append('cart', JSON.stringify(cart));
       formData.append('shipping_amount', shipping.amount.toString());
