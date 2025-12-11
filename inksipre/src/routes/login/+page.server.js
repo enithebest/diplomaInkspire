@@ -1,6 +1,13 @@
 import { login } from '$lib/db/auth';
-import { redirect } from '@sveltejs/kit';
+import { redirect, fail } from '@sveltejs/kit';
 import { validateEmail, validatePassword } from '$lib/utils/authUtils';
+
+export const load = ({ url }) => {
+  return {
+    reason: url.searchParams.get('reason'),
+    next: url.searchParams.get('next')
+  };
+};
 
 export const actions = {
   login: async ({ request, cookies, url }) => {
@@ -9,8 +16,8 @@ export const actions = {
     const password = data.get('password');
 
     // Validate email and password
-    if (!validateEmail(email)) return { message: 'Invalid email format' };
-    if (!validatePassword(password)) return { message: 'Password must be at least 8 characters' };
+    if (!validateEmail(email)) return fail(400, { message: 'Invalid email format' });
+    if (!validatePassword(password)) return fail(400, { message: 'Password must be at least 8 characters' });
 
     // Attempt login
     const result = await login(email, password);
@@ -36,7 +43,11 @@ export const actions = {
       throw redirect(302, to);
     }
 
+    if (result.message === 'Incorrect password') {
+      return fail(401, { message: 'The password for this email is incorrect' });
+    }
+
     // Return any login error (email not found or wrong password)
-    return { message: result.message };
+    return fail(400, { message: result.message });
   }
 };

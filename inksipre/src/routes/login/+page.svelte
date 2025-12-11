@@ -1,17 +1,17 @@
 <script>
   import { enhance } from '$app/forms';
-  import { page } from '$app/stores';
   import Warning from '$lib/components/Warning.svelte';
   import * as m from '$lib/paraglide/messages/_index.js';
-  import { onMount } from 'svelte';
-  let form;
-  let showOrderNotice = $state(false);
 
-  onMount(() => {
-    showOrderNotice = $page.url.searchParams.get('reason') === 'order_required';
-  });
+  export let data;
+  export let form;
 
-  function closeNotice() { showOrderNotice = false; }
+  let showOrderNotice = data?.reason === 'order_required';
+  let nextParam = data?.next ?? null;
+
+  function closeNotice() {
+    showOrderNotice = false;
+  }
 </script>
 
 <div class="flex items-center justify-center min-h-screen bg-gray-900 p-4">
@@ -72,8 +72,8 @@
       <!-- Footer -->
       <p class="text-gray-400 text-sm text-center">
           {m.dont_have_account()}
-          {#if $page.url.searchParams.get('next')}
-            <a href={`/register?next=${encodeURIComponent($page.url.searchParams.get('next'))}`} class="text-blue-500 font-medium hover:text-blue-400">{m.register_here()}</a>
+          {#if nextParam}
+            <a href={`/register?next=${encodeURIComponent(nextParam)}`} class="text-blue-500 font-medium hover:text-blue-400">{m.register_here()}</a>
           {:else}
             <a href="/register" class="text-blue-500 font-medium hover:text-blue-400">{m.register_here()}</a>
           {/if}
