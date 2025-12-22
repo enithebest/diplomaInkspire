@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid';
 export async function login(email, password) {
   const db = await createConnection();
 
-  // Get rows directly from the pool query helper
   const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
   if (rows.length === 0) {
     db.release();
@@ -21,7 +20,6 @@ export async function login(email, password) {
     return { token: null, message: 'Incorrect password' };
   }
 
-  // ✅ clear previous session
   await db.execute(
     'UPDATE users SET session_token = NULL, session_expiration = NULL WHERE id = ?',
     [user.id]

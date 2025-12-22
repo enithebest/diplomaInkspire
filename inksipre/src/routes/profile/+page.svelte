@@ -24,14 +24,16 @@
     return 'bg-gray-600/20 text-gray-200 border border-gray-500/40';
   };
 
-  $effect(() => {
+  function updateFilteredOrders() {
     filteredOrders =
       filterStatus === 'all'
         ? data.orders || []
         : (data.orders || []).filter(
             (o) => (o.status || '').toLowerCase() === filterStatus.toLowerCase()
           );
-  });
+  }
+
+  updateFilteredOrders();
 
   function reorderToCart(orderId) {
     try {
@@ -148,6 +150,7 @@
             <select
               class="appearance-none bg-white/5 border border-white/15 rounded-lg px-3 py-2 text-sm text-white shadow-inner shadow-black/20 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 pr-10"
               bind:value={filterStatus}
+              onchange={updateFilteredOrders}
             >
               <option class="bg-gray-900 text-white" value="all">{m.profile_orders_filter_all()}</option>
               <option class="bg-gray-900 text-white" value="paid">{m.profile_orders_filter_paid()}</option>
