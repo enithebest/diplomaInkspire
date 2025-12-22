@@ -33,9 +33,9 @@
   ]; // adjust names to match the back mesh in the GLB
   const modelPath = (() => {
     const name = (data?.product?.name ?? '').toLowerCase();
-    if (name.includes('ceramic mug')) return '/model1.glb'; // only the first mug
+    if (name.includes('ceramic mug')) return '/model1.glb';
     if (name.includes('classic pullover hoodie')) return '/workerjacket111.glb';
-    if (name.includes('classic cotton tee')) return '/poloshirt.glb'// only the first hoodie model
+    if (name.includes('classic cotton tee')) return '/poloshirt.glb'
     return null;
   })();
 
@@ -215,6 +215,7 @@
       };
     });
   };
+
 
   const applyToModel = () => {
     if (!stage || textureTargets.length === 0) return;
