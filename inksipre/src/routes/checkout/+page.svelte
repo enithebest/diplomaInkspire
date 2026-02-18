@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { loadStripe } from '@stripe/stripe-js';
+  import { calculateShippingFee } from '$lib/shipping';
 
   const { data } = $props();
 
@@ -9,6 +10,12 @@
   let loading = $state(false);
   let total = $state(0);
   let totalFormatted = $state('0.00');
+  let shipping = $state({ amount: 0, label: 'Enter country to calculate shipping', tier: 'missing_country' });
+  let grandTotal = $state(0);
+  let grandTotalFormatted = $state('0.00');
+  let country = $state((data?.user?.country ?? 'AL').toUpperCase());
+  let cityInput = $state('');
+  let cityLookupStatus = $state('');
   let stripe = $state(null);
   let elements = $state(null);
   let paymentElement;
@@ -16,10 +23,56 @@
   let mountedSecret = '';
   let hasPaymentElement = false;
   let buttonLabel = $state('Continue to payment');
+  let removedInvalidItems = $state(0);
+  let cityLookupTimeout;
+
+  const countries = [
+    { code: 'AL', name: 'Albania' },
+    { code: 'AD', name: 'Andorra' },
+    { code: 'AT', name: 'Austria' },
+    { code: 'BE', name: 'Belgium' },
+    { code: 'BG', name: 'Bulgaria' },
+    { code: 'HR', name: 'Croatia' },
+    { code: 'CY', name: 'Cyprus' },
+    { code: 'CZ', name: 'Czech Republic' },
+    { code: 'DK', name: 'Denmark' },
+    { code: 'EE', name: 'Estonia' },
+    { code: 'FI', name: 'Finland' },
+    { code: 'FR', name: 'France' },
+    { code: 'DE', name: 'Germany' },
+    { code: 'GR', name: 'Greece' },
+    { code: 'HU', name: 'Hungary' },
+    { code: 'IS', name: 'Iceland' },
+    { code: 'IE', name: 'Ireland' },
+    { code: 'IT', name: 'Italy' },
+    { code: 'LV', name: 'Latvia' },
+    { code: 'LI', name: 'Liechtenstein' },
+    { code: 'LT', name: 'Lithuania' },
+    { code: 'LU', name: 'Luxembourg' },
+    { code: 'MT', name: 'Malta' },
+    { code: 'MC', name: 'Monaco' },
+    { code: 'NL', name: 'Netherlands' },
+    { code: 'MK', name: 'North Macedonia' },
+    { code: 'NO', name: 'Norway' },
+    { code: 'PL', name: 'Poland' },
+    { code: 'PT', name: 'Portugal' },
+    { code: 'RO', name: 'Romania' },
+    { code: 'SM', name: 'San Marino' },
+    { code: 'RS', name: 'Serbia' },
+    { code: 'SK', name: 'Slovakia' },
+    { code: 'SI', name: 'Slovenia' },
+    { code: 'ES', name: 'Spain' },
+    { code: 'SE', name: 'Sweden' },
+    { code: 'CH', name: 'Switzerland' },
+    { code: 'TR', name: 'Turkey' },
+    { code: 'UA', name: 'Ukraine' },
+    { code: 'GB', name: 'United Kingdom' }
+  ];
 
   onMount(() => {
     const raw = localStorage.getItem('cart');
     cart = raw ? JSON.parse(raw) : [];
+    sanitizeCart();
     updateTotals();
 
     if (!cart.length) {
@@ -35,21 +88,106 @@
     }
   });
 
+  function sanitizeCart() {
+    const valid = [];
+    let removed = 0;
+    for (const item of cart) {
+      const productId = Number(item.product_id ?? item.productId);
+      const price = Number(item.price);
+      const qty = Number(item.qty) || 1;
+      if (Number.isFinite(productId) && productId > 0 && Number.isFinite(price) && price > 0 && qty > 0) {
+        valid.push({ ...item, product_id: productId, qty });
+      } else {
+        removed += 1;
+      }
+    }
+    if (removed > 0) {
+      cart = valid;
+      removedInvalidItems = removed;
+      try {
+        localStorage.setItem('cart', JSON.stringify(cart));
+      } catch (err) {
+        console.warn('Unable to persist sanitized cart', err);
+      }
+    }
+  }
+
   function updateTotals() {
     total = cart.reduce(
       (sum, item) => sum + (Number(item.price) || 0) * (Number(item.qty) || 1),
       0
     );
     totalFormatted = total.toFixed(2);
+    refreshShipping();
   }
 
   const lineTotal = (item) =>
     ((Number(item.price) || 0) * (Number(item.qty) || 1)).toFixed(2);
 
+  function refreshShipping() {
+    const fee = calculateShippingFee({ subtotal: total, country });
+    shipping = fee;
+    grandTotal = total + fee.amount;
+    grandTotalFormatted = grandTotal.toFixed(2);
+  }
+
+  const handleCountryInput = (event) => {
+    const raw = event?.target?.value ?? '';
+    country = raw.toString().toUpperCase();
+    refreshShipping();
+  };
+
+  const handleCityInput = (event) => {
+    const raw = event?.target?.value ?? '';
+    cityInput = raw;
+    const trimmed = raw.trim();
+    cityLookupStatus = trimmed.length ? 'Searching…' : '';
+    clearTimeout(cityLookupTimeout);
+    if (trimmed.length < 2) {
+      cityLookupStatus = trimmed.length ? 'Enter at least 2 characters' : '';
+      return;
+    }
+    cityLookupTimeout = setTimeout(() => lookupCountryForCity(trimmed), 400);
+  };
+
+  async function lookupCountryForCity(cityText) {
+    const query = cityText.trim();
+    if (query.length < 2) return;
+    try {
+      const res = await fetch(`/api/city-country?city=${encodeURIComponent(query)}`);
+      const payload = await res.json().catch(() => null);
+      if (res.ok && payload?.countryCode) {
+        country = payload.countryCode.toUpperCase();
+        refreshShipping();
+        cityLookupStatus = payload.countryName
+          ? `Detected ${payload.countryName} (${country})`
+          : `Detected ${country}`;
+      } else {
+        cityLookupStatus = 'No matching country found for that city';
+      }
+    } catch (err) {
+      console.error('City lookup failed', err);
+      cityLookupStatus = 'Could not look up country right now';
+    }
+  }
+
   async function mountElements(secret) {
     if (!stripe || !secret) return;
     if (elements && mountedSecret === secret) return;
-    elements = stripe.elements({ clientSecret: secret });
+    elements = stripe.elements({
+      clientSecret: secret,
+      appearance: {
+        theme: 'night',
+        variables: {
+          colorPrimary: '#6366F1',
+          colorBackground: 'rgba(255,255,255,0.04)',
+          colorText: '#e5e7eb',
+          colorTextSecondary: '#9ca3af',
+          colorDanger: '#f87171',
+          borderRadius: '10px'
+        }
+      }
+    });
     const paymentEl = elements.create('payment', { layout: 'tabs' });
     const target = document.getElementById('payment-element');
     if (target) {
@@ -114,16 +252,16 @@
     loading = true;
     message = '';
     try {
-      // If the payment element is already mounted with this clientSecret, confirm the payment
       if (hasPaymentElement && clientSecret && mountedSecret === clientSecret) {
         const confirmError = await confirmPayment(clientSecret);
         if (confirmError) message = confirmError;
         return;
       }
 
-      // Otherwise create a new intent and mount the payment element
       const formData = new FormData(event.currentTarget);
       formData.append('cart', JSON.stringify(cart));
+      formData.append('shipping_amount', shipping.amount.toString());
+      formData.append('shipping_label', shipping.label);
       const res = await fetch('/api/checkout-intent', {
         method: 'POST',
         headers: { accept: 'application/json' },
@@ -152,134 +290,191 @@
   }
 </script>
 
-<section class="max-w-6xl mx-auto px-6 py-12">
-  <h1 class="text-3xl font-bold text-gray-900 mb-6">Checkout</h1>
-
-  <div class="grid lg:grid-cols-3 gap-8">
-    <div class="lg:col-span-2 space-y-6">
-      <form
-        method="POST"
-        onsubmit={submitCheckout}
-        class="space-y-4 bg-white shadow-sm border border-gray-200 rounded-lg p-6"
-      >
-        <h2 class="text-xl font-semibold text-gray-800 mb-2">Shipping details</h2>
-
-        <div class="grid md:grid-cols-2 gap-4">
-          <label class="block text-sm font-medium text-gray-700">
-            Full name
-            <input
-              name="full_name"
-              autocomplete="name"
-              required
-              value={data.user?.full_name}
-              class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </label>
-          <label class="block text-sm font-medium text-gray-700">
-            Email
-            <input
-              name="email"
-              type="email"
-              autocomplete="email"
-              disabled
-              value={data.user?.email}
-              class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 bg-gray-100 text-gray-600"
-            />
-          </label>
-        </div>
-
-        <label class="block text-sm font-medium text-gray-700">
-          Address line
-          <input
-            name="line1"
-            autocomplete="address-line1"
-            required
-            class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </label>
-
-        <div class="grid md:grid-cols-3 gap-4">
-          <label class="block text-sm font-medium text-gray-700">
-            City
-            <input
-              name="city"
-              autocomplete="address-level2"
-              required
-              class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </label>
-          <label class="block text-sm font-medium text-gray-700">
-            Postal code
-            <input
-              name="postal_code"
-              autocomplete="postal-code"
-              required
-              class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </label>
-          <label class="block text-sm font-medium text-gray-700">
-            Country (2-letter)
-            <input
-              name="country"
-              maxlength="2"
-              autocomplete="country"
-              required
-              class="mt-1 w-full uppercase rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </label>
-        </div>
-
-        {#if message}
-          <div class="text-sm text-red-600 bg-red-50 border border-red-200 px-3 py-2 rounded">
-            {message}
-          </div>
-        {/if}
-
-        {#if !data.stripeReady}
-          <p class="text-sm text-red-600">
-            Payment is not configured (server missing STRIPE_SECRET_KEY).
-          </p>
-        {:else}
-          <div id="payment-element" class="border border-gray-200 rounded-lg p-4 bg-gray-50"></div>
-        {/if}
-
-        <button
-          type="submit"
-          class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-2 rounded-md bg-[#4F46E5] text-white font-semibold hover:bg-[#6366F1] transition disabled:opacity-60"
-          disabled={loading}
-        >
-          {#if loading}
-            <span class="animate-pulse">Processing...</span>
-          {:else}
-            {buttonLabel}
-          {/if}
-        </button>
-      </form>
+<div class="min-h-screen bg-[#0b1120]">
+<section class="max-w-7xl mx-auto px-4 lg:px-6 py-12 text-gray-100">
+  <div class="bg-gradient-to-br from-[#0f172a] via-[#0b1223] to-[#0d1326] rounded-3xl border border-white/5 shadow-2xl shadow-black/30 p-6 lg:p-10">
+    <div class="flex items-center justify-between flex-wrap gap-3 mb-8">
+      <div>
+        <p class="text-sm text-indigo-300 uppercase tracking-wide">Checkout</p>
+        <h1 class="text-3xl font-bold text-white">Complete your order</h1>
+      </div>
+      <div class="text-sm text-gray-400">
+        Secure payments powered by Stripe
+      </div>
     </div>
 
-<aside class="bg-white shadow-sm border border-gray-200 rounded-lg p-6">
-  <h2 class="text-xl font-semibold text-gray-800 mb-4">Order summary</h2>
+    <div class="grid lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2 space-y-6">
+        <form
+          method="POST"
+          onsubmit={submitCheckout}
+          class="space-y-5 bg-white/5 border border-white/10 rounded-2xl p-6 shadow-lg shadow-black/20 backdrop-blur-sm"
+        >
+          <div class="flex items-center justify-between">
+            <h2 class="text-xl font-semibold text-white">Shipping details</h2>
+            <span class="text-xs text-gray-400">All fields required</span>
+          </div>
 
-      {#if cart.length === 0}
-        <p class="text-gray-500 text-sm">Your cart is empty.</p>
-      {:else}
-        <div class="space-y-3">
-          {#each cart as item}
-            <div class="flex justify-between text-sm text-gray-700">
-              <div>
-                <p class="font-medium">{item.name}</p>
-                <p class="text-gray-500">Qty: {item.qty} - {item.color} {item.size}</p>
+          <div class="grid md:grid-cols-2 gap-4">
+            <label class="block text-sm font-medium text-gray-200">
+              Full name
+              <input
+                name="full_name"
+                autocomplete="name"
+                required
+                value={data.user?.full_name}
+                class="mt-1 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              />
+            </label>
+            <label class="block text-sm font-medium text-gray-200">
+              Email
+              <input
+                name="email"
+                type="email"
+                autocomplete="email"
+                disabled
+                value={data.user?.email}
+                class="mt-1 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-gray-400"
+              />
+            </label>
+          </div>
+
+          <label class="block text-sm font-medium text-gray-200">
+            Address line
+            <input
+              name="line1"
+              autocomplete="address-line1"
+              required
+              class="mt-1 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            />
+          </label>
+
+          <div class="grid md:grid-cols-3 gap-4">
+            <label class="block text-sm font-medium text-gray-200">
+              City
+              <input
+                name="city"
+                autocomplete="address-level2"
+                required
+                bind:value={cityInput}
+                oninput={handleCityInput}
+                class="mt-1 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              />
+              {#if cityLookupStatus}
+                <p class="mt-1 text-xs text-indigo-200">{cityLookupStatus}</p>
+              {/if}
+            </label>
+            <label class="block text-sm font-medium text-gray-200">
+              Postal code
+              <input
+                name="postal_code"
+                autocomplete="postal-code"
+                required
+                class="mt-1 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              />
+            </label>
+            <label class="block text-sm font-medium text-gray-200">
+              Country (2-letter)
+              <div class="mt-1 relative">
+                <select
+                  name="country"
+                  autocomplete="country-name"
+                  required
+                  bind:value={country}
+                  onchange={handleCountryInput}
+                  class="w-full appearance-none rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 pr-10 uppercase"
+                >
+                  <option value="" disabled>Select your country</option>
+                  {#each countries as option}
+                    <option value={option.code} class="bg-[#0b1120] text-white">
+                      {option.name} ({option.code})
+                    </option>
+                  {/each}
+                </select>
+                <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
               </div>
-              <p class="font-semibold">{lineTotal(item)} $</p>
+            </label>
+          </div>
+
+          {#if message}
+            <div class="text-sm text-red-300 bg-red-900/30 border border-red-500/40 px-3 py-2 rounded">
+              {message}
             </div>
-          {/each}
+          {/if}
+          {#if removedInvalidItems > 0}
+            <div class="text-sm text-amber-200 bg-amber-900/30 border border-amber-500/40 px-3 py-2 rounded">
+              Removed {removedInvalidItems} invalid cart item(s). Please review your cart before paying.
+            </div>
+          {/if}
+
+          {#if !data.stripeReady}
+            <p class="text-sm text-red-300">
+              Payment is not configured (server missing STRIPE_SECRET_KEY).
+            </p>
+        {:else}
+            <div id="payment-element" class="border border-white/10 rounded-lg p-4 bg-white/5"></div>
+        {/if}
+
+          <button
+            type="submit"
+            class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#4F46E5] text-white font-semibold shadow-lg shadow-[#4F46E5]/30 transition hover:bg-[#6366F1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6366F1] disabled:opacity-60"
+            disabled={loading}
+          >
+            {#if loading}
+              <span class="animate-pulse">Processing...</span>
+            {:else}
+              {buttonLabel}
+            {/if}
+          </button>
+        </form>
+      </div>
+
+      <aside class="bg-white/5 border border-white/10 rounded-2xl p-6 shadow-lg shadow-black/20 backdrop-blur-sm">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-xl font-semibold text-white">Order summary</h2>
+          <span class="text-xs text-gray-400">Review your items</span>
         </div>
 
-        <div class="border-t border-gray-200 mt-4 pt-4 flex justify-between text-gray-900 font-semibold">
-          <span>Total</span>
-          <span>{totalFormatted} $</span>
-        </div>
-      {/if}
-    </aside>
+        {#if cart.length === 0}
+          <p class="text-gray-400 text-sm">Your cart is empty.</p>
+        {:else}
+          <div class="space-y-3">
+            {#each cart as item}
+              <div class="flex justify-between text-sm text-gray-200 border-b border-white/5 pb-2">
+                <div>
+                  <p class="font-medium text-white">{item.name}</p>
+                  <p class="text-gray-400">Qty: {item.qty} - {item.color} {item.size}</p>
+                </div>
+                <p class="font-semibold text-white">{lineTotal(item)} $</p>
+              </div>
+            {/each}
+          </div>
+
+          <div class="border-t border-white/10 mt-4 pt-4 space-y-2 text-sm text-gray-200">
+            <div class="flex justify-between">
+              <span>Subtotal</span>
+              <span class="font-semibold text-white">{totalFormatted} $</span>
+            </div>
+            <div class="flex justify-between">
+              <div>
+                <span>Shipping</span>
+                <p class="text-xs text-gray-400">{shipping.label}</p>
+              </div>
+              <span class="font-semibold text-white">{shipping.amount.toFixed(2)} $</span>
+            </div>
+            <div class="flex justify-between border-t border-dashed border-white/10 pt-2 text-white font-semibold">
+              <span>Order total</span>
+              <span>{grandTotalFormatted} $</span>
+            </div>
+            <p class="text-xs text-gray-400">
+              Shipping fees follow the About page tiers (DE free over EUR 120, EUR 5 domestic, EUR 12 EU, EUR 18-25 international).
+            </p>
+          </div>
+        {/if}
+      </aside>
+    </div>
   </div>
 </section>
+</div>

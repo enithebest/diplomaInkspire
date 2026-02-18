@@ -24,14 +24,16 @@
     return 'bg-gray-600/20 text-gray-200 border border-gray-500/40';
   };
 
-  $effect(() => {
+  function updateFilteredOrders() {
     filteredOrders =
       filterStatus === 'all'
         ? data.orders || []
         : (data.orders || []).filter(
             (o) => (o.status || '').toLowerCase() === filterStatus.toLowerCase()
           );
-  });
+  }
+
+  updateFilteredOrders();
 
   function reorderToCart(orderId) {
     try {
@@ -148,6 +150,7 @@
             <select
               class="appearance-none bg-white/5 border border-white/15 rounded-lg px-3 py-2 text-sm text-white shadow-inner shadow-black/20 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 pr-10"
               bind:value={filterStatus}
+              onchange={updateFilteredOrders}
             >
               <option class="bg-gray-900 text-white" value="all">{m.profile_orders_filter_all()}</option>
               <option class="bg-gray-900 text-white" value="paid">{m.profile_orders_filter_paid()}</option>
@@ -187,8 +190,21 @@
                         {/if}
                         <div class="flex-1">
                           <div class="font-semibold text-white">{it.name}</div>
-                          <div class="text-xs text-gray-400">
-                            {m.profile_orders_line({ qty: it.quantity, price: `$${it.unit_price}` })}
+                          <div class="flex items-center gap-3 text-xs text-gray-400">
+                            <span>{m.profile_orders_line({ qty: it.quantity, price: `$${it.unit_price}` })}</span>
+                            {#if it.color}
+                              <span class="inline-flex items-center gap-1 text-white">
+                                <span
+                                  class="inline-block h-3 w-3 rounded-full border border-white/40"
+                                  style={`background:${it.color};`}
+                                  aria-hidden="true"
+                                ></span>
+                                <span class="capitalize text-gray-200">{it.color}</span>
+                              </span>
+                            {/if}
+                            {#if it.size}
+                              <span class="uppercase text-gray-300">{it.size}</span>
+                            {/if}
                           </div>
                         </div>
                         <div class="text-sm text-gray-200 font-semibold">

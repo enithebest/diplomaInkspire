@@ -53,7 +53,9 @@ export const load = async ({ cookies }) => {
          oi.unit_price,
          (oi.quantity * oi.unit_price) AS line_total,
          p.name,
-         COALESCE(u.image_url, pv.image_url, p.image_url) AS image_url
+         COALESCE(u.image_url, pv.image_url, p.image_url) AS image_url,
+         JSON_UNQUOTE(JSON_EXTRACT(pv.option_values, '$.color')) AS color,
+         JSON_UNQUOTE(JSON_EXTRACT(pv.option_values, '$.size')) AS size
        FROM order_items oi
        JOIN products p ON p.id = oi.product_id
        LEFT JOIN product_variants pv ON pv.id = oi.variant_id

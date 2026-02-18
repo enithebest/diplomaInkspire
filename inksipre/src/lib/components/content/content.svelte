@@ -29,9 +29,20 @@
       </div>
     </div>
 
-    <!-- Image Preview -->
+    <!-- Video Preview -->
     <div class="-mt-12 -ml-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
-      <img src="https://cdn.dribbble.com/userupload/10987109/file/original-9ee1a586cc06e7cfd9b9cb891f3e3a1d.png" alt="3D mockup showcase" class="w-3xl max-w-none rounded-xl bg-gray-800 shadow-xl ring-1 ring-white/10 sm:w-228" />
+      <video
+        class="w-full max-w-2xl max-h-140 rounded-xl bg-gray-800 shadow-xl ring-1 ring-white/10 object-cover"
+        src="/videos/mockup-demo.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        controls
+        poster="/videos/mockup-poster.jpg"
+      >
+        Your browser does not support the video tag.
+      </video>
     </div>
 
     <!-- Features -->

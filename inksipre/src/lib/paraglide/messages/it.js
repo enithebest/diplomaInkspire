@@ -1198,6 +1198,138 @@ export const about_tos_point5 = /** @type {(inputs: {}) => string} */ () => {
 	return `Legge applicabile: diritto tedesco; foro di Lipsia, Germania.`
 };
 
+export const about_partner_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Produzione & Fulfillment`
+};
+
+export const about_partner_lead = /** @type {(inputs: {}) => string} */ () => {
+	return `Stampa 3D di precisione e finitura tessile per abbigliamento e merch su misura.`
+};
+
+export const about_partner_name = /** @type {(inputs: {}) => string} */ () => {
+	return `Aurora Print Labs (Lipsia, DE)`
+};
+
+export const about_partner_coverage = /** @type {(inputs: {}) => string} */ () => {
+	return `HQ a Lipsia; distribuzione in tutta l'UE; DHL/UPS: 1-3 giorni DACH, 3-6 giorni resto UE.`
+};
+
+export const about_partner_facility = /** @type {(inputs: {}) => string} */ () => {
+	return `1.800 m2 di produzione con baia di stampa climatizzata e finitura/imballo in sede.`
+};
+
+export const about_partner_banner_note = /** @type {(inputs: {}) => string} */ () => {
+	return `Banner ampio del reparto stampa con DTG/UV; riquadro con la postazione QC.`
+};
+
+export const about_partner_capabilities_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Capacit… e macchinari`
+};
+
+export const about_partner_capability_dtg = /** @type {(inputs: {}) => string} */ () => {
+	return `DTG: Kornit Atlas MAX + Brother GTXpro bulk per mischie di cotone.`
+};
+
+export const about_partner_capability_uv = /** @type {(inputs: {}) => string} */ () => {
+	return `UV flatbed: Canon Arizona per hard goods (metallo, acrilico).`
+};
+
+export const about_partner_capability_dyesub = /** @type {(inputs: {}) => string} */ () => {
+	return `Dye-sub: Epson SureColor serie F per tessuti performance.`
+};
+
+export const about_partner_capability_finishing = /** @type {(inputs: {}) => string} */ () => {
+	return `Finitura: linea a 6 presse, taglio laser a contorno per patch, QC inline + imbustamento.`
+};
+
+export const about_partner_capability_color = /** @type {(inputs: {}) => string} */ () => {
+	return `Colore: flussi ICC gestiti; Pantone matching su tessili dove possibile.`
+};
+
+export const about_partner_materials_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Materiali e inchiostri`
+};
+
+export const about_partner_materials_inks = /** @type {(inputs: {}) => string} */ () => {
+	return `Inchiostri a base acqua, OEKO-TEX Eco Passport; opzioni GOTS su richiesta.`
+};
+
+export const about_partner_materials_garments = /** @type {(inputs: {}) => string} */ () => {
+	return `Capi: t-shirt/felpe in cotone ring-spun; opzioni in poliestere riciclato per linee performance; supporti in ceramica per tazze.`
+};
+
+export const about_partner_quality_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Qualit… e processo`
+};
+
+export const about_partner_quality_qc = /** @type {(inputs: {}) => string} */ () => {
+	return `QC in 3 fasi: controllo tessuto/blank pre-stampa, verifica visiva post-stampa, audit finale di packing.`
+};
+
+export const about_partner_quality_profiling = /** @type {(inputs: {}) => string} */ () => {
+	return `Profilazione: profili ICC collegati al device per ogni substrato; nozzle check e calibrazione settimanali.`
+};
+
+export const about_partner_quality_samples = /** @type {(inputs: {}) => string} */ () => {
+	return `Protocollo campioni: prova del primo lotto conservata 30 giorni; foto di conferma disponibile.`
+};
+
+export const about_partner_sla_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Tempi e SLA`
+};
+
+export const about_partner_sla_production = /** @type {(inputs: {}) => string} */ () => {
+	return `Standard: 48-72h di produzione dopo approvazione artwork; corsia urgente <24h sugli SKU a stock.`
+};
+
+export const about_partner_sla_packaging = /** @type {(inputs: {}) => string} */ () => {
+	return `Imballo: brandizzato o neutro; mailer riciclati di default.`
+};
+
+export const about_partner_sla_returns = /** @type {(inputs: {}) => string} */ () => {
+	return `Resi/rifacimenti: difetti di stampa rifatti entro 48h; danni da trasporto con prova fotografica.`
+};
+
+export const about_partner_sustainability_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Sostenibilit… e conformit…`
+};
+
+export const about_partner_sustainability_power = /** @type {(inputs: {}) => string} */ () => {
+	return `Energia rinnovabile in stabilimento; filtrazione acque reflue sul pretreat DTG.`
+};
+
+export const about_partner_sustainability_certs = /** @type {(inputs: {}) => string} */ () => {
+	return `Certificazioni in corso/ottenute: OEKO-TEX Eco Passport per gli inchiostri, packaging FSC; SOP stile ISO 9001 documentate.`
+};
+
+export const about_partner_team_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Team e contatti`
+};
+
+export const about_partner_team_photo = /** @type {(inputs: {}) => string} */ () => {
+	return `Foto del responsabile stampa + supervisore QC; due turni Lun-Sab.`
+};
+
+export const about_partner_team_contact = /** @type {(inputs: {}) => string} */ () => {
+	return `Contatto: production@inkspire.studio | +49 341 000000; visite su appuntamento.`
+};
+
+export const about_partner_logistics_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Mappa e logistica`
+};
+
+export const about_partner_logistics_lanes = /** @type {(inputs: {}) => string} */ () => {
+	return `Lanes DHL/UPS; spedizioni UE senza dogana; indicazioni per ordini extra-UE su richiesta.`
+};
+
+export const about_partner_cta_checklist = /** @type {(inputs: {}) => string} */ () => {
+	return `Vedi la nostra checklist di stampa`
+};
+
+export const about_partner_cta_call = /** @type {(inputs: {}) => string} */ () => {
+	return `Richiedi una call di produzione`
+};
+
 export const contact_badge = /** @type {(inputs: {}) => string} */ () => {
 	return `Rispondiamo entro 24 ore`
 };

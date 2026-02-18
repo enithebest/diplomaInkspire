@@ -33,8 +33,9 @@
   ]; // adjust names to match the back mesh in the GLB
   const modelPath = (() => {
     const name = (data?.product?.name ?? '').toLowerCase();
-    if (name.includes('ceramic mug')) return '/model1.glb'; // only the first mug
-    if (name.includes('classic pullover hoodie')) return '/workerjacket111.glb'; // only the first hoodie model
+    if (name.includes('ceramic mug')) return '/model1.glb';
+    if (name.includes('classic pullover hoodie')) return '/workerjacket111.glb';
+    if (name.includes('classic cotton tee')) return '/poloshirt.glb'
     return null;
   })();
 
@@ -49,6 +50,16 @@
   let orderDesignData = $state('');
   let orderDesignUrl = $state('');
   let lastOrderHandled = $state(null);
+  const primaryButton =
+    'inline-flex items-center justify-center gap-2 rounded-lg bg-[#4F46E5] text-white font-semibold shadow-lg shadow-[#4F46E5]/30 transition hover:bg-[#6366F1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6366F1] disabled:opacity-60 disabled:cursor-not-allowed';
+
+  const getMaxAnisotropy = () => renderer?.capabilities?.getMaxAnisotropy?.() ?? 1;
+  const applyTextureQuality = (tex, useSRGB = false) => {
+    if (!tex) return;
+    if (useSRGB) tex.colorSpace = THREE.SRGBColorSpace;
+    tex.anisotropy = getMaxAnisotropy();
+    tex.needsUpdate = true;
+  };
 
   let libraryItems = $derived((data?.uploads ?? []).map((upload) => ({
     id: upload.id,
@@ -123,10 +134,11 @@
   const convertImageToTexture = (imageUrl) => {
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load(imageUrl);
-    texture.encoding = THREE.sRGBEncoding;
+    applyTextureQuality(texture, true);
     texture.flipY = false;
     texture.wrapS = THREE.ClampToEdgeWrapping;
     texture.wrapT = THREE.ClampToEdgeWrapping;
+    texture.needsUpdate = true;
     return texture;
   };
 
@@ -137,24 +149,25 @@
       materials.forEach((mat) => {
         if (!mat) return;
         mat.map = texture;
+        applyTextureQuality(mat.map, true);
         if (mat.color) mat.color.set('#ffffff'); // ensure texture is visible
         mat.needsUpdate = true;
       });
     });
   };
 
+  const editorWidth = 400;
+  const editorHeight = 300;
+
   const initEditor = () => {
     if (!konvaReady || !Konva) return;
     if (!editorContainerRef) return;
     if (stage) stage.destroy();
 
-    const width = 400;
-    const height = 300;
-
     stage = new Konva.Stage({
       container: editorContainerRef,
-      width,
-      height
+      width: editorWidth,
+      height: editorHeight
     });
 
     layer = new Konva.Layer();
@@ -163,8 +176,8 @@
     const background = new Konva.Rect({
       x: 0,
       y: 0,
-      width,
-      height,
+      width: editorWidth,
+      height: editorHeight,
       fill: '#f0f0f0',
       stroke: '#aaa',
       strokeWidth: 2
@@ -182,7 +195,8 @@
           y: 50 + index * 20,
           width: 150,
           height: 150,
-          draggable: true
+          draggable: true,
+          name: 'design-image'
         });
         layer.add(konvaImage);
 
@@ -201,6 +215,7 @@
       };
     });
   };
+
 
   const applyToModel = () => {
     if (!stage || textureTargets.length === 0) return;
@@ -244,8 +259,16 @@
       if (event?.target) {
         const designUrlField = event.target.querySelector('input[name="design_url"]');
         const designDataField = event.target.querySelector('input[name="design_data"]');
+        const rotationField = event.target.querySelector('input[name="rotation"]');
+        const scaleField = event.target.querySelector('input[name="scale"]');
+        const posXField = event.target.querySelector('input[name="position_x"]');
+        const posYField = event.target.querySelector('input[name="position_y"]');
         if (designUrlField) designUrlField.value = orderDesignUrl;
         if (designDataField) designDataField.value = orderDesignData;
+        if (rotationField) rotationField.value = '0';
+        if (scaleField) scaleField.value = '1';
+        if (posXField) posXField.value = '0';
+        if (posYField) posYField.value = '0';
       }
       return;
     }
@@ -261,11 +284,27 @@
       orderDesignData = '';
     }
 
+    const designImage = stage.find('.design-image')?.[0];
+    const rotation = designImage?.rotation?.() ?? 0;
+    const scaleX = designImage?.scaleX?.() ?? 1;
+    const scaleY = designImage?.scaleY?.() ?? 1;
+    const scale = (scaleX + scaleY) / 2;
+    const posX = (designImage?.x?.() ?? 0) / editorWidth;
+    const posY = (designImage?.y?.() ?? 0) / editorHeight;
+
     if (event?.target) {
       const designUrlField = event.target.querySelector('input[name="design_url"]');
       const designDataField = event.target.querySelector('input[name="design_data"]');
+      const rotationField = event.target.querySelector('input[name="rotation"]');
+      const scaleField = event.target.querySelector('input[name="scale"]');
+      const posXField = event.target.querySelector('input[name="position_x"]');
+      const posYField = event.target.querySelector('input[name="position_y"]');
       if (designUrlField) designUrlField.value = orderDesignUrl;
       if (designDataField) designDataField.value = orderDesignData;
+      if (rotationField) rotationField.value = rotation.toFixed(2);
+      if (scaleField) scaleField.value = scale.toFixed(2);
+      if (posXField) posXField.value = posX.toFixed(2);
+      if (posYField) posYField.value = posY.toFixed(2);
     }
 
     snapshotCartPreview();
@@ -294,28 +333,42 @@
     camera = new THREE.PerspectiveCamera(20, 1, 1e-5, 1e10);
     scene.add(camera);
 
-    const light = new THREE.HemisphereLight(0xffffff, 0x222222, 1);
-    scene.add(light);
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1.1);
+    scene.add(hemiLight);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 2.4);
+    dirLight.position.set(4, 8, 6);
+    dirLight.castShadow = false;
+    scene.add(dirLight);
 
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      alpha: true,
+      powerPreference: 'high-performance'
+    });
+    renderer.physicallyCorrectLights = true;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.1;
     renderer.setClearColor(0x131316, 0);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(800, 800); // initial; will be resized to container below
-    renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    const initialWidth = containerRef?.clientWidth || 800;
+    const initialHeight = containerRef?.clientHeight || 800;
+    renderer.setSize(initialWidth, initialHeight, false); // initial; will be resized to container below
+    camera.aspect = initialWidth / initialHeight;
+    camera.updateProjectionMatrix();
     containerRef.appendChild(renderer.domElement);
 
     orbitControls = new OrbitControls(camera, renderer.domElement);
 
     const resizeRendererToDisplaySize = () => {
       if (!renderer || !camera || !containerRef) return;
-      const width = containerRef.clientWidth || 800;
-      const height = containerRef.clientHeight || 800;
-      const size = Math.max(200, Math.min(width, height)); // keep square to avoid stretch
+      const width = Math.max(200, containerRef.clientWidth || 800);
+      const height = Math.max(200, containerRef.clientHeight || 800);
       const canvas = renderer.domElement;
-      const needResize = canvas.width !== size || canvas.height !== size;
+      const needResize = canvas.width !== width || canvas.height !== height;
       if (needResize) {
-        renderer.setSize(size, size, false);
-        camera.aspect = 1;
+        renderer.setSize(width, height, false);
+        camera.aspect = width / height;
         camera.updateProjectionMatrix();
       }
     };
@@ -391,6 +444,20 @@
               textureTargets.push(obj);
             }
             if (!material && !Array.isArray(obj.material)) material = obj.material;
+            const materials = Array.isArray(obj.material) ? obj.material : [obj.material];
+            materials.forEach((mat) => {
+              if (!mat) return;
+              applyTextureQuality(mat.map, true);
+              applyTextureQuality(mat.emissiveMap, true);
+              applyTextureQuality(mat.lightMap);
+              applyTextureQuality(mat.bumpMap);
+              applyTextureQuality(mat.displacementMap);
+              applyTextureQuality(mat.roughnessMap);
+              applyTextureQuality(mat.metalnessMap);
+              applyTextureQuality(mat.normalMap);
+              applyTextureQuality(mat.aoMap);
+              applyTextureQuality(mat.specularMap);
+            });
           }
         });
 
@@ -516,6 +583,8 @@
       const cart = cartRaw ? JSON.parse(cartRaw) : [];
       cart.unshift({
         name: data?.product?.name || 'Custom product',
+        product_id: data?.product?.id || null,
+        variant_id: data?.variant?.id || null,
         sku: data?.variant?.sku || data?.variant?.id || '',
         size,
         color,
@@ -554,7 +623,7 @@
           <h2 class="text-lg font-semibold">Upload design</h2>
           <button
             type="button"
-            class="text-sm text-indigo-300 hover:text-white underline"
+            class={`${primaryButton} px-3 py-2 text-sm`}
             onclick={() => (showLibrary = true)}
           >
             My library
@@ -586,7 +655,7 @@
           <button
             type="submit"
             formaction="?/upload"
-            class="w-full flex items-center justify-center gap-2 bg-[#4F46E5] hover:bg-[#6366F1] text-white font-semibold px-6 py-2 rounded-lg transition focus:outline-none focus:ring-2 focus:ring-[#6366F1]"
+            class={`${primaryButton} w-full px-6 py-3`}
           >
             Upload &amp; Save
           </button>
@@ -607,7 +676,7 @@
       <div class="bg-gray-800/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-700 shadow-lg">
         <p class="text-lg font-medium mb-3">Edit your artwork</p>
         <button
-          class="w-full bg-[#4F46E5] hover:bg-[#6366F1] text-white font-semibold px-6 py-3 rounded-xl transition transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-[#6366F1]"
+          class={`${primaryButton} w-full px-6 py-3`}
           onclick={openEditor}
         >
           {uploadedImages.length ? 'Reopen Customizer' : 'Open Customizer'}
@@ -647,7 +716,7 @@
         </div>
         <div class="flex justify-end mt-3">
           <button
-            class="bg-gray-800/70 border border-white/15 text-white font-semibold px-3 py-2 rounded-lg shadow-md backdrop-blur transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-400 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+            class={`${primaryButton} px-4 py-2 text-sm`}
             onclick={download}
             disabled={!modelPath}
           >
@@ -681,15 +750,19 @@
           >
             <input type="hidden" name="design_data" value={orderDesignData} />
             <input type="hidden" name="design_url" value={orderDesignUrl} />
+            <input type="hidden" name="rotation" value="0" />
+            <input type="hidden" name="scale" value="1" />
+            <input type="hidden" name="position_x" value="0" />
+            <input type="hidden" name="position_y" value="0" />
 
             <button
               type="submit"
-              class="w-full bg-green-600 hover:bg-green-500 text-white font-semibold px-6 py-3 rounded-xl transition transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-green-400 disabled:opacity-60 disabled:cursor-not-allowed"
+              class={`${primaryButton} w-full px-6 py-3`}
             >
               Order this custom piece
             </button>
             {#if form?.orderSuccess}
-              <p class="text-sm text-green-400" role="status">Order saved! We’ll get it ready.</p>
+              <p class="text-sm text-green-400" role="status">Order saved! We'll get it ready.</p>
             {/if}
             {#if form?.orderError}
               <p class="text-sm text-red-400" role="alert">{form.orderError}</p>
@@ -713,7 +786,7 @@
       <aside class="absolute right-0 top-0 h-full w-full sm:w-[28rem] bg-gray-900 border-l border-white/10 p-4 overflow-y-auto">
         <div class="flex items-center justify-between mb-3">
           <h2 class="text-lg font-semibold">My library</h2>
-          <button class="text-sm text-gray-300 hover:text-white" onclick={() => (showLibrary = false)}>Close</button>
+          <button class={`${primaryButton} px-3 py-2 text-sm`} onclick={() => (showLibrary = false)}>Close</button>
         </div>
 
         <input
@@ -733,7 +806,7 @@
                 <div class="p-2 flex items-center justify-between">
                   <span class="text-xs truncate max-w-[70%]" title={displayName(item.url)}>{displayName(item.url)}</span>
                   <button
-                    class="text-xs px-2 py-1 rounded bg-[#4F46E5] text-white hover:bg-[#6366F1]"
+                    class={`${primaryButton} text-xs px-3 py-2 w-full justify-center`}
                     onclick={() => useFromLibrary(item.url)}
                   >
                     Use
@@ -752,7 +825,7 @@
       <h2 class="text-2xl font-bold text-white mb-4">Adjust your images</h2>
       <div bind:this={editorContainerRef} class="bg-gray-100 rounded-lg shadow-2xl overflow-hidden"></div>
       <button
-        class="mt-6 bg-[#4F46E5] hover:bg-[#6366F1] text-white font-semibold px-8 py-3 rounded-full transition transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-[#6366F1]"
+        class={`${primaryButton} mt-6 px-8 py-3`}
         onclick={applyToModel}
       >
         Ready
@@ -760,5 +833,3 @@
     </div>
   {/if}
 </div>
-
-

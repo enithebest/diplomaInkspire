@@ -78,7 +78,7 @@
 
   <div class="max-w-6xl mx-auto space-y-10">
     <div class="text-center space-y-2">
-      <p class="text-sm uppercase tracking-[0.2em] text-indigo-300/80">{m.cart_title()}</p>
+      <p class="text-sm uppercase tracking-[0.2em] text-indigo-300/80">Review your cart</p>
       <h1 class="text-4xl font-semibold text-white drop-shadow-[0_10px_35px_rgba(99,102,241,0.35)]">
         {m.cart_title()}
       </h1>
@@ -101,8 +101,18 @@
             <article class="relative overflow-hidden rounded-2xl border border-gray-800 bg-white/5 p-4 shadow-xl backdrop-blur">
               <div class="absolute inset-0 pointer-events-none rounded-2xl border border-white/5"></div>
               <div class="flex gap-4">
-                <div class="relative h-24 w-24 rounded-xl border border-gray-700 bg-gray-900/80 overflow-hidden">
-                  <img src={item.image_url} alt={item.name} class="h-full w-full object-cover" />
+                <div class="relative h-24 w-24 rounded-xl border border-gray-700 bg-gray-900/80 overflow-hidden flex items-center justify-center">
+                  {#if item.image_url}
+                    <img src={item.image_url} alt={item.name} class="h-full w-full object-cover" />
+                  {:else if item.color}
+                    <div
+                      class="h-full w-full"
+                      style={`background:${item.color};`}
+                      aria-label={`Color ${item.color}`}
+                    ></div>
+                  {:else}
+                    <div class="h-full w-full bg-gray-800"></div>
+                  {/if}
                   <div class="absolute inset-0 rounded-xl ring-1 ring-white/5"></div>
                 </div>
 
@@ -110,8 +120,18 @@
                   <div class="flex items-start justify-between gap-3">
                     <div class="space-y-1">
                       <h2 class="text-lg font-semibold text-white leading-tight">{item.name}</h2>
-                      <p class="text-sm text-gray-300">
-                        {m.cart_color_label()} <span class="capitalize text-white">{item.color}</span>
+                      <p class="text-sm text-gray-300 flex items-center gap-2">
+                        {m.cart_color_label()}
+                        <span class="inline-flex items-center gap-1 text-white">
+                          {#if item.color}
+                            <span
+                              class="inline-block h-3.5 w-3.5 rounded-full border border-white/40"
+                              style={`background:${item.color};`}
+                              aria-hidden="true"
+                            ></span>
+                          {/if}
+                          <span class="capitalize">{item.color}</span>
+                        </span>
                         <span class="mx-2 text-gray-500">|</span>
                         {m.cart_size_label()} <span class="uppercase text-white">{item.size}</span>
                       </p>
