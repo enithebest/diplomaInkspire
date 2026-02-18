@@ -12,7 +12,6 @@
 		}
 	};
 
-	// Pagination state: show 3 products per load
 	let displayCount = 3;
 	const productsPerPage = 3;
 
@@ -24,7 +23,6 @@
 	};
 </script>
 
-<!-- Tailwind overlay to visually hide the language buttons on admin page (desktop only) -->
 <div class="hidden md:block fixed top-4 right-6 z-50 w-20 h-9 bg-gray-900/90 rounded-full pointer-events-auto"></div>
 
 <section class="relative min-h-screen bg-gradient-to-b from-[#141b33] via-[#10182c] to-[#0c1124] text-white px-6 py-16 overflow-hidden">
