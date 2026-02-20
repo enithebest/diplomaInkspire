@@ -13,7 +13,9 @@
   let shipping = $state({ amount: 0, label: 'Enter country to calculate shipping', tier: 'missing_country' });
   let grandTotal = $state(0);
   let grandTotalFormatted = $state('0.00');
-  let country = $state('');
+  let country = $state((data?.user?.country ?? 'AL').toUpperCase());
+  let cityInput = $state('');
+  let cityLookupStatus = $state('');
   let stripe = $state(null);
   let elements = $state(null);
   let paymentElement;
@@ -22,6 +24,50 @@
   let hasPaymentElement = false;
   let buttonLabel = $state('Continue to payment');
   let removedInvalidItems = $state(0);
+  let cityLookupTimeout;
+
+  const countries = [
+    { code: 'AL', name: 'Albania' },
+    { code: 'AD', name: 'Andorra' },
+    { code: 'AT', name: 'Austria' },
+    { code: 'BE', name: 'Belgium' },
+    { code: 'BG', name: 'Bulgaria' },
+    { code: 'HR', name: 'Croatia' },
+    { code: 'CY', name: 'Cyprus' },
+    { code: 'CZ', name: 'Czech Republic' },
+    { code: 'DK', name: 'Denmark' },
+    { code: 'EE', name: 'Estonia' },
+    { code: 'FI', name: 'Finland' },
+    { code: 'FR', name: 'France' },
+    { code: 'DE', name: 'Germany' },
+    { code: 'GR', name: 'Greece' },
+    { code: 'HU', name: 'Hungary' },
+    { code: 'IS', name: 'Iceland' },
+    { code: 'IE', name: 'Ireland' },
+    { code: 'IT', name: 'Italy' },
+    { code: 'LV', name: 'Latvia' },
+    { code: 'LI', name: 'Liechtenstein' },
+    { code: 'LT', name: 'Lithuania' },
+    { code: 'LU', name: 'Luxembourg' },
+    { code: 'MT', name: 'Malta' },
+    { code: 'MC', name: 'Monaco' },
+    { code: 'NL', name: 'Netherlands' },
+    { code: 'MK', name: 'North Macedonia' },
+    { code: 'NO', name: 'Norway' },
+    { code: 'PL', name: 'Poland' },
+    { code: 'PT', name: 'Portugal' },
+    { code: 'RO', name: 'Romania' },
+    { code: 'SM', name: 'San Marino' },
+    { code: 'RS', name: 'Serbia' },
+    { code: 'SK', name: 'Slovakia' },
+    { code: 'SI', name: 'Slovenia' },
+    { code: 'ES', name: 'Spain' },
+    { code: 'SE', name: 'Sweden' },
+    { code: 'CH', name: 'Switzerland' },
+    { code: 'TR', name: 'Turkey' },
+    { code: 'UA', name: 'Ukraine' },
+    { code: 'GB', name: 'United Kingdom' }
+  ];
 
   onMount(() => {
     const raw = localStorage.getItem('cart');
@@ -90,6 +136,40 @@
     country = raw.toString().toUpperCase();
     refreshShipping();
   };
+
+  const handleCityInput = (event) => {
+    const raw = event?.target?.value ?? '';
+    cityInput = raw;
+    const trimmed = raw.trim();
+    cityLookupStatus = trimmed.length ? 'Searching…' : '';
+    clearTimeout(cityLookupTimeout);
+    if (trimmed.length < 2) {
+      cityLookupStatus = trimmed.length ? 'Enter at least 2 characters' : '';
+      return;
+    }
+    cityLookupTimeout = setTimeout(() => lookupCountryForCity(trimmed), 400);
+  };
+
+  async function lookupCountryForCity(cityText) {
+    const query = cityText.trim();
+    if (query.length < 2) return;
+    try {
+      const res = await fetch(`/api/city-country?city=${encodeURIComponent(query)}`);
+      const payload = await res.json().catch(() => null);
+      if (res.ok && payload?.countryCode) {
+        country = payload.countryCode.toUpperCase();
+        refreshShipping();
+        cityLookupStatus = payload.countryName
+          ? `Detected ${payload.countryName} (${country})`
+          : `Detected ${country}`;
+      } else {
+        cityLookupStatus = 'No matching country found for that city';
+      }
+    } catch (err) {
+      console.error('City lookup failed', err);
+      cityLookupStatus = 'Could not look up country right now';
+    }
+  }
 
   async function mountElements(secret) {
     if (!stripe || !secret) return;
@@ -172,16 +252,13 @@
     loading = true;
     message = '';
     try {
-      // If the payment element is already mounted with this clientSecret, confirm the payment
       if (hasPaymentElement && clientSecret && mountedSecret === clientSecret) {
         const confirmError = await confirmPayment(clientSecret);
         if (confirmError) message = confirmError;
         return;
       }
 
-
-
-      // Otherwise create a new intent and mount the payment element
+    // Otherwise create a new intent and mount the payment element
       const formData = new FormData(event.currentTarget);
       formData.append('cart', JSON.stringify(cart));
       formData.append('shipping_amount', shipping.amount.toString());
@@ -280,8 +357,13 @@
                 name="city"
                 autocomplete="address-level2"
                 required
+                bind:value={cityInput}
+                oninput={handleCityInput}
                 class="mt-1 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
               />
+              {#if cityLookupStatus}
+                <p class="mt-1 text-xs text-indigo-200">{cityLookupStatus}</p>
+              {/if}
             </label>
             <label class="block text-sm font-medium text-gray-200">
               Postal code
@@ -294,15 +376,26 @@
             </label>
             <label class="block text-sm font-medium text-gray-200">
               Country (2-letter)
-              <input
-                name="country"
-                maxlength="2"
-                autocomplete="country"
-                required
-                bind:value={country}
-                oninput={handleCountryInput}
-                class="mt-1 w-full uppercase rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              />
+              <div class="mt-1 relative">
+                <select
+                  name="country"
+                  autocomplete="country-name"
+                  required
+                  bind:value={country}
+                  onchange={handleCountryInput}
+                  class="w-full appearance-none rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 pr-10 uppercase"
+                >
+                  <option value="" disabled>Select your country</option>
+                  {#each countries as option}
+                    <option value={option.code} class="bg-[#0b1120] text-white">
+                      {option.name} ({option.code})
+                    </option>
+                  {/each}
+                </select>
+                <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
             </label>
           </div>
 

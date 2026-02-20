@@ -33,8 +33,9 @@
   ]; // adjust names to match the back mesh in the GLB
   const modelPath = (() => {
     const name = (data?.product?.name ?? '').toLowerCase();
-    if (name.includes('ceramic mug')) return '/model1.glb'; // only the first mug
-    if (name.includes('classic pullover hoodie')) return '/workerjacket111.glb'; // only the first hoodie model
+    if (name.includes('ceramic mug')) return '/model1.glb';
+    if (name.includes('classic pullover hoodie')) return '/workerjacket111.glb';
+    if (name.includes('classic cotton tee')) return '/poloshirt.glb'
     return null;
   })();
 
@@ -51,6 +52,14 @@
   let lastOrderHandled = $state(null);
   const primaryButton =
     'inline-flex items-center justify-center gap-2 rounded-lg bg-[#4F46E5] text-white font-semibold shadow-lg shadow-[#4F46E5]/30 transition hover:bg-[#6366F1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6366F1] disabled:opacity-60 disabled:cursor-not-allowed';
+
+  const getMaxAnisotropy = () => renderer?.capabilities?.getMaxAnisotropy?.() ?? 1;
+  const applyTextureQuality = (tex, useSRGB = false) => {
+    if (!tex) return;
+    if (useSRGB) tex.colorSpace = THREE.SRGBColorSpace;
+    tex.anisotropy = getMaxAnisotropy();
+    tex.needsUpdate = true;
+  };
 
   let libraryItems = $derived((data?.uploads ?? []).map((upload) => ({
     id: upload.id,
@@ -125,10 +134,11 @@
   const convertImageToTexture = (imageUrl) => {
     const textureLoader = new THREE.TextureLoader();
     const texture = textureLoader.load(imageUrl);
-    texture.colorSpace = THREE.SRGBColorSpace;
+    applyTextureQuality(texture, true);
     texture.flipY = false;
     texture.wrapS = THREE.ClampToEdgeWrapping;
     texture.wrapT = THREE.ClampToEdgeWrapping;
+    texture.needsUpdate = true;
     return texture;
   };
 
@@ -139,6 +149,7 @@
       materials.forEach((mat) => {
         if (!mat) return;
         mat.map = texture;
+        applyTextureQuality(mat.map, true);
         if (mat.color) mat.color.set('#ffffff'); // ensure texture is visible
         mat.needsUpdate = true;
       });
@@ -204,6 +215,7 @@
       };
     });
   };
+
 
   const applyToModel = () => {
     if (!stage || textureTargets.length === 0) return;
@@ -321,28 +333,42 @@
     camera = new THREE.PerspectiveCamera(20, 1, 1e-5, 1e10);
     scene.add(camera);
 
-    const light = new THREE.HemisphereLight(0xffffff, 0x222222, 1);
-    scene.add(light);
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1.1);
+    scene.add(hemiLight);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 2.4);
+    dirLight.position.set(4, 8, 6);
+    dirLight.castShadow = false;
+    scene.add(dirLight);
 
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      alpha: true,
+      powerPreference: 'high-performance'
+    });
+    renderer.physicallyCorrectLights = true;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.1;
     renderer.setClearColor(0x131316, 0);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(800, 800); // initial; will be resized to container below
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
+    const initialWidth = containerRef?.clientWidth || 800;
+    const initialHeight = containerRef?.clientHeight || 800;
+    renderer.setSize(initialWidth, initialHeight, false); // initial; will be resized to container below
+    camera.aspect = initialWidth / initialHeight;
+    camera.updateProjectionMatrix();
     containerRef.appendChild(renderer.domElement);
 
     orbitControls = new OrbitControls(camera, renderer.domElement);
 
     const resizeRendererToDisplaySize = () => {
       if (!renderer || !camera || !containerRef) return;
-      const width = containerRef.clientWidth || 800;
-      const height = containerRef.clientHeight || 800;
-      const size = Math.max(200, Math.min(width, height)); // keep square to avoid stretch
+      const width = Math.max(200, containerRef.clientWidth || 800);
+      const height = Math.max(200, containerRef.clientHeight || 800);
       const canvas = renderer.domElement;
-      const needResize = canvas.width !== size || canvas.height !== size;
+      const needResize = canvas.width !== width || canvas.height !== height;
       if (needResize) {
-        renderer.setSize(size, size, false);
-        camera.aspect = 1;
+        renderer.setSize(width, height, false);
+        camera.aspect = width / height;
         camera.updateProjectionMatrix();
       }
     };
@@ -418,6 +444,20 @@
               textureTargets.push(obj);
             }
             if (!material && !Array.isArray(obj.material)) material = obj.material;
+            const materials = Array.isArray(obj.material) ? obj.material : [obj.material];
+            materials.forEach((mat) => {
+              if (!mat) return;
+              applyTextureQuality(mat.map, true);
+              applyTextureQuality(mat.emissiveMap, true);
+              applyTextureQuality(mat.lightMap);
+              applyTextureQuality(mat.bumpMap);
+              applyTextureQuality(mat.displacementMap);
+              applyTextureQuality(mat.roughnessMap);
+              applyTextureQuality(mat.metalnessMap);
+              applyTextureQuality(mat.normalMap);
+              applyTextureQuality(mat.aoMap);
+              applyTextureQuality(mat.specularMap);
+            });
           }
         });
 
@@ -764,9 +804,9 @@
               <div class="bg-white/5 border border-white/10 rounded-md overflow-hidden group">
                 <img src={item.url} alt={displayName(item.url)} class="w-full h-28 object-cover" />
                 <div class="p-2 flex items-center justify-between">
-                  <span class="text-xs truncate max-w-[65%]" title={displayName(item.url)}>{displayName(item.url)}</span>
+                  <span class="text-xs truncate max-w-[70%]" title={displayName(item.url)}>{displayName(item.url)}</span>
                   <button
-                    class="inline-flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-semibold rounded-md bg-white/5 text-gray-100 border border-white/20 hover:bg-white/10 hover:border-white/30 transition shadow-sm backdrop-blur-sm"
+                    class={`${primaryButton} text-xs px-3 py-2 w-full justify-center`}
                     onclick={() => useFromLibrary(item.url)}
                   >
                     Use
@@ -793,5 +833,3 @@
     </div>
   {/if}
 </div>
-
-
