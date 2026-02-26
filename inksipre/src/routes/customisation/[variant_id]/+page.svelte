@@ -611,12 +611,17 @@
         name: data?.product?.name || 'Custom product',
         product_id: data?.product?.id || null,
         variant_id: data?.variant?.id || null,
+        upload_id: form?.uploadId ?? null,
+        customisation_id: form?.customisationId ?? null,
+        source_order_id: form?.orderId ?? null,
+        source_order_item_id: form?.orderItemId ?? null,
         sku: data?.variant?.sku || data?.variant?.id || '',
         size,
         color,
         price,
         qty: 1,
-        image
+        image,
+        design_url: form?.designUrl || image
       });
       localStorage.setItem('cart', JSON.stringify(cart));
       window.dispatchEvent(new Event('cart-updated'));

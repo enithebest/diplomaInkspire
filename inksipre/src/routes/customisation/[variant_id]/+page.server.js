@@ -83,12 +83,12 @@ export const actions = {
     });
 
     // Store the uploaded file URL in the DB and link to variant
-    await query('INSERT INTO uploads (user_id, customisation_id, image_url) VALUES (?, NULL, ?)', [
+    const uploadResult = await query('INSERT INTO uploads (user_id, customisation_id, image_url) VALUES (?, NULL, ?)', [
       user.id,
       blob.url
     ]);
 
-    return { success: true, imageUrl: blob.url };
+    return { success: true, imageUrl: blob.url, uploadId: uploadResult?.insertId ?? null };
   },
 
   order: async ({ request, locals, params }) => {
@@ -197,7 +197,14 @@ export const actions = {
 
       await conn.commit();
 
-      return { orderSuccess: true, orderId };
+      return {
+        orderSuccess: true,
+        orderId,
+        orderItemId,
+        customisationId,
+        uploadId,
+        designUrl
+      };
     } catch (err) {
       if (err?.status && err.status >= 300 && err.status < 400) {
         // Allow redirects to bubble up without showing a failure state
