@@ -2,6 +2,7 @@ import { STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET } from '$env/static/private';
 import Stripe from 'stripe';
 import { json } from '@sveltejs/kit';
 import { createConnection } from '$lib/db/mysql.js';
+import { sendPrinterEmail } from '$lib/email/mailer.js';
 
 // This route expects the raw body. Ensure your deployment preserves the raw body for webhook verification.
 
@@ -32,6 +33,107 @@ export const POST = async ({ request }) => {
         try {
           const newStatus = event.type === 'payment_intent.succeeded' ? 'paid' : 'processing';
           await conn.query('UPDATE orders SET status = ? WHERE id = ?', [newStatus, orderId]);
+
+          if (event.type === 'payment_intent.succeeded') {
+            // Fetch order details to dispatch to printer
+            const [orderRows] = await conn.query('SELECT * FROM orders WHERE id = ?', [orderId]);
+            const order = orderRows?.[0] || null;
+            if (order) {
+              const [userRows] = await conn.query('SELECT id, email, full_name FROM users WHERE id = ?', [
+                order.user_id
+              ]);
+              const user = userRows?.[0] || null;
+
+              const [addressRows] = await conn.query(
+                'SELECT full_name, line1, line2, city, region, postal_code, country, phone FROM addresses WHERE id = ?',
+                [order.shipping_address_id]
+              );
+              const shippingAddress = addressRows?.[0] || null;
+
+              const [items] = await conn.query(
+                `
+                SELECT
+                  oi.*,
+                  oi.printer_email_sent_at,
+                  oi.printer_email_last_error
+                FROM order_items oi
+                WHERE oi.order_id = ?
+                ORDER BY oi.id ASC
+                `,
+                [orderId]
+              );
+              for (const item of items || []) {
+                if (item.printer_email_sent_at) {
+                  continue;
+                }
+
+                const [productRows] = await conn.query(
+                  'SELECT id, name, base_price, image_url FROM products WHERE id = ?',
+                  [item.product_id]
+                );
+                const product = productRows?.[0] || null;
+
+                let variant = null;
+                if (item.variant_id) {
+                  const [variantRows] = await conn.query('SELECT * FROM product_variants WHERE id = ?', [
+                    item.variant_id
+                  ]);
+                  const variantRaw = variantRows?.[0] || null;
+                  if (variantRaw) {
+                    try {
+                      const opts =
+                        typeof variantRaw.option_values === 'string'
+                          ? JSON.parse(variantRaw.option_values)
+                          : variantRaw.option_values;
+                      variant = { ...variantRaw, color: opts?.color ?? null, size: opts?.size ?? null };
+                    } catch {
+                      variant = variantRaw;
+                    }
+                  }
+                }
+
+                let designUrl = '';
+                if (item.upload_id) {
+                  const [uploadRows] = await conn.query('SELECT image_url FROM uploads WHERE id = ?', [
+                    item.upload_id
+                  ]);
+                  designUrl = uploadRows?.[0]?.image_url || '';
+                }
+
+                try {
+                  await sendPrinterEmail({
+                    order,
+                    orderItem: item,
+                    product,
+                    variant,
+                    user,
+                    designUrl,
+                    renderUrl: designUrl,
+                    renderBuffer: null,
+                    customisation: null,
+                    shippingAddress
+                  });
+
+                  await conn.query(
+                    'UPDATE order_items SET printer_email_sent_at = NOW(), printer_email_last_error = NULL WHERE id = ?',
+                    [item.id]
+                  );
+                } catch (emailErr) {
+                  const errorMessage = (emailErr?.message || String(emailErr)).slice(0, 1000);
+                  try {
+                    await conn.query(
+                      'UPDATE order_items SET printer_email_last_error = ? WHERE id = ?',
+                      [errorMessage, item.id]
+                    );
+                  } catch (markErr) {
+                    console.error('Failed to record printer email error', markErr);
+                  }
+                  console.error('Printer email failed (webhook)', emailErr);
+                  throw emailErr;
+                }
+              }
+            }
+          }
         } finally {
           conn.release();
         }
