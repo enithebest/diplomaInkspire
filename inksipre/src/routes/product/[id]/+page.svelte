@@ -409,7 +409,6 @@
 
       </div>
 
-      <!-- SPECIFICATIONS horizontal strip -->
       <section class="max-w-7xl w-full mx-auto mt-8">
         <div class="grid gap-4 md:grid-cols-3">
           {#each specSections as spec}
@@ -434,10 +433,10 @@
                   class="mt-3 text-sm text-gray-300 leading-relaxed"
                 >
                   {spec.detail}
-                </p>
-              {/if}
-            </button>
-          {/each}
+              </p>
+            {/if}
+          </button>
+        {/each}
         </div>
       </section>
 
