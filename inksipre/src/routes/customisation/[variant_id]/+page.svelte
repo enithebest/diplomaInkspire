@@ -35,7 +35,8 @@
     const name = (data?.product?.name ?? '').toLowerCase();
     if (name.includes('ceramic mug')) return '/model1.glb';
     if (name.includes('classic pullover hoodie')) return '/workerjacket111.glb';
-    if (name.includes('classic cotton tee')) return '/poloshirt.glb'
+    if (name.includes('classic cotton tee')) return '/poloshirt.glb';
+    if (name.includes('cropped sweatshirt')) return '/sweatshirt1.glb';
     return null;
   })();
 
@@ -508,7 +509,7 @@
       const dataURL = captureCanvas.toDataURL('image/png', 1.0);
       const link = document.createElement('a');
       link.href = dataURL;
-      link.download = 'custom-mug.png';
+      link.download = 'preview.png';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
