@@ -1043,7 +1043,7 @@ export const about_team_chip = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const about_team_body = /** @type {(inputs: {}) => string} */ () => {
-	return `Drop in a team photo or a short founder message to show the faces behind the presses. Keep it raw, keep it human.`
+	return `The crew behind Inkspire—meet the people making every drop.`
 };
 
 export const about_team_quote = /** @type {(inputs: {}) => string} */ () => {
@@ -1051,7 +1051,15 @@ export const about_team_quote = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const about_team_note = /** @type {(inputs: {}) => string} */ () => {
-	return `Add your founder blurb or a quick audio/video clip reference here.`
+	return `Team spotlight`
+};
+
+export const about_team_role_lead = /** @type {(inputs: {}) => string} */ () => {
+	return `Team lead`
+};
+
+export const about_team_role_member = /** @type {(inputs: {}) => string} */ () => {
+	return `Team member`
 };
 
 export const about_team_tag_print = /** @type {(inputs: {}) => string} */ () => {

@@ -28,10 +28,10 @@
   const partnerHighlights = [m.about_partner_coverage, m.about_partner_facility, m.about_partner_banner_note];
 
   const teamMembers = [
-    { name: 'Gesart Mlloja', role: 'Teamleiter', initials: 'GM' },
-    { name: 'Eni Hasmegaj', role: 'Teammitglied', initials: 'EH' },
-    { name: 'Ani Hasmegaj', role: 'Teammitglied', initials: 'AH' },
-    { name: 'Ajsi Sala', role: 'Teammitglied', initials: 'AS' }
+    { name: 'Ani Hasmegaj', role: m.about_team_role_lead(), initials: 'AH' },
+    { name: 'Eni Hasmegaj', role: m.about_team_role_member(), initials: 'EH' },
+    { name: 'Gesart Mlloja', role: m.about_team_role_member(), initials: 'GM' },
+    { name: 'Ajsi Sala', role: m.about_team_role_member(), initials: 'AS' }
   ];
 
   const partnerGroups = [
@@ -247,33 +247,21 @@
         <p class="text-sm text-gray-200">{m.about_team_body()}</p>
 
         <div class="rounded-2xl border border-white/15 bg-gradient-to-br from-[#0f1328] via-indigo-900/40 to-[#0c1024] p-6 shadow-2xl shadow-indigo-500/20">
-          <div class="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-center">
-            <div class="space-y-3">
-              <p class="text-lg font-semibold text-white sm:text-xl">{m.about_team_quote()}</p>
-              <p class="text-sm text-gray-300">{m.about_team_note()}</p>
-              <div class="flex flex-wrap gap-2 text-xs text-indigo-100">
-                <span class="rounded-full bg-indigo-500/15 px-3 py-1">{m.about_team_tag_print()}</span>
-                <span class="rounded-full bg-indigo-500/15 px-3 py-1">{m.about_team_tag_sourcing()}</span>
-                <span class="rounded-full bg-indigo-500/15 px-3 py-1">{m.about_team_tag_qa()}</span>
-              </div>
-            </div>
-
-            <div class="grid gap-3 sm:grid-cols-2">
-              {#each teamMembers as member}
-                <div class="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-3 shadow-lg shadow-indigo-500/15 transition hover:-translate-y-0.5 hover:border-indigo-300/60 hover:shadow-indigo-400/25">
-                  <div class="absolute inset-0 opacity-0 blur-2xl transition group-hover:opacity-30" style="background: radial-gradient(circle at 30% 30%, rgba(99,102,241,0.35), transparent 45%);"></div>
-                  <div class="relative flex items-center gap-3">
-                    <div class="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 via-violet-500 to-sky-400 text-sm font-semibold text-white shadow-inner shadow-indigo-900/40">
-                      {member.initials}
-                    </div>
-                    <div class="space-y-0.5">
-                      <p class="text-sm font-semibold text-white">{member.name}</p>
-                      <p class="text-xs text-gray-300">{member.role}</p>
-                    </div>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-2">
+            {#each teamMembers as member}
+              <div class="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-5 shadow-lg shadow-indigo-500/20 transition hover:-translate-y-1 hover:border-indigo-200/70 hover:shadow-indigo-300/30">
+                <div class="absolute inset-0 opacity-0 blur-2xl transition group-hover:opacity-30" style="background: radial-gradient(circle at 40% 40%, rgba(99,102,241,0.45), transparent 55%);"></div>
+                <div class="relative flex items-center gap-4">
+                  <div class="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-indigo-400 via-violet-500 to-sky-400 text-lg font-bold text-white shadow-inner shadow-indigo-900/50">
+                    {member.initials}
+                  </div>
+                  <div class="space-y-1">
+                    <p class="text-xl font-bold text-white leading-tight drop-shadow">{member.name}</p>
+                    <p class="text-xs uppercase tracking-wide text-indigo-100/90">{member.role}</p>
                   </div>
                 </div>
-              {/each}
-            </div>
+              </div>
+            {/each}
           </div>
         </div>
       </div>
