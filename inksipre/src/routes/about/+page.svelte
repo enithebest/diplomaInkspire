@@ -23,15 +23,16 @@
 
   const returnRules = [m.about_return_rule1, m.about_return_rule2, m.about_return_rule3];
   const privacyPoints = [m.about_privacy_point1, m.about_privacy_point2, m.about_privacy_point3];
-  const tosPoints = [
-    m.about_tos_point1,
-    m.about_tos_point2,
-    m.about_tos_point3,
-    m.about_tos_point4,
-    m.about_tos_point5
-  ];
+  const tosPoints = [m.about_tos_point1, m.about_tos_point2, m.about_tos_point3, m.about_tos_point4, m.about_tos_point5];
 
   const partnerHighlights = [m.about_partner_coverage, m.about_partner_facility, m.about_partner_banner_note];
+
+  const teamMembers = [
+    { name: 'Gesart Mlloja', role: 'Teamleiter', initials: 'GM' },
+    { name: 'Eni Hasmegaj', role: 'Teammitglied', initials: 'EH' },
+    { name: 'Ani Hasmegaj', role: 'Teammitglied', initials: 'AH' },
+    { name: 'Ajsi Sala', role: 'Teammitglied', initials: 'AS' }
+  ];
 
   const partnerGroups = [
     {
@@ -244,14 +245,34 @@
           <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-200">{m.about_team_chip()}</span>
         </div>
         <p class="text-sm text-gray-200">{m.about_team_body()}</p>
-        <div class="relative overflow-hidden rounded-2xl border border-dashed border-white/20 bg-gradient-to-br from-white/5 via-indigo-500/5 to-white/5 p-5">
-          <div class="grid gap-4 sm:grid-cols-[1.2fr_0.8fr] sm:items-center">
-            <div class="flex h-full flex-col justify-center gap-2">
-              <p class="text-base font-semibold text-white">{m.about_team_quote()}</p>
+
+        <div class="rounded-2xl border border-white/15 bg-gradient-to-br from-[#0f1328] via-indigo-900/40 to-[#0c1024] p-6 shadow-2xl shadow-indigo-500/20">
+          <div class="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+            <div class="space-y-3">
+              <p class="text-lg font-semibold text-white sm:text-xl">{m.about_team_quote()}</p>
               <p class="text-sm text-gray-300">{m.about_team_note()}</p>
+              <div class="flex flex-wrap gap-2 text-xs text-indigo-100">
+                <span class="rounded-full bg-indigo-500/15 px-3 py-1">{m.about_team_tag_print()}</span>
+                <span class="rounded-full bg-indigo-500/15 px-3 py-1">{m.about_team_tag_sourcing()}</span>
+                <span class="rounded-full bg-indigo-500/15 px-3 py-1">{m.about_team_tag_qa()}</span>
+              </div>
             </div>
-            <div class="flex h-36 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-sm text-gray-300 sm:h-40">
-              Drop photo / clip placeholder
+
+            <div class="grid gap-3 sm:grid-cols-2">
+              {#each teamMembers as member}
+                <div class="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-3 shadow-lg shadow-indigo-500/15 transition hover:-translate-y-0.5 hover:border-indigo-300/60 hover:shadow-indigo-400/25">
+                  <div class="absolute inset-0 opacity-0 blur-2xl transition group-hover:opacity-30" style="background: radial-gradient(circle at 30% 30%, rgba(99,102,241,0.35), transparent 45%);"></div>
+                  <div class="relative flex items-center gap-3">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 via-violet-500 to-sky-400 text-sm font-semibold text-white shadow-inner shadow-indigo-900/40">
+                      {member.initials}
+                    </div>
+                    <div class="space-y-0.5">
+                      <p class="text-sm font-semibold text-white">{member.name}</p>
+                      <p class="text-xs text-gray-300">{member.role}</p>
+                    </div>
+                  </div>
+                </div>
+              {/each}
             </div>
           </div>
         </div>

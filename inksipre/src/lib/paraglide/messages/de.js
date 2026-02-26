@@ -1054,6 +1054,18 @@ export const about_team_note = /** @type {(inputs: {}) => string} */ () => {
 	return `Füge hier deinen Gründertext oder einen kurzen Audio/Video-Hinweis ein.`
 };
 
+export const about_team_tag_print = /** @type {(inputs: {}) => string} */ () => {
+	return `Print & Design`
+};
+
+export const about_team_tag_sourcing = /** @type {(inputs: {}) => string} */ () => {
+	return `Beschaffung`
+};
+
+export const about_team_tag_qa = /** @type {(inputs: {}) => string} */ () => {
+	return `Qualitätssicherung`
+};
+
 export const about_shipping_heading = /** @type {(inputs: {}) => string} */ () => {
 	return `Versand`
 };

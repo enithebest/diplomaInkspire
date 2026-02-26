@@ -1054,6 +1054,18 @@ export const about_team_note = /** @type {(inputs: {}) => string} */ () => {
 	return `Add your founder blurb or a quick audio/video clip reference here.`
 };
 
+export const about_team_tag_print = /** @type {(inputs: {}) => string} */ () => {
+	return `Print & Design`
+};
+
+export const about_team_tag_sourcing = /** @type {(inputs: {}) => string} */ () => {
+	return `Sourcing`
+};
+
+export const about_team_tag_qa = /** @type {(inputs: {}) => string} */ () => {
+	return `QA`
+};
+
 export const about_shipping_heading = /** @type {(inputs: {}) => string} */ () => {
 	return `Shipping`
 };
