@@ -33,12 +33,12 @@
   ]; // adjust names to match the back mesh in the GLB
   const modelPath = (() => {
     const name = (data?.product?.name ?? '').toLowerCase();
-    if (name.includes('ceramic mug')) return '/model1.glb';
+    if (name.includes('ceramic mug')) return '/3dobjects/mugs/model1.glb';
     if (name.includes('classic pullover hoodie')) return '/workerjacket111.glb';
     if (name.includes('classic cotton tee')) return '/poloshirt.glb';
-    if (name.includes('cropped sweatshirt')) return '/sweatshirt1.glb';
+    if (name.includes('cropped sweatshirt')) return '/3dobjects/hoodie/sweatshirt1.glb';
     return null;
-  })();
+  })(); 
 
   let showEditor = $state(false);
   let uploadedImages = $state([]);
@@ -51,6 +51,7 @@
   let orderDesignData = $state('');
   let orderDesignUrl = $state('');
   let lastOrderHandled = $state(null);
+  let previewExpanded = $state(false);
   const primaryButton =
     'inline-flex items-center justify-center gap-2 rounded-lg bg-[#4F46E5] text-white font-semibold shadow-lg shadow-[#4F46E5]/30 transition hover:bg-[#6366F1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6366F1] disabled:opacity-60 disabled:cursor-not-allowed';
 
@@ -105,9 +106,14 @@
 
   const addImageToEditor = (url) => {
     if (!url) return;
-    uploadedImages = [url];
+    if (!uploadedImages.includes(url)) {
+      uploadedImages = [...uploadedImages, url];
+    }
     showEditor = true;
-    if (konvaReady) {
+    if (konvaReady && stage && layer) {
+      addImageNode(url, uploadedImages.length - 1);
+      layer.draw();
+    } else if (konvaReady) {
       setTimeout(initEditor, 50);
     } else {
       pendingEditorInit = true;
@@ -123,7 +129,7 @@
       }
     }
     showEditor = true;
-    setTimeout(initEditor, 50);
+    if (!stage) setTimeout(initEditor, 50);
   };
 
   const useFromLibrary = (url) => {
@@ -160,10 +166,50 @@
   const editorWidth = 400;
   const editorHeight = 300;
 
+  const addImageNode = (imgUrl, index = 0) => {
+    if (!layer || !Konva || !stage) return;
+    const alreadyExists = layer.find((node) => node.name() === 'design-image' && node.getAttr('data-url') === imgUrl)?.[0];
+    if (alreadyExists) return;
+
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = imgUrl;
+    img.onload = () => {
+      const konvaImage = new Konva.Image({
+        image: img,
+        x: 50 + index * 20,
+        y: 50 + index * 20,
+        width: 150,
+        height: 150,
+        draggable: true,
+        name: 'design-image',
+        'data-url': imgUrl
+      });
+      layer.add(konvaImage);
+
+      const transformer = new Konva.Transformer({
+        nodes: [konvaImage],
+        enabledAnchors: ['top-left', 'top-right', 'bottom-left', 'bottom-right']
+      });
+      layer.add(transformer);
+      layer.draw();
+
+      konvaImage.on('click', () => {
+        stage.find('Transformer').forEach((instance) => instance.nodes([]));
+        transformer.nodes([konvaImage]);
+        layer.draw();
+      });
+    };
+  };
+
   const initEditor = () => {
     if (!konvaReady || !Konva) return;
     if (!editorContainerRef) return;
-    if (stage) stage.destroy();
+    if (stage && layer) {
+      uploadedImages.forEach((imgUrl, index) => addImageNode(imgUrl, index));
+      layer.draw();
+      return;
+    }
 
     stage = new Konva.Stage({
       container: editorContainerRef,
@@ -185,36 +231,7 @@
     });
     layer.add(background);
 
-    uploadedImages.forEach((imgUrl, index) => {
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.src = imgUrl;
-      img.onload = () => {
-        const konvaImage = new Konva.Image({
-          image: img,
-          x: 50 + index * 20,
-          y: 50 + index * 20,
-          width: 150,
-          height: 150,
-          draggable: true,
-          name: 'design-image'
-        });
-        layer.add(konvaImage);
-
-        const transformer = new Konva.Transformer({
-          nodes: [konvaImage],
-          enabledAnchors: ['top-left', 'top-right', 'bottom-left', 'bottom-right']
-        });
-        layer.add(transformer);
-        layer.draw();
-
-        konvaImage.on('click', () => {
-          stage.find('Transformer').forEach((instance) => instance.nodes([]));
-          transformer.nodes([konvaImage]);
-          layer.draw();
-        });
-      };
-    });
+    uploadedImages.forEach((imgUrl, index) => addImageNode(imgUrl, index));
   };
 
 
@@ -516,6 +533,14 @@
     }
   };
 
+  const togglePreviewExpanded = (state = !previewExpanded) => {
+    previewExpanded = state;
+    // re-trigger renderer sizing when layout changes
+    if (browser) {
+      setTimeout(() => window.dispatchEvent(new Event('resize')), 50);
+    }
+  };
+
   onMount(() => {
     if (browser) {
       try {
@@ -603,6 +628,10 @@
   onDestroy(() => {
     if (!browser) return;
     cancelAnimationFrame(animationId);
+    if (stage) {
+      stage.destroy();
+      stage = null;
+    }
     if (renderer) {
       renderer.dispose();
       if (containerRef && renderer.domElement.parentNode === containerRef) {
@@ -704,18 +733,55 @@
     </aside>
 
     <main class="lg:col-span-6 flex flex-col h-full space-y-6">
-      <div class="flex-1 relative">
-        <div class="bg-gray-900/80 backdrop-blur-md rounded-3xl overflow-hidden shadow-2xl border border-gray-700 h-[60vh] max-h-[650px] min-h-[360px] relative">
+      {#if previewExpanded}
+        <div
+          class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+          role="button"
+          tabindex="0"
+          aria-label="Close expanded preview"
+          onclick={() => togglePreviewExpanded(false)}
+          onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && togglePreviewExpanded(false)}
+        ></div>
+      {/if}
+
+      <div class={`flex-1 relative ${previewExpanded ? 'z-50' : ''}`}>
+        <div
+          class={`bg-gray-900/80 backdrop-blur-md rounded-3xl overflow-hidden shadow-2xl border border-gray-700 relative transition-all duration-200 ease-out
+            ${previewExpanded ? 'fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-6xl h-[80vh] min-h-[480px]' : 'h-[60vh] max-h-[650px] min-h-[360px]'}
+          `}
+        >
           <div bind:this={containerRef} class="w-full h-full flex items-center justify-center cursor-grab"></div>
           {#if modelPath}
-            <div class="pointer-events-none absolute inset-0 flex items-end justify-center pb-4">            </div>
+            <div class="pointer-events-none absolute inset-0 flex items-end justify-center pb-4"></div>
           {:else}
             <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
               <div class="bg-black/50 text-white px-4 py-2 rounded-lg border border-white/10 text-sm">3D preview coming soon</div>
             </div>
           {/if}
+          {#if previewExpanded}
+            <div class="absolute top-4 right-4 flex gap-2 z-50">
+              <button
+                class={`${primaryButton} px-3 py-2 text-xs`}
+                onclick={() => togglePreviewExpanded(false)}
+              >
+                Close
+              </button>
+            </div>
+          {/if}
         </div>
-        <div class="flex justify-end mt-3">
+        <div class="flex justify-end gap-2 mt-3">
+          <button
+            class={`${primaryButton} px-3 py-2 text-sm flex items-center gap-2`}
+            onclick={() => togglePreviewExpanded(true)}
+            aria-pressed={previewExpanded}
+            disabled={!modelPath || previewExpanded}
+            title="Expand preview"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 9V5a1 1 0 011-1h4M20 15v4a1 1 0 01-1 1h-4M15 4h4a1 1 0 011 1v4M9 20H5a1 1 0 01-1-1v-4" />
+            </svg>
+            Maximize
+          </button>
           <button
             class={`${primaryButton} px-4 py-2 text-sm`}
             onclick={download}
@@ -821,16 +887,14 @@
     </div>
   {/if}
 
-    {#if showEditor}
-    <div class="fixed inset-0 bg-black/95 backdrop-blur-sm flex flex-col items-center justify-center z-40 p-6">
-      <h2 class="text-2xl font-bold text-white mb-4">Adjust your images</h2>
-      <div bind:this={editorContainerRef} class="bg-gray-100 rounded-lg shadow-2xl overflow-hidden"></div>
-      <button
-        class={`${primaryButton} mt-6 px-8 py-3`}
-        onclick={applyToModel}
-      >
-        Ready
-      </button>
-    </div>
-  {/if}
+  <div class={`fixed inset-0 bg-black/95 backdrop-blur-sm flex flex-col items-center justify-center z-40 p-6 ${showEditor ? '' : 'hidden'}`}>
+    <h2 class="text-2xl font-bold text-white mb-4">Adjust your images</h2>
+    <div bind:this={editorContainerRef} class="bg-gray-100 rounded-lg shadow-2xl overflow-hidden"></div>
+    <button
+      class={`${primaryButton} mt-6 px-8 py-3`}
+      onclick={applyToModel}
+    >
+      Ready
+    </button>
+  </div>
 </div>
