@@ -2,7 +2,7 @@ import { env } from '$env/dynamic/private';
 import Stripe from 'stripe';
 import { json } from '@sveltejs/kit';
 import { createConnection } from '$lib/db/mysql.js';
-import { sendPrinterEmail } from '$lib/email/mailer.js';
+import { sendPrinterEmail, sendCustomerOrderEmail } from '$lib/email/mailer.js';
 
 // This route expects the raw body. Ensure your deployment preserves the raw body for webhook verification.
 
@@ -132,6 +132,49 @@ export const POST = async ({ request }) => {
                   }
                   console.error('Printer email failed (webhook)', emailErr);
                   throw emailErr;
+                }
+              }
+
+              if (!order.customer_email_sent_at && user?.email) {
+                const [customerItems] = await conn.query(
+                  `
+                  SELECT
+                    oi.quantity,
+                    oi.unit_price,
+                    p.name AS product_name
+                  FROM order_items oi
+                  LEFT JOIN products p ON p.id = oi.product_id
+                  WHERE oi.order_id = ?
+                  ORDER BY oi.id ASC
+                  `,
+                  [order.id]
+                );
+                try {
+                  await sendCustomerOrderEmail({
+                    order,
+                    user,
+                    shippingAddress,
+                    items: customerItems || []
+                  });
+                  await conn.query(
+                    'UPDATE orders SET customer_email_sent_at = NOW(), customer_email_last_error = NULL WHERE id = ?',
+                    [order.id]
+                  );
+                } catch (customerEmailErr) {
+                  const errorMessage = (customerEmailErr?.message || String(customerEmailErr)).slice(
+                    0,
+                    1000
+                  );
+                  try {
+                    await conn.query('UPDATE orders SET customer_email_last_error = ? WHERE id = ?', [
+                      errorMessage,
+                      order.id
+                    ]);
+                  } catch (markErr) {
+                    console.error('Failed to record customer email error', markErr);
+                  }
+                  console.error('Customer email failed (webhook)', customerEmailErr);
+                  throw customerEmailErr;
                 }
               }
             }

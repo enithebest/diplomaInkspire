@@ -81,6 +81,8 @@ CREATE TABLE IF NOT EXISTS orders (
   total_price DECIMAL(10,2) DEFAULT 0.00,
   status ENUM('pending', 'processing', 'paid', 'failed', 'shipped') DEFAULT 'pending',
   shipping_address_id INT NULL,
+  customer_email_sent_at TIMESTAMP NULL DEFAULT NULL,
+  customer_email_last_error VARCHAR(1000) NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (shipping_address_id) REFERENCES addresses(id) ON DELETE SET NULL
