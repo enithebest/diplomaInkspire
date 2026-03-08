@@ -2,6 +2,7 @@
   import { goto } from '$app/navigation';
   import { enhance } from '$app/forms';
   import { onMount } from 'svelte';
+  import { fade } from 'svelte/transition';
   import * as m from '$lib/paraglide/messages/_index.js';
   export let data;
   export let form;
@@ -34,6 +35,45 @@
     window.location.href = `/product/${id}`;
   }
   let showDesignToast = false;
+
+  // Featured showcase content
+  const showcaseTitle = 'Monochrome Essentials';
+  const categoryLabel = 'Outerwear Capsule';
+  const categoryDescription = 'Curated layers with sculptural lines, muted tones, and tactile finishes for the season ahead.';
+  const ctaLabel = 'SHOP NOW ›';
+  const ctaHref = '/categories';
+  const featuredProducts = [
+    {
+      image: '/images/feature-hoodie.jpg',
+      name: 'Contour Fleece Hoodie',
+      price: '$89',
+      alt: 'Black fleece hoodie on a stand against a gray backdrop'
+    },
+    {
+      image: '/images/feature-parka.jpg',
+      name: 'Midnight Technical Parka',
+      price: '$142',
+      alt: 'Long black parka with matte finish'
+    },
+    {
+      image: '/images/feature-crew.jpg',
+      name: 'Structured Crewneck',
+      price: '$78',
+      alt: 'Charcoal crewneck folded neatly on chair'
+    },
+    {
+      image: '/images/feature-vest.jpg',
+      name: 'Quilted Vest',
+      price: '$96',
+      alt: 'Lightweight padded vest on hanger'
+    }
+  ];
+
+  let activeIndex = 0;
+  $: activeProduct = featuredProducts[activeIndex];
+  const setActive = (idx) => (activeIndex = idx);
+  const cycleUp = () => (activeIndex = (activeIndex - 1 + featuredProducts.length) % featuredProducts.length);
+  const cycleDown = () => (activeIndex = (activeIndex + 1) % featuredProducts.length);
   const categorySections = [
     { title: m.categories_section_hoodies(), items: hoodies },
     { title: m.categories_section_tshirts(), items: tshirts },
@@ -53,7 +93,7 @@
   });
 </script>
 
-<div class="relative isolate overflow-hidden bg-gray-900 text-gray-200 min-h-screen px-6 py-16 sm:py-24 lg:px-12">
+<div class="relative isolate overflow-hidden bg-gray-900 text-gray-200 min-h-screen px-6 pb-16 sm:pb-24 lg:px-12">
   {#if showDesignToast}
     <div role="status" aria-live="polite" class="fixed top-20 left-1/2 -translate-x-1/2 z-[9999] bg-indigo-600 text-white pointer-events-none px-4 py-2 rounded-lg shadow-lg">{m.categories_toast_design_selected()}</div>
   {/if}
@@ -69,42 +109,29 @@
     </svg>
   </div>
 
-  <!-- Page Header -->
-  <h1 class="text-4xl font-semibold text-center text-white mb-10">{m.categories_title()}</h1>
-
-  <!-- Search Bar -->
-  <form method="POST" action="?/search" use:enhance class="flex flex-col sm:flex-row gap-3 justify-center mb-12">
-    <div class="relative w-full sm:w-1/2">
-      <input
-        type="text"
-        name="name"
-        placeholder={form?.searchTerm || m.categories_search_placeholder()}
-        class="border border-gray-700 bg-gray-800 text-gray-200 placeholder:text-gray-500 rounded-lg px-4 py-2 w-full pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-        required
-        aria-label="Produkt suchen"
-      />
-      {#if form?.searchTerm}
-        <button
-          type="button"
-          class="absolute inset-y-0 right-2 my-auto h-8 w-8 rounded-full bg-gray-700 text-gray-200 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-          onclick={clearSearch}
-          aria-label="Suche zurücksetzen und zum Shop"
+  <!-- Hero Header -->
+  <section class="relative -mx-6 lg:-mx-12 mb-12 min-h-screen overflow-hidden bg-gray-800/80">
+    <img
+      src="/images/header.png"
+      alt="Collection hero"
+      class="absolute inset-0 h-full w-full object-cover opacity-60"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-gray-900/100 via-gray-900/5 to-transparent" />
+    <div class="absolute inset-0 flex items-end justify-center pb-12">
+      <div class="text-center space-y-3">
+        <p class="text-2xl sm:text-3xl font-light text-white/90 tracking-wide">Inkspire Winter Collection</p>
+        <a
+          href="/categories"
+          class="inline-block text-white text-sm font-medium tracking-[0.12em] uppercase transition hover:text-indigo-200"
         >
-          ✕
-        </button>
-      {/if}
+          Shop now
+        </a>
+      </div>
     </div>
-    <button
-      type="submit"
-      class="bg-[#4F46E5] hover:bg-[#6366F1] text-white px-6 py-2 rounded-lg font-medium transition"
-    >
-      {m.categories_search_button()}
-    </button>
-  </form>
+  </section>
 
-  {#if form?.message}
-    <p class="text-center text-red-500 mb-4">{form.message}</p>
-  {/if}
+  
 
   <!--Search Results -->
   {#if form?.products?.length > 0}

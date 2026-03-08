@@ -39,6 +39,23 @@
 
   $: availableLocales = locales?.length ? locales : ['en'];
   $: currentHref = `${$page.url.pathname}${$page.url.search}${$page.url.hash}`;
+  let navHidden = false;
+  let hovered = false;
+  let lastScrollY = 0;
+
+  onMount(() => {
+    const handleScroll = () => {
+      const y = window.scrollY || 0;
+      if (y > lastScrollY && y > 40) {
+        navHidden = true;
+      } else {
+        navHidden = false;
+      }
+      lastScrollY = y;
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  });
 
   function handleLocaleClick(e, code) {
     // allow modified clicks (open in new tab / window) and non-left clicks
@@ -58,22 +75,28 @@
   }
 </script>
 
-<nav class="w-full sticky top-0 z-50 bg-gray-900/90 backdrop-blur border-b border-white/10 shadow-sm">
-  <div class="max-w-7xl mx-auto flex items-center justify-between gap-4 px-6 py-3 text-white">
-    <div class="flex items-center gap-8">
-      <a href="/" class="text-2xl font-bold tracking-tight text-white hover:text-indigo-400 flex-shrink-0">
-        Inkspire
-      </a>
-
-      <div class="hidden md:flex items-center gap-6 text-sm font-medium">
-        <a href="/" class="text-gray-300 hover:text-white">{m.nav_home()}</a>
-        <a href="/categories" class="text-gray-300 hover:text-white">{m.nav_shop()}</a>
-        <a href="/contact" class="text-gray-300 hover:text-white">{m.nav_contact()}</a>
-        <a href="/about" class="text-gray-300 hover:text-white">{m.nav_about()}</a>
-      </div>
+<nav
+  class={`w-full fixed top-0 z-50 transition-all duration-300 ${
+    navHidden ? '-translate-y-full' : 'translate-y-0'
+  } ${hovered ? 'bg-gray-900/90 shadow-sm backdrop-blur' : 'bg-transparent'}`}
+  onmouseenter={() => (hovered = true)}
+  onmouseleave={() => (hovered = false)}
+>
+  <div class="max-w-7xl mx-auto grid grid-cols-3 items-center gap-4 px-6 py-3 text-white">
+    <div class="flex items-center gap-6 text-sm font-medium justify-start">
+      <a href="/" class="text-gray-300 hover:text-white hidden md:inline">{m.nav_home()}</a>
+      <a href="/categories" class="text-gray-300 hover:text-white hidden md:inline">{m.nav_shop()}</a>
+      <a href="/contact" class="text-gray-300 hover:text-white hidden lg:inline">{m.nav_contact()}</a>
+      <a href="/about" class="text-gray-300 hover:text-white hidden lg:inline">{m.nav_about()}</a>
     </div>
 
-    <div class="flex items-center gap-2 md:gap-3 flex-shrink-0">
+    <div class="flex justify-center">
+      <a href="/" class="text-2xl font-semibold tracking-tight text-white hover:text-indigo-300">
+        Inkspire
+      </a>
+    </div>
+
+    <div class="flex items-center gap-2 md:gap-3 flex-shrink-0 justify-end">
       <div class="hidden sm:flex items-center gap-1 rounded-full bg-white/5 border border-white/10 px-2 py-1 text-[11px] uppercase tracking-wide text-gray-300">
         <Globe class="h-4 w-4 text-gray-400" aria-hidden="true" />
         {#each availableLocales as code}
