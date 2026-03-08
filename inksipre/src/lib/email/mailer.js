@@ -30,6 +30,12 @@ const buildTransporter = () => {
 };
 
 const transporter = buildTransporter();
+const ensureTransport = () => {
+  if (!transporter) {
+    throw new Error('SMTP transport is not configured');
+  }
+  return transporter;
+};
 
 const csvEscape = (value) => {
   if (value === null || value === undefined) return '';
@@ -55,9 +61,7 @@ export const sendPrinterEmail = async ({
   if (!PRINTER_EMAIL) {
     throw new Error('PRINTER_EMAIL is not configured');
   }
-  if (!transporter) {
-    throw new Error('SMTP transport is not configured');
-  }
+  const mailer = ensureTransport();
 
   const headers = [
     'order_id',
@@ -168,12 +172,66 @@ export const sendPrinterEmail = async ({
     variant?.sku ?? variant?.id ?? 'variant'
   })`;
 
-  await transporter.sendMail({
+  await mailer.sendMail({
     from: MAIL_FROM || SMTP_USER,
     to: PRINTER_EMAIL,
     replyTo: MAIL_REPLY_TO || user?.email || undefined,
     subject,
     text: bodyLines.join('\n'),
     attachments
+  });
+};
+
+export const sendCustomerOrderEmail = async ({ order, user, shippingAddress, items = [] }) => {
+  const customerEmail = user?.email?.trim?.();
+  if (!customerEmail) {
+    throw new Error('Customer email is missing');
+  }
+  const mailer = ensureTransport();
+
+  const lineItems = (items || []).map((item, idx) => {
+    const name = item?.product_name || item?.name || `Item ${idx + 1}`;
+    const qty = Number(item?.quantity || 1);
+    const unit = Number(item?.unit_price || 0);
+    const lineTotal = (qty * unit).toFixed(2);
+    return `- ${name} x${qty} @ ${unit.toFixed(2)} = ${lineTotal}`;
+  });
+
+  const shippingLine = [
+    shippingAddress?.line1,
+    shippingAddress?.line2,
+    shippingAddress?.city,
+    shippingAddress?.region,
+    shippingAddress?.postal_code,
+    shippingAddress?.country
+  ]
+    .filter(Boolean)
+    .join(', ');
+
+  const subject = `Order Confirmation #${order?.id ?? 'N/A'} - Inkspire`;
+  const bodyLines = [
+    `Hi ${shippingAddress?.full_name || user?.full_name || 'there'},`,
+    '',
+    'Thanks for your order. Payment was confirmed and your order is now in production.',
+    '',
+    `Order ID: ${order?.id ?? 'N/A'}`,
+    `Order total: ${Number(order?.total_price || 0).toFixed(2)}`,
+    '',
+    'Items:',
+    ...(lineItems.length ? lineItems : ['- No items found']),
+    '',
+    'Shipping address:',
+    shippingLine || 'Not available',
+    '',
+    'Best regards,',
+    'Inkspire Team'
+  ];
+
+  await mailer.sendMail({
+    from: MAIL_FROM || SMTP_USER,
+    to: customerEmail,
+    replyTo: MAIL_REPLY_TO || undefined,
+    subject,
+    text: bodyLines.join('\n')
   });
 };
