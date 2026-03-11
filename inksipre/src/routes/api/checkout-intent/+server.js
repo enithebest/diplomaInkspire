@@ -4,6 +4,7 @@ import { json, redirect } from '@sveltejs/kit';
 import { createConnection } from '$lib/db/mysql.js';
 import { calculateShippingFee } from '$lib/shipping.js';
 
+
 const findOrCreateAddress = async (conn, userId, address) => {
   const [existing] = await conn.query(
     `
@@ -106,6 +107,7 @@ export const POST = async ({ request, locals }) => {
     const name = (item.name || 'Item').toString().slice(0, 100);
     const productId = Number(item.product_id ?? item.productId);
     const variantId = Number(item.variant_id ?? item.variantId);
+    const uploadId = Number(item.upload_id ?? item.uploadId);
 
     if (!Number.isFinite(price) || price <= 0 || qty <= 0) {
       continue;
@@ -125,6 +127,7 @@ export const POST = async ({ request, locals }) => {
     rawItems.push({
       product_id: productId,
       variant_id: Number.isFinite(variantId) && variantId > 0 ? variantId : null,
+      upload_id: Number.isFinite(uploadId) && uploadId > 0 ? uploadId : null,
       quantity: Math.round(qty),
       unit_price: price
     });
@@ -170,8 +173,8 @@ export const POST = async ({ request, locals }) => {
 
     for (const it of rawItems) {
       await conn.query(
-        'INSERT INTO order_items (order_id, product_id, variant_id, upload_id, quantity, unit_price) VALUES (?, ?, ?, NULL, ?, ?)',
-        [orderId, it.product_id, it.variant_id, it.quantity, it.unit_price]
+        'INSERT INTO order_items (order_id, product_id, variant_id, upload_id, quantity, unit_price) VALUES (?, ?, ?, ?, ?, ?)',
+        [orderId, it.product_id, it.variant_id, it.upload_id, it.quantity, it.unit_price]
       );
     }
 

@@ -258,6 +258,7 @@
         return;
       }
 
+    // Otherwise create a new intent and mount the payment element
       const formData = new FormData(event.currentTarget);
       formData.append('cart', JSON.stringify(cart));
       formData.append('shipping_amount', shipping.amount.toString());
@@ -478,3 +479,5 @@
   </div>
 </section>
 </div>
+
+

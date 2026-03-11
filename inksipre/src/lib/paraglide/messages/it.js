@@ -1043,7 +1043,7 @@ export const about_team_chip = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const about_team_body = /** @type {(inputs: {}) => string} */ () => {
-	return `Aggiungi una foto del team o un breve messaggio del founder per mostrare i volti dietro le macchine. Mantienilo autentico.`
+	return `Il team dietro Inkspire: le persone che rendono possibile ogni drop.`
 };
 
 export const about_team_quote = /** @type {(inputs: {}) => string} */ () => {
@@ -1051,7 +1051,27 @@ export const about_team_quote = /** @type {(inputs: {}) => string} */ () => {
 };
 
 export const about_team_note = /** @type {(inputs: {}) => string} */ () => {
-	return `Inserisci qui il testo del founder o un breve riferimento audio/video.`
+	return `Focus sul team`
+};
+
+export const about_team_role_lead = /** @type {(inputs: {}) => string} */ () => {
+	return `Team lead`
+};
+
+export const about_team_role_member = /** @type {(inputs: {}) => string} */ () => {
+	return `Membro del team`
+};
+
+export const about_team_tag_print = /** @type {(inputs: {}) => string} */ () => {
+	return `Stampa & Design`
+};
+
+export const about_team_tag_sourcing = /** @type {(inputs: {}) => string} */ () => {
+	return `Sourcing`
+};
+
+export const about_team_tag_qa = /** @type {(inputs: {}) => string} */ () => {
+	return `Qualita`
 };
 
 export const about_shipping_heading = /** @type {(inputs: {}) => string} */ () => {

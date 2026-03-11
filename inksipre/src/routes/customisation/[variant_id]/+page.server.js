@@ -83,12 +83,12 @@ export const actions = {
     });
 
     // Store the uploaded file URL in the DB and link to variant
-    await query('INSERT INTO uploads (user_id, customisation_id, image_url) VALUES (?, NULL, ?)', [
+    const uploadResult = await query('INSERT INTO uploads (user_id, customisation_id, image_url) VALUES (?, NULL, ?)', [
       user.id,
       blob.url
     ]);
 
-    return { success: true, imageUrl: blob.url };
+    return { success: true, imageUrl: blob.url, uploadId: uploadResult?.insertId ?? null };
   },
 
   order: async ({ request, locals, params }) => {
@@ -98,7 +98,20 @@ export const actions = {
 
     const { variant_id } = params;
     const variantRows = await query('SELECT * FROM product_variants WHERE id = ?', [variant_id]);
-    const variant = variantRows?.[0] || null;
+    const variantRaw = variantRows?.[0] || null;
+    const variant = (() => {
+      if (!variantRaw) return null;
+      if (!variantRaw.option_values) return variantRaw;
+      try {
+        const opts =
+          typeof variantRaw.option_values === 'string'
+            ? JSON.parse(variantRaw.option_values)
+            : variantRaw.option_values;
+        return { ...variantRaw, color: opts?.color ?? null, size: opts?.size ?? null };
+      } catch {
+        return variantRaw;
+      }
+    })();
     if (!variant) {
       return fail(404, { orderError: m.custom_order_error_variant({}, { locale }) });
     }
@@ -116,6 +129,8 @@ export const actions = {
     const scale = Number(form.get('scale') || 1);
     const position_x = Number(form.get('position_x') || 0);
     const position_y = Number(form.get('position_y') || 0);
+    let renderBuffer = null;
+    let renderContentType = 'image/png';
 
     if (!designData && !designUrl) {
       return fail(400, { orderError: m.custom_order_error_design_required({}, { locale }) });
@@ -130,17 +145,17 @@ export const actions = {
         }
 
         const mimeMatch = designData.match(/^data:(.*?);base64,/);
-        const contentType = mimeMatch?.[1] || 'image/png';
-        const buffer = Buffer.from(base64, 'base64');
+        renderContentType = mimeMatch?.[1] || 'image/png';
+        renderBuffer = Buffer.from(base64, 'base64');
 
-        if (buffer.length > 8_000_000) {
+        if (renderBuffer.length > 8_000_000) {
           return fail(400, { orderError: m.custom_order_error_design_too_large({}, { locale }) });
         }
 
         const filename = `${user.id}-${variant_id}-${Date.now()}-design.png`;
-        const blob = await put(filename, buffer, {
+        const blob = await put(filename, renderBuffer, {
           access: 'public',
-          contentType,
+          contentType: renderContentType,
           token: BLOB_READ_WRITE_TOKEN
         });
         designUrl = blob.url;
@@ -197,7 +212,14 @@ export const actions = {
 
       await conn.commit();
 
-      return { orderSuccess: true, orderId };
+      return {
+        orderSuccess: true,
+        orderId,
+        orderItemId,
+        customisationId,
+        uploadId,
+        designUrl
+      };
     } catch (err) {
       if (err?.status && err.status >= 300 && err.status < 400) {
         // Allow redirects to bubble up without showing a failure state

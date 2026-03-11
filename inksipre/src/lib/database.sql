@@ -79,8 +79,10 @@ CREATE TABLE IF NOT EXISTS orders (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
   total_price DECIMAL(10,2) DEFAULT 0.00,
-  status ENUM('pending', 'paid', 'shipped') DEFAULT 'pending',
+  status ENUM('pending', 'processing', 'paid', 'failed', 'shipped') DEFAULT 'pending',
   shipping_address_id INT NULL,
+  customer_email_sent_at TIMESTAMP NULL DEFAULT NULL,
+  customer_email_last_error VARCHAR(1000) NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (shipping_address_id) REFERENCES addresses(id) ON DELETE SET NULL
@@ -95,6 +97,8 @@ CREATE TABLE IF NOT EXISTS order_items (
   upload_id INT NULL,
   quantity INT DEFAULT 1,
   unit_price DECIMAL(10,2) DEFAULT 0.00,
+  printer_email_sent_at TIMESTAMP NULL DEFAULT NULL,
+  printer_email_last_error VARCHAR(1000) NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
   FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
@@ -135,5 +139,6 @@ CREATE TABLE IF NOT EXISTS product_ratings (
   FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 );
+
 
 

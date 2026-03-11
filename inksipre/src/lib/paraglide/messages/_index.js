@@ -6065,6 +6065,121 @@ export const about_team_note = (inputs = {}, options = {}) => {
 * @returns {string}
 */
 /* @__NO_SIDE_EFFECTS__ */
+export const about_team_role_lead = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.about_team_role_lead(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("about_team_role_lead", locale)
+	if (locale === "en") return en.about_team_role_lead(inputs)
+	if (locale === "de") return de.about_team_role_lead(inputs)
+	return it.about_team_role_lead(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const about_team_role_member = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.about_team_role_member(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("about_team_role_member", locale)
+	if (locale === "en") return en.about_team_role_member(inputs)
+	if (locale === "de") return de.about_team_role_member(inputs)
+	return it.about_team_role_member(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const about_team_tag_print = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.about_team_tag_print(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("about_team_tag_print", locale)
+	if (locale === "en") return en.about_team_tag_print(inputs)
+	if (locale === "de") return de.about_team_tag_print(inputs)
+	return it.about_team_tag_print(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const about_team_tag_sourcing = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.about_team_tag_sourcing(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("about_team_tag_sourcing", locale)
+	if (locale === "en") return en.about_team_tag_sourcing(inputs)
+	if (locale === "de") return de.about_team_tag_sourcing(inputs)
+	return it.about_team_tag_sourcing(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const about_team_tag_qa = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.about_team_tag_qa(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("about_team_tag_qa", locale)
+	if (locale === "en") return en.about_team_tag_qa(inputs)
+	if (locale === "de") return de.about_team_tag_qa(inputs)
+	return it.about_team_tag_qa(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 export const about_shipping_heading = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.about_shipping_heading(inputs) 
