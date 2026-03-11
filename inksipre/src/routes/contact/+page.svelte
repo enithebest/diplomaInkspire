@@ -1,6 +1,7 @@
 <script>
 	import { enhance } from '$app/forms';
 	import * as m from '$lib/paraglide/messages/_index.js';
+	import { theme } from '$lib/stores/theme';
 	export let form = {};
 
 	const prefixes = [
@@ -25,7 +26,6 @@
 	let messageValue = '';
 	let selectedPrefix = prefixes[0].code;
 
-
 	$: if (form?.values) {
 		nameValue = form.values.name ?? '';
 		emailValue = form.values.email ?? '';
@@ -42,20 +42,27 @@
 		selectedPrefix = prefixes[0].code;
 	}
 
+	$: isLight = $theme === 'light';
 </script>
 
-<section class="relative min-h-screen bg-gradient-to-b from-[#0b0b20] via-[#111132] to-[#0b0b20] text-white px-4 sm:px-6 lg:px-10 pt-16 pb-32">
+<section
+	class={`relative min-h-screen px-4 pt-16 pb-32 sm:px-6 lg:px-10 ${isLight ? 'bg-gradient-to-b from-[#fbf7f1] via-[#f4efe7] to-[#efe7db] text-slate-900' : 'bg-gradient-to-b from-[#0b0b20] via-[#111132] to-[#0b0b20] text-white'}`}
+>
+	<div
+		class="pointer-events-none absolute -top-32 left-1/2 h-[900px] w-[900px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-3xl"
+	></div>
+	<div
+		class="pointer-events-none absolute right-1/4 -bottom-48 h-[700px] w-[700px] rounded-full bg-purple-600/20 blur-3xl"
+	></div>
 
-	<div class="pointer-events-none absolute -top-32 left-1/2 w-[900px] h-[900px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-3xl"></div>
-	<div class="pointer-events-none absolute -bottom-48 right-1/4 w-[700px] h-[700px] rounded-full bg-purple-600/20 blur-3xl"></div>
-
-	<div class="relative z-10 mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
-		<div class="order-2 lg:order-1 space-y-10">
+	<div
+		class="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16"
+	>
+		<div class="order-2 space-y-10 lg:order-1">
 			<header class="space-y-4">
-				<p class="text-sm uppercase tracking-[0.3em] text-indigo-300/80">{m.contact_badge()}</p>
-				<h1 class="text-4xl sm:text-5xl font-bold leading-tight">{m.contact_title()}</h1>
-				<p class="text-gray-300 text-lg">{m.contact_subtitle()}</p>
+				<p class="text-sm tracking-[0.3em] text-indigo-300/80 uppercase">{m.contact_badge()}</p>
+				<h1 class="text-4xl leading-tight font-bold sm:text-5xl">{m.contact_title()}</h1>
+				<p class="text-lg text-gray-300">{m.contact_subtitle()}</p>
 			</header>
 
 			<div class="space-y-5">
@@ -95,52 +102,72 @@
 				></iframe>
 			</div>
 
-			<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+			<div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
 				{#each features as item}
 					<div class="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
 						<h3 class="text-lg font-semibold text-indigo-200">{item.title()}</h3>
-						<p class="mt-1 text-gray-300 text-sm">{item.desc()}</p>
+						<p class="mt-1 text-sm text-gray-300">{item.desc()}</p>
 					</div>
 				{/each}
 			</div>
 		</div>
 
-		<div class="order-1 lg:order-2 w-full lg:pl-6">
-			<div class="mx-auto w-full max-w-2xl lg:mx-auto lg:max-w-none lg:w-[640px]">
-
+		<div class="order-1 w-full lg:order-2 lg:pl-6">
+			<div class="mx-auto w-full max-w-2xl lg:mx-auto lg:w-[640px] lg:max-w-none">
 				<div class="relative">
-
-					<div class="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl 
-								space-y-8 flex flex-col">
-
+					<div
+						class="flex flex-col space-y-8 rounded-3xl border border-white/10 bg-white/10 p-8
+								shadow-2xl backdrop-blur-xl sm:p-10"
+					>
 						<div class="space-y-2">
 							<h2 class="text-4xl font-semibold">{m.contact_form_title()}</h2>
 							<p class="text-sm text-gray-300">{m.contact_form_subtitle()}</p>
 						</div>
 
 						<form method="POST" action="?/send" use:enhance class="flex flex-col gap-5">
-
 							<div>
-								<label class="text-sm font-medium text-gray-300" for="contact-name">{m.contact_form_name_label()}</label>
-								<input id="contact-name" type="text" name="name" bind:value={nameValue} required minlength="2"
-									class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 
-									       placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+								<label class="text-sm font-medium text-gray-300" for="contact-name"
+									>{m.contact_form_name_label()}</label
+								>
+								<input
+									id="contact-name"
+									type="text"
+									name="name"
+									bind:value={nameValue}
+									required
+									minlength="2"
+									class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100
+									       placeholder-gray-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+								/>
 							</div>
 
 							<div>
-								<label class="text-sm font-medium text-gray-300" for="contact-email">{m.contact_form_email_label()}</label>
-								<input id="contact-email" type="email" name="email" bind:value={emailValue} required
-									class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 
-									       placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+								<label class="text-sm font-medium text-gray-300" for="contact-email"
+									>{m.contact_form_email_label()}</label
+								>
+								<input
+									id="contact-email"
+									type="email"
+									name="email"
+									bind:value={emailValue}
+									required
+									class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100
+									       placeholder-gray-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+								/>
 							</div>
 
 							<div>
-								<label class="text-sm font-medium text-gray-300" for="contact-phone">{m.contact_form_phone_label()}</label>
+								<label class="text-sm font-medium text-gray-300" for="contact-phone"
+									>{m.contact_form_phone_label()}</label
+								>
 								<div class="mt-1 flex flex-col gap-3 sm:flex-row">
-
-									<select name="prefix" bind:value={selectedPrefix} required
-										class="rounded-xl border border-white/10 bg-[#4F46E5] text-white px-4 py-3 
-											   focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 sm:w-40">
+									<select
+										name="prefix"
+										bind:value={selectedPrefix}
+										required
+										class="rounded-xl border border-white/10 bg-[#4F46E5] px-4 py-3 text-white
+											   focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400 focus:outline-none sm:w-40"
+									>
 										{#each prefixes as option}
 											<option value={option.code}>
 												{option.code} - {option.country()}
@@ -148,16 +175,25 @@
 										{/each}
 									</select>
 
-									<input id="contact-phone" type="tel" name="phone" bind:value={phoneValue} required minlength="6"
-										class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 
-										       placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+									<input
+										id="contact-phone"
+										type="tel"
+										name="phone"
+										bind:value={phoneValue}
+										required
+										minlength="6"
+										class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100
+										       placeholder-gray-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+									/>
 								</div>
 
-								<p class="text-xs text-gray-400 mt-1">{m.contact_form_phone_hint()}</p>
+								<p class="mt-1 text-xs text-gray-400">{m.contact_form_phone_hint()}</p>
 							</div>
 
 							<div>
-								<label class="text-sm font-medium text-gray-300" for="contact-message">{m.contact_form_message_label()}</label>
+								<label class="text-sm font-medium text-gray-300" for="contact-message"
+									>{m.contact_form_message_label()}</label
+								>
 
 								<textarea
 									id="contact-message"
@@ -167,16 +203,17 @@
 									required
 									minlength="10"
 									maxlength="1500"
-									class="mt-1 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-gray-100 
-										   placeholder-gray-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 
-										   overflow-hidden min-h-[180px]"
+									class="mt-1 min-h-[180px] w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5 px-4
+										   py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:ring-2
+										   focus:ring-indigo-400 focus:outline-none"
 								></textarea>
 							</div>
 
 							<div class="space-y-3">
-								<button type="submit"
-									class="w-full rounded-xl bg-[#4F46E5] py-3 text-lg font-semibold text-white 
-									       shadow-lg shadow-[#4F46E5]/30 hover:bg-[#6366F1]">
+								<button
+									type="submit"
+									class={`w-full rounded-xl py-3 text-lg font-semibold text-white shadow-lg transition ${isLight ? 'bg-amber-500 shadow-amber-500/30 hover:bg-amber-400' : 'bg-[#4F46E5] shadow-[#4F46E5]/30 hover:bg-[#6366F1]'}`}
+								>
 									{m.contact_form_submit()}
 								</button>
 
@@ -186,15 +223,10 @@
 									<p class="text-center text-sm text-rose-300">{form.error}</p>
 								{/if}
 							</div>
-
 						</form>
-
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
 </section>
-
-
