@@ -1550,6 +1550,46 @@ export const contact_form_message_placeholder = /** @type {(inputs: {}) => strin
 	return `Tell us about your project or question...`
 };
 
+export const contact_form_attachment_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Upload file`
+};
+
+export const contact_form_attachment_optional = /** @type {(inputs: {}) => string} */ () => {
+	return `Optional`
+};
+
+export const contact_form_attachment_cta = /** @type {(inputs: {}) => string} */ () => {
+	return `Choose an image or reference file`
+};
+
+export const contact_form_attachment_hint = /** @type {(inputs: {}) => string} */ () => {
+	return `PNG, JPG, or WEBP. Great for mockups, screenshots, or print references.`
+};
+
+export const contact_form_attachment_selected = /** @type {(inputs: { file: NonNullable<unknown> }) => string} */ (i) => {
+	return `Selected file: ${i.file}`
+};
+
+export const contact_form_attachment_guidelines_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Upload guidelines`
+};
+
+export const contact_form_attachment_guideline_formats = /** @type {(inputs: {}) => string} */ () => {
+	return `Allowed formats: PNG, JPG, JPEG, WEBP.`
+};
+
+export const contact_form_attachment_guideline_size = /** @type {(inputs: {}) => string} */ () => {
+	return `Maximum file size: 5 MB.`
+};
+
+export const contact_form_attachment_guideline_quality = /** @type {(inputs: {}) => string} */ () => {
+	return `Please upload a clear image with readable details.`
+};
+
+export const contact_form_attachment_guideline_privacy = /** @type {(inputs: {}) => string} */ () => {
+	return `Do not include sensitive data. Uploads are used only to process your request.`
+};
+
 export const contact_form_submit = /** @type {(inputs: {}) => string} */ () => {
 	return `Send Message`
 };
@@ -1576,6 +1616,14 @@ export const contact_form_error_phone = /** @type {(inputs: {}) => string} */ ()
 
 export const contact_form_error_message = /** @type {(inputs: {}) => string} */ () => {
 	return `Please add a short message (min. 10 characters).`
+};
+
+export const contact_form_error_attachment_type = /** @type {(inputs: {}) => string} */ () => {
+	return `Invalid file. Please upload PNG, JPG, or WEBP.`
+};
+
+export const contact_form_error_attachment_size = /** @type {(inputs: {}) => string} */ () => {
+	return `The file is too large. Maximum size is 5 MB.`
 };
 
 export const contact_form_error_send = /** @type {(inputs: {}) => string} */ () => {

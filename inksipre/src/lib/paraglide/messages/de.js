@@ -1550,6 +1550,46 @@ export const contact_form_message_placeholder = /** @type {(inputs: {}) => strin
 	return `Erzählen Sie uns von Ihrem Projekt oder Ihrer Frage...`
 };
 
+export const contact_form_attachment_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Datei hochladen`
+};
+
+export const contact_form_attachment_optional = /** @type {(inputs: {}) => string} */ () => {
+	return `Optional`
+};
+
+export const contact_form_attachment_cta = /** @type {(inputs: {}) => string} */ () => {
+	return `Bild oder Referenzdatei auswählen`
+};
+
+export const contact_form_attachment_hint = /** @type {(inputs: {}) => string} */ () => {
+	return `PNG, JPG oder WEBP. Ideal für Mockups, Screenshots oder Druckreferenzen.`
+};
+
+export const contact_form_attachment_selected = /** @type {(inputs: { file: NonNullable<unknown> }) => string} */ (i) => {
+	return `Ausgewählte Datei: ${i.file}`
+};
+
+export const contact_form_attachment_guidelines_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Upload-Richtlinien`
+};
+
+export const contact_form_attachment_guideline_formats = /** @type {(inputs: {}) => string} */ () => {
+	return `Erlaubte Formate: PNG, JPG, JPEG, WEBP.`
+};
+
+export const contact_form_attachment_guideline_size = /** @type {(inputs: {}) => string} */ () => {
+	return `Maximale Dateigröße: 5 MB.`
+};
+
+export const contact_form_attachment_guideline_quality = /** @type {(inputs: {}) => string} */ () => {
+	return `Bitte gut lesbare Bilder mit klaren Details hochladen.`
+};
+
+export const contact_form_attachment_guideline_privacy = /** @type {(inputs: {}) => string} */ () => {
+	return `Keine sensiblen Daten einbetten. Uploads werden nur zur Bearbeitung Ihrer Anfrage verwendet.`
+};
+
 export const contact_form_submit = /** @type {(inputs: {}) => string} */ () => {
 	return `Nachricht senden`
 };
@@ -1576,6 +1616,14 @@ export const contact_form_error_phone = /** @type {(inputs: {}) => string} */ ()
 
 export const contact_form_error_message = /** @type {(inputs: {}) => string} */ () => {
 	return `Bitte fügen Sie eine kurze Nachricht hinzu (mind. 10 Zeichen).`
+};
+
+export const contact_form_error_attachment_type = /** @type {(inputs: {}) => string} */ () => {
+	return `Ungültige Datei. Bitte laden Sie PNG, JPG oder WEBP hoch.`
+};
+
+export const contact_form_error_attachment_size = /** @type {(inputs: {}) => string} */ () => {
+	return `Die Datei ist zu groß. Maximal 5 MB sind erlaubt.`
 };
 
 export const contact_form_error_send = /** @type {(inputs: {}) => string} */ () => {

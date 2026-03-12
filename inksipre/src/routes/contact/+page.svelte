@@ -1,17 +1,12 @@
 <script>
 	import { enhance } from '$app/forms';
 	import * as m from '$lib/paraglide/messages/_index.js';
+	import { phoneCountryFallback } from '$lib/data/phoneCountryFallback.js';
 	import { theme } from '$lib/stores/theme';
+	export let data = {};
 	export let form = {};
 
-	const prefixes = [
-		{ code: '+43', country: m.contact_country_austria },
-		{ code: '+49', country: m.contact_country_germany },
-		{ code: '+41', country: m.contact_country_switzerland },
-		{ code: '+355', country: m.contact_country_albania },
-		{ code: '+39', country: m.contact_country_italy },
-		{ code: '+44', country: m.contact_country_uk }
-	];
+	let prefixes = data.phoneCountries?.length ? data.phoneCountries : phoneCountryFallback;
 
 	const features = [
 		{ title: m.contact_feature_fast_title, desc: m.contact_feature_fast_desc },
@@ -24,14 +19,15 @@
 	let emailValue = '';
 	let phoneValue = '';
 	let messageValue = '';
-	let selectedPrefix = prefixes[0].code;
+	let selectedPrefix = phoneCountryFallback[0].code;
+	let selectedAttachmentName = '';
 
 	$: if (form?.values) {
 		nameValue = form.values.name ?? '';
 		emailValue = form.values.email ?? '';
 		phoneValue = form.values.phone ?? '';
 		messageValue = form.values.message ?? '';
-		selectedPrefix = form.values.prefix ?? prefixes[0].code;
+		selectedPrefix = form.values.prefix ?? phoneCountryFallback[0].code;
 	}
 
 	$: if (form?.success) {
@@ -39,10 +35,18 @@
 		emailValue = '';
 		phoneValue = '';
 		messageValue = '';
-		selectedPrefix = prefixes[0].code;
+		selectedPrefix = phoneCountryFallback[0].code;
+		selectedAttachmentName = '';
 	}
 
 	$: isLight = $theme === 'light';
+
+	$: if (data.phoneCountries?.length) {
+		prefixes = data.phoneCountries;
+		if (!prefixes.some((option) => option.code === selectedPrefix)) {
+			selectedPrefix = prefixes[0].code;
+		}
+	}
 </script>
 
 <section
@@ -103,7 +107,7 @@
 			</div>
 
 			<div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
-				{#each features as item}
+				{#each features as item, index (index)}
 					<div class="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
 						<h3 class="text-lg font-semibold text-indigo-200">{item.title()}</h3>
 						<p class="mt-1 text-sm text-gray-300">{item.desc()}</p>
@@ -124,7 +128,13 @@
 							<p class="text-sm text-gray-300">{m.contact_form_subtitle()}</p>
 						</div>
 
-						<form method="POST" action="?/send" use:enhance class="flex flex-col gap-5">
+						<form
+							method="POST"
+							action="?/send"
+							enctype="multipart/form-data"
+							use:enhance
+							class="flex flex-col gap-5"
+						>
 							<div>
 								<label class="text-sm font-medium text-gray-300" for="contact-name"
 									>{m.contact_form_name_label()}</label
@@ -168,9 +178,9 @@
 										class="rounded-xl border border-white/10 bg-[#4F46E5] px-4 py-3 text-white
 											   focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400 focus:outline-none sm:w-40"
 									>
-										{#each prefixes as option}
+										{#each prefixes as option (option.code)}
 											<option value={option.code}>
-												{option.code} - {option.country()}
+												{option.code} - {option.country}
 											</option>
 										{/each}
 									</select>
@@ -207,6 +217,75 @@
 										   py-3 text-gray-100 placeholder-gray-400 focus:border-indigo-400 focus:ring-2
 										   focus:ring-indigo-400 focus:outline-none"
 								></textarea>
+							</div>
+
+							<div class="group relative">
+								<div class="mb-2 flex items-center justify-between gap-3">
+									<label class="text-sm font-medium text-gray-300" for="contact-attachment"
+										>{m.contact_form_attachment_label()}</label
+									>
+									<span
+										class={`rounded-full px-3 py-1 text-[11px] font-medium ${
+											isLight ? 'bg-amber-100 text-amber-700' : 'bg-indigo-500/15 text-indigo-200'
+										}`}
+									>
+										{m.contact_form_attachment_optional()}
+									</span>
+								</div>
+
+								<label
+									for="contact-attachment"
+									class={`relative block cursor-pointer overflow-hidden rounded-2xl border border-dashed p-5 transition ${
+										isLight
+											? 'border-stone-300 bg-white/70 hover:border-amber-400 hover:bg-amber-50/70'
+											: 'border-white/15 bg-white/5 hover:border-indigo-400 hover:bg-indigo-500/10'
+									}`}
+								>
+									<div class="space-y-2">
+										<p class={`text-sm font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>
+											{m.contact_form_attachment_cta()}
+										</p>
+										<p class={`text-xs ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+											{#if selectedAttachmentName}
+												{m.contact_form_attachment_selected({ file: selectedAttachmentName })}
+											{:else}
+												{m.contact_form_attachment_hint()}
+											{/if}
+										</p>
+									</div>
+
+									<input
+										id="contact-attachment"
+										type="file"
+										name="attachment"
+										accept="image/png,image/jpeg,image/webp"
+										class="sr-only"
+										onchange={(event) => {
+											const file = event.currentTarget?.files?.[0];
+											selectedAttachmentName = file?.name ?? '';
+										}}
+									/>
+								</label>
+
+								<div
+									class={`pointer-events-none absolute top-full right-0 z-20 mt-3 hidden w-full max-w-sm rounded-2xl border p-4 text-xs shadow-xl group-hover:block ${
+										isLight
+											? 'border-stone-200 bg-white text-slate-700'
+											: 'border-white/10 bg-gray-950 text-gray-200'
+									}`}
+								>
+									<p
+										class={`mb-2 text-sm font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}
+									>
+										{m.contact_form_attachment_guidelines_title()}
+									</p>
+									<ul class="space-y-1.5">
+										<li>{m.contact_form_attachment_guideline_formats()}</li>
+										<li>{m.contact_form_attachment_guideline_size()}</li>
+										<li>{m.contact_form_attachment_guideline_quality()}</li>
+										<li>{m.contact_form_attachment_guideline_privacy()}</li>
+									</ul>
+								</div>
 							</div>
 
 							<div class="space-y-3">
