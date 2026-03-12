@@ -505,6 +505,78 @@ export const categories_results_title = /** @type {(inputs: {}) => string} */ ()
 	return `Search Results`
 };
 
+export const categories_filter_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Combine modern shop filters for color, category, and price.`
+};
+
+export const categories_filter_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Switch between light and dark mode and refine the collection live with polished controls.`
+};
+
+export const categories_filter_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Filters`
+};
+
+export const categories_filter_helper = /** @type {(inputs: {}) => string} */ () => {
+	return `You can combine multiple options at the same time.`
+};
+
+export const categories_filter_live_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Visible products`
+};
+
+export const categories_filter_active_count = /** @type {(inputs: { count: NonNullable<unknown> }) => string} */ (i) => {
+	return `${i.count} active filters`
+};
+
+export const categories_filter_price_cap = /** @type {(inputs: {}) => string} */ () => {
+	return `Maximum price`
+};
+
+export const categories_filter_reset = /** @type {(inputs: {}) => string} */ () => {
+	return `Reset filters`
+};
+
+export const categories_filter_category = /** @type {(inputs: {}) => string} */ () => {
+	return `Categories`
+};
+
+export const categories_filter_color = /** @type {(inputs: {}) => string} */ () => {
+	return `Colors`
+};
+
+export const categories_filter_sort = /** @type {(inputs: {}) => string} */ () => {
+	return `Sort`
+};
+
+export const categories_filter_sort_featured = /** @type {(inputs: {}) => string} */ () => {
+	return `Featured`
+};
+
+export const categories_filter_sort_price_low = /** @type {(inputs: {}) => string} */ () => {
+	return `Price: low to high`
+};
+
+export const categories_filter_sort_price_high = /** @type {(inputs: {}) => string} */ () => {
+	return `Price: high to low`
+};
+
+export const categories_filter_results = /** @type {(inputs: {}) => string} */ () => {
+	return `Filtered products`
+};
+
+export const categories_filter_results_hint = /** @type {(inputs: {}) => string} */ () => {
+	return `Every card updates instantly based on your selection.`
+};
+
+export const categories_filter_empty_title = /** @type {(inputs: {}) => string} */ () => {
+	return `No products match this selection`
+};
+
+export const categories_filter_empty_copy = /** @type {(inputs: {}) => string} */ () => {
+	return `Adjust color, category, or price to see results again.`
+};
+
 export const categories_view_product = /** @type {(inputs: {}) => string} */ () => {
 	return `View Product`
 };

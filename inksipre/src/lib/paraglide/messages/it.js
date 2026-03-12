@@ -505,6 +505,78 @@ export const categories_results_title = /** @type {(inputs: {}) => string} */ ()
 	return `Risultati di ricerca`
 };
 
+export const categories_filter_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Combina filtri moderni per colore, categoria e prezzo.`
+};
+
+export const categories_filter_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Passa tra modalita light e dark e aggiorna la collezione in tempo reale con controlli moderni.`
+};
+
+export const categories_filter_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Filtri`
+};
+
+export const categories_filter_helper = /** @type {(inputs: {}) => string} */ () => {
+	return `Puoi combinare piu opzioni nello stesso momento.`
+};
+
+export const categories_filter_live_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Prodotti visibili`
+};
+
+export const categories_filter_active_count = /** @type {(inputs: { count: NonNullable<unknown> }) => string} */ (i) => {
+	return `${i.count} filtri attivi`
+};
+
+export const categories_filter_price_cap = /** @type {(inputs: {}) => string} */ () => {
+	return `Prezzo massimo`
+};
+
+export const categories_filter_reset = /** @type {(inputs: {}) => string} */ () => {
+	return `Reimposta filtri`
+};
+
+export const categories_filter_category = /** @type {(inputs: {}) => string} */ () => {
+	return `Categorie`
+};
+
+export const categories_filter_color = /** @type {(inputs: {}) => string} */ () => {
+	return `Colori`
+};
+
+export const categories_filter_sort = /** @type {(inputs: {}) => string} */ () => {
+	return `Ordina`
+};
+
+export const categories_filter_sort_featured = /** @type {(inputs: {}) => string} */ () => {
+	return `In evidenza`
+};
+
+export const categories_filter_sort_price_low = /** @type {(inputs: {}) => string} */ () => {
+	return `Prezzo: crescente`
+};
+
+export const categories_filter_sort_price_high = /** @type {(inputs: {}) => string} */ () => {
+	return `Prezzo: decrescente`
+};
+
+export const categories_filter_results = /** @type {(inputs: {}) => string} */ () => {
+	return `Prodotti filtrati`
+};
+
+export const categories_filter_results_hint = /** @type {(inputs: {}) => string} */ () => {
+	return `Ogni scheda si aggiorna subito in base alla selezione.`
+};
+
+export const categories_filter_empty_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Nessun prodotto corrisponde ai filtri`
+};
+
+export const categories_filter_empty_copy = /** @type {(inputs: {}) => string} */ () => {
+	return `Modifica colore, categoria o prezzo per vedere di nuovo i risultati.`
+};
+
 export const categories_view_product = /** @type {(inputs: {}) => string} */ () => {
 	return `Vedi prodotto`
 };
