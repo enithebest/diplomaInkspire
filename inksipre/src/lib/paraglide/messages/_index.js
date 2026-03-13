@@ -2914,6 +2914,420 @@ export const categories_results_title = (inputs = {}, options = {}) => {
 * @returns {string}
 */
 /* @__NO_SIDE_EFFECTS__ */
+export const categories_filter_heading = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_filter_heading(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("categories_filter_heading", locale)
+	if (locale === "en") return en.categories_filter_heading(inputs)
+	if (locale === "de") return de.categories_filter_heading(inputs)
+	return it.categories_filter_heading(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const categories_filter_subtitle = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_filter_subtitle(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("categories_filter_subtitle", locale)
+	if (locale === "en") return en.categories_filter_subtitle(inputs)
+	if (locale === "de") return de.categories_filter_subtitle(inputs)
+	return it.categories_filter_subtitle(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const categories_filter_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_filter_title(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("categories_filter_title", locale)
+	if (locale === "en") return en.categories_filter_title(inputs)
+	if (locale === "de") return de.categories_filter_title(inputs)
+	return it.categories_filter_title(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const categories_filter_helper = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_filter_helper(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("categories_filter_helper", locale)
+	if (locale === "en") return en.categories_filter_helper(inputs)
+	if (locale === "de") return de.categories_filter_helper(inputs)
+	return it.categories_filter_helper(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const categories_filter_live_label = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_filter_live_label(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("categories_filter_live_label", locale)
+	if (locale === "en") return en.categories_filter_live_label(inputs)
+	if (locale === "de") return de.categories_filter_live_label(inputs)
+	return it.categories_filter_live_label(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{ count: NonNullable<unknown> }} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const categories_filter_active_count = (inputs, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_filter_active_count(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("categories_filter_active_count", locale)
+	if (locale === "en") return en.categories_filter_active_count(inputs)
+	if (locale === "de") return de.categories_filter_active_count(inputs)
+	return it.categories_filter_active_count(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const categories_filter_price_cap = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_filter_price_cap(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("categories_filter_price_cap", locale)
+	if (locale === "en") return en.categories_filter_price_cap(inputs)
+	if (locale === "de") return de.categories_filter_price_cap(inputs)
+	return it.categories_filter_price_cap(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const categories_filter_reset = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_filter_reset(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("categories_filter_reset", locale)
+	if (locale === "en") return en.categories_filter_reset(inputs)
+	if (locale === "de") return de.categories_filter_reset(inputs)
+	return it.categories_filter_reset(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const categories_filter_category = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_filter_category(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("categories_filter_category", locale)
+	if (locale === "en") return en.categories_filter_category(inputs)
+	if (locale === "de") return de.categories_filter_category(inputs)
+	return it.categories_filter_category(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const categories_filter_color = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_filter_color(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("categories_filter_color", locale)
+	if (locale === "en") return en.categories_filter_color(inputs)
+	if (locale === "de") return de.categories_filter_color(inputs)
+	return it.categories_filter_color(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const categories_filter_sort = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_filter_sort(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("categories_filter_sort", locale)
+	if (locale === "en") return en.categories_filter_sort(inputs)
+	if (locale === "de") return de.categories_filter_sort(inputs)
+	return it.categories_filter_sort(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const categories_filter_sort_featured = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_filter_sort_featured(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("categories_filter_sort_featured", locale)
+	if (locale === "en") return en.categories_filter_sort_featured(inputs)
+	if (locale === "de") return de.categories_filter_sort_featured(inputs)
+	return it.categories_filter_sort_featured(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const categories_filter_sort_price_low = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_filter_sort_price_low(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("categories_filter_sort_price_low", locale)
+	if (locale === "en") return en.categories_filter_sort_price_low(inputs)
+	if (locale === "de") return de.categories_filter_sort_price_low(inputs)
+	return it.categories_filter_sort_price_low(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const categories_filter_sort_price_high = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_filter_sort_price_high(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("categories_filter_sort_price_high", locale)
+	if (locale === "en") return en.categories_filter_sort_price_high(inputs)
+	if (locale === "de") return de.categories_filter_sort_price_high(inputs)
+	return it.categories_filter_sort_price_high(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const categories_filter_results = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_filter_results(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("categories_filter_results", locale)
+	if (locale === "en") return en.categories_filter_results(inputs)
+	if (locale === "de") return de.categories_filter_results(inputs)
+	return it.categories_filter_results(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const categories_filter_results_hint = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_filter_results_hint(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("categories_filter_results_hint", locale)
+	if (locale === "en") return en.categories_filter_results_hint(inputs)
+	if (locale === "de") return de.categories_filter_results_hint(inputs)
+	return it.categories_filter_results_hint(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const categories_filter_empty_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_filter_empty_title(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("categories_filter_empty_title", locale)
+	if (locale === "en") return en.categories_filter_empty_title(inputs)
+	if (locale === "de") return de.categories_filter_empty_title(inputs)
+	return it.categories_filter_empty_title(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const categories_filter_empty_copy = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_filter_empty_copy(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("categories_filter_empty_copy", locale)
+	if (locale === "en") return en.categories_filter_empty_copy(inputs)
+	if (locale === "de") return de.categories_filter_empty_copy(inputs)
+	return it.categories_filter_empty_copy(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 export const categories_view_product = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.categories_view_product(inputs) 
@@ -8503,6 +8917,236 @@ export const contact_form_message_placeholder = (inputs = {}, options = {}) => {
 * @returns {string}
 */
 /* @__NO_SIDE_EFFECTS__ */
+export const contact_form_attachment_label = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_form_attachment_label(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_form_attachment_label", locale)
+	if (locale === "en") return en.contact_form_attachment_label(inputs)
+	if (locale === "de") return de.contact_form_attachment_label(inputs)
+	return it.contact_form_attachment_label(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_form_attachment_optional = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_form_attachment_optional(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_form_attachment_optional", locale)
+	if (locale === "en") return en.contact_form_attachment_optional(inputs)
+	if (locale === "de") return de.contact_form_attachment_optional(inputs)
+	return it.contact_form_attachment_optional(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_form_attachment_cta = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_form_attachment_cta(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_form_attachment_cta", locale)
+	if (locale === "en") return en.contact_form_attachment_cta(inputs)
+	if (locale === "de") return de.contact_form_attachment_cta(inputs)
+	return it.contact_form_attachment_cta(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_form_attachment_hint = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_form_attachment_hint(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_form_attachment_hint", locale)
+	if (locale === "en") return en.contact_form_attachment_hint(inputs)
+	if (locale === "de") return de.contact_form_attachment_hint(inputs)
+	return it.contact_form_attachment_hint(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{ file: NonNullable<unknown> }} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_form_attachment_selected = (inputs, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_form_attachment_selected(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_form_attachment_selected", locale)
+	if (locale === "en") return en.contact_form_attachment_selected(inputs)
+	if (locale === "de") return de.contact_form_attachment_selected(inputs)
+	return it.contact_form_attachment_selected(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_form_attachment_guidelines_title = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_form_attachment_guidelines_title(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_form_attachment_guidelines_title", locale)
+	if (locale === "en") return en.contact_form_attachment_guidelines_title(inputs)
+	if (locale === "de") return de.contact_form_attachment_guidelines_title(inputs)
+	return it.contact_form_attachment_guidelines_title(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_form_attachment_guideline_formats = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_form_attachment_guideline_formats(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_form_attachment_guideline_formats", locale)
+	if (locale === "en") return en.contact_form_attachment_guideline_formats(inputs)
+	if (locale === "de") return de.contact_form_attachment_guideline_formats(inputs)
+	return it.contact_form_attachment_guideline_formats(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_form_attachment_guideline_size = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_form_attachment_guideline_size(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_form_attachment_guideline_size", locale)
+	if (locale === "en") return en.contact_form_attachment_guideline_size(inputs)
+	if (locale === "de") return de.contact_form_attachment_guideline_size(inputs)
+	return it.contact_form_attachment_guideline_size(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_form_attachment_guideline_quality = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_form_attachment_guideline_quality(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_form_attachment_guideline_quality", locale)
+	if (locale === "en") return en.contact_form_attachment_guideline_quality(inputs)
+	if (locale === "de") return de.contact_form_attachment_guideline_quality(inputs)
+	return it.contact_form_attachment_guideline_quality(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_form_attachment_guideline_privacy = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_form_attachment_guideline_privacy(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_form_attachment_guideline_privacy", locale)
+	if (locale === "en") return en.contact_form_attachment_guideline_privacy(inputs)
+	if (locale === "de") return de.contact_form_attachment_guideline_privacy(inputs)
+	return it.contact_form_attachment_guideline_privacy(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
 export const contact_form_submit = (inputs = {}, options = {}) => {
 	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
 		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_form_submit(inputs) 
@@ -8650,6 +9294,52 @@ export const contact_form_error_message = (inputs = {}, options = {}) => {
 	if (locale === "en") return en.contact_form_error_message(inputs)
 	if (locale === "de") return de.contact_form_error_message(inputs)
 	return it.contact_form_error_message(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_form_error_attachment_type = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_form_error_attachment_type(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_form_error_attachment_type", locale)
+	if (locale === "en") return en.contact_form_error_attachment_type(inputs)
+	if (locale === "de") return de.contact_form_error_attachment_type(inputs)
+	return it.contact_form_error_attachment_type(inputs)
+};
+/**
+* This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).
+*
+* - Changing this function will be over-written by the next build.
+*
+* - If you want to change the translations, you can either edit the source files e.g. `en.json`, or
+* use another inlang app like [Fink](https://inlang.com/m/tdozzpar) or the [VSCode extension Sherlock](https://inlang.com/m/r7kp499g).
+* 
+* @param {{}} inputs
+* @param {{ locale?: "en" | "de" | "it" }} options
+* @returns {string}
+*/
+/* @__NO_SIDE_EFFECTS__ */
+export const contact_form_error_attachment_size = (inputs = {}, options = {}) => {
+	if (experimentalMiddlewareLocaleSplitting && isServer === false) {
+		return /** @type {any} */ (globalThis).__paraglide_ssr.contact_form_error_attachment_size(inputs) 
+	}
+	const locale = options.locale ?? getLocale()
+	trackMessageCall("contact_form_error_attachment_size", locale)
+	if (locale === "en") return en.contact_form_error_attachment_size(inputs)
+	if (locale === "de") return de.contact_form_error_attachment_size(inputs)
+	return it.contact_form_error_attachment_size(inputs)
 };
 /**
 * This function has been compiled by [Paraglide JS](https://inlang.com/m/gerre34r).

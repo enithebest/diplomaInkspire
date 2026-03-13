@@ -505,6 +505,78 @@ export const categories_results_title = /** @type {(inputs: {}) => string} */ ()
 	return `Suchergebnisse`
 };
 
+export const categories_filter_heading = /** @type {(inputs: {}) => string} */ () => {
+	return `Kombinierbare Shop-Filter fuer Farbe, Kategorie und Preis.`
+};
+
+export const categories_filter_subtitle = /** @type {(inputs: {}) => string} */ () => {
+	return `Wechsle zwischen Light und Dark Mode und filtere die Kollektion live mit modernen Controls.`
+};
+
+export const categories_filter_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Filter`
+};
+
+export const categories_filter_helper = /** @type {(inputs: {}) => string} */ () => {
+	return `Mehrere Optionen lassen sich gleichzeitig kombinieren.`
+};
+
+export const categories_filter_live_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Sichtbare Produkte`
+};
+
+export const categories_filter_active_count = /** @type {(inputs: { count: NonNullable<unknown> }) => string} */ (i) => {
+	return `${i.count} aktive Filter`
+};
+
+export const categories_filter_price_cap = /** @type {(inputs: {}) => string} */ () => {
+	return `Maximalpreis`
+};
+
+export const categories_filter_reset = /** @type {(inputs: {}) => string} */ () => {
+	return `Filter zuruecksetzen`
+};
+
+export const categories_filter_category = /** @type {(inputs: {}) => string} */ () => {
+	return `Kategorien`
+};
+
+export const categories_filter_color = /** @type {(inputs: {}) => string} */ () => {
+	return `Farben`
+};
+
+export const categories_filter_sort = /** @type {(inputs: {}) => string} */ () => {
+	return `Sortierung`
+};
+
+export const categories_filter_sort_featured = /** @type {(inputs: {}) => string} */ () => {
+	return `Empfohlen`
+};
+
+export const categories_filter_sort_price_low = /** @type {(inputs: {}) => string} */ () => {
+	return `Preis: niedrig nach hoch`
+};
+
+export const categories_filter_sort_price_high = /** @type {(inputs: {}) => string} */ () => {
+	return `Preis: hoch nach niedrig`
+};
+
+export const categories_filter_results = /** @type {(inputs: {}) => string} */ () => {
+	return `Gefilterte Produkte`
+};
+
+export const categories_filter_results_hint = /** @type {(inputs: {}) => string} */ () => {
+	return `Alle Karten reagieren sofort auf deine Auswahl.`
+};
+
+export const categories_filter_empty_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Keine Produkte fuer diese Auswahl`
+};
+
+export const categories_filter_empty_copy = /** @type {(inputs: {}) => string} */ () => {
+	return `Passe Farbe, Kategorie oder Preis an, um wieder Ergebnisse zu sehen.`
+};
+
 export const categories_view_product = /** @type {(inputs: {}) => string} */ () => {
 	return `Produkt ansehen`
 };
@@ -1478,6 +1550,46 @@ export const contact_form_message_placeholder = /** @type {(inputs: {}) => strin
 	return `Erzählen Sie uns von Ihrem Projekt oder Ihrer Frage...`
 };
 
+export const contact_form_attachment_label = /** @type {(inputs: {}) => string} */ () => {
+	return `Datei hochladen`
+};
+
+export const contact_form_attachment_optional = /** @type {(inputs: {}) => string} */ () => {
+	return `Optional`
+};
+
+export const contact_form_attachment_cta = /** @type {(inputs: {}) => string} */ () => {
+	return `Bild oder Referenzdatei auswählen`
+};
+
+export const contact_form_attachment_hint = /** @type {(inputs: {}) => string} */ () => {
+	return `PNG, JPG oder WEBP. Ideal für Mockups, Screenshots oder Druckreferenzen.`
+};
+
+export const contact_form_attachment_selected = /** @type {(inputs: { file: NonNullable<unknown> }) => string} */ (i) => {
+	return `Ausgewählte Datei: ${i.file}`
+};
+
+export const contact_form_attachment_guidelines_title = /** @type {(inputs: {}) => string} */ () => {
+	return `Upload-Richtlinien`
+};
+
+export const contact_form_attachment_guideline_formats = /** @type {(inputs: {}) => string} */ () => {
+	return `Erlaubte Formate: PNG, JPG, JPEG, WEBP.`
+};
+
+export const contact_form_attachment_guideline_size = /** @type {(inputs: {}) => string} */ () => {
+	return `Maximale Dateigröße: 5 MB.`
+};
+
+export const contact_form_attachment_guideline_quality = /** @type {(inputs: {}) => string} */ () => {
+	return `Bitte gut lesbare Bilder mit klaren Details hochladen.`
+};
+
+export const contact_form_attachment_guideline_privacy = /** @type {(inputs: {}) => string} */ () => {
+	return `Keine sensiblen Daten einbetten. Uploads werden nur zur Bearbeitung Ihrer Anfrage verwendet.`
+};
+
 export const contact_form_submit = /** @type {(inputs: {}) => string} */ () => {
 	return `Nachricht senden`
 };
@@ -1504,6 +1616,14 @@ export const contact_form_error_phone = /** @type {(inputs: {}) => string} */ ()
 
 export const contact_form_error_message = /** @type {(inputs: {}) => string} */ () => {
 	return `Bitte fügen Sie eine kurze Nachricht hinzu (mind. 10 Zeichen).`
+};
+
+export const contact_form_error_attachment_type = /** @type {(inputs: {}) => string} */ () => {
+	return `Ungültige Datei. Bitte laden Sie PNG, JPG oder WEBP hoch.`
+};
+
+export const contact_form_error_attachment_size = /** @type {(inputs: {}) => string} */ () => {
+	return `Die Datei ist zu groß. Maximal 5 MB sind erlaubt.`
 };
 
 export const contact_form_error_send = /** @type {(inputs: {}) => string} */ () => {
