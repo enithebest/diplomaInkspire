@@ -60,6 +60,8 @@
   let orderDesignUrl = $state('');
   let lastOrderHandled = $state(null);
   let previewExpanded = $state(false);
+  let sceneBootstrapped = false;
+  let konvaLoading = false;
   const primaryButton =
     'inline-flex items-center justify-center gap-2 rounded-lg bg-[#4F46E5] text-white font-semibold shadow-lg shadow-[#4F46E5]/30 transition hover:bg-[#6366F1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6366F1] disabled:opacity-60 disabled:cursor-not-allowed';
 
@@ -561,40 +563,55 @@
     }
   };
 
-  onMount(() => {
-    if (browser) {
-      try {
-        if (!jacketColor) {
-          const storedColor = localStorage.getItem('selectedBaseColor');
-          if (storedColor) {
-            jacketColor = storedColor;
-          }
-        }
-        const stored = localStorage.getItem('selectedDesignUrl');
-        if (stored) {
-          previewUrl = stored;
-          addImageToEditor(stored);
-          localStorage.removeItem('selectedDesignUrl');
-        }
-      } catch (error) {
-        console.error(error);
+  const loadKonva = async () => {
+    if (konvaReady || konvaLoading || !browser) return;
+    konvaLoading = true;
+    try {
+      const mod = await import('konva');
+      Konva = mod.default ?? mod;
+      konvaReady = true;
+      if (pendingEditorInit || uploadedImages.length) {
+        pendingEditorInit = false;
+        setTimeout(initEditor, 50);
       }
-
-      const loadKonva = async () => {
-        const mod = await import('konva');
-        Konva = mod.default ?? mod;
-        konvaReady = true;
-        if (pendingEditorInit || uploadedImages.length) {
-          pendingEditorInit = false;
-          setTimeout(initEditor, 50);
-        }
-      };
-
-      loadKonva();
-      initScene();
-      loadModel();
-      if (modelPath) animate();
+    } finally {
+      konvaLoading = false;
     }
+  };
+
+  onMount(() => {
+    if (!browser) return;
+    try {
+      if (!jacketColor) {
+        const storedColor = localStorage.getItem('selectedBaseColor');
+        if (storedColor) {
+          jacketColor = storedColor;
+        }
+      }
+      const stored = localStorage.getItem('selectedDesignUrl');
+      if (stored) {
+        previewUrl = stored;
+        addImageToEditor(stored);
+        localStorage.removeItem('selectedDesignUrl');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+    loadKonva();
+  });
+
+  $effect(() => {
+    if (!browser || sceneBootstrapped || !containerRef) return;
+    sceneBootstrapped = true;
+    initScene();
+    loadModel();
+    if (modelPath) animate();
+  });
+
+  $effect(() => {
+    if (!browser || !showEditor || !editorContainerRef || !konvaReady || stage) return;
+    setTimeout(initEditor, 50);
   });
 
   $effect(() => {
@@ -693,7 +710,7 @@
         {primaryButton}
         {modelPath}
         {previewExpanded}
-        bind:containerRef={containerRef}
+        onContainerReady={(node) => (containerRef = node)}
         onTogglePreview={togglePreviewExpanded}
         onDownload={download}
       />
@@ -728,7 +745,7 @@
   <EditorOverlay
     {primaryButton}
     {showEditor}
-    bind:editorContainerRef={editorContainerRef}
+    onContainerReady={(node) => (editorContainerRef = node)}
     onApply={applyToModel}
   />
 </div>

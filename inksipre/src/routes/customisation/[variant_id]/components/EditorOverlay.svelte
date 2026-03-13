@@ -2,10 +2,10 @@
   export let showEditor = false;
   export let primaryButton = '';
   export let onApply;
-  export let editorContainerRef;
+  export let onContainerReady;
 
   let containerEl;
-  $: editorContainerRef = containerEl;
+  $: onContainerReady?.(containerEl);
 </script>
 
 <div class={`fixed inset-0 bg-black/95 backdrop-blur-sm flex flex-col items-center justify-center z-40 p-6 ${showEditor ? '' : 'hidden'}`}>

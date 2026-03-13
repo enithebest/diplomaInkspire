@@ -4,10 +4,10 @@
   export let previewExpanded = false;
   export let onTogglePreview;
   export let onDownload;
-  export let containerRef;
+  export let onContainerReady;
 
   let containerEl;
-  $: containerRef = containerEl;
+  $: onContainerReady?.(containerEl);
 </script>
 
 {#if previewExpanded}
