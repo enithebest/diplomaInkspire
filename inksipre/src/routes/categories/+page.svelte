@@ -154,7 +154,7 @@
 </script>
 
 <div
-	class={`relative isolate min-h-screen overflow-hidden px-6 pt-24 pb-16 transition-colors duration-300 sm:pb-24 lg:px-12 ${
+	class={`relative isolate min-h-screen overflow-hidden px-6 pb-16 transition-colors duration-300 sm:pb-24 lg:px-12 ${
 		isLight ? 'bg-[#f4efe7] text-slate-800' : 'bg-gray-900 text-gray-200'
 	}`}
 >
@@ -376,24 +376,24 @@
 	></div>
 
 	<section
-		class={`relative -mx-6 mb-12 min-h-[88vh] overflow-hidden lg:-mx-12 ${
+		class={`relative -mx-6 mb-12 min-h-screen overflow-hidden lg:-mx-12 ${
 			isLight ? 'bg-[#efe3d1]' : 'bg-gray-800/80'
 		}`}
 	>
 		<img
-			src="/images/header.png"
+			src={isLight ? '/images/header2.png' : '/images/header.png'}
 			alt="Collection hero"
-			class={`absolute inset-0 h-full w-full object-cover ${isLight ? 'opacity-45' : 'opacity-60'}`}
+			class={`absolute inset-0 h-full w-full object-cover`}
 			loading="lazy"
 		/>
 		<div
 			class={`absolute inset-0 ${
 				isLight
-					? 'bg-gradient-to-t from-[#f4efe7] via-[#f4efe740] to-transparent'
+					? 'bg-gradient-to-t from-[#f4efe7]/100 via-[#f4efe7]/5 to-transparent'
 					: 'bg-gradient-to-t from-gray-900/100 via-gray-900/5 to-transparent'
 			}`}
 		></div>
-		<div class="absolute inset-0 flex items-end justify-center pb-12">
+		<div class="absolute inset-0 flex items-end justify-center px-6 pb-12 pt-24 sm:px-8 lg:px-12">
 			<div class="space-y-4 text-center">
 				<p
 					class={`text-2xl font-light tracking-wide sm:text-3xl ${

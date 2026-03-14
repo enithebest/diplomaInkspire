@@ -23,6 +23,7 @@
 	let navHidden = false;
 	let hovered = false;
 	let lastScrollY = 0;
+	let scrollY = 0;
 
 	function updateCartCount() {
 		try {
@@ -43,6 +44,7 @@
 
 		const handleScroll = () => {
 			const y = window.scrollY || 0;
+			scrollY = y;
 			navHidden = y > lastScrollY && y > 40;
 			lastScrollY = y;
 		};
@@ -59,6 +61,8 @@
 	$: availableLocales = locales?.length ? locales : ['en'];
 	$: currentHref = `${$page.url.pathname}${$page.url.search}${$page.url.hash}`;
 	$: isLight = $theme === 'light';
+	$: isCategoriesPage = /\/categories\/?$/.test($page.url.pathname);
+	$: useOverlayStyle = isCategoriesPage && scrollY < 48 && !hovered;
 
 	function handleLocaleClick(e, code) {
 		if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) {
@@ -80,37 +84,67 @@
 	class={`fixed top-0 z-50 w-full transition-all duration-300 ${
 		navHidden ? '-translate-y-full' : 'translate-y-0'
 	} ${
-		hovered
+		useOverlayStyle
+			? 'bg-transparent'
+			: hovered
 			? isLight
 				? 'bg-[#fff9ef]/90 shadow-[0_20px_60px_rgba(148,163,184,0.18)] backdrop-blur'
 				: 'bg-gray-900/90 shadow-sm backdrop-blur'
-			: 'bg-transparent'
+			: isLight
+				? 'bg-[#fff9ef]/80 shadow-[0_16px_40px_rgba(148,163,184,0.12)] backdrop-blur'
+				: 'bg-gray-900/80 shadow-sm backdrop-blur'
 	}`}
 	onmouseenter={() => (hovered = true)}
 	onmouseleave={() => (hovered = false)}
 >
 	<div
-		class={`mx-auto grid max-w-7xl grid-cols-3 items-center gap-4 px-6 py-3 transition-colors duration-200 ${isLight ? 'text-slate-900' : 'text-white'}`}
+		class={`mx-auto grid max-w-7xl grid-cols-3 items-center gap-4 px-6 py-3 transition-colors duration-200 ${
+			useOverlayStyle ? 'text-white' : isLight ? 'text-slate-900' : 'text-white'
+		}`}
 	>
 		<div class="flex items-center justify-start gap-6 text-sm font-medium">
 			<a
 				href="/"
-				class={`hidden md:inline ${isLight ? 'text-slate-600 hover:text-slate-950' : 'text-gray-300 hover:text-white'}`}
+				class={`hidden md:inline ${
+					useOverlayStyle
+						? 'text-white/80 hover:text-white'
+						: isLight
+							? 'text-slate-600 hover:text-slate-950'
+							: 'text-gray-300 hover:text-white'
+				}`}
 				>{m.nav_home()}</a
 			>
 			<a
 				href="/categories"
-				class={`hidden md:inline ${isLight ? 'text-slate-600 hover:text-slate-950' : 'text-gray-300 hover:text-white'}`}
+				class={`hidden md:inline ${
+					useOverlayStyle
+						? 'text-white/80 hover:text-white'
+						: isLight
+							? 'text-slate-600 hover:text-slate-950'
+							: 'text-gray-300 hover:text-white'
+				}`}
 				>{m.nav_shop()}</a
 			>
 			<a
 				href="/contact"
-				class={`hidden lg:inline ${isLight ? 'text-slate-600 hover:text-slate-950' : 'text-gray-300 hover:text-white'}`}
+				class={`hidden lg:inline ${
+					useOverlayStyle
+						? 'text-white/80 hover:text-white'
+						: isLight
+							? 'text-slate-600 hover:text-slate-950'
+							: 'text-gray-300 hover:text-white'
+				}`}
 				>{m.nav_contact()}</a
 			>
 			<a
 				href="/about"
-				class={`hidden lg:inline ${isLight ? 'text-slate-600 hover:text-slate-950' : 'text-gray-300 hover:text-white'}`}
+				class={`hidden lg:inline ${
+					useOverlayStyle
+						? 'text-white/80 hover:text-white'
+						: isLight
+							? 'text-slate-600 hover:text-slate-950'
+							: 'text-gray-300 hover:text-white'
+				}`}
 				>{m.nav_about()}</a
 			>
 		</div>
@@ -118,7 +152,14 @@
 		<div class="flex justify-center">
 			<a
 				href="/"
-				class={`text-2xl font-semibold tracking-tight transition-colors ${isLight ? 'text-slate-950 hover:text-amber-700' : 'text-white hover:text-indigo-300'}`}
+				class={`text-2xl font-semibold tracking-tight transition-colors ${
+					useOverlayStyle
+						? '!text-white hover:text-white/80'
+						: isLight
+							? 'text-amber-500 hover:text-amber-700'
+							: 'text-white hover:text-indigo-300'
+				}`}
+				style={useOverlayStyle ? 'text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);' : undefined}
 			>
 				Inkspire
 			</a>
@@ -127,13 +168,17 @@
 		<div class="flex flex-shrink-0 items-center justify-end gap-2 md:gap-3">
 			<div
 				class={`hidden items-center gap-1 rounded-full border px-2 py-1 text-[11px] tracking-wide uppercase sm:flex ${
-					isLight
+					useOverlayStyle
+						? 'border-white/20 bg-black/15 text-white/75 backdrop-blur-sm'
+						: isLight
 						? 'border-slate-200 bg-white/80 text-slate-500'
 						: 'border-white/10 bg-white/5 text-gray-300'
 				}`}
 			>
 				<Globe
-					class={`h-4 w-4 ${isLight ? 'text-slate-400' : 'text-gray-400'}`}
+					class={`h-4 w-4 ${
+						useOverlayStyle ? 'text-white/65' : isLight ? 'text-slate-400' : 'text-gray-400'
+					}`}
 					aria-hidden="true"
 				/>
 				{#each availableLocales as code}
@@ -142,10 +187,14 @@
 						aria-current={locale === code ? 'true' : 'false'}
 						class={`rounded-full px-2 py-1 transition ${
 							locale === code
-								? isLight
+								? useOverlayStyle
+									? 'bg-white text-slate-900'
+									: isLight
 									? 'bg-slate-900 font-semibold text-white'
 									: 'bg-white font-semibold text-gray-900'
-								: isLight
+								: useOverlayStyle
+									? 'text-white/80 hover:text-white'
+									: isLight
 									? 'text-slate-500 hover:text-slate-900'
 									: 'text-gray-300 hover:text-white/90'
 						}`}
@@ -159,12 +208,16 @@
 			<a
 				href="/cart"
 				class={`relative flex h-10 w-10 items-center justify-center rounded-full transition ${
-					isLight ? 'bg-white/80 hover:bg-white' : 'bg-white/5 hover:bg-white/10'
+					useOverlayStyle
+						? 'bg-black/15 hover:bg-black/25 backdrop-blur-sm'
+						: isLight
+							? 'bg-white/80 hover:bg-white'
+							: 'bg-white/5 hover:bg-white/10'
 				}`}
 				aria-label={m.nav_cart()}
 			>
 				<ShoppingCart
-					class={`h-5 w-5 ${isLight ? 'text-slate-900' : 'text-white'}`}
+					class={`h-5 w-5 ${useOverlayStyle ? 'text-white' : isLight ? 'text-slate-900' : 'text-white'}`}
 					aria-hidden="true"
 				/>
 				{#if cartCount > 0}
@@ -181,14 +234,18 @@
 					<button
 						type="button"
 						class={`flex h-10 w-10 items-center justify-center rounded-full transition ${
-							isLight ? 'bg-white/80 hover:bg-white' : 'bg-white/5 hover:bg-white/10'
+							useOverlayStyle
+								? 'bg-black/15 hover:bg-black/25 backdrop-blur-sm'
+								: isLight
+									? 'bg-white/80 hover:bg-white'
+									: 'bg-white/5 hover:bg-white/10'
 						}`}
 						aria-haspopup="menu"
 						aria-expanded={userMenuOpen}
 						onclick={() => (userMenuOpen = !userMenuOpen)}
 					>
 						<UserRound
-							class={`h-5 w-5 ${isLight ? 'text-slate-900' : 'text-white'}`}
+							class={`h-5 w-5 ${useOverlayStyle ? 'text-white' : isLight ? 'text-slate-900' : 'text-white'}`}
 							aria-hidden="true"
 						/>
 					</button>
@@ -242,7 +299,9 @@
 					<a
 						href="/login"
 						class={`flex h-10 items-center gap-2 rounded-full border px-3 text-sm transition ${
-							isLight
+							useOverlayStyle
+								? 'border-white/20 bg-black/15 text-white hover:border-white/40 hover:bg-black/25 backdrop-blur-sm'
+								: isLight
 								? 'border-slate-200 bg-white/80 text-slate-800 hover:border-slate-300 hover:text-slate-950'
 								: 'border-white/10 text-gray-100 hover:border-white/30 hover:text-white'
 						}`}
@@ -264,7 +323,9 @@
 			<button
 				type="button"
 				class={`flex h-10 w-10 items-center justify-center rounded-full border transition ${
-					isLight
+					useOverlayStyle
+						? 'border-white/20 bg-black/15 text-white hover:border-white/40 hover:bg-black/25 backdrop-blur-sm'
+						: isLight
 						? 'border-amber-200 bg-white/80 text-amber-600 hover:border-amber-300 hover:bg-amber-50'
 						: 'border-white/10 bg-white/5 text-amber-200 hover:bg-white/10'
 				}`}
