@@ -126,7 +126,13 @@
 						class={`max-w-xs min-w-[280px] shrink-0 snap-start rounded-xl p-5 ${isLight ? 'border border-stone-200 bg-white/85 shadow-[0_18px_45px_-30px_rgba(217,119,6,0.28)]' : 'border border-white/10 bg-white/5 shadow-[0_15px_50px_-35px_rgba(99,102,241,0.9)]'}`}
 					>
 						<div class="flex items-center gap-3">
-							<img src={r.img} alt={r.name} class="h-10 w-10 rounded-full object-cover" />
+							<img
+								src={r.img}
+								alt={r.name}
+								class="h-10 w-10 rounded-full object-cover"
+								loading="lazy"
+								decoding="async"
+							/>
 							<div>
 								<p class={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>{r.name}</p>
 								<p class={`text-sm ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>{r.role}</p>
