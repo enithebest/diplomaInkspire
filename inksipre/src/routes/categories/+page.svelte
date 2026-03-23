@@ -393,7 +393,7 @@
 					: 'bg-gradient-to-t from-gray-900/100 via-gray-900/5 to-transparent'
 			}`}
 		></div>
-		<div class="absolute inset-0 flex items-end justify-center px-6 pb-12 pt-24 sm:px-8 lg:px-12">
+		<div class="absolute inset-0 flex items-end justify-center px-6 pt-24 pb-12 sm:px-8 lg:px-12">
 			<div class="space-y-4 text-center">
 				<p
 					class={`text-2xl font-light tracking-wide sm:text-3xl ${
@@ -490,12 +490,16 @@
 									src={productImages[product.id].colors[selectedColor[product.id]]}
 									alt={product.name}
 									class="h-full w-full object-cover"
+									loading="lazy"
+									decoding="async"
 								/>
 							{:else if product.image_url}
 								<img
 									src={product.image_url}
 									alt={product.name}
 									class="h-full w-full object-cover"
+									loading="lazy"
+									decoding="async"
 								/>
 							{:else}
 								<span class={`text-sm ${isLight ? 'text-slate-400' : 'text-gray-400'}`}
@@ -582,12 +586,16 @@
 											src={productImages[product.id].colors[selectedColor[product.id]]}
 											alt={product.name}
 											class="h-full w-full object-cover"
+											loading="lazy"
+											decoding="async"
 										/>
 									{:else if product.image_url}
 										<img
 											src={product.image_url}
 											alt={product.name}
 											class="h-full w-full object-cover"
+											loading="lazy"
+											decoding="async"
 										/>
 									{:else}
 										<span class={`text-sm ${isLight ? 'text-slate-400' : 'text-gray-400'}`}
