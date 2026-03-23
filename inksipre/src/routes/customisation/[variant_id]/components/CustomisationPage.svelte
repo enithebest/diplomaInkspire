@@ -42,9 +42,9 @@
 	const modelPath = (() => {
 		const name = (data?.product?.name ?? '').toLowerCase();
 		if (name.includes('ceramic mug')) return '/3dobjects/mugs/model1.glb';
-		if (name.includes('classic pullover hoodie')) return '/workerjacket111.glb';
+		if (name.includes('classic pullover hoodie')) return '/3dobjects/hoodie/hoodie1.glb';
 		if (name.includes('classic cotton tee')) return '/poloshirt.glb';
-		if (name.includes('cropped sweatshirt')) return '/3dobjects/hoodie/sweatshirt1.glb';
+		if (name.includes('cropped sweatshirt')) return '/3dobjects/sweatshirts/sweatshirt1.glb';
 		return null;
 	})();
 
