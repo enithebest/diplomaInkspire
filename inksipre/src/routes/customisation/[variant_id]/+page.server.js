@@ -3,7 +3,6 @@ import { fail, redirect } from '@sveltejs/kit';
 import { put } from '@vercel/blob';
 import { BLOB_READ_WRITE_TOKEN } from '$env/static/private';
 import * as m from '$lib/paraglide/messages/_index.js';
-import { sendPrinterEmail } from '$lib/email/mailer.js';
 
 export const load = async ({ params, locals }) => {
   const { variant_id } = params;
@@ -84,12 +83,12 @@ export const actions = {
     });
 
     // Store the uploaded file URL in the DB and link to variant
-    await query('INSERT INTO uploads (user_id, customisation_id, image_url) VALUES (?, NULL, ?)', [
+    const uploadResult = await query('INSERT INTO uploads (user_id, customisation_id, image_url) VALUES (?, NULL, ?)', [
       user.id,
       blob.url
     ]);
 
-    return { success: true, imageUrl: blob.url };
+    return { success: true, imageUrl: blob.url, uploadId: uploadResult?.insertId ?? null };
   },
 
   order: async ({ request, locals, params }) => {
@@ -213,29 +212,14 @@ export const actions = {
 
       await conn.commit();
 
-      try {
-        await sendPrinterEmail({
-          order: { id: orderId, total_price: price, status: 'pending' },
-          orderItem: { id: orderItemId, quantity: 1, unit_price: price },
-          product,
-          variant,
-          user,
-          designUrl,
-          renderUrl: designUrl,
-          renderBuffer,
-          customisation: {
-            rotation: Number.isFinite(rotation) ? rotation : 0,
-            scale: Number.isFinite(scale) ? scale : 1,
-            position_x: Number.isFinite(position_x) ? position_x : 0,
-            position_y: Number.isFinite(position_y) ? position_y : 0
-          },
-          shippingAddress: null
-        });
-      } catch (emailErr) {
-        console.error('Printer email failed', emailErr);
-      }
-
-      return { orderSuccess: true, orderId };
+      return {
+        orderSuccess: true,
+        orderId,
+        orderItemId,
+        customisationId,
+        uploadId,
+        designUrl
+      };
     } catch (err) {
       if (err?.status && err.status >= 300 && err.status < 400) {
         // Allow redirects to bubble up without showing a failure state

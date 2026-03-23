@@ -29,22 +29,12 @@
       </div>
     </div>
 
-    <!-- Video Preview -->
-    <div class="-mt-12 -ml-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
-      <video
-        class="w-full max-w-2xl max-h-140 rounded-xl bg-gray-800 shadow-xl ring-1 ring-white/10 object-cover"
-        src="/videos/mockup-demo.mp4"
-        autoplay
-        muted
-        loop
-        playsinline
-        controls
-        poster="/videos/mockup-poster.jpg"
-      >
-        Your browser does not support the video tag.
-      </video>
+    <!-- Hero Image -->
+    <div class="relative lg:col-start-2 lg:row-start-1 lg:mt-0 lg:pl-8">
+      <div class="absolute inset-x-0 top-0 -z-10 h-full w-full overflow-hidden rounded-xl bg-gray-800/50 shadow-lg ring-1 ring-gray-900/10">
+        <img src="/images/mockup.png" alt="Mockup" class="h-full w-full object-cover object-center" />
+      </div>
     </div>
-
     <!-- Features -->
     <div class="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
       <div class="lg:pr-4">
