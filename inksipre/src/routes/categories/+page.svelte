@@ -397,8 +397,9 @@
 			<div class="space-y-4 text-center">
 				<p
 					class={`text-2xl font-light tracking-wide sm:text-3xl ${
-						isLight ? 'text-slate-900' : 'text-white/90'
+						isLight ? '' : 'text-white/90'
 					}`}
+					style={isLight ? 'color: #ffffff;' : ''}
 				>
 					Inkspire Winter Collection
 				</p>
