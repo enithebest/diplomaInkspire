@@ -1,6 +1,6 @@
 import { fail } from '@sveltejs/kit';
 import nodemailer from 'nodemailer';
-import { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_RECEIVER } from '$env/static/private';
+import { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, PRINTER_EMAIL } from '$env/static/private';
 import * as m from '$lib/paraglide/messages/_index.js';
 import { getPhoneCountries } from '$lib/data/phoneCountries.js';
 
@@ -89,7 +89,7 @@ export const actions = {
 
 			await transporter.sendMail({
 				from: `"Inkspire Contact" <${SMTP_USER}>`,
-				to: CONTACT_RECEIVER,
+				to: PRINTER_EMAIL || SMTP_USER,
 				subject: `New message from ${name}`,
 				text: `From: ${name} <${email}>
 Phone: ${prefix} ${phone}
