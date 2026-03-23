@@ -7,16 +7,12 @@ const SUPPORTED_LOCALES = ['en', 'de', 'it'];
 const originalHandle = async ({ event, resolve }) => {
 	const session = event.cookies.get('session');
 
-	console.log('🧩 Session cookie:', session);
-
 	if (session) {
 		const db = await createConnection();
 		const [rows] = await db.query(
 			'SELECT id, email, full_name, role FROM users WHERE session_token = ? AND session_expiration > NOW()',
 			[session]
 		);
-
-		console.log('🧠 Found user rows:', rows);
 
 		if (rows.length > 0) {
 			event.locals.user = rows[0];
