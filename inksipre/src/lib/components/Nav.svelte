@@ -12,13 +12,16 @@
 		Globe,
 		LogIn,
 		LogOut,
+		Menu,
 		MoonStar,
 		ShoppingCart,
 		SunMedium,
-		UserRound
+		UserRound,
+		X
 	} from 'lucide-svelte';
 
 	let cartCount = 0;
+	let mobileMenuOpen = false;
 	let userMenuOpen = false;
 	let navHidden = false;
 	let hovered = false;
@@ -63,6 +66,7 @@
 	$: isLight = $theme === 'light';
 	$: isCategoriesPage = /\/categories\/?$/.test($page.url.pathname);
 	$: useOverlayStyle = isCategoriesPage && scrollY < 48 && !hovered;
+	$: $page.url.pathname, (mobileMenuOpen = false), (userMenuOpen = false);
 
 	function handleLocaleClick(e, code) {
 		if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) {
@@ -77,6 +81,11 @@
 		} catch {
 			window.location.href = localizeHref(currentHref, { locale: code });
 		}
+	}
+
+	function toggleMobileMenu() {
+		mobileMenuOpen = !mobileMenuOpen;
+		if (mobileMenuOpen) userMenuOpen = false;
 	}
 </script>
 
@@ -102,7 +111,27 @@
 			useOverlayStyle ? 'text-white' : isLight ? 'text-slate-900' : 'text-white'
 		}`}
 	>
-		<div class="flex items-center justify-start gap-6 text-sm font-medium">
+		<div class="flex items-center justify-start gap-3 text-sm font-medium md:gap-6">
+			<button
+				type="button"
+				class={`flex h-10 w-10 items-center justify-center rounded-full border transition md:hidden ${
+					useOverlayStyle
+						? 'border-white/20 bg-black/15 text-white hover:border-white/40 hover:bg-black/25 backdrop-blur-sm'
+						: isLight
+							? 'border-slate-200 bg-white/80 text-slate-900 hover:bg-white'
+							: 'border-white/10 bg-white/5 text-white hover:bg-white/10'
+				}`}
+				aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+				aria-expanded={mobileMenuOpen}
+				aria-controls="mobile-nav-menu"
+				onclick={toggleMobileMenu}
+			>
+				{#if mobileMenuOpen}
+					<X class="h-5 w-5" aria-hidden="true" />
+				{:else}
+					<Menu class="h-5 w-5" aria-hidden="true" />
+				{/if}
+			</button>
 			<a
 				href="/"
 				class={`hidden md:inline ${
@@ -295,7 +324,7 @@
 					{/if}
 				</div>
 			{:else}
-				<div class="flex items-center gap-2">
+				<div class="hidden items-center gap-2 sm:flex">
 					<a
 						href="/login"
 						class={`flex h-10 items-center gap-2 rounded-full border px-3 text-sm transition ${
@@ -340,4 +369,151 @@
 			</button>
 		</div>
 	</div>
+
+	{#if mobileMenuOpen}
+		<div
+			id="mobile-nav-menu"
+			class={`border-t px-6 pb-5 md:hidden ${
+				useOverlayStyle
+					? 'border-white/10 bg-black/35 backdrop-blur-md'
+					: isLight
+						? 'border-slate-200 bg-[#fff9ef]/95 backdrop-blur'
+						: 'border-white/10 bg-gray-900/95 backdrop-blur'
+			}`}
+		>
+			<div class="flex flex-col gap-2 pt-4">
+				<a
+					href="/"
+					class={`rounded-2xl px-4 py-3 text-sm font-medium transition ${
+						isLight ? 'text-slate-800 hover:bg-slate-900/5' : 'text-white hover:bg-white/5'
+					}`}
+					>{m.nav_home()}</a
+				>
+				<a
+					href="/categories"
+					class={`rounded-2xl px-4 py-3 text-sm font-medium transition ${
+						isLight ? 'text-slate-800 hover:bg-slate-900/5' : 'text-white hover:bg-white/5'
+					}`}
+					>{m.nav_shop()}</a
+				>
+				<a
+					href="/contact"
+					class={`rounded-2xl px-4 py-3 text-sm font-medium transition ${
+						isLight ? 'text-slate-800 hover:bg-slate-900/5' : 'text-white hover:bg-white/5'
+					}`}
+					>{m.nav_contact()}</a
+				>
+				<a
+					href="/about"
+					class={`rounded-2xl px-4 py-3 text-sm font-medium transition ${
+						isLight ? 'text-slate-800 hover:bg-slate-900/5' : 'text-white hover:bg-white/5'
+					}`}
+					>{m.nav_about()}</a
+				>
+				<a
+					href="/cart"
+					class={`rounded-2xl px-4 py-3 text-sm font-medium transition ${
+						isLight ? 'text-slate-800 hover:bg-slate-900/5' : 'text-white hover:bg-white/5'
+					}`}
+				>
+					{m.nav_cart()}{#if cartCount > 0} ({cartCount}){/if}
+				</a>
+			</div>
+
+			<div class="mt-4 flex flex-wrap items-center gap-2 rounded-2xl border p-3 text-[11px] uppercase tracking-wide sm:hidden">
+				<Globe
+					class={`h-4 w-4 ${
+						useOverlayStyle ? 'text-white/65' : isLight ? 'text-slate-400' : 'text-gray-400'
+					}`}
+					aria-hidden="true"
+				/>
+				{#each availableLocales as code}
+					<a
+						href={localizeHref(currentHref, { locale: code })}
+						aria-current={locale === code ? 'true' : 'false'}
+						class={`rounded-full px-3 py-1.5 transition ${
+							locale === code
+								? isLight
+									? 'bg-slate-900 font-semibold text-white'
+									: 'bg-white font-semibold text-gray-900'
+								: isLight
+									? 'text-slate-500 hover:text-slate-900'
+									: 'text-gray-300 hover:text-white/90'
+						}`}
+						onclick={(e) => handleLocaleClick(e, code)}
+					>
+						{code.toUpperCase()}
+					</a>
+				{/each}
+			</div>
+
+			{#if user}
+				<div class="mt-4 rounded-2xl border p-3">
+					<div class={`px-1 pb-2 text-xs ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+						{user.full_name || user.email}
+					</div>
+					<div class="flex flex-col gap-2">
+						<a
+							href="/profile"
+							class={`rounded-xl px-3 py-2 text-sm transition ${
+								isLight ? 'text-slate-800 hover:bg-slate-900/5' : 'text-gray-100 hover:bg-white/5'
+							}`}
+							>{m.nav_profile()}</a
+						>
+						{#if user?.role === 'admin'}
+							<a
+								href="/admin"
+								class={`rounded-xl px-3 py-2 text-sm transition ${
+									isLight ? 'text-slate-800 hover:bg-slate-900/5' : 'text-gray-100 hover:bg-white/5'
+								}`}
+								>{m.nav_admin()}</a
+							>
+							<a
+								href="/orders"
+								class={`rounded-xl px-3 py-2 text-sm transition ${
+									isLight ? 'text-slate-800 hover:bg-slate-900/5' : 'text-gray-100 hover:bg-white/5'
+								}`}
+								>{m.nav_orders()}</a
+							>
+						{/if}
+						<form method="POST" action="/logout">
+							<button
+								type="submit"
+								class={`flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm transition ${
+									isLight
+										? 'text-rose-600 hover:bg-rose-50 hover:text-rose-700'
+										: 'text-red-300 hover:bg-white/5 hover:text-red-200'
+								}`}
+							>
+								<LogOut class="h-4 w-4" aria-hidden="true" />
+								{m.nav_logout()}
+							</button>
+						</form>
+					</div>
+				</div>
+			{:else}
+				<div class="mt-4 grid grid-cols-2 gap-2 sm:hidden">
+					<a
+						href="/login"
+						class={`flex items-center justify-center gap-2 rounded-full border px-3 py-3 text-sm transition ${
+							isLight
+								? 'border-slate-200 bg-white/80 text-slate-800 hover:border-slate-300 hover:text-slate-950'
+								: 'border-white/10 text-gray-100 hover:border-white/30 hover:text-white'
+						}`}
+					>
+						<LogIn class="h-4 w-4" aria-hidden="true" />
+						<span>{m.nav_login()}</span>
+					</a>
+					<a
+						href="/register"
+						class={`inline-flex items-center justify-center rounded-full px-3 py-3 text-sm font-semibold text-white transition ${
+							isLight ? 'bg-amber-500 hover:bg-amber-400' : 'bg-[#4F46E5] hover:bg-[#6366F1]'
+						}`}
+					>
+						{m.nav_register()}
+					</a>
+				</div>
+			{/if}
+		</div>
+	{/if}
 </nav>
