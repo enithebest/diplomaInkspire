@@ -603,71 +603,12 @@
 								: 'border-white/10 bg-gray-800/80 text-white hover:bg-gray-800'
 						}`}
 					>
-<<<<<<< HEAD
 						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8">
 							<circle cx="11" cy="11" r="6"></circle>
 							<path d="m20 20-4.35-4.35"></path>
 						</svg>
 					</button>
 				</div>
-=======
-						<div
-							class={`flex h-48 w-full items-center justify-center overflow-hidden rounded-xl border ${
-								isLight
-									? 'border-stone-200 bg-gradient-to-br from-amber-50 via-white to-stone-100'
-									: 'border-gray-700 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800'
-							}`}
-						>
-							{#if productImages[product.id] && selectedColor[product.id]}
-								<img
-									src={productImages[product.id].colors[selectedColor[product.id]]}
-									alt={product.name}
-									class="h-full w-full object-cover"
-									loading="lazy"
-									decoding="async"
-								/>
-							{:else if product.image_url}
-								<img
-									src={product.image_url}
-									alt={product.name}
-									class="h-full w-full object-cover"
-									loading="lazy"
-									decoding="async"
-								/>
-							{:else}
-								<span class={`text-sm ${isLight ? 'text-slate-400' : 'text-gray-400'}`}
-									>Image coming soon</span
-								>
-							{/if}
-						</div>
-						<div class="mt-3 flex flex-1 flex-col gap-2">
-							<div class="flex items-center justify-between gap-2">
-								<h3
-									class={`line-clamp-1 text-lg font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}
-								>
-									{product.name}
-								</h3>
-								<span
-									class={`text-sm font-medium ${isLight ? 'text-amber-700' : 'text-indigo-300'}`}
-								>
-									${product.base_price}
-								</span>
-							</div>
-							{#if product.description}
-								<p class={`line-clamp-2 text-sm ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
-									{short(product.description, 110)}
-								</p>
-							{/if}
-						</div>
-						<button
-							onclick={() => viewProduct(product.id)}
-							class={`mt-3 rounded-lg px-4 py-2 text-white transition ${isLight ? 'bg-amber-500 hover:bg-amber-400' : 'bg-[#4F46E5] hover:bg-[#6366F1]'}`}
-						>
-							{m.categories_view_product()}
-						</button>
-					</article>
-				{/each}
->>>>>>> dc37f8f7ab18a9eb563978920bf9cf612297ecea
 			</div>
 		</section>
 
@@ -773,70 +714,6 @@
 											: 'border-gray-700 bg-gray-800/60 hover:shadow-indigo-500/30'
 									}`}
 								>
-<<<<<<< HEAD
-=======
-									{#if productImages[product.id] && selectedColor[product.id]}
-										<img
-											src={productImages[product.id].colors[selectedColor[product.id]]}
-											alt={product.name}
-											class="h-full w-full object-cover"
-											loading="lazy"
-											decoding="async"
-										/>
-									{:else if product.image_url}
-										<img
-											src={product.image_url}
-											alt={product.name}
-											class="h-full w-full object-cover"
-											loading="lazy"
-											decoding="async"
-										/>
-									{:else}
-										<span class={`text-sm ${isLight ? 'text-slate-400' : 'text-gray-400'}`}
-											>Image coming soon</span
-										>
-									{/if}
-								</div>
-								<div class="mt-3 flex flex-1 flex-col gap-2">
-									<div class="flex items-center justify-between gap-2">
-										<h3
-											class={`line-clamp-1 text-lg font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}
-										>
-											{product.name}
-										</h3>
-										<span
-											class={`text-sm font-medium ${isLight ? 'text-amber-700' : 'text-indigo-300'}`}
-										>
-											${product.base_price}
-										</span>
-									</div>
-									{#if product.description}
-										<p
-											class={`line-clamp-2 text-sm ${isLight ? 'text-slate-500' : 'text-gray-400'}`}
-										>
-											{short(product.description, 110)}
-										</p>
-									{/if}
-									<div class="flex flex-wrap gap-2">
-										{#each colorsOf(product) as color (color)}
-											<button
-												type="button"
-												onclick={() => (selectedColor[product.id] = color)}
-												class={`h-7 w-7 rounded-full border-2 transition ${
-													selectedColor[product.id] === color
-														? isLight
-															? 'border-slate-900'
-															: 'border-white'
-														: isLight
-															? 'border-stone-200'
-															: 'border-white/20'
-												}`}
-												style={`background:${colorMeta[color] || color};`}
-												aria-label={`${product.name} ${color}`}
-											></button>
-										{/each}
-									</div>
->>>>>>> dc37f8f7ab18a9eb563978920bf9cf612297ecea
 									<div
 										class={`flex h-48 w-full items-center justify-center overflow-hidden rounded-xl border ${
 											isLight
