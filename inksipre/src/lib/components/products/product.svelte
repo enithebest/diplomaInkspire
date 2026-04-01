@@ -34,15 +34,15 @@
       </div>
 
       <div class="bg-white/5 border border-white/10 rounded-xl overflow-hidden shadow-[0_20px_60px_-40px_rgba(99,102,241,0.8)]">
-        <img src="https://images.pexels.com/photos/986733/pexels-photo-986733.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Photography" class="w-full h-48 object-cover" />
+        <img src="https://images.pexels.com/photos/986733/pexels-photo-986733.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Photography" class="w-full h-48 object-cover" loading="lazy" decoding="async" />
         <div class="p-6 space-y-3">
           <h2 class="text-xl font-semibold text-white">{m.product_tshirt_title()}</h2>
           <p class="text-gray-300 leading-relaxed">{m.product_tshirt_desc()}</p>
           <div class="flex -space-x-3 pt-2">
-            <img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200" alt="Face" class="rounded-full w-10 h-10 object-cover border-2 border-gray-900" />
-            <img src="https://images.pexels.com/photos/458766/pexels-photo-458766.jpeg?crop=faces&fit=crop&h=200&w=200&auto=compress&cs=tinysrgb" alt="Face" class="rounded-full w-10 h-10 object-cover border-2 border-gray-900" />
-            <img src="https://images.pexels.com/photos/458718/pexels-photo-458718.jpeg?crop=faces&fit=crop&h=200&w=200&auto=compress&cs=tinysrgb" alt="Face" class="rounded-full w-10 h-10 object-cover border-2 border-gray-900" />
-            <img src="https://images.pexels.com/photos/573299/pexels-photo-573299.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200" alt="Face" class="rounded-full w-10 h-10 object-cover border-2 border-gray-900" />
+            <img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200" alt="Face" class="rounded-full w-10 h-10 object-cover border-2 border-gray-900" loading="lazy" decoding="async" />
+            <img src="https://images.pexels.com/photos/458766/pexels-photo-458766.jpeg?crop=faces&fit=crop&h=200&w=200&auto=compress&cs=tinysrgb" alt="Face" class="rounded-full w-10 h-10 object-cover border-2 border-gray-900" loading="lazy" decoding="async" />
+            <img src="https://images.pexels.com/photos/458718/pexels-photo-458718.jpeg?crop=faces&fit=crop&h=200&w=200&auto=compress&cs=tinysrgb" alt="Face" class="rounded-full w-10 h-10 object-cover border-2 border-gray-900" loading="lazy" decoding="async" />
+            <img src="https://images.pexels.com/photos/573299/pexels-photo-573299.jpeg?auto=compress&cs=tinysrgb&crop=faces&fit=crop&h=200&w=200" alt="Face" class="rounded-full w-10 h-10 object-cover border-2 border-gray-900" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>
