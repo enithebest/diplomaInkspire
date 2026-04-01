@@ -18,6 +18,14 @@
 		}
 		updateTotals();
 	}
+	
+	function updateTotals() {
+		total = cart.reduce(
+			(sum, { price, qty }) => sum + (Number(price) || 0) * (Number(qty) || 1),
+			0
+		);
+		totalFormatted = total.toFixed(2);
+	}
 
 	function removeItem(index) {
 		cart = cart.filter((_, i) => i !== index);
@@ -35,13 +43,7 @@
 		updateTotals();
 	}
 
-	function updateTotals() {
-		total = cart.reduce(
-			(sum, { price, qty }) => sum + (Number(price) || 0) * (Number(qty) || 1),
-			0
-		);
-		totalFormatted = total.toFixed(2);
-	}
+
 
 	function updateQty(index, value) {
 		const qty = Math.max(1, Number(value) || 1);
@@ -231,3 +233,5 @@
 		{/if}
 	</div>
 </section>
+
+

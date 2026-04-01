@@ -5,11 +5,11 @@
 	import { productImages } from './productImages.js';
 
 	export let data;
-	export let form;
 
 	let selectedColor = {};
 	let showDesignToast = false;
 	let showFilterPopup = false;
+	let showSearchBox = false;
 	let selectedCategories = [];
 	let selectedColors = [];
 	let maxPrice = 0;
@@ -17,6 +17,7 @@
 	let searchQuery = '';
 	let categoryGroups = [];
 	let filteredProducts = [];
+	let searchResults = [];
 	let visibleCount = 0;
 	let activeFilterCount = 0;
 
@@ -58,10 +59,83 @@
 	};
 
 	const allProducts = [...hoodies, ...tshirts, ...sweatshirts, ...mugs];
+	const hoodieIds = new Set(hoodies.map((product) => product.id));
+	const tshirtIds = new Set(tshirts.map((product) => product.id));
+	const sweatshirtIds = new Set(sweatshirts.map((product) => product.id));
+	const mugIds = new Set(mugs.map((product) => product.id));
 	const priceOf = (product) => Number(product?.base_price || 0);
 	const colorsOf = (product) => Object.keys(productImages[product?.id]?.colors || {});
 	const availableColors = Array.from(new Set(allProducts.flatMap(colorsOf)));
 	const highestPrice = allProducts.length ? Math.max(...allProducts.map(priceOf)) : 0;
+	const normalizeSearch = (value) =>
+		String(value || '')
+			.toLowerCase()
+			.replace(/[\s-]/g, '')
+			.trim();
+
+	function productKeywords(product) {
+		const keywords = new Set([
+			(product.category || '').toLowerCase(),
+			normalizeSearch(product.category)
+		]);
+
+		if (hoodieIds.has(product.id)) {
+			keywords.add('hoodie');
+			keywords.add('hoodies');
+		}
+		if (tshirtIds.has(product.id)) {
+			keywords.add('tshirt');
+			keywords.add('tshirts');
+			keywords.add('tee');
+			keywords.add('tees');
+		}
+		if (sweatshirtIds.has(product.id)) {
+			keywords.add('sweatshirt');
+			keywords.add('sweatshirts');
+		}
+		if (mugIds.has(product.id)) {
+			keywords.add('mug');
+			keywords.add('mugs');
+			keywords.add('cup');
+			keywords.add('cups');
+			keywords.add('tasse');
+			keywords.add('tassen');
+		}
+
+		return Array.from(keywords).filter(Boolean);
+	}
+
+	function searchScore(product, rawQuery) {
+		const query = String(rawQuery || '').toLowerCase().trim();
+		const normalizedQuery = normalizeSearch(rawQuery);
+		const productName = (product.name || '').toLowerCase();
+		const productDescription = (product.description || '').toLowerCase();
+		const productCategory = (product.category || '').toLowerCase();
+		const keywords = productKeywords(product);
+		const normalizedName = normalizeSearch(product.name);
+		const normalizedDescription = normalizeSearch(product.description);
+		const normalizedCategory = normalizeSearch(product.category);
+
+		let score = 0;
+
+		if (productCategory === query || normalizedCategory === normalizedQuery) score += 120;
+		if (productName === query || normalizedName === normalizedQuery) score += 100;
+		if (keywords.includes(query) || keywords.includes(normalizedQuery)) score += 140;
+		if (productCategory.startsWith(query) || normalizedCategory.startsWith(normalizedQuery)) score += 60;
+		if (productName.startsWith(query) || normalizedName.startsWith(normalizedQuery)) score += 45;
+		if (keywords.some((keyword) => keyword.startsWith(query) || keyword.startsWith(normalizedQuery))) score += 80;
+		if (productCategory.includes(query) || normalizedCategory.includes(normalizedQuery)) score += 35;
+		if (productName.includes(query) || normalizedName.includes(normalizedQuery)) score += 25;
+		if (keywords.some((keyword) => keyword.includes(query) || keyword.includes(normalizedQuery))) score += 50;
+		if (productDescription.includes(query) || normalizedDescription.includes(normalizedQuery)) score += 10;
+
+		if (normalizedQuery === 'tshirt') {
+			if (productName.includes('tee') || normalizedName.includes('tee')) score += 40;
+			if (productCategory.includes('tshirt') || normalizedCategory.includes('tshirt')) score += 60;
+		}
+
+		return score;
+	}
 
 	$: isLight = $theme === 'light';
 	$: if (!maxPrice && highestPrice) maxPrice = Math.ceil(highestPrice);
@@ -104,33 +178,88 @@
 			.filter((product) => {
 				if (!searchQuery.trim()) return true;
 				const query = searchQuery.trim().toLowerCase();
+				const normalizedQuery = normalizeSearch(searchQuery);
+				const productName = (product.name || '').toLowerCase();
+				const productDescription = (product.description || '').toLowerCase();
+				const productCategory = (product.category || '').toLowerCase();
+				const keywords = productKeywords(product);
+				const normalizedName = normalizeSearch(product.name);
+				const normalizedDescription = normalizeSearch(product.description);
+				const normalizedCategory = normalizeSearch(product.category);
+				const matchesTshirtAlias =
+					normalizedQuery === 'tshirt' &&
+					(
+						productName.includes('tee') ||
+						productDescription.includes('tee') ||
+						normalizedName.includes('tee') ||
+						normalizedDescription.includes('tee')
+					);
 				return (
-					(product.name || '').toLowerCase().includes(query) ||
-					(product.description || '').toLowerCase().includes(query) ||
-					(product.category || '').toLowerCase().includes(query)
+					productName.includes(query) ||
+					productDescription.includes(query) ||
+					productCategory.includes(query) ||
+					keywords.some((keyword) => keyword.includes(query) || keyword.includes(normalizedQuery)) ||
+					normalizedName.includes(normalizedQuery) ||
+					normalizedDescription.includes(normalizedQuery) ||
+					normalizedCategory.includes(normalizedQuery) ||
+					matchesTshirtAlias
 				);
 			})
 			.sort((a, b) => {
+				if (searchQuery.trim()) {
+					const scoreDiff = searchScore(b, searchQuery) - searchScore(a, searchQuery);
+					if (scoreDiff !== 0) return scoreDiff;
+				}
 				if (sortBy === 'price-asc') return priceOf(a) - priceOf(b);
 				if (sortBy === 'price-desc') return priceOf(b) - priceOf(a);
 				return 0;
 			});
 	}
 
+	function matchesSearch(product, rawQuery) {
+		const query = String(rawQuery || '').toLowerCase().trim();
+		const normalizedQuery = normalizeSearch(rawQuery);
+		if (!query) return true;
+
+		const productName = (product.name || '').toLowerCase();
+		const productDescription = (product.description || '').toLowerCase();
+		const productCategory = (product.category || '').toLowerCase();
+		const keywords = productKeywords(product);
+		const normalizedName = normalizeSearch(product.name);
+		const normalizedDescription = normalizeSearch(product.description);
+		const normalizedCategory = normalizeSearch(product.category);
+
+		return (
+			productName.includes(query) ||
+			productDescription.includes(query) ||
+			productCategory.includes(query) ||
+			keywords.some((keyword) => keyword.includes(query) || keyword.includes(normalizedQuery)) ||
+			normalizedName.includes(normalizedQuery) ||
+			normalizedDescription.includes(normalizedQuery) ||
+			normalizedCategory.includes(normalizedQuery)
+		);
+	}
+
 	$: {
 		filteredProducts = applyFilters(allProducts);
+		searchResults = allProducts
+			.filter((product) => matchesSearch(product, searchQuery))
+			.sort((a, b) => {
+				const scoreDiff = searchScore(b, searchQuery) - searchScore(a, searchQuery);
+				if (scoreDiff !== 0) return scoreDiff;
+				return priceOf(a) - priceOf(b);
+			});
 		categoryGroups = [
 			{ title: 'Hoodies', value: 'hoodies', items: applyFilters(hoodies) },
 			{ title: 'T-Shirts', value: 'tshirts', items: applyFilters(tshirts) },
 			{ title: 'Sweatshirts', value: 'sweatshirts', items: applyFilters(sweatshirts) },
 			{ title: 'Mugs', value: 'mugs', items: applyFilters(mugs) }
 		];
-		visibleCount = filteredProducts.length;
+		visibleCount = searchQuery.trim() ? searchResults.length : filteredProducts.length;
 		activeFilterCount =
 			selectedCategories.length +
 			selectedColors.length +
 			(Number(maxPrice || highestPrice) < highestPrice ? 1 : 0) +
-			(searchQuery.trim() ? 1 : 0) +
 			(sortBy !== 'featured' ? 1 : 0);
 	}
 
@@ -206,26 +335,6 @@
 			</div>
 
 			<div class="space-y-5">
-				<div>
-					<label
-						class={`mb-2 block text-sm font-medium ${isLight ? 'text-slate-700' : 'text-gray-200'}`}
-						for="popup-search"
-					>
-						{m.categories_search_placeholder()}
-					</label>
-					<input
-						id="popup-search"
-						type="search"
-						bind:value={searchQuery}
-						placeholder={m.categories_search_placeholder()}
-						class={`w-full rounded-2xl border px-4 py-3 transition outline-none ${
-							isLight
-								? 'border-stone-200 bg-stone-50 text-slate-900 placeholder:text-slate-400'
-								: 'border-white/10 bg-slate-900 text-white placeholder:text-gray-500'
-						}`}
-					/>
-				</div>
-
 				<div>
 					<p class={`mb-3 text-sm font-medium ${isLight ? 'text-slate-700' : 'text-gray-200'}`}>
 						{m.categories_filter_category()}
@@ -462,80 +571,113 @@
 		</section>
 	{/if}
 
-	{#if form?.products?.length > 0}
-		<section class="mb-16">
-			<h2
-				class={`mb-6 text-center text-2xl font-semibold ${isLight ? 'text-amber-700' : 'text-indigo-400'}`}
-			>
-				{m.categories_results_title()}
-			</h2>
-			<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-				{#each form.products as product (product.id)}
-					<article
-						class={`flex flex-col rounded-2xl border p-4 shadow-lg backdrop-blur-sm transition duration-300 hover:-translate-y-1 ${
+	<div class="space-y-20">
+		<section class="flex justify-end">
+			<div class="group relative">
+				<div class="flex items-center justify-end gap-3">
+					{#if showSearchBox || searchQuery.trim()}
+						<input
+							type="search"
+							bind:value={searchQuery}
+							placeholder={m.categories_search_placeholder()}
+							onblur={() => {
+								if (!searchQuery.trim()) showSearchBox = false;
+							}}
+							class={`w-52 rounded-full border px-4 py-2 text-sm transition outline-none sm:w-64 ${
+								isLight
+									? 'border-stone-200 bg-white/90 text-slate-900 placeholder:text-slate-400'
+									: 'border-white/10 bg-gray-900/90 text-white placeholder:text-gray-500'
+							}`}
+						/>
+					{/if}
+					<button
+						type="button"
+						aria-label={m.categories_search_placeholder()}
+						onmouseenter={() => (showSearchBox = true)}
+						onfocus={() => (showSearchBox = true)}
+						onclick={() => (showSearchBox = !showSearchBox)}
+						class={`rounded-full border p-3 transition ${
 							isLight
-								? 'border-stone-200 bg-white/80 hover:shadow-[0_20px_45px_rgba(217,119,6,0.18)]'
-								: 'border-gray-700 bg-gray-800/60 hover:shadow-indigo-500/30'
+								? 'border-stone-200 bg-white/85 text-slate-700 hover:bg-white'
+								: 'border-white/10 bg-gray-800/80 text-white hover:bg-gray-800'
 						}`}
 					>
-						<div
-							class={`flex h-48 w-full items-center justify-center overflow-hidden rounded-xl border ${
-								isLight
-									? 'border-stone-200 bg-gradient-to-br from-amber-50 via-white to-stone-100'
-									: 'border-gray-700 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800'
-							}`}
-						>
-							{#if productImages[product.id] && selectedColor[product.id]}
-								<img
-									src={productImages[product.id].colors[selectedColor[product.id]]}
-									alt={product.name}
-									class="h-full w-full object-cover"
-								/>
-							{:else if product.image_url}
-								<img
-									src={product.image_url}
-									alt={product.name}
-									class="h-full w-full object-cover"
-								/>
-							{:else}
-								<span class={`text-sm ${isLight ? 'text-slate-400' : 'text-gray-400'}`}
-									>Image coming soon</span
-								>
-							{/if}
-						</div>
-						<div class="mt-3 flex flex-1 flex-col gap-2">
-							<div class="flex items-center justify-between gap-2">
-								<h3
-									class={`line-clamp-1 text-lg font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}
-								>
-									{product.name}
-								</h3>
-								<span
-									class={`text-sm font-medium ${isLight ? 'text-amber-700' : 'text-indigo-300'}`}
-								>
-									${product.base_price}
-								</span>
-							</div>
-							{#if product.description}
-								<p class={`line-clamp-2 text-sm ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
-									{short(product.description, 110)}
-								</p>
-							{/if}
-						</div>
-						<button
-							onclick={() => viewProduct(product.id)}
-							class={`mt-3 rounded-lg px-4 py-2 text-white transition ${isLight ? 'bg-amber-500 hover:bg-amber-400' : 'bg-[#4F46E5] hover:bg-[#6366F1]'}`}
-						>
-							{m.categories_view_product()}
-						</button>
-					</article>
-				{/each}
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8">
+							<circle cx="11" cy="11" r="6"></circle>
+							<path d="m20 20-4.35-4.35"></path>
+						</svg>
+					</button>
+				</div>
 			</div>
 		</section>
-	{/if}
 
-	<div class="space-y-20">
-		{#if visibleCount === 0}
+		{#if searchQuery.trim() && searchResults.length > 0}
+			<section class="text-center">
+				<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+					{#each searchResults as product (product.id)}
+						<article
+							class={`flex flex-col rounded-2xl border p-4 shadow-lg backdrop-blur-sm transition duration-300 hover:-translate-y-1 ${
+								isLight
+									? 'border-stone-200 bg-white/82 hover:shadow-[0_20px_45px_rgba(217,119,6,0.18)]'
+									: 'border-gray-700 bg-gray-800/60 hover:shadow-indigo-500/30'
+							}`}
+						>
+							<div
+								class={`flex h-48 w-full items-center justify-center overflow-hidden rounded-xl border ${
+									isLight
+										? 'border-stone-200 bg-gradient-to-br from-amber-50 via-white to-stone-100'
+										: 'border-gray-700 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800'
+								}`}
+							>
+								{#if productImages[product.id] && selectedColor[product.id]}
+									<img
+										src={productImages[product.id].colors[selectedColor[product.id]]}
+										alt={product.name}
+										class="h-full w-full object-cover"
+									/>
+								{:else if product.image_url}
+									<img
+										src={product.image_url}
+										alt={product.name}
+										class="h-full w-full object-cover"
+									/>
+								{:else}
+									<span class={`text-sm ${isLight ? 'text-slate-400' : 'text-gray-400'}`}>
+										Image coming soon
+									</span>
+								{/if}
+							</div>
+							<div class="mt-3 flex flex-1 flex-col gap-2">
+								<div class="flex items-center justify-between gap-2">
+									<h3
+										class={`line-clamp-1 text-lg font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}
+									>
+										{product.name}
+									</h3>
+									<span
+										class={`text-sm font-medium ${isLight ? 'text-amber-700' : 'text-indigo-300'}`}
+									>
+										${product.base_price}
+									</span>
+								</div>
+								{#if product.description}
+									<p class={`line-clamp-2 text-sm ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+										{short(product.description, 110)}
+									</p>
+								{/if}
+							</div>
+							<button
+								onclick={() => viewProduct(product.id)}
+								class={`mt-3 rounded-lg px-4 py-2 text-white transition ${isLight ? 'bg-amber-500 hover:bg-amber-400' : 'bg-[#4F46E5] hover:bg-[#6366F1]'}`}
+							>
+								{m.categories_view_product()}
+							</button>
+						</article>
+					{/each}
+				</div>
+			</section>
+		{/if}
+		{#if searchQuery.trim() && visibleCount === 0}
 			<section class="text-center">
 				<p class={`text-xl font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>
 					{m.categories_filter_empty_title()}
@@ -546,117 +688,119 @@
 			</section>
 		{/if}
 
-		{#each categoryGroups as category (category.value)}
-			{#if category.items.length > 0}
-				<section class="text-center">
-					<h2
-						class={`mb-2 text-3xl font-bold tracking-tight sm:text-4xl ${
-							isLight
-								? 'text-slate-900 drop-shadow-[0_5px_18px_rgba(245,158,11,0.16)]'
-								: 'text-white drop-shadow-[0_5px_18px_rgba(79,70,229,0.25)]'
-						}`}
-					>
-						{category.title}
-					</h2>
-					<div
-						class={`mx-auto mb-8 h-0.5 w-24 rounded ${isLight ? 'bg-amber-500/50' : 'bg-indigo-400/50'}`}
-					></div>
-					<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-						{#each category.items as product (product.id)}
-							<article
-								class={`flex flex-col rounded-2xl border p-4 shadow-lg backdrop-blur-sm transition duration-300 hover:-translate-y-1 ${
-									isLight
-										? 'border-stone-200 bg-white/82 hover:shadow-[0_20px_45px_rgba(217,119,6,0.18)]'
-										: 'border-gray-700 bg-gray-800/60 hover:shadow-indigo-500/30'
-								}`}
-							>
-								<div
-									class={`flex h-48 w-full items-center justify-center overflow-hidden rounded-xl border ${
+		{#if !searchQuery.trim()}
+			{#each categoryGroups as category (category.value)}
+				{#if category.items.length > 0}
+					<section class="text-center">
+						<h2
+							class={`mb-2 text-3xl font-bold tracking-tight sm:text-4xl ${
+								isLight
+									? 'text-slate-900 drop-shadow-[0_5px_18px_rgba(245,158,11,0.16)]'
+									: 'text-white drop-shadow-[0_5px_18px_rgba(79,70,229,0.25)]'
+							}`}
+						>
+							{category.title}
+						</h2>
+						<div
+							class={`mx-auto mb-8 h-0.5 w-24 rounded ${isLight ? 'bg-amber-500/50' : 'bg-indigo-400/50'}`}
+						></div>
+						<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+							{#each category.items as product (product.id)}
+								<article
+									class={`flex flex-col rounded-2xl border p-4 shadow-lg backdrop-blur-sm transition duration-300 hover:-translate-y-1 ${
 										isLight
-											? 'border-stone-200 bg-gradient-to-br from-amber-50 via-white to-stone-100'
-											: 'border-gray-700 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800'
+											? 'border-stone-200 bg-white/82 hover:shadow-[0_20px_45px_rgba(217,119,6,0.18)]'
+											: 'border-gray-700 bg-gray-800/60 hover:shadow-indigo-500/30'
 									}`}
 								>
-									{#if productImages[product.id] && selectedColor[product.id]}
-										<img
-											src={productImages[product.id].colors[selectedColor[product.id]]}
-											alt={product.name}
-											class="h-full w-full object-cover"
-										/>
-									{:else if product.image_url}
-										<img
-											src={product.image_url}
-											alt={product.name}
-											class="h-full w-full object-cover"
-										/>
-									{:else}
-										<span class={`text-sm ${isLight ? 'text-slate-400' : 'text-gray-400'}`}
-											>Image coming soon</span
-										>
-									{/if}
-								</div>
-								<div class="mt-3 flex flex-1 flex-col gap-2">
-									<div class="flex items-center justify-between gap-2">
-										<h3
-											class={`line-clamp-1 text-lg font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}
-										>
-											{product.name}
-										</h3>
-										<span
-											class={`text-sm font-medium ${isLight ? 'text-amber-700' : 'text-indigo-300'}`}
-										>
-											${product.base_price}
-										</span>
-									</div>
-									{#if product.description}
-										<p
-											class={`line-clamp-2 text-sm ${isLight ? 'text-slate-500' : 'text-gray-400'}`}
-										>
-											{short(product.description, 110)}
-										</p>
-									{/if}
-									<div class="flex flex-wrap gap-2">
-										{#each colorsOf(product) as color (color)}
-											<button
-												type="button"
-												onclick={() => (selectedColor[product.id] = color)}
-												class={`h-7 w-7 rounded-full border-2 transition ${
-													selectedColor[product.id] === color
-														? isLight
-															? 'border-slate-900'
-															: 'border-white'
-														: isLight
-															? 'border-stone-200'
-															: 'border-white/20'
-												}`}
-												style={`background:${colorMeta[color] || color};`}
-												aria-label={`${product.name} ${color}`}
-											></button>
-										{/each}
-									</div>
 									<div
-										class={`flex flex-wrap gap-2 text-xs ${isLight ? 'text-slate-600' : 'text-gray-300'}`}
+										class={`flex h-48 w-full items-center justify-center overflow-hidden rounded-xl border ${
+											isLight
+												? 'border-stone-200 bg-gradient-to-br from-amber-50 via-white to-stone-100'
+												: 'border-gray-700 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800'
+										}`}
 									>
-										{#each featureBadges(product) as feat (feat)}
-											<span
-												class={`rounded-full border px-2 py-1 ${isLight ? 'border-stone-200 bg-stone-100' : 'border-white/10 bg-white/5'}`}
+										{#if productImages[product.id] && selectedColor[product.id]}
+											<img
+												src={productImages[product.id].colors[selectedColor[product.id]]}
+												alt={product.name}
+												class="h-full w-full object-cover"
+											/>
+										{:else if product.image_url}
+											<img
+												src={product.image_url}
+												alt={product.name}
+												class="h-full w-full object-cover"
+											/>
+										{:else}
+											<span class={`text-sm ${isLight ? 'text-slate-400' : 'text-gray-400'}`}
+												>Image coming soon</span
 											>
-												{feat}
-											</span>
-										{/each}
+										{/if}
 									</div>
-								</div>
-								<button
-									onclick={() => viewProduct(product.id)}
-									class={`mt-3 rounded-lg px-4 py-2 text-white transition ${isLight ? 'bg-amber-500 hover:bg-amber-400' : 'bg-[#4F46E5] hover:bg-[#6366F1]'}`}
-								>
-									{m.categories_view_product()}
-								</button>
-							</article>
-						{/each}
-					</div>
-				</section>
-			{/if}
-		{/each}
+									<div class="mt-3 flex flex-1 flex-col gap-2">
+										<div class="flex items-center justify-between gap-2">
+											<h3
+												class={`line-clamp-1 text-lg font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}
+											>
+												{product.name}
+											</h3>
+											<span
+												class={`text-sm font-medium ${isLight ? 'text-amber-700' : 'text-indigo-300'}`}
+											>
+												${product.base_price}
+											</span>
+										</div>
+										{#if product.description}
+											<p
+												class={`line-clamp-2 text-sm ${isLight ? 'text-slate-500' : 'text-gray-400'}`}
+											>
+												{short(product.description, 110)}
+											</p>
+										{/if}
+										<div class="flex flex-wrap gap-2">
+											{#each colorsOf(product) as color (color)}
+												<button
+													type="button"
+													onclick={() => (selectedColor[product.id] = color)}
+													class={`h-7 w-7 rounded-full border-2 transition ${
+														selectedColor[product.id] === color
+															? isLight
+																? 'border-slate-900'
+																: 'border-white'
+															: isLight
+																? 'border-stone-200'
+																: 'border-white/20'
+													}`}
+													style={`background:${colorMeta[color] || color};`}
+													aria-label={`${product.name} ${color}`}
+												></button>
+											{/each}
+										</div>
+										<div
+											class={`flex flex-wrap gap-2 text-xs ${isLight ? 'text-slate-600' : 'text-gray-300'}`}
+										>
+											{#each featureBadges(product) as feat (feat)}
+												<span
+													class={`rounded-full border px-2 py-1 ${isLight ? 'border-stone-200 bg-stone-100' : 'border-white/10 bg-white/5'}`}
+												>
+													{feat}
+												</span>
+											{/each}
+										</div>
+									</div>
+									<button
+										onclick={() => viewProduct(product.id)}
+										class={`mt-3 rounded-lg px-4 py-2 text-white transition ${isLight ? 'bg-amber-500 hover:bg-amber-400' : 'bg-[#4F46E5] hover:bg-[#6366F1]'}`}
+									>
+										{m.categories_view_product()}
+									</button>
+								</article>
+							{/each}
+						</div>
+					</section>
+				{/if}
+			{/each}
+		{/if}
 	</div>
 </div>

@@ -42,6 +42,10 @@ export const actions = {
 		if (!email || !isValidEmail(email)) {
 			return fail(400, { error: m.contact_form_error_email({}, { locale }), values });
 		}
+		
+		if (!message || message.length < 10) {
+			return fail(400, { error: m.contact_form_error_message({}, { locale }), values });
+		}
 
 		if (!prefix || !isValidPrefix(prefix)) {
 			return fail(400, { error: m.contact_form_error_prefix({}, { locale }), values });
@@ -49,10 +53,6 @@ export const actions = {
 
 		if (!phone || !isValidPhone(phone)) {
 			return fail(400, { error: m.contact_form_error_phone({}, { locale }), values });
-		}
-
-		if (!message || message.length < 10) {
-			return fail(400, { error: m.contact_form_error_message({}, { locale }), values });
 		}
 
 		if (attachment instanceof File && attachment.size > 0) {
