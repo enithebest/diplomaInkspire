@@ -232,8 +232,19 @@
                   </div>
                 {/if}
                 <div class="mt-3 flex justify-between items-center text-sm text-gray-300">
-                  <span>{m.profile_orders_receipt()}</span>
-                  <button class="px-3 py-1 rounded bg-[#4F46E5] hover:bg-[#6366F1] text-white text-xs" disabled>{m.profile_orders_download()}</button>
+                  <span>{(o.status || '').toLowerCase() === 'paid' ? 'Invoice' : 'Invoice unavailable'}</span>
+                  {#if (o.status || '').toLowerCase() === 'paid'}
+                    <a
+                      href={`/api/invoice/${o.id}`}
+                      class="px-3 py-1 rounded bg-[#4F46E5] hover:bg-[#6366F1] text-white text-xs"
+                    >
+                      {m.profile_orders_download()}
+                    </a>
+                  {:else}
+                    <span class="px-3 py-1 rounded bg-white/5 border border-white/10 text-gray-400 text-xs">
+                      {m.profile_orders_download()}
+                    </span>
+                  {/if}
                 </div>
                 <div class="mt-3 text-right">
                   <button class="px-3 py-2 rounded bg-[#4F46E5] hover:bg-[#6366F1] text-white text-sm" onclick={() => reorderToCart(o.id)}>{m.profile_orders_reorder()}</button>

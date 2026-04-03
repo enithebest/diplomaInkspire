@@ -225,7 +225,7 @@
   <p class="text-center mt-20 text-gray-400 text-lg">Product not found.</p>
 {:else}
   <!-- Outer container keeps nice margins and dark background -->
-  <div class="relative isolate overflow-hidden bg-gray-900 text-gray-200 min-h-screen px-4 py-10 lg:px-8">
+  <div class="relative isolate overflow-hidden bg-gray-900 text-gray-200 min-h-screen px-4 pt-24 pb-10 lg:px-8 lg:pt-28">
     <section class="max-w-7xl mx-auto relative">
       <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1.4fr] gap-8 items-start">
         <!-- LEFT: big image + thumbnails -->
